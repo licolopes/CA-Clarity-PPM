@@ -3,12 +3,6 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dash_comunicacao" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="842" leftMargin="0" rightMargin="0" topMargin="10" bottomMargin="0" uuid="82d84933-db3d-4f04-99b8-5cce3f92e9f3">
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="VIVO - DEV"/>
-	<property name="ireport.jasperserver.url" value="https://cppmrpt103.ondemand.ca.com/reportservice/"/>
-	<property name="ireport.jasperserver.user" value="jasperadmin|cppm9296"/>
-	<property name="ireport.jasperserver.reportUnit" value="/ca_ppm/vivo/vivo_dash_comunicacao"/>
-	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="ireport.jasperserver.report.resource" value="/ca_ppm/vivo/vivo_dash_comunicacao_files/main_jrxml"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
