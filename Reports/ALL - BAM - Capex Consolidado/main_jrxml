@@ -1,0 +1,2235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.2.final using JasperReports Library version 6.4.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4_8" pageWidth="1290" pageHeight="600" columnWidth="1290" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="737e5c36-4c89-4e64-8e52-e43a14ebe769">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="RUMO - DEV"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="ireport.jasperserver.url" value="https://cppmrpt103.ondemand.ca.com/reportservice/"/>
+	<property name="ireport.jasperserver.user" value="reportdev|cppm9008"/>
+	<property name="ireport.jasperserver.report.resource" value="/ca_ppm/RUMO_ALL/bam_capex_consolidado_files/main_jrxml"/>
+	<property name="ireport.jasperserver.reportUnit" value="/ca_ppm/RUMO_ALL/bam_capex_consolidado"/>
+	<style name="Crosstab_CH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="CAPEX_DEMANDA_PROJ" uuid="004a4746-3085-4742-9ad2-8402ee307845">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="RUMO - PRD"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
+		<queryString>
+			<![CDATA[SELECT
+ TIPO_DEMANDA || ' R$' TIPO_DEMANDA
+, (SUM(NVL(CORPORATIVO,0)))/1000 CORPORATIVO
+, (SUM(NVL(NORTE,0)))/1000 NORTE
+, (SUM(NVL(SUL,0)))/1000 SUL
+, 'VAL' TIPO
+, CASE WHEN TIPO_DEMANDA = 'CAPEX' THEN 1 ELSE 10 END ORDEM
+FROM
+(
+	SELECT DISTINCT
+		INVI.CODE INV_CODE
+		, TIPO_DEMANDA.NAME TIPO_DEMANDA 
+		, CASE WHEN OPERACAO.NAME = 'Corporativo' THEN NVL(ROUND(OCP.all_cst_total_fct,0),0) END CORPORATIVO
+		, CASE WHEN OPERACAO.NAME = 'Operação Norte' THEN NVL(ROUND(OCP.all_cst_total_fct,0),0) END NORTE
+		, CASE WHEN OPERACAO.NAME = 'Operação Sul' THEN NVL(ROUND(OCP.all_cst_total_fct,0),0) END SUL
+	FROM 
+		INV_INVESTMENTS INVI
+		LEFT JOIN ODF_CA_INV OCINV ON INVI.ID = OCINV.ID
+		LEFT JOIN ODF_CA_PROJECT OCPRJ ON OCPRJ.ID = INVI.ID
+		LEFT JOIN ODF_CA_IDEA OCID ON OCID.ID = INVI.ID AND INVI.STATUS !=8
+		LEFT JOIN CMN_LOOKUPS_V TIPO_DEMANDA ON (TIPO_DEMANDA.LOOKUP_CODE = OCPRJ.all_tipo_demanda OR TIPO_DEMANDA.LOOKUP_CODE = OCID.all_tipo_demanda) AND TIPO_DEMANDA.LANGUAGE_CODE = 'pt' AND TIPO_DEMANDA.LOOKUP_TYPE = 'ALL_TIPO_DEMANDA'
+		LEFT JOIN CMN_LOOKUPS_V OPERACAO ON OPERACAO.LOOKUP_CODE = OCINV.all_area AND OPERACAO.LANGUAGE_CODE = 'pt' AND OPERACAO.LOOKUP_TYPE = 'ALL_LKP_AREAS'
+		LEFT JOIN FIN_PLANS FP ON FP.OBJECT_ID = INVI.ID AND FP.PLAN_TYPE_CODE = 'FORECAST'
+		LEFT JOIN FIN_COST_PLAN_DETAILS FPD on FP.ID = FPD.PLAN_ID
+		LEFT JOIN ODF_SSL_CST_DTL_COST FP_COST ON FPD.ID = FP_COST.PRJ_OBJECT_ID
+		LEFT JOIN ODF_CA_COSTPLAN OCP ON OCP.ID = FP.ID AND OCP.ALL_TP_PLANO = 'all_forecast' AND OCP.ALL_ATIVO = 1
+	WHERE 
+		TIPO_DEMANDA.LOOKUP_CODE IS NOT NULL
+		AND INVI.STATUS !=8
+		AND INVI.IS_ACTIVE = 1
+		AND (
+				(TRUNC(FP_COST.START_DATE,'YEAR') = TRUNC(SYSDATE,'YEAR'))
+				OR
+				(TRUNC(SYSDATE,'YEAR') = 
+				(	
+					SELECT DISTINCT 
+					TRUNC(PW.TRANSDATE,'YEAR') 
+					FROM PPA_WIP PW 
+					LEFT JOIN PPA_WIP_VALUES PV ON PW.TRANSNO = PV.TRANSNO AND PV.CURRENCY_TYPE = 'HOME'
+					WHERE PW.INVESTMENT_ID = INVI.ID AND PW.STATUS = 0 AND PV.TOTALCOST > 0 AND TRUNC(PW.TRANSDATE,'YEAR') = TRUNC(SYSDATE,'YEAR')
+				))
+			)
+) VAL
+
+GROUP BY 
+TIPO_DEMANDA
+
+UNION
+
+SELECT
+ 'Quantidade ' TIPO_DEMANDA
+, SUM(NVL(CORPORATIVO,0)) CORPORATIVO
+, SUM(NVL(NORTE,0)) NORTE
+, SUM(NVL(SUL,0)) SUL
+, 'QTD' TIPO
+, CASE WHEN TIPO_DEMANDA = 'CAPEX' THEN 2 ELSE 20 END ORDEM
+FROM
+(
+	SELECT DISTINCT
+		INVI.CODE INV_CODE
+		, TIPO_DEMANDA.NAME TIPO_DEMANDA 
+		, CASE WHEN OPERACAO.NAME = 'Corporativo' THEN 1 END CORPORATIVO
+		, CASE WHEN OPERACAO.NAME = 'Operação Norte' THEN 1 END NORTE
+		, CASE WHEN OPERACAO.NAME = 'Operação Sul' THEN 1 END SUL
+	FROM 
+		INV_INVESTMENTS INVI
+		LEFT JOIN ODF_CA_INV OCINV ON INVI.ID = OCINV.ID
+		LEFT JOIN ODF_CA_PROJECT OCPRJ ON OCPRJ.ID = INVI.ID
+		LEFT JOIN ODF_CA_IDEA OCID ON OCID.ID = INVI.ID
+		LEFT JOIN CMN_LOOKUPS_V TIPO_DEMANDA ON (TIPO_DEMANDA.LOOKUP_CODE = OCPRJ.all_tipo_demanda OR TIPO_DEMANDA.LOOKUP_CODE = OCID.all_tipo_demanda) AND TIPO_DEMANDA.LANGUAGE_CODE = 'pt' AND TIPO_DEMANDA.LOOKUP_TYPE = 'ALL_TIPO_DEMANDA'
+		LEFT JOIN CMN_LOOKUPS_V OPERACAO ON OPERACAO.LOOKUP_CODE = OCINV.all_area AND OPERACAO.LANGUAGE_CODE = 'pt' AND OPERACAO.LOOKUP_TYPE = 'ALL_LKP_AREAS'
+		LEFT JOIN FIN_PLANS FP ON FP.OBJECT_ID = INVI.ID AND FP.PLAN_TYPE_CODE = 'FORECAST'
+		LEFT JOIN FIN_COST_PLAN_DETAILS FPD on FP.ID = FPD.PLAN_ID
+		LEFT JOIN ODF_SSL_CST_DTL_COST FP_COST ON FPD.ID = FP_COST.PRJ_OBJECT_ID
+		LEFT JOIN ODF_CA_COSTPLAN OCP ON OCP.ID = FP.ID AND OCP.ALL_TP_PLANO = 'all_forecast' AND OCP.ALL_ATIVO = 1
+	WHERE 
+		TIPO_DEMANDA.LOOKUP_CODE IS NOT NULL
+		AND INVI.STATUS !=8
+		AND OCP.all_cst_total_fct <> 0
+		AND INVI.IS_ACTIVE = 1
+		AND (
+				(TRUNC(FP_COST.START_DATE,'YEAR') = TRUNC(SYSDATE,'YEAR'))
+				OR
+				(TRUNC(SYSDATE,'YEAR') = 
+				(	
+					SELECT DISTINCT 
+					TRUNC(PW.TRANSDATE,'YEAR') 
+					FROM PPA_WIP PW 
+					LEFT JOIN PPA_WIP_VALUES PV ON PW.TRANSNO = PV.TRANSNO AND PV.CURRENCY_TYPE = 'HOME'
+					WHERE PW.INVESTMENT_ID = INVI.ID AND PW.STATUS = 0 AND PV.TOTALCOST > 0 AND TRUNC(PW.TRANSDATE,'YEAR') = TRUNC(SYSDATE,'YEAR')
+				))
+			)
+) VAL
+
+GROUP BY 
+TIPO_DEMANDA]]>
+		</queryString>
+		<field name="TIPO_DEMANDA" class="java.lang.String"/>
+		<field name="CORPORATIVO" class="java.math.BigDecimal"/>
+		<field name="NORTE" class="java.math.BigDecimal"/>
+		<field name="SUL" class="java.math.BigDecimal"/>
+		<field name="TIPO" class="java.lang.String"/>
+		<field name="ORDEM" class="java.math.BigDecimal"/>
+		<sortField name="ORDEM"/>
+		<variable name="TOTAL_LINHA" class="java.math.BigDecimal">
+			<variableExpression><![CDATA[$F{NORTE}.add($F{SUL}).add($F{CORPORATIVO})]]></variableExpression>
+		</variable>
+		<variable name="TOTAL_CORP_VAL" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[$F{TIPO}.equals("VAL") ? $F{CORPORATIVO} : 0.0]]></variableExpression>
+		</variable>
+		<variable name="TOTAL_NORTE_VAL" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[$F{TIPO}.equals("VAL") ? $F{NORTE} : 0]]></variableExpression>
+		</variable>
+		<variable name="TOTAL_SUL_VAL" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[$F{TIPO}.equals("VAL")?$F{SUL}:0]]></variableExpression>
+		</variable>
+		<variable name="TOTAL_CORP_QTD" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[$F{TIPO}.equals("QTD") ? $F{CORPORATIVO} : 0.0]]></variableExpression>
+		</variable>
+		<variable name="TOTAL_NORTE_QTD" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[$F{TIPO}.equals("QTD") ? $F{NORTE} : 0.0]]></variableExpression>
+		</variable>
+		<variable name="TOTAL_SUL_QTD" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[$F{TIPO}.equals("QTD") ? $F{SUL} : 0.0]]></variableExpression>
+		</variable>
+		<variable name="TOTAL_TOTAL_VAL" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[$F{TIPO}.equals("VAL") ? $V{TOTAL_LINHA} : 0.0]]></variableExpression>
+		</variable>
+		<variable name="TOTAL_TOTAL_QTD" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[$F{TIPO}.equals("QTD") ? $V{TOTAL_LINHA} : 0.0]]></variableExpression>
+		</variable>
+	</subDataset>
+	<subDataset name="CAPEX_PROJETOS" uuid="e06ffc0e-f83d-4eaa-b7b8-591f1993e89c">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="RUMO - PRD"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<queryString>
+			<![CDATA[SELECT
+ TIPO_DEMANDA || ' R$' TIPO_DEMANDA
+, (SUM(NVL(CORPORATIVO,0)))/1000 CORPORATIVO
+, (SUM(NVL(NORTE,0)))/1000 NORTE
+, (SUM(NVL(SUL,0)))/1000 SUL
+, 'VAL' TIPO
+, CASE WHEN TIPO_DEMANDA = 'CAPEX' THEN 1 ELSE 10 END ORDEM
+FROM
+(
+	SELECT DISTINCT
+		INVI.CODE INV_CODE
+		, TIPO_DEMANDA.NAME TIPO_DEMANDA 
+		, CASE WHEN OPERACAO.NAME = 'Corporativo' THEN NVL(ROUND(OCP.all_cst_total_fct,0),0) END CORPORATIVO
+		, CASE WHEN OPERACAO.NAME = 'Operação Norte' THEN NVL(ROUND(OCP.all_cst_total_fct,0),0) END NORTE
+		, CASE WHEN OPERACAO.NAME = 'Operação Sul' THEN NVL(ROUND(OCP.all_cst_total_fct,0),0) END SUL
+	FROM 
+		INV_INVESTMENTS INVI
+		LEFT JOIN ODF_CA_INV OCINV ON INVI.ID = OCINV.ID
+		LEFT JOIN ODF_CA_PROJECT OCPRJ ON OCPRJ.ID = INVI.ID
+		LEFT JOIN ODF_CA_IDEA OCID ON OCID.ID = INVI.ID
+		LEFT JOIN CMN_LOOKUPS_V TIPO_DEMANDA ON (TIPO_DEMANDA.LOOKUP_CODE = OCPRJ.all_tipo_demanda OR TIPO_DEMANDA.LOOKUP_CODE = OCID.all_tipo_demanda) AND TIPO_DEMANDA.LANGUAGE_CODE = 'pt' AND TIPO_DEMANDA.LOOKUP_TYPE = 'ALL_TIPO_DEMANDA'
+		LEFT JOIN CMN_LOOKUPS_V OPERACAO ON OPERACAO.LOOKUP_CODE = OCINV.all_area AND OPERACAO.LANGUAGE_CODE = 'pt' AND OPERACAO.LOOKUP_TYPE = 'ALL_LKP_AREAS'
+		LEFT JOIN FIN_PLANS FP ON FP.OBJECT_ID = INVI.ID AND FP.PLAN_TYPE_CODE = 'FORECAST'
+		LEFT JOIN FIN_COST_PLAN_DETAILS FPD on FP.ID = FPD.PLAN_ID
+		LEFT JOIN ODF_SSL_CST_DTL_COST FP_COST ON FPD.ID = FP_COST.PRJ_OBJECT_ID
+		LEFT JOIN ODF_CA_COSTPLAN OCP ON OCP.ID = FP.ID AND OCP.ALL_TP_PLANO = 'all_forecast' AND OCP.ALL_ATIVO = 1
+	WHERE 
+		TIPO_DEMANDA.LOOKUP_CODE IS NOT NULL
+		AND INVI.STATUS !=8
+		AND INVI.IS_ACTIVE = 1
+		AND INVI.ODF_OBJECT_CODE = 'project'
+		AND (
+				(TRUNC(FP_COST.START_DATE,'YEAR') = TRUNC(SYSDATE,'YEAR'))
+				OR
+				(TRUNC(SYSDATE,'YEAR') = 
+				(	
+					SELECT DISTINCT 
+					TRUNC(PW.TRANSDATE,'YEAR') 
+					FROM PPA_WIP PW 
+					LEFT JOIN PPA_WIP_VALUES PV ON PW.TRANSNO = PV.TRANSNO AND PV.CURRENCY_TYPE = 'HOME'
+					WHERE PW.INVESTMENT_ID = INVI.ID AND PW.STATUS = 0 AND PV.TOTALCOST > 0 AND TRUNC(PW.TRANSDATE,'YEAR') = TRUNC(SYSDATE,'YEAR')
+				))
+			)
+) VAL
+
+GROUP BY 
+TIPO_DEMANDA
+
+UNION
+
+SELECT
+ 'Quantidade ' TIPO_DEMANDA
+, SUM(NVL(CORPORATIVO,0)) CORPORATIVO
+, SUM(NVL(NORTE,0)) NORTE
+, SUM(NVL(SUL,0)) SUL
+, 'QTD' TIPO
+, CASE WHEN TIPO_DEMANDA = 'CAPEX' THEN 2 ELSE 20 END ORDEM
+FROM
+(
+	SELECT DISTINCT
+		INVI.CODE INV_CODE
+		, TIPO_DEMANDA.NAME TIPO_DEMANDA 
+		, CASE WHEN OPERACAO.NAME = 'Corporativo' THEN 1 END CORPORATIVO
+		, CASE WHEN OPERACAO.NAME = 'Operação Norte' THEN 1 END NORTE
+		, CASE WHEN OPERACAO.NAME = 'Operação Sul' THEN 1 END SUL
+	FROM 
+		INV_INVESTMENTS INVI
+		LEFT JOIN ODF_CA_INV OCINV ON INVI.ID = OCINV.ID
+		LEFT JOIN ODF_CA_PROJECT OCPRJ ON OCPRJ.ID = INVI.ID
+		LEFT JOIN ODF_CA_IDEA OCID ON OCID.ID = INVI.ID
+		LEFT JOIN CMN_LOOKUPS_V TIPO_DEMANDA ON (TIPO_DEMANDA.LOOKUP_CODE = OCPRJ.all_tipo_demanda OR TIPO_DEMANDA.LOOKUP_CODE = OCID.all_tipo_demanda) AND TIPO_DEMANDA.LANGUAGE_CODE = 'pt' AND TIPO_DEMANDA.LOOKUP_TYPE = 'ALL_TIPO_DEMANDA'
+		LEFT JOIN CMN_LOOKUPS_V OPERACAO ON OPERACAO.LOOKUP_CODE = OCINV.all_area AND OPERACAO.LANGUAGE_CODE = 'pt' AND OPERACAO.LOOKUP_TYPE = 'ALL_LKP_AREAS'
+		LEFT JOIN FIN_PLANS FP ON FP.OBJECT_ID = INVI.ID AND FP.PLAN_TYPE_CODE = 'FORECAST'
+		LEFT JOIN FIN_COST_PLAN_DETAILS FPD on FP.ID = FPD.PLAN_ID
+		LEFT JOIN ODF_SSL_CST_DTL_COST FP_COST ON FPD.ID = FP_COST.PRJ_OBJECT_ID
+		LEFT JOIN ODF_CA_COSTPLAN OCP ON OCP.ID = FP.ID AND OCP.ALL_TP_PLANO = 'all_forecast' AND OCP.ALL_ATIVO = 1
+	WHERE 
+		TIPO_DEMANDA.LOOKUP_CODE IS NOT NULL
+		AND INVI.STATUS !=8
+		AND OCP.all_cst_total_fct <> 0
+		AND INVI.IS_ACTIVE = 1
+		AND INVI.ODF_OBJECT_CODE = 'project'
+		AND (
+				(TRUNC(FP_COST.START_DATE,'YEAR') = TRUNC(SYSDATE,'YEAR'))
+				OR
+				(TRUNC(SYSDATE,'YEAR') = 
+				(	
+					SELECT DISTINCT 
+					TRUNC(PW.TRANSDATE,'YEAR') 
+					FROM PPA_WIP PW 
+					LEFT JOIN PPA_WIP_VALUES PV ON PW.TRANSNO = PV.TRANSNO AND PV.CURRENCY_TYPE = 'HOME'
+					WHERE PW.INVESTMENT_ID = INVI.ID AND PW.STATUS = 0 AND PV.TOTALCOST > 0 AND TRUNC(PW.TRANSDATE,'YEAR') = TRUNC(SYSDATE,'YEAR')
+				))
+			)
+) VAL
+
+GROUP BY 
+TIPO_DEMANDA]]>
+		</queryString>
+		<field name="TIPO_DEMANDA" class="java.lang.String"/>
+		<field name="CORPORATIVO" class="java.math.BigDecimal"/>
+		<field name="NORTE" class="java.math.BigDecimal"/>
+		<field name="SUL" class="java.math.BigDecimal"/>
+		<field name="TIPO" class="java.lang.String"/>
+		<field name="ORDEM" class="java.math.BigDecimal"/>
+		<sortField name="ORDEM"/>
+		<variable name="TOTAL_LINHA" class="java.math.BigDecimal">
+			<variableExpression><![CDATA[$F{NORTE}.add($F{SUL}).add($F{CORPORATIVO})]]></variableExpression>
+		</variable>
+		<variable name="TOTAL_CORP_VAL" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[$F{TIPO}.equals("VAL") ? $F{CORPORATIVO} : 0.0]]></variableExpression>
+		</variable>
+		<variable name="TOTAL_NORTE_VAL" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[$F{TIPO}.equals("VAL") ? $F{NORTE} : 0]]></variableExpression>
+		</variable>
+		<variable name="TOTAL_SUL_VAL" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[$F{TIPO}.equals("VAL")?$F{SUL}:0]]></variableExpression>
+		</variable>
+		<variable name="TOTAL_CORP_QTD" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[$F{TIPO}.equals("QTD") ? $F{CORPORATIVO} : 0.0]]></variableExpression>
+		</variable>
+		<variable name="TOTAL_NORTE_QTD" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[$F{TIPO}.equals("QTD") ? $F{NORTE} : 0.0]]></variableExpression>
+		</variable>
+		<variable name="TOTAL_SUL_QTD" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[$F{TIPO}.equals("QTD") ? $F{SUL} : 0.0]]></variableExpression>
+		</variable>
+		<variable name="TOTAL_TOTAL_VAL" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[$F{TIPO}.equals("VAL") ? $V{TOTAL_LINHA} : 0.0]]></variableExpression>
+		</variable>
+		<variable name="TOTAL_TOTAL_QTD" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[$F{TIPO}.equals("QTD") ? $V{TOTAL_LINHA} : 0.0]]></variableExpression>
+		</variable>
+	</subDataset>
+	<subDataset name="CAPEX_PROJ_APROV" uuid="e18eb086-a76d-4432-ad3b-f355838147d8">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="RUMO - PRD"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<queryString>
+			<![CDATA[SELECT
+ TIPO_DEMANDA || ' R$' TIPO_DEMANDA
+, (SUM(NVL(CORPORATIVO,0)))/1000 CORPORATIVO
+, (SUM(NVL(NORTE,0)))/1000 NORTE
+, (SUM(NVL(SUL,0)))/1000 SUL
+, 'VAL' TIPO
+, CASE WHEN TIPO_DEMANDA = 'CAPEX' THEN 1 ELSE 10 END ORDEM
+FROM
+(
+	SELECT DISTINCT
+		INVI.CODE INV_CODE
+		, TIPO_DEMANDA.NAME TIPO_DEMANDA 
+		, CASE WHEN OPERACAO.NAME = 'Corporativo' THEN NVL(ROUND(OCP.all_cst_total_fct,0),0) END CORPORATIVO
+		, CASE WHEN OPERACAO.NAME = 'Operação Norte' THEN NVL(ROUND(OCP.all_cst_total_fct,0),0) END NORTE
+		, CASE WHEN OPERACAO.NAME = 'Operação Sul' THEN NVL(ROUND(OCP.all_cst_total_fct,0),0) END SUL
+	FROM 
+		INV_INVESTMENTS INVI
+		LEFT JOIN ODF_CA_INV OCINV ON INVI.ID = OCINV.ID
+		LEFT JOIN ODF_CA_PROJECT OCPRJ ON OCPRJ.ID = INVI.ID
+		LEFT JOIN ODF_CA_IDEA OCID ON OCID.ID = INVI.ID AND INVI.STATUS !=8
+		LEFT JOIN CMN_LOOKUPS_V TIPO_DEMANDA ON (TIPO_DEMANDA.LOOKUP_CODE = OCPRJ.all_tipo_demanda OR TIPO_DEMANDA.LOOKUP_CODE = OCID.all_tipo_demanda) AND TIPO_DEMANDA.LANGUAGE_CODE = 'pt' AND TIPO_DEMANDA.LOOKUP_TYPE = 'ALL_TIPO_DEMANDA'
+		LEFT JOIN CMN_LOOKUPS_V OPERACAO ON OPERACAO.LOOKUP_CODE = OCINV.all_area AND OPERACAO.LANGUAGE_CODE = 'pt' AND OPERACAO.LOOKUP_TYPE = 'ALL_LKP_AREAS'
+		LEFT JOIN FIN_PLANS FP ON FP.OBJECT_ID = INVI.ID AND FP.PLAN_TYPE_CODE = 'FORECAST'
+		LEFT JOIN FIN_COST_PLAN_DETAILS FPD on FP.ID = FPD.PLAN_ID
+		LEFT JOIN ODF_SSL_CST_DTL_COST FP_COST ON FPD.ID = FP_COST.PRJ_OBJECT_ID
+		LEFT JOIN ODF_CA_COSTPLAN OCP ON OCP.ID = FP.ID AND OCP.ALL_TP_PLANO = 'all_forecast' AND OCP.ALL_ATIVO = 1
+	WHERE 
+		TIPO_DEMANDA.LOOKUP_CODE IS NOT NULL
+		AND INVI.STATUS !=8
+		AND INVI.IS_ACTIVE = 1
+		AND INVI.ODF_OBJECT_CODE = 'project'
+		AND INVI.STAGE_CODE IN ('all_execucao','all_encerramento','all_concluido')
+		AND (
+				(TRUNC(FP_COST.START_DATE,'YEAR') = TRUNC(SYSDATE,'YEAR'))
+				OR
+				(TRUNC(SYSDATE,'YEAR') = 
+				(	
+					SELECT DISTINCT 
+					TRUNC(PW.TRANSDATE,'YEAR') 
+					FROM PPA_WIP PW 
+					LEFT JOIN PPA_WIP_VALUES PV ON PW.TRANSNO = PV.TRANSNO AND PV.CURRENCY_TYPE = 'HOME'
+					WHERE PW.INVESTMENT_ID = INVI.ID AND PW.STATUS = 0 AND PV.TOTALCOST > 0 AND TRUNC(PW.TRANSDATE,'YEAR') = TRUNC(SYSDATE,'YEAR')
+				))
+			)
+) VAL
+
+GROUP BY 
+TIPO_DEMANDA
+
+UNION
+
+SELECT
+ 'Quantidade ' TIPO_DEMANDA
+, SUM(NVL(CORPORATIVO,0)) CORPORATIVO
+, SUM(NVL(NORTE,0)) NORTE
+, SUM(NVL(SUL,0)) SUL
+, 'QTD' TIPO
+, CASE WHEN TIPO_DEMANDA = 'CAPEX' THEN 2 ELSE 20 END ORDEM
+FROM
+(
+	SELECT DISTINCT
+		INVI.CODE INV_CODE
+		, TIPO_DEMANDA.NAME TIPO_DEMANDA 
+		, CASE WHEN OPERACAO.NAME = 'Corporativo' THEN 1 END CORPORATIVO
+		, CASE WHEN OPERACAO.NAME = 'Operação Norte' THEN 1 END NORTE
+		, CASE WHEN OPERACAO.NAME = 'Operação Sul' THEN 1 END SUL
+	FROM 
+		INV_INVESTMENTS INVI
+		LEFT JOIN ODF_CA_INV OCINV ON INVI.ID = OCINV.ID
+		LEFT JOIN ODF_CA_PROJECT OCPRJ ON OCPRJ.ID = INVI.ID
+		LEFT JOIN ODF_CA_IDEA OCID ON OCID.ID = INVI.ID
+		LEFT JOIN CMN_LOOKUPS_V TIPO_DEMANDA ON (TIPO_DEMANDA.LOOKUP_CODE = OCPRJ.all_tipo_demanda OR TIPO_DEMANDA.LOOKUP_CODE = OCID.all_tipo_demanda) AND TIPO_DEMANDA.LANGUAGE_CODE = 'pt' AND TIPO_DEMANDA.LOOKUP_TYPE = 'ALL_TIPO_DEMANDA'
+		LEFT JOIN CMN_LOOKUPS_V OPERACAO ON OPERACAO.LOOKUP_CODE = OCINV.all_area AND OPERACAO.LANGUAGE_CODE = 'pt' AND OPERACAO.LOOKUP_TYPE = 'ALL_LKP_AREAS'
+		LEFT JOIN FIN_PLANS FP ON FP.OBJECT_ID = INVI.ID AND FP.PLAN_TYPE_CODE = 'FORECAST'
+		LEFT JOIN FIN_COST_PLAN_DETAILS FPD on FP.ID = FPD.PLAN_ID
+		LEFT JOIN ODF_SSL_CST_DTL_COST FP_COST ON FPD.ID = FP_COST.PRJ_OBJECT_ID
+		LEFT JOIN ODF_CA_COSTPLAN OCP ON OCP.ID = FP.ID AND OCP.ALL_TP_PLANO = 'all_forecast' AND OCP.ALL_ATIVO = 1
+	WHERE 
+		TIPO_DEMANDA.LOOKUP_CODE IS NOT NULL
+		AND INVI.STATUS !=8
+		AND OCP.all_cst_total_fct <> 0
+		AND INVI.IS_ACTIVE = 1
+		AND INVI.ODF_OBJECT_CODE = 'project'
+		AND INVI.STAGE_CODE IN ('all_execucao','all_encerramento','all_concluido')
+		AND (
+				(TRUNC(FP_COST.START_DATE,'YEAR') = TRUNC(SYSDATE,'YEAR'))
+				OR
+				(TRUNC(SYSDATE,'YEAR') = 
+				(	
+					SELECT DISTINCT 
+					TRUNC(PW.TRANSDATE,'YEAR') 
+					FROM PPA_WIP PW 
+					LEFT JOIN PPA_WIP_VALUES PV ON PW.TRANSNO = PV.TRANSNO AND PV.CURRENCY_TYPE = 'HOME'
+					WHERE PW.INVESTMENT_ID = INVI.ID AND PW.STATUS = 0 AND PV.TOTALCOST > 0 AND TRUNC(PW.TRANSDATE,'YEAR') = TRUNC(SYSDATE,'YEAR')
+				))
+			)
+) VAL
+
+GROUP BY 
+TIPO_DEMANDA]]>
+		</queryString>
+		<field name="TIPO_DEMANDA" class="java.lang.String"/>
+		<field name="CORPORATIVO" class="java.math.BigDecimal"/>
+		<field name="NORTE" class="java.math.BigDecimal"/>
+		<field name="SUL" class="java.math.BigDecimal"/>
+		<field name="TIPO" class="java.lang.String"/>
+		<field name="ORDEM" class="java.math.BigDecimal"/>
+		<sortField name="ORDEM"/>
+		<variable name="TOTAL_LINHA" class="java.math.BigDecimal">
+			<variableExpression><![CDATA[$F{NORTE}.add($F{SUL}).add($F{CORPORATIVO})]]></variableExpression>
+		</variable>
+		<variable name="TOTAL_CORP_VAL" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[$F{TIPO}.equals("VAL") ? $F{CORPORATIVO} : 0.0]]></variableExpression>
+		</variable>
+		<variable name="TOTAL_NORTE_VAL" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[$F{TIPO}.equals("VAL") ? $F{NORTE} : 0]]></variableExpression>
+		</variable>
+		<variable name="TOTAL_SUL_VAL" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[$F{TIPO}.equals("VAL")?$F{SUL}:0]]></variableExpression>
+		</variable>
+		<variable name="TOTAL_CORP_QTD" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[$F{TIPO}.equals("QTD") ? $F{CORPORATIVO} : 0.0]]></variableExpression>
+		</variable>
+		<variable name="TOTAL_NORTE_QTD" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[$F{TIPO}.equals("QTD") ? $F{NORTE} : 0.0]]></variableExpression>
+		</variable>
+		<variable name="TOTAL_SUL_QTD" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[$F{TIPO}.equals("QTD") ? $F{SUL} : 0.0]]></variableExpression>
+		</variable>
+		<variable name="TOTAL_TOTAL_VAL" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[$F{TIPO}.equals("VAL") ? $V{TOTAL_LINHA} : 0.0]]></variableExpression>
+		</variable>
+		<variable name="TOTAL_TOTAL_QTD" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[$F{TIPO}.equals("QTD") ? $V{TOTAL_LINHA} : 0.0]]></variableExpression>
+		</variable>
+	</subDataset>
+	<subDataset name="ORCAMENTO_FCST" uuid="2679fa72-db59-4282-a609-103b09a94442">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="RUMO - PRD"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<queryString>
+			<![CDATA[SELECT
+ TIPO_DEMANDA
+, (SUM(NVL(CORPORATIVO,0))/1000) CORPORATIVO
+, (SUM(NVL(NORTE,0))/1000) NORTE
+, (SUM(NVL(SUL,0))/1000) SUL
+, 'VAL' TIPO
+, CASE WHEN TIPO_DEMANDA = 'Orçamento' THEN 2 ELSE 20 END ORDEM
+FROM
+(
+	SELECT DISTINCT
+		INVI.CODE INV_CODE
+		, 'Orçamento' TIPO_DEMANDA
+		, FP_COST.START_DATE
+		, CASE WHEN OPERACAO.NAME = 'Corporativo' THEN NVL(ROUND(((FP_COST.FINISH_DATE-FP_COST.START_DATE)*FP_COST.SLICE),0),0) END CORPORATIVO
+		, CASE WHEN OPERACAO.NAME = 'Operação Norte' THEN NVL(ROUND(((FP_COST.FINISH_DATE-FP_COST.START_DATE)*FP_COST.SLICE),0),0) END NORTE
+		, CASE WHEN OPERACAO.NAME = 'Operação Sul' THEN NVL(ROUND(((FP_COST.FINISH_DATE-FP_COST.START_DATE)*FP_COST.SLICE),0),0) END SUL
+	FROM 
+		INV_INVESTMENTS INVI
+		LEFT JOIN ODF_CA_INV OCINV ON INVI.ID = OCINV.ID
+		LEFT JOIN ODF_CA_PROJECT OCPRJ ON OCPRJ.ID = INVI.ID
+		LEFT JOIN ODF_CA_IDEA OCID ON OCID.ID = INVI.ID
+		LEFT JOIN CMN_LOOKUPS_V TIPO_DEMANDA ON (TIPO_DEMANDA.LOOKUP_CODE = OCPRJ.all_tipo_demanda OR TIPO_DEMANDA.LOOKUP_CODE = OCID.all_tipo_demanda) AND TIPO_DEMANDA.LANGUAGE_CODE = 'pt' AND TIPO_DEMANDA.LOOKUP_TYPE = 'ALL_TIPO_DEMANDA'
+		LEFT JOIN CMN_LOOKUPS_V OPERACAO ON OPERACAO.LOOKUP_CODE = OCINV.all_area AND OPERACAO.LANGUAGE_CODE = 'pt' AND OPERACAO.LOOKUP_TYPE = 'ALL_LKP_AREAS'
+		LEFT JOIN CMN_LOOKUPS_V STATUS ON STATUS.LOOKUP_CODE = INVI.STAGE_CODE AND STATUS.LANGUAGE_CODE = 'pt' AND STATUS.LOOKUP_TYPE = 'INV_STAGE_TYPE'
+		LEFT JOIN FIN_PLANS FP ON FP.OBJECT_ID = INVI.ID AND FP.PLAN_TYPE_CODE = 'FORECAST'
+		LEFT JOIN FIN_COST_PLAN_DETAILS FPD ON FP.ID = FPD.PLAN_ID 
+		LEFT JOIN ODF_SSL_CST_DTL_COST FP_COST ON FPD.ID = FP_COST.PRJ_OBJECT_ID
+		LEFT JOIN ODF_CA_COSTPLAN OCP ON OCP.ID = FP.ID 
+	WHERE
+		OCP.ALL_TP_PLANO = 'all_orcamento'
+		AND INVI.STATUS !=8
+		AND OCP.ALL_ATIVO = 1
+		AND INVI.IS_ACTIVE = 1
+		AND (
+				(TRUNC(FP_COST.START_DATE,'YEAR') = TRUNC(SYSDATE,'YEAR'))
+				OR
+				(TRUNC(SYSDATE,'YEAR') = 
+				(	
+					SELECT DISTINCT 
+					TRUNC(PW.TRANSDATE,'YEAR') 
+					FROM PPA_WIP PW 
+					LEFT JOIN PPA_WIP_VALUES PV ON PW.TRANSNO = PV.TRANSNO AND PV.CURRENCY_TYPE = 'HOME'
+					WHERE PW.INVESTMENT_ID = INVI.ID AND PW.STATUS = 0 AND PV.TOTALCOST > 0 AND TRUNC(PW.TRANSDATE,'YEAR') = TRUNC(SYSDATE,'YEAR')
+				))
+			)
+		)
+) VAL
+WHERE
+	TRUNC(START_DATE,'YEAR') = TRUNC(SYSDATE,'YEAR')
+GROUP BY 
+	TIPO_DEMANDA
+
+UNION
+
+SELECT
+ TIPO_DEMANDA
+, (SUM(NVL(CORPORATIVO,0))/1000) CORPORATIVO
+, (SUM(NVL(NORTE,0))/1000) NORTE
+, (SUM(NVL(SUL,0))/1000) SUL
+, 'VAL' TIPO
+, CASE WHEN TIPO_DEMANDA = 'Orçamento' THEN 2 ELSE 20 END ORDEM
+FROM
+(
+	SELECT DISTINCT
+		INVI.CODE INV_CODE
+		, 'Forecast' TIPO_DEMANDA 
+		, CASE WHEN OPERACAO.NAME = 'Corporativo' THEN NVL(ROUND(OCP.all_cst_total_fct,0),0) END CORPORATIVO
+		, CASE WHEN OPERACAO.NAME = 'Operação Norte' THEN NVL(ROUND(OCP.all_cst_total_fct,0),0) END NORTE
+		, CASE WHEN OPERACAO.NAME = 'Operação Sul' THEN NVL(ROUND(OCP.all_cst_total_fct,0),0) END SUL
+	FROM 
+		INV_INVESTMENTS INVI
+		LEFT JOIN ODF_CA_INV OCINV ON INVI.ID = OCINV.ID
+		LEFT JOIN ODF_CA_PROJECT OCPRJ ON OCPRJ.ID = INVI.ID
+		LEFT JOIN ODF_CA_IDEA OCID ON OCID.ID = INVI.ID
+		LEFT JOIN CMN_LOOKUPS_V TIPO_DEMANDA ON (TIPO_DEMANDA.LOOKUP_CODE = OCPRJ.all_tipo_demanda OR TIPO_DEMANDA.LOOKUP_CODE = OCID.all_tipo_demanda) AND TIPO_DEMANDA.LANGUAGE_CODE = 'pt' AND TIPO_DEMANDA.LOOKUP_TYPE = 'ALL_TIPO_DEMANDA'
+		LEFT JOIN CMN_LOOKUPS_V OPERACAO ON OPERACAO.LOOKUP_CODE = OCINV.all_area AND OPERACAO.LANGUAGE_CODE = 'pt' AND OPERACAO.LOOKUP_TYPE = 'ALL_LKP_AREAS'
+		LEFT JOIN FIN_PLANS FP ON FP.OBJECT_ID = INVI.ID  AND FP.PLAN_TYPE_CODE = 'FORECAST'
+		LEFT JOIN FIN_COST_PLAN_DETAILS FPD ON FP.ID = FPD.PLAN_ID 
+		LEFT JOIN ODF_SSL_CST_DTL_COST FP_COST ON FPD.ID = FP_COST.PRJ_OBJECT_ID
+		LEFT JOIN ODF_CA_COSTPLAN OCP ON OCP.ID = FP.ID 
+	WHERE
+		INVI.ODF_OBJECT_CODE = 'idea'
+		AND OCP.ALL_TP_PLANO = 'all_forecast' 
+		AND OCP.ALL_ATIVO = 1
+		AND INVI.STATUS !=8
+		AND OCP.all_cst_total_fct <> 0
+		AND INVI.IS_ACTIVE = 1
+		AND (
+				(TRUNC(FP_COST.START_DATE,'YEAR') = TRUNC(SYSDATE,'YEAR'))
+				OR
+				(TRUNC(SYSDATE,'YEAR') = 
+				(	
+					SELECT DISTINCT 
+					TRUNC(PW.TRANSDATE,'YEAR') 
+					FROM PPA_WIP PW 
+					LEFT JOIN PPA_WIP_VALUES PV ON PW.TRANSNO = PV.TRANSNO AND PV.CURRENCY_TYPE = 'HOME'
+					WHERE PW.INVESTMENT_ID = INVI.ID AND PW.STATUS = 0 AND PV.TOTALCOST > 0 AND TRUNC(PW.TRANSDATE,'YEAR') = TRUNC(SYSDATE,'YEAR')
+				))
+			)
+	
+	UNION
+	
+	SELECT DISTINCT
+		INVI.CODE INV_CODE
+		, 'Forecast' TIPO_DEMANDA 
+		, CASE WHEN OPERACAO.NAME = 'Corporativo' THEN NVL(ROUND(OCP.all_cst_total_fct,0),0) END CORPORATIVO
+		, CASE WHEN OPERACAO.NAME = 'Operação Norte' THEN NVL(ROUND(OCP.all_cst_total_fct,0),0) END NORTE
+		, CASE WHEN OPERACAO.NAME = 'Operação Sul' THEN NVL(ROUND(OCP.all_cst_total_fct,0),0) END SUL
+	FROM 
+		INV_INVESTMENTS INVI
+		LEFT JOIN ODF_CA_INV OCINV ON INVI.ID = OCINV.ID
+		LEFT JOIN ODF_CA_PROJECT OCPRJ ON OCPRJ.ID = INVI.ID
+		LEFT JOIN ODF_CA_IDEA OCID ON OCID.ID = INVI.ID
+		LEFT JOIN CMN_LOOKUPS_V TIPO_DEMANDA ON (TIPO_DEMANDA.LOOKUP_CODE = OCPRJ.all_tipo_demanda OR TIPO_DEMANDA.LOOKUP_CODE = OCID.all_tipo_demanda) AND TIPO_DEMANDA.LANGUAGE_CODE = 'pt' AND TIPO_DEMANDA.LOOKUP_TYPE = 'ALL_TIPO_DEMANDA'
+		LEFT JOIN CMN_LOOKUPS_V OPERACAO ON OPERACAO.LOOKUP_CODE = OCINV.all_area AND OPERACAO.LANGUAGE_CODE = 'pt' AND OPERACAO.LOOKUP_TYPE = 'ALL_LKP_AREAS'
+		LEFT JOIN FIN_PLANS FP ON FP.OBJECT_ID = INVI.ID AND FP.PLAN_TYPE_CODE = 'FORECAST'
+		LEFT JOIN FIN_COST_PLAN_DETAILS FPD ON FP.ID = FPD.PLAN_ID 
+		LEFT JOIN ODF_SSL_CST_DTL_COST FP_COST ON FPD.ID = FP_COST.PRJ_OBJECT_ID
+		LEFT JOIN ODF_CA_COSTPLAN OCP ON OCP.ID = FP.ID 
+	WHERE
+		TIPO_DEMANDA.LOOKUP_CODE IS NOT NULL
+		AND OCP.ALL_TP_PLANO = 'all_forecast' 
+		AND OCP.ALL_ATIVO = 1
+		AND INVI.STATUS !=8
+		AND OCP.all_cst_total_fct <> 0
+		AND INVI.STAGE_CODE IN ('all_execucao','all_encerramento','all_concluido','all_planejamento','all_outros')
+		AND INVI.IS_ACTIVE = 1
+		AND (
+				(TRUNC(FP_COST.START_DATE,'YEAR') = TRUNC(SYSDATE,'YEAR'))
+				OR
+				(TRUNC(SYSDATE,'YEAR') = 
+				(	
+					SELECT DISTINCT 
+					TRUNC(PW.TRANSDATE,'YEAR') 
+					FROM PPA_WIP PW 
+					LEFT JOIN PPA_WIP_VALUES PV ON PW.TRANSNO = PV.TRANSNO AND PV.CURRENCY_TYPE = 'HOME'
+					WHERE PW.INVESTMENT_ID = INVI.ID AND PW.STATUS = 0 AND PV.TOTALCOST > 0 AND TRUNC(PW.TRANSDATE,'YEAR') = TRUNC(SYSDATE,'YEAR')
+				))
+			)
+) VAL
+
+GROUP BY 
+TIPO_DEMANDA]]>
+		</queryString>
+		<field name="TIPO_DEMANDA" class="java.lang.String"/>
+		<field name="CORPORATIVO" class="java.math.BigDecimal"/>
+		<field name="NORTE" class="java.math.BigDecimal"/>
+		<field name="SUL" class="java.math.BigDecimal"/>
+		<field name="TIPO" class="java.lang.String"/>
+		<field name="ORDEM" class="java.math.BigDecimal"/>
+		<sortField name="ORDEM"/>
+		<variable name="TOTAL_NORTE_FCT_VAL" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[AND($F{TIPO}.equals("VAL"),$F{TIPO_DEMANDA}.equals("Forecast")) ? $F{NORTE} : 0.0]]></variableExpression>
+		</variable>
+		<variable name="TOTAL_NORTE_ORC_VAL" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[AND($F{TIPO}.equals("VAL"),$F{TIPO_DEMANDA}.equals("Orçamento")) ? $F{NORTE} : 0.0]]></variableExpression>
+		</variable>
+		<variable name="TOTAL_SUL_FCT_VAL" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[AND($F{TIPO}.equals("VAL"),$F{TIPO_DEMANDA}.equals("Forecast")) ? $F{SUL} : 0.0]]></variableExpression>
+		</variable>
+		<variable name="TOTAL_SUL_ORC_VAL" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[AND($F{TIPO}.equals("VAL"),$F{TIPO_DEMANDA}.equals("Orçamento")) ? $F{SUL} : 0.0]]></variableExpression>
+		</variable>
+		<variable name="TOTAL_CORP_FCT_VAL" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[AND($F{TIPO}.equals("VAL"),$F{TIPO_DEMANDA}.equals("Forecast")) ? $F{CORPORATIVO} : 0.0]]></variableExpression>
+		</variable>
+		<variable name="TOTAL_CORP_ORC_VAL" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[AND($F{TIPO}.equals("VAL"),$F{TIPO_DEMANDA}.equals("Orçamento")) ? $F{CORPORATIVO} : 0.0]]></variableExpression>
+		</variable>
+		<variable name="TOTAL_LINHA" class="java.math.BigDecimal">
+			<variableExpression><![CDATA[$F{NORTE}.add($F{SUL}).add($F{CORPORATIVO})]]></variableExpression>
+		</variable>
+		<variable name="SUB_NORTE" class="java.math.BigDecimal">
+			<variableExpression><![CDATA[$V{TOTAL_NORTE_ORC_VAL}.subtract( $V{TOTAL_NORTE_FCT_VAL} )]]></variableExpression>
+		</variable>
+		<variable name="SUB_SUL" class="java.math.BigDecimal">
+			<variableExpression><![CDATA[$V{TOTAL_SUL_ORC_VAL}.subtract( $V{TOTAL_SUL_FCT_VAL} )]]></variableExpression>
+		</variable>
+		<variable name="SUB_CORPORATIVO" class="java.math.BigDecimal">
+			<variableExpression><![CDATA[$V{TOTAL_CORP_ORC_VAL}.subtract( $V{TOTAL_CORP_FCT_VAL} )]]></variableExpression>
+		</variable>
+		<variable name="SUB_TOTAL" class="java.math.BigDecimal">
+			<variableExpression><![CDATA[$V{SUB_NORTE}.add($V{SUB_SUL}).add($V{SUB_CORPORATIVO})]]></variableExpression>
+		</variable>
+	</subDataset>
+	<subDataset name="FORECAST" uuid="db7756b3-b39e-457f-ab85-854c052dafa2">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="RUMO - PRD"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<queryString>
+			<![CDATA[SELECT DISTINCT
+ TIPO_DEMANDA
+, (SUM(NVL(CORPORATIVO,0))/1000) CORPORATIVO
+, (SUM(NVL(NORTE,0))/1000) NORTE
+, (SUM(NVL(SUL,0))/1000) SUL
+, 'VAL' TIPO
+, CASE WHEN TIPO_DEMANDA = 'Liberado' THEN 2 WHEN TIPO_DEMANDA = 'Não Liberado' THEN 20 ELSE 200 END ORDEM
+FROM
+(
+	SELECT DISTINCT
+		INVI.CODE INV_CODE
+		, 'Liberado' TIPO_DEMANDA 
+		, CASE WHEN OPERACAO.NAME = 'Corporativo' THEN NVL(ROUND(OCP.all_cst_total_fct,0),0) END CORPORATIVO
+		, CASE WHEN OPERACAO.NAME = 'Operação Norte' THEN NVL(ROUND(OCP.all_cst_total_fct,0),0) END NORTE
+		, CASE WHEN OPERACAO.NAME = 'Operação Sul' THEN NVL(ROUND(OCP.all_cst_total_fct,0),0) END SUL
+	FROM 
+		INV_INVESTMENTS INVI
+		LEFT JOIN ODF_CA_INV OCINV ON INVI.ID = OCINV.ID
+		LEFT JOIN ODF_CA_PROJECT OCPRJ ON OCPRJ.ID = INVI.ID
+		LEFT JOIN ODF_CA_IDEA OCID ON OCID.ID = INVI.ID 
+		LEFT JOIN CMN_LOOKUPS_V TIPO_DEMANDA ON (TIPO_DEMANDA.LOOKUP_CODE = OCPRJ.all_tipo_demanda OR TIPO_DEMANDA.LOOKUP_CODE = OCID.all_tipo_demanda) AND TIPO_DEMANDA.LANGUAGE_CODE = 'pt' AND TIPO_DEMANDA.LOOKUP_TYPE = 'ALL_TIPO_DEMANDA'
+		LEFT JOIN CMN_LOOKUPS_V OPERACAO ON OPERACAO.LOOKUP_CODE = OCINV.all_area AND OPERACAO.LANGUAGE_CODE = 'pt' AND OPERACAO.LOOKUP_TYPE = 'ALL_LKP_AREAS'
+		LEFT JOIN FIN_PLANS FP ON FP.OBJECT_ID = INVI.ID AND FP.PLAN_TYPE_CODE = 'FORECAST'
+		LEFT JOIN FIN_COST_PLAN_DETAILS FPD on FP.ID = FPD.PLAN_ID
+		LEFT JOIN ODF_SSL_CST_DTL_COST FP_COST ON FPD.ID = FP_COST.PRJ_OBJECT_ID
+		LEFT JOIN ODF_CA_COSTPLAN OCP ON OCP.ID = FP.ID 
+	WHERE
+		INVI.STAGE_CODE IN ('all_execucao','all_encerramento','all_concluido')
+		AND OCP.ALL_TP_PLANO = 'all_forecast' 
+		AND OCP.ALL_ATIVO = 1
+		AND INVI.STATUS !=8
+		AND TIPO_DEMANDA.LOOKUP_CODE IS NOT NULL
+		AND INVI.IS_ACTIVE = 1
+		AND (
+				(TRUNC(FP_COST.START_DATE,'YEAR') = TRUNC(SYSDATE,'YEAR'))
+				OR
+				(TRUNC(SYSDATE,'YEAR') = 
+				(	
+					SELECT DISTINCT 
+					TRUNC(PW.TRANSDATE,'YEAR') 
+					FROM PPA_WIP PW 
+					LEFT JOIN PPA_WIP_VALUES PV ON PW.TRANSNO = PV.TRANSNO AND PV.CURRENCY_TYPE = 'HOME'
+					WHERE PW.INVESTMENT_ID = INVI.ID AND PW.STATUS = 0 AND PV.TOTALCOST > 0 AND TRUNC(PW.TRANSDATE,'YEAR') = TRUNC(SYSDATE,'YEAR')
+				))
+			)
+) VAL
+
+GROUP BY 
+TIPO_DEMANDA
+
+UNION
+
+SELECT DISTINCT
+ TIPO_DEMANDA
+, (SUM(NVL(CORPORATIVO,0))/1000) CORPORATIVO
+, (SUM(NVL(NORTE,0))/1000) NORTE
+, (SUM(NVL(SUL,0))/1000) SUL
+, 'VAL' TIPO
+, CASE WHEN TIPO_DEMANDA = 'Liberado' THEN 2 WHEN TIPO_DEMANDA = 'Não Liberado' THEN 20 ELSE 200 END ORDEM
+FROM
+(
+	SELECT DISTINCT
+		INVI.CODE INV_CODE
+		, 'Não Liberado' TIPO_DEMANDA 
+		, CASE WHEN OPERACAO.NAME = 'Corporativo' THEN NVL(ROUND(OCP.all_cst_total_fct,0),0) END CORPORATIVO
+		, CASE WHEN OPERACAO.NAME = 'Operação Norte' THEN NVL(ROUND(OCP.all_cst_total_fct,0),0) END NORTE
+		, CASE WHEN OPERACAO.NAME = 'Operação Sul' THEN NVL(ROUND(OCP.all_cst_total_fct,0),0) END SUL
+	FROM 
+		INV_INVESTMENTS INVI
+		LEFT JOIN ODF_CA_INV OCINV ON INVI.ID = OCINV.ID
+		LEFT JOIN ODF_CA_PROJECT OCPRJ ON OCPRJ.ID = INVI.ID
+		LEFT JOIN ODF_CA_IDEA OCID ON OCID.ID = INVI.ID 
+		LEFT JOIN CMN_LOOKUPS_V TIPO_DEMANDA ON (TIPO_DEMANDA.LOOKUP_CODE = OCPRJ.all_tipo_demanda OR TIPO_DEMANDA.LOOKUP_CODE = OCID.all_tipo_demanda) AND TIPO_DEMANDA.LANGUAGE_CODE = 'pt' AND TIPO_DEMANDA.LOOKUP_TYPE = 'ALL_TIPO_DEMANDA'
+		LEFT JOIN CMN_LOOKUPS_V OPERACAO ON OPERACAO.LOOKUP_CODE = OCINV.all_area AND OPERACAO.LANGUAGE_CODE = 'pt' AND OPERACAO.LOOKUP_TYPE = 'ALL_LKP_AREAS'
+		LEFT JOIN FIN_PLANS FP ON FP.OBJECT_ID = INVI.ID AND FP.PLAN_TYPE_CODE = 'FORECAST'
+		LEFT JOIN FIN_COST_PLAN_DETAILS FPD on FP.ID = FPD.PLAN_ID
+		LEFT JOIN ODF_SSL_CST_DTL_COST FP_COST ON FPD.ID = FP_COST.PRJ_OBJECT_ID
+		LEFT JOIN ODF_CA_COSTPLAN OCP ON OCP.ID = FP.ID 
+	WHERE
+		INVI.STAGE_CODE IN ('all_planejamento')
+		AND OCP.ALL_TP_PLANO = 'all_forecast' 
+		AND OCP.ALL_ATIVO = 1
+		AND INVI.STATUS !=8
+		AND TIPO_DEMANDA.LOOKUP_CODE IS NOT NULL
+		AND INVI.IS_ACTIVE = 1
+		AND (
+				(TRUNC(FP_COST.START_DATE,'YEAR') = TRUNC(SYSDATE,'YEAR'))
+				OR
+				(TRUNC(SYSDATE,'YEAR') = 
+				(	
+					SELECT DISTINCT 
+					TRUNC(PW.TRANSDATE,'YEAR') 
+					FROM PPA_WIP PW 
+					LEFT JOIN PPA_WIP_VALUES PV ON PW.TRANSNO = PV.TRANSNO AND PV.CURRENCY_TYPE = 'HOME'
+					WHERE PW.INVESTMENT_ID = INVI.ID AND PW.STATUS = 0 AND PV.TOTALCOST > 0 AND TRUNC(PW.TRANSDATE,'YEAR') = TRUNC(SYSDATE,'YEAR')
+				))
+			)
+	
+	UNION
+	
+	SELECT DISTINCT
+		INVI.CODE INV_CODE
+		, 'Não Liberado' TIPO_DEMANDA 
+		, CASE WHEN OPERACAO.NAME = 'Corporativo' THEN NVL(ROUND(OCP.all_cst_total_fct,0),0) END CORPORATIVO
+		, CASE WHEN OPERACAO.NAME = 'Operação Norte' THEN NVL(ROUND(OCP.all_cst_total_fct,0),0) END NORTE
+		, CASE WHEN OPERACAO.NAME = 'Operação Sul' THEN NVL(ROUND(OCP.all_cst_total_fct,0),0) END SUL
+	FROM 
+		INV_INVESTMENTS INVI
+		LEFT JOIN ODF_CA_INV OCINV ON INVI.ID = OCINV.ID
+		LEFT JOIN ODF_CA_PROJECT OCPRJ ON OCPRJ.ID = INVI.ID
+		LEFT JOIN ODF_CA_IDEA OCID ON OCID.ID = INVI.ID 
+		LEFT JOIN CMN_LOOKUPS_V TIPO_DEMANDA ON (TIPO_DEMANDA.LOOKUP_CODE = OCPRJ.all_tipo_demanda OR TIPO_DEMANDA.LOOKUP_CODE = OCID.all_tipo_demanda) AND TIPO_DEMANDA.LANGUAGE_CODE = 'pt' AND TIPO_DEMANDA.LOOKUP_TYPE = 'ALL_TIPO_DEMANDA'
+		LEFT JOIN CMN_LOOKUPS_V OPERACAO ON OPERACAO.LOOKUP_CODE = OCINV.all_area AND OPERACAO.LANGUAGE_CODE = 'pt' AND OPERACAO.LOOKUP_TYPE = 'ALL_LKP_AREAS'
+		LEFT JOIN FIN_PLANS FP ON FP.OBJECT_ID = INVI.ID AND FP.PLAN_TYPE_CODE = 'FORECAST'
+		LEFT JOIN FIN_COST_PLAN_DETAILS FPD on FP.ID = FPD.PLAN_ID
+		LEFT JOIN ODF_SSL_CST_DTL_COST FP_COST ON FPD.ID = FP_COST.PRJ_OBJECT_ID
+		LEFT JOIN ODF_CA_COSTPLAN OCP ON OCP.ID = FP.ID 
+	WHERE
+		INVI.ODF_OBJECT_CODE = 'idea'
+		AND OCP.ALL_TP_PLANO = 'all_forecast' 
+		AND OCP.ALL_ATIVO = 1
+		AND INVI.STATUS !=8
+		AND INVI.IS_ACTIVE = 1
+		AND (
+				(TRUNC(FP_COST.START_DATE,'YEAR') = TRUNC(SYSDATE,'YEAR'))
+				OR
+				(TRUNC(SYSDATE,'YEAR') = 
+				(	
+					SELECT DISTINCT 
+					TRUNC(PW.TRANSDATE,'YEAR') 
+					FROM PPA_WIP PW 
+					LEFT JOIN PPA_WIP_VALUES PV ON PW.TRANSNO = PV.TRANSNO AND PV.CURRENCY_TYPE = 'HOME'
+					WHERE PW.INVESTMENT_ID = INVI.ID AND PW.STATUS = 0 AND PV.TOTALCOST > 0 AND TRUNC(PW.TRANSDATE,'YEAR') = TRUNC(SYSDATE,'YEAR')
+				))
+			)
+) VAL
+
+GROUP BY 
+TIPO_DEMANDA
+
+UNION
+
+SELECT DISTINCT
+ TIPO_DEMANDA
+, (SUM(NVL(CORPORATIVO,0))/1000) CORPORATIVO
+, (SUM(NVL(NORTE,0))/1000) NORTE
+, (SUM(NVL(SUL,0))/1000) SUL
+, 'VAL' TIPO
+, CASE WHEN TIPO_DEMANDA = 'Liberado' THEN 2 WHEN TIPO_DEMANDA = 'Não Liberado' THEN 20 ELSE 200 END ORDEM
+FROM
+(
+	SELECT DISTINCT
+		INVI.CODE INV_CODE
+		, 'Outros' TIPO_DEMANDA 
+		, CASE WHEN OPERACAO.NAME = 'Corporativo' THEN NVL(ROUND(OCP.all_cst_total_fct,0),0) END CORPORATIVO
+		, CASE WHEN OPERACAO.NAME = 'Operação Norte' THEN NVL(ROUND(OCP.all_cst_total_fct,0),0) END NORTE
+		, CASE WHEN OPERACAO.NAME = 'Operação Sul' THEN NVL(ROUND(OCP.all_cst_total_fct,0),0) END SUL
+	FROM 
+		INV_INVESTMENTS INVI
+		LEFT JOIN ODF_CA_INV OCINV ON INVI.ID = OCINV.ID
+		LEFT JOIN ODF_CA_PROJECT OCPRJ ON OCPRJ.ID = INVI.ID
+		LEFT JOIN ODF_CA_IDEA OCID ON OCID.ID = INVI.ID 
+		LEFT JOIN CMN_LOOKUPS_V TIPO_DEMANDA ON (TIPO_DEMANDA.LOOKUP_CODE = OCPRJ.all_tipo_demanda OR TIPO_DEMANDA.LOOKUP_CODE = OCID.all_tipo_demanda) AND TIPO_DEMANDA.LANGUAGE_CODE = 'pt' AND TIPO_DEMANDA.LOOKUP_TYPE = 'ALL_TIPO_DEMANDA'
+		LEFT JOIN CMN_LOOKUPS_V OPERACAO ON OPERACAO.LOOKUP_CODE = OCINV.all_area AND OPERACAO.LANGUAGE_CODE = 'pt' AND OPERACAO.LOOKUP_TYPE = 'ALL_LKP_AREAS'
+		LEFT JOIN FIN_PLANS FP ON FP.OBJECT_ID = INVI.ID AND FP.PLAN_TYPE_CODE = 'FORECAST'
+		LEFT JOIN FIN_COST_PLAN_DETAILS FPD on FP.ID = FPD.PLAN_ID
+		LEFT JOIN ODF_SSL_CST_DTL_COST FP_COST ON FPD.ID = FP_COST.PRJ_OBJECT_ID
+		LEFT JOIN ODF_CA_COSTPLAN OCP ON OCP.ID = FP.ID 
+	WHERE
+		INVI.STAGE_CODE IN ('all_outros')
+		AND OCP.ALL_TP_PLANO = 'all_forecast' 
+		AND OCP.ALL_ATIVO = 1
+		AND INVI.STATUS !=8
+		AND TIPO_DEMANDA.LOOKUP_CODE IS NOT NULL
+		AND INVI.IS_ACTIVE = 1
+		AND (
+				(TRUNC(FP_COST.START_DATE,'YEAR') = TRUNC(SYSDATE,'YEAR'))
+				OR
+				(TRUNC(SYSDATE,'YEAR') = 
+				(	
+					SELECT DISTINCT 
+					TRUNC(PW.TRANSDATE,'YEAR') 
+					FROM PPA_WIP PW 
+					LEFT JOIN PPA_WIP_VALUES PV ON PW.TRANSNO = PV.TRANSNO AND PV.CURRENCY_TYPE = 'HOME'
+					WHERE PW.INVESTMENT_ID = INVI.ID AND PW.STATUS = 0 AND PV.TOTALCOST > 0 AND TRUNC(PW.TRANSDATE,'YEAR') = TRUNC(SYSDATE,'YEAR')
+				))
+			)
+) VAL
+
+GROUP BY 
+TIPO_DEMANDA]]>
+		</queryString>
+		<field name="TIPO_DEMANDA" class="java.lang.String"/>
+		<field name="CORPORATIVO" class="java.math.BigDecimal"/>
+		<field name="NORTE" class="java.math.BigDecimal"/>
+		<field name="SUL" class="java.math.BigDecimal"/>
+		<field name="TIPO" class="java.lang.String"/>
+		<field name="ORDEM" class="java.math.BigDecimal"/>
+		<sortField name="ORDEM"/>
+		<variable name="TOTAL_LINHA" class="java.math.BigDecimal">
+			<variableExpression><![CDATA[$F{NORTE}.add($F{SUL}).add($F{CORPORATIVO})]]></variableExpression>
+		</variable>
+		<variable name="TOTAL_CORP_VAL" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[$F{TIPO}.equals("VAL") ? $F{CORPORATIVO} : 0.0]]></variableExpression>
+		</variable>
+		<variable name="TOTAL_NORTE_VAL" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[$F{TIPO}.equals("VAL") ? $F{NORTE} : 0]]></variableExpression>
+		</variable>
+		<variable name="TOTAL_SUL_VAL" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[$F{TIPO}.equals("VAL")?$F{SUL}:0]]></variableExpression>
+		</variable>
+		<variable name="TOTAL_CORP_QTD" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[$F{TIPO}.equals("QTD") ? $F{CORPORATIVO} : 0.0]]></variableExpression>
+		</variable>
+		<variable name="TOTAL_NORTE_QTD" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[$F{TIPO}.equals("QTD") ? $F{NORTE} : 0.0]]></variableExpression>
+		</variable>
+		<variable name="TOTAL_SUL_QTD" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[$F{TIPO}.equals("QTD") ? $F{SUL} : 0.0]]></variableExpression>
+		</variable>
+		<variable name="TOTAL_TOTAL_VAL" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[$F{TIPO}.equals("VAL") ? $V{TOTAL_LINHA} : 0.0]]></variableExpression>
+		</variable>
+		<variable name="TOTAL_TOTAL_QTD" class="java.math.BigDecimal" calculation="Sum">
+			<variableExpression><![CDATA[$F{TIPO}.equals("QTD") ? $V{TOTAL_LINHA} : 0.0]]></variableExpression>
+		</variable>
+	</subDataset>
+	<queryString>
+		<![CDATA[SELECT NULL FROM DUAL]]>
+	</queryString>
+	<field name="NULL" class="java.lang.String"/>
+	<detail>
+		<band height="155" splitType="Stretch">
+			<componentElement>
+				<reportElement positionType="Float" x="0" y="0" width="426" height="145" uuid="53392970-6c32-41e7-8ec0-8f13ba984988">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+					<property name="com.jaspersoft.studio.components.autoresize.next" value="true"/>
+					<property name="com.jaspersoft.studio.components.autoresize.proportional" value="true"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="CAPEX_DEMANDA_PROJ" uuid="dce1461b-7bcc-4378-ab3e-d111d4a67df4">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="100" uuid="b3d6db81-6476-4815-8834-2e5a2ad0aba2">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
+							<textField>
+								<reportElement mode="Opaque" x="0" y="0" width="100" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="c92a324d-14ee-4ff0-a689-1a3d37174602"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="10" isBold="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA["Quantidade Total"]]></textFieldExpression>
+							</textField>
+						</jr:tableFooter>
+						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<box>
+								<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField isBlankWhenNull="true">
+								<reportElement mode="Opaque" x="0" y="0" width="100" height="30" uuid="37ac4d46-b570-4edc-919f-afbab5fbae5c"/>
+								<textElement>
+									<font size="10"/>
+								</textElement>
+							</textField>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30" rowSpan="1">
+							<textField>
+								<reportElement mode="Opaque" x="0" y="0" width="100" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="9049c8a8-1171-4d42-afbc-43b9473b7e1e"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="10" isBold="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA["Valor Total"]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell style="Table_TD" height="30">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField>
+								<reportElement x="0" y="0" width="100" height="30" uuid="08672887-faca-481b-b274-a0271c26f816"/>
+								<textElement textAlignment="Left" verticalAlignment="Middle">
+									<font size="10" isBold="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{TIPO_DEMANDA}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:columnGroup width="326" uuid="eac8e855-326b-4f8a-8195-b8028af7346c">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<jr:tableHeader height="25">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<box>
+								<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+								<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="326" height="25" forecolor="#FFFFFF" backcolor="#15008C" uuid="c091f21d-bf7b-4b98-81f3-a1abd130f4ea"/>
+								<box>
+									<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[PROJETOS + DEMANDAS]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:column width="80" uuid="96c16f00-21e4-4984-a807-e80c27e4e23b">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							<jr:tableHeader height="0">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							</jr:tableHeader>
+							<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
+								<textField pattern="#,##0.###;(#,##0.###-)">
+									<reportElement mode="Opaque" x="0" y="0" width="80" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="26b4c379-c3ca-4742-ae61-3d7e8bb74761"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{TOTAL_NORTE_QTD}]]></textFieldExpression>
+								</textField>
+							</jr:tableFooter>
+							<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField hyperlinkType="ReportExecution" hyperlinkTarget="Blank">
+									<reportElement mode="Opaque" x="0" y="0" width="80" height="30" uuid="14703fd6-a0c5-44cc-913b-988e605cee18"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA["NORTE"]]></textFieldExpression>
+									<hyperlinkParameter name="_report">
+										<hyperlinkParameterExpression><![CDATA["/ca_ppm/RUMO_ALL/bam_capex_drilldown"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+									<hyperlinkParameter name="bam_operacao">
+										<hyperlinkParameterExpression><![CDATA["NORTE"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CH" height="30" rowSpan="1">
+								<textField pattern="#,##0;(#,##0)">
+									<reportElement mode="Opaque" x="0" y="0" width="80" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="4ce0fc2f-e88f-4ffc-a6a5-db3ad401a5cc"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{TOTAL_NORTE_VAL}]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Table_TD" height="30">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField pattern="#,##0;(#,##0)">
+									<reportElement x="0" y="0" width="80" height="30" uuid="8f3ac8ae-46a0-4673-bd37-abb32bfd7102"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{NORTE}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="80" uuid="87f2232f-1fe1-44e8-925d-3a2c57decd30">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+							<jr:tableHeader height="0">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							</jr:tableHeader>
+							<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
+								<textField pattern="#,##0.###;(#,##0.###-)">
+									<reportElement mode="Opaque" x="0" y="0" width="80" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="e9efca72-e509-4059-b638-15fd2ea2f611"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{TOTAL_SUL_QTD}]]></textFieldExpression>
+								</textField>
+							</jr:tableFooter>
+							<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField hyperlinkType="ReportExecution" hyperlinkTarget="Blank">
+									<reportElement mode="Opaque" x="0" y="0" width="80" height="30" uuid="8ec989a8-dc99-49e7-9281-8029d0ebe7fb"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA["SUL"]]></textFieldExpression>
+									<hyperlinkParameter name="_report">
+										<hyperlinkParameterExpression><![CDATA["/ca_ppm/RUMO_ALL/bam_capex_drilldown"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+									<hyperlinkParameter name="bam_operacao">
+										<hyperlinkParameterExpression><![CDATA["SUL"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CH" height="30" rowSpan="1">
+								<textField pattern="#,##0;(#,##0)">
+									<reportElement mode="Opaque" x="0" y="0" width="80" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="fb10530f-1aef-45e4-a669-44b34d68602b"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{TOTAL_SUL_VAL}]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Table_TD" height="30">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField pattern="#,##0;(#,##0)">
+									<reportElement x="0" y="0" width="80" height="30" uuid="c59afa9b-5cd7-4215-910b-6e818110d43e"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{SUL}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="84" uuid="4518f8bf-d705-4361-ab6d-34423505f5c1">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+							<jr:tableHeader height="0">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							</jr:tableHeader>
+							<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
+								<textField pattern="#,##0.###;(#,##0.###-)">
+									<reportElement mode="Opaque" x="0" y="0" width="84" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="87e8d5a2-659f-4f68-a0a0-00951682ead9"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{TOTAL_CORP_QTD}]]></textFieldExpression>
+								</textField>
+							</jr:tableFooter>
+							<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField hyperlinkType="ReportExecution" hyperlinkTarget="Blank">
+									<reportElement mode="Opaque" x="0" y="0" width="84" height="30" uuid="73eee9f9-3fdb-4c20-8589-ed3170bb0680"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA["CORPORATIVO"]]></textFieldExpression>
+									<hyperlinkParameter name="_report">
+										<hyperlinkParameterExpression><![CDATA["/ca_ppm/RUMO_ALL/bam_capex_drilldown"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+									<hyperlinkParameter name="bam_operacao">
+										<hyperlinkParameterExpression><![CDATA["CORPORATIVO"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CH" height="30" rowSpan="1">
+								<textField pattern="#,##0;(#,##0)">
+									<reportElement mode="Opaque" x="0" y="0" width="84" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="4dbdb5c9-b1b3-42b5-b8ca-3977ca6d5399"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{TOTAL_CORP_VAL}]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Table_TD" height="30">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField pattern="#,##0;(#,##0)">
+									<reportElement x="0" y="0" width="84" height="30" uuid="24e47ec5-6e8f-494e-9ca2-6492d16b6697"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{CORPORATIVO}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="82" uuid="7ae3d2e5-e6e1-4943-8e57-05d7d7387380">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							<jr:tableHeader height="0">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							</jr:tableHeader>
+							<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
+								<textField pattern="#,##0.###;(#,##0.###-)">
+									<reportElement mode="Opaque" x="0" y="0" width="82" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="8df01b46-4cbc-4a2f-8164-29768a06fdf7"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{TOTAL_TOTAL_QTD}]]></textFieldExpression>
+								</textField>
+							</jr:tableFooter>
+							<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField hyperlinkType="ReportExecution" hyperlinkTarget="Blank">
+									<reportElement mode="Opaque" x="0" y="0" width="82" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="69054aa4-a623-4171-b77c-94d98a63453f"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA["TOTAL"]]></textFieldExpression>
+									<hyperlinkParameter name="_report">
+										<hyperlinkParameterExpression><![CDATA["/ca_ppm/RUMO_ALL/bam_capex_drilldown"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CH" height="30" rowSpan="1">
+								<textField pattern="#,##0;(#,##0)">
+									<reportElement mode="Opaque" x="0" y="0" width="82" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="81b147a9-ae59-4f6e-83ed-faf7e4d509b6"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{TOTAL_TOTAL_VAL}]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Table_TD" height="30">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField pattern="#,##0;(#,##0)">
+									<reportElement mode="Opaque" x="0" y="0" width="82" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="cab5f546-78fe-411e-8459-fc809b3f9d64"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{TOTAL_LINHA}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+					</jr:columnGroup>
+				</jr:table>
+			</componentElement>
+			<componentElement>
+				<reportElement positionType="Float" x="430" y="0" width="426" height="145" uuid="6fddddd7-823d-4071-bc5f-fdffc175e03c">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+					<property name="com.jaspersoft.studio.components.autoresize.next" value="true"/>
+					<property name="com.jaspersoft.studio.components.autoresize.proportional" value="true"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="CAPEX_PROJETOS" uuid="81b313a9-8c71-449d-9220-92fd952e96dc">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="100" uuid="873e6685-d9b0-41de-bc27-227c97d50895">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
+							<textField>
+								<reportElement mode="Opaque" x="0" y="0" width="100" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="9f887e29-8245-475a-a89a-f3cb04fde470"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="10" isBold="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA["Quantidade Total"]]></textFieldExpression>
+							</textField>
+						</jr:tableFooter>
+						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<box>
+								<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField isBlankWhenNull="true">
+								<reportElement mode="Opaque" x="0" y="0" width="100" height="30" uuid="953bc6c4-0679-45e9-9932-8a742888afc3"/>
+								<textElement>
+									<font size="10"/>
+								</textElement>
+							</textField>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30" rowSpan="1">
+							<textField>
+								<reportElement mode="Opaque" x="0" y="0" width="100" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="d05565f6-0bb4-4fd0-9a73-63b4295565bc"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="10" isBold="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA["Valor Total"]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell style="Table_TD" height="30">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField>
+								<reportElement x="0" y="0" width="100" height="30" uuid="faf3ec85-05cd-4efd-98cf-d95a038a49fa"/>
+								<textElement textAlignment="Left" verticalAlignment="Middle">
+									<font size="10" isBold="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{TIPO_DEMANDA}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:columnGroup width="326" uuid="4244ed56-1587-49ff-9677-34258cd4831f">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<jr:tableHeader height="25">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="326" height="25" forecolor="#FFFFFF" backcolor="#15008C" uuid="4b7e551b-e4ba-41b7-9d4f-caaabb3189ff"/>
+								<box>
+									<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[PROJETOS]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:column width="80" uuid="ac05e482-07b0-4005-b6fe-25db1a075590">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+							<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
+								<textField pattern="#,##0.###;(#,##0.###-)">
+									<reportElement mode="Opaque" x="0" y="0" width="80" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="155ee4a3-efde-4dd7-8ecc-062188cf4824"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{TOTAL_NORTE_QTD}]]></textFieldExpression>
+								</textField>
+							</jr:tableFooter>
+							<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+								<textField hyperlinkType="ReportExecution" hyperlinkTarget="Blank">
+									<reportElement mode="Opaque" x="0" y="0" width="80" height="30" uuid="7b1d1057-891d-4b66-ac79-913c6ce7ff78"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA["NORTE"]]></textFieldExpression>
+									<hyperlinkParameter name="_report">
+										<hyperlinkParameterExpression><![CDATA["/ca_ppm/RUMO_ALL/bam_capex_drilldown"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+									<hyperlinkParameter name="bam_tipo_inv">
+										<hyperlinkParameterExpression><![CDATA["project"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+									<hyperlinkParameter name="bam_operacao">
+										<hyperlinkParameterExpression><![CDATA["NORTE"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CH" height="30" rowSpan="1">
+								<textField pattern="#,##0;(#,##0)">
+									<reportElement mode="Opaque" x="0" y="0" width="80" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="71f4a973-622f-416d-b6ba-563d71b07b66"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{TOTAL_NORTE_VAL}]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Table_TD" height="30">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField pattern="#,##0;(#,##0)">
+									<reportElement x="0" y="0" width="80" height="30" uuid="89de4821-f2e1-41bf-af3c-21e5c0410450"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{NORTE}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="80" uuid="5875edf8-336f-42b4-bf88-646093a1490f">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+							<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
+								<textField pattern="#,##0.###;(#,##0.###-)">
+									<reportElement mode="Opaque" x="0" y="0" width="80" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="fe32b80c-d8f8-47a6-89f5-7b5de90d3a74"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{TOTAL_SUL_QTD}]]></textFieldExpression>
+								</textField>
+							</jr:tableFooter>
+							<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+								<textField hyperlinkType="ReportExecution" hyperlinkTarget="Blank">
+									<reportElement mode="Opaque" x="0" y="0" width="80" height="30" uuid="b1d78099-617a-4d2c-b040-4109e8a5e159"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA["SUL"]]></textFieldExpression>
+									<hyperlinkParameter name="_report">
+										<hyperlinkParameterExpression><![CDATA["/ca_ppm/RUMO_ALL/bam_capex_drilldown"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+									<hyperlinkParameter name="bam_tipo_inv">
+										<hyperlinkParameterExpression><![CDATA["project"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+									<hyperlinkParameter name="bam_operacao">
+										<hyperlinkParameterExpression><![CDATA["SUL"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CH" height="30" rowSpan="1">
+								<textField pattern="#,##0;(#,##0)">
+									<reportElement mode="Opaque" x="0" y="0" width="80" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="db68a48c-b81b-4281-bd4d-d7481bf98434"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{TOTAL_SUL_VAL}]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Table_TD" height="30">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField pattern="#,##0;(#,##0)">
+									<reportElement x="0" y="0" width="80" height="30" uuid="fe5c7107-f0da-4dad-b318-bfec57a34e0d"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{SUL}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="84" uuid="bfdb5458-ea13-44af-88f4-b6fa2b0afc57">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
+								<textField pattern="#,##0.###;(#,##0.###-)">
+									<reportElement mode="Opaque" x="0" y="0" width="84" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="58220120-26bb-4670-9917-5887e8feaa2d"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{TOTAL_CORP_QTD}]]></textFieldExpression>
+								</textField>
+							</jr:tableFooter>
+							<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+								<textField hyperlinkType="ReportExecution" hyperlinkTarget="Blank">
+									<reportElement mode="Opaque" x="0" y="0" width="84" height="30" uuid="51483c1c-c8a6-4219-b1df-aa3736c5b99f"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA["CORPORATIVO"]]></textFieldExpression>
+									<hyperlinkParameter name="_report">
+										<hyperlinkParameterExpression><![CDATA["/ca_ppm/RUMO_ALL/bam_capex_drilldown"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+									<hyperlinkParameter name="bam_tipo_inv">
+										<hyperlinkParameterExpression><![CDATA["project"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+									<hyperlinkParameter name="bam_operacao">
+										<hyperlinkParameterExpression><![CDATA["CORPORATIVO"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CH" height="30" rowSpan="1">
+								<textField pattern="#,##0;(#,##0)">
+									<reportElement mode="Opaque" x="0" y="0" width="84" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="95dcdfa8-86c8-4844-adc9-305ef7cbf6a5"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{TOTAL_CORP_VAL}]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Table_TD" height="30">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField pattern="#,##0;(#,##0)">
+									<reportElement x="0" y="0" width="84" height="30" uuid="25d58271-e8ac-466a-9790-d3258b051812"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{CORPORATIVO}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="82" uuid="3d2eb0d6-bd8a-4e68-8928-917d65135831">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
+								<textField pattern="#,##0.###;(#,##0.###-)">
+									<reportElement mode="Opaque" x="0" y="0" width="82" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="4b4151de-5bc3-4cd9-ae59-71ac81067fd9"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{TOTAL_TOTAL_QTD}]]></textFieldExpression>
+								</textField>
+							</jr:tableFooter>
+							<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+								<textField hyperlinkType="ReportExecution" hyperlinkTarget="Blank">
+									<reportElement mode="Opaque" x="0" y="0" width="82" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="fbeca873-52cf-4217-947e-3b2b2d18d73e"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA["TOTAL"]]></textFieldExpression>
+									<hyperlinkParameter name="_report">
+										<hyperlinkParameterExpression><![CDATA["/ca_ppm/RUMO_ALL/bam_capex_drilldown"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+									<hyperlinkParameter name="bam_tipo_inv">
+										<hyperlinkParameterExpression><![CDATA["project"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CH" height="30" rowSpan="1">
+								<textField pattern="#,##0;(#,##0)">
+									<reportElement mode="Opaque" x="0" y="0" width="82" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="69681695-d703-419d-955f-bcd88e5101fe"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{TOTAL_TOTAL_VAL}]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Table_TD" height="30">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField pattern="#,##0;(#,##0)">
+									<reportElement mode="Opaque" x="0" y="0" width="82" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="f02d4e93-6c7e-4605-9026-476ce6d4faf7"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{TOTAL_LINHA}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+					</jr:columnGroup>
+				</jr:table>
+			</componentElement>
+			<componentElement>
+				<reportElement positionType="Float" x="860" y="0" width="426" height="145" uuid="5db8db87-6b89-462a-9cb1-a53017b2e20e">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+					<property name="com.jaspersoft.studio.components.autoresize.next" value="true"/>
+					<property name="com.jaspersoft.studio.components.autoresize.proportional" value="true"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="CAPEX_PROJ_APROV" uuid="4a7f19a4-2b56-463d-9de5-9bbc98a3f91b">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="100" uuid="2c60fe37-9e68-46fd-b91d-21a404feb7c1">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
+							<textField>
+								<reportElement mode="Opaque" x="0" y="0" width="100" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="bd314f97-032b-480e-b176-4b8ef12938ff"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="10" isBold="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA["Quantidade Total"]]></textFieldExpression>
+							</textField>
+						</jr:tableFooter>
+						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<box>
+								<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textField isBlankWhenNull="true">
+								<reportElement mode="Opaque" x="0" y="0" width="100" height="30" uuid="c4484262-683c-4d83-9249-6e78eb969c0d"/>
+								<textElement>
+									<font size="10"/>
+								</textElement>
+							</textField>
+						</jr:columnHeader>
+						<jr:columnFooter style="Table_CH" height="30" rowSpan="1">
+							<textField>
+								<reportElement mode="Opaque" x="0" y="0" width="100" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="8fa9ac02-8c85-437c-8228-11e9a23482f5"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="10" isBold="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA["Valor Total"]]></textFieldExpression>
+							</textField>
+						</jr:columnFooter>
+						<jr:detailCell style="Table_TD" height="30">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField>
+								<reportElement x="0" y="0" width="100" height="30" uuid="668021a0-37eb-444e-9d3d-d6ab603c0ca4"/>
+								<textElement textAlignment="Left" verticalAlignment="Middle">
+									<font size="10" isBold="true"/>
+									<paragraph leftIndent="5"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{TIPO_DEMANDA}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:columnGroup width="326" uuid="26a33ae7-2c3e-4e65-a27f-38297d6b37c7">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<jr:tableHeader height="25">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="326" height="25" forecolor="#FFFFFF" backcolor="#15008C" uuid="60fa8e28-7634-4b74-af72-ecac6b0b9b65"/>
+								<box>
+									<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[PROJETOS APROVADOS]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:column width="80" uuid="ef34c871-c016-4e77-a8ee-304ce0a3c2a6">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							<jr:tableHeader height="0"/>
+							<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
+								<textField pattern="#,##0.###;(#,##0.###-)">
+									<reportElement mode="Opaque" x="0" y="0" width="80" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="7f18c4b0-3688-4e2b-aa86-0f1fdd3b4995"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{TOTAL_NORTE_QTD}]]></textFieldExpression>
+								</textField>
+							</jr:tableFooter>
+							<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+								<textField hyperlinkType="ReportExecution" hyperlinkTarget="Blank">
+									<reportElement mode="Opaque" x="0" y="0" width="80" height="30" uuid="13a63d95-5cd8-41f0-b912-4e4d1006fe9e"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA["NORTE"]]></textFieldExpression>
+									<hyperlinkParameter name="_report">
+										<hyperlinkParameterExpression><![CDATA["/ca_ppm/RUMO_ALL/bam_capex_drilldown"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+									<hyperlinkParameter name="bam_tipo_inv">
+										<hyperlinkParameterExpression><![CDATA["project"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+									<hyperlinkParameter name="bam_operacao">
+										<hyperlinkParameterExpression><![CDATA["NORTE"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+									<hyperlinkParameter name="bam_status">
+										<hyperlinkParameterExpression><![CDATA[java.util.Arrays.asList("all_execucao","all_encerramento","all_concluido")]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CH" height="30" rowSpan="1">
+								<textField pattern="#,##0;(#,##0)">
+									<reportElement mode="Opaque" x="0" y="0" width="80" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="6c9c2174-8e78-4543-9a00-24cd216bcc30"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{TOTAL_NORTE_VAL}]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Table_TD" height="30">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField pattern="#,##0;(#,##0)">
+									<reportElement x="0" y="0" width="80" height="30" uuid="3b522d3c-111c-4384-b64f-e71e74452406"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{NORTE}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="80" uuid="772552f6-4d61-4252-b7fc-094fa07b7c66">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+							<jr:tableHeader height="0"/>
+							<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
+								<textField pattern="#,##0.###;(#,##0.###-)">
+									<reportElement mode="Opaque" x="0" y="0" width="80" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="47634914-d956-491b-aabc-af024d9b6715"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{TOTAL_SUL_QTD}]]></textFieldExpression>
+								</textField>
+							</jr:tableFooter>
+							<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+								<textField hyperlinkType="ReportExecution" hyperlinkTarget="Blank">
+									<reportElement mode="Opaque" x="0" y="0" width="80" height="30" uuid="cde93bf5-8abe-46a8-9da9-922e407c5bbc"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA["SUL"]]></textFieldExpression>
+									<hyperlinkParameter name="_report">
+										<hyperlinkParameterExpression><![CDATA["/ca_ppm/RUMO_ALL/bam_capex_drilldown"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+									<hyperlinkParameter name="bam_tipo_inv">
+										<hyperlinkParameterExpression><![CDATA["project"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+									<hyperlinkParameter name="bam_operacao">
+										<hyperlinkParameterExpression><![CDATA["SUL"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+									<hyperlinkParameter name="bam_status">
+										<hyperlinkParameterExpression><![CDATA[java.util.Arrays.asList("all_execucao","all_encerramento","all_concluido")]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CH" height="30" rowSpan="1">
+								<textField pattern="#,##0;(#,##0)">
+									<reportElement mode="Opaque" x="0" y="0" width="80" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="030d7d58-0355-428d-b9a6-ff84e521eea3"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{TOTAL_SUL_VAL}]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Table_TD" height="30">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField pattern="#,##0;(#,##0)">
+									<reportElement x="0" y="0" width="80" height="30" uuid="615fd846-d55b-4ec5-a760-84d5b189ab79"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{SUL}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="84" uuid="846ff5cb-0c60-4d0e-899b-727782a32af2">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							<jr:tableHeader height="0"/>
+							<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
+								<textField pattern="#,##0.###;(#,##0.###-)">
+									<reportElement mode="Opaque" x="0" y="0" width="84" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="40bfa11a-ec14-4394-804f-c17c12f81f01"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{TOTAL_CORP_QTD}]]></textFieldExpression>
+								</textField>
+							</jr:tableFooter>
+							<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+								<textField hyperlinkType="ReportExecution" hyperlinkTarget="Blank">
+									<reportElement mode="Opaque" x="0" y="0" width="84" height="30" uuid="28d46960-bdb0-4f0e-8151-dfea44ebe04f"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA["CORPORATIVO"]]></textFieldExpression>
+									<hyperlinkParameter name="_report">
+										<hyperlinkParameterExpression><![CDATA["/ca_ppm/RUMO_ALL/bam_capex_drilldown"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+									<hyperlinkParameter name="bam_tipo_inv">
+										<hyperlinkParameterExpression><![CDATA["project"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+									<hyperlinkParameter name="bam_operacao">
+										<hyperlinkParameterExpression><![CDATA["CORPORATIVO"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+									<hyperlinkParameter name="bam_status">
+										<hyperlinkParameterExpression><![CDATA[java.util.Arrays.asList("all_execucao","all_encerramento","all_concluido")]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CH" height="30" rowSpan="1">
+								<textField pattern="#,##0;(#,##0)">
+									<reportElement mode="Opaque" x="0" y="0" width="84" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="e010f404-eacc-4ca9-b6e5-3ee7dd0d95a7"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{TOTAL_CORP_VAL}]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Table_TD" height="30">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField pattern="#,##0;(#,##0)">
+									<reportElement x="0" y="0" width="84" height="30" uuid="2bac94ce-cf4b-4381-8f25-798e29916b82"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{CORPORATIVO}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="82" uuid="3cccc517-7872-4eed-b841-f4cfa7d6f761">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							<jr:tableHeader height="0"/>
+							<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
+								<textField pattern="#,##0.###;(#,##0.###-)">
+									<reportElement mode="Opaque" x="0" y="0" width="82" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="9b68aa5c-f174-499c-9cac-fed1e7dd588a"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{TOTAL_TOTAL_QTD}]]></textFieldExpression>
+								</textField>
+							</jr:tableFooter>
+							<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+								<textField hyperlinkType="ReportExecution" hyperlinkTarget="Blank">
+									<reportElement mode="Opaque" x="0" y="0" width="82" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="cd7fea87-45d2-46d2-9923-ebd4d51ad1b8"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA["TOTAL"]]></textFieldExpression>
+									<hyperlinkParameter name="_report">
+										<hyperlinkParameterExpression><![CDATA["/ca_ppm/RUMO_ALL/bam_capex_drilldown"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+									<hyperlinkParameter name="bam_tipo_inv">
+										<hyperlinkParameterExpression><![CDATA["project"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+									<hyperlinkParameter name="bam_status">
+										<hyperlinkParameterExpression><![CDATA[java.util.Arrays.asList("all_execucao","all_encerramento","all_concluido")]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+								</textField>
+							</jr:columnHeader>
+							<jr:columnFooter style="Table_CH" height="30" rowSpan="1">
+								<textField pattern="#,##0;(#,##0)">
+									<reportElement mode="Opaque" x="0" y="0" width="82" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="ca28b2b8-8750-41f3-a740-a1065b51a249"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{TOTAL_TOTAL_VAL}]]></textFieldExpression>
+								</textField>
+							</jr:columnFooter>
+							<jr:detailCell style="Table_TD" height="30">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField pattern="#,##0;(#,##0)">
+									<reportElement mode="Opaque" x="0" y="0" width="82" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="7bccbbbc-a4a8-4c53-a6e3-5c0ccbdc2016"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{TOTAL_LINHA}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+					</jr:columnGroup>
+				</jr:table>
+			</componentElement>
+		</band>
+		<band height="115">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<componentElement>
+				<reportElement positionType="Float" x="0" y="0" width="615" height="114" uuid="8cf4d521-486c-4ef6-80ff-ea90da572a89">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+					<property name="com.jaspersoft.studio.components.autoresize.next" value="true"/>
+					<property name="com.jaspersoft.studio.components.autoresize.proportional" value="true"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="ORCAMENTO_FCST" uuid="f3ec8cf6-61ac-4a4b-a50b-6dc2b6d07447">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="124" uuid="f0b735df-dd9b-4607-a9eb-c586a6c98578">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
+							<textField>
+								<reportElement mode="Opaque" x="0" y="0" width="124" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="32165288-5c7e-450f-bd62-fd4ecf22949e"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="10" isBold="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA["△ FCT – ORÇ"]]></textFieldExpression>
+							</textField>
+						</jr:tableFooter>
+						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+							<box>
+								<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="124" height="30" uuid="3798c264-4311-420e-bd97-16fe9370f6ae"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="10" isBold="true"/>
+								</textElement>
+								<text><![CDATA[]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="124" height="30" uuid="d42431d8-73c2-4715-b873-03f833a22bc9"/>
+								<textElement textAlignment="Left" verticalAlignment="Middle">
+									<font size="10" isBold="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{TIPO_DEMANDA}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:columnGroup width="491" uuid="be604840-2afc-4094-82fa-7876a292295a">
+						<jr:tableHeader height="25">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<box>
+								<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+								<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="491" height="25" forecolor="#FFFFFF" backcolor="#15008C" uuid="3a8d573c-0900-4cfb-b356-4fd869bc665e"/>
+								<box>
+									<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[ORÇAMENTO X FORECAST]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:column width="124" uuid="61617418-1af1-4537-b758-dbe0d8bbc605">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+							<jr:tableHeader height="0">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+							</jr:tableHeader>
+							<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
+								<textField pattern="#,##0;(#,##0)">
+									<reportElement mode="Opaque" x="0" y="0" width="124" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="7d6f6531-4c7d-4af2-92e6-d2aeaa0814e1"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{SUB_NORTE}]]></textFieldExpression>
+								</textField>
+							</jr:tableFooter>
+							<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+								<textField hyperlinkType="ReportExecution" hyperlinkTarget="Blank">
+									<reportElement mode="Opaque" x="0" y="0" width="124" height="30" uuid="5ed97829-8838-4e0b-adc0-44ca8440eb16"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA["NORTE"]]></textFieldExpression>
+									<hyperlinkParameter name="_report">
+										<hyperlinkParameterExpression><![CDATA["/ca_ppm/RUMO_ALL/bam_orc_fct_drilldown"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+									<hyperlinkParameter name="bam_operacao">
+										<hyperlinkParameterExpression><![CDATA["NORTE"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+								</textField>
+							</jr:columnHeader>
+							<jr:detailCell style="Table_TD" height="30">
+								<textField pattern="#,##0;(#,##0)">
+									<reportElement x="0" y="0" width="124" height="30" uuid="52129e15-a8a5-4b3c-a1f2-8f3eca5c9bed"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{NORTE}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="134" uuid="75956556-4e7d-4cd1-9f50-0660d8e2f590">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+							<jr:tableHeader height="0">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</jr:tableHeader>
+							<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
+								<textField pattern="#,##0;(#,##0)">
+									<reportElement mode="Opaque" x="0" y="0" width="134" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="4fa8e8a8-db1f-43fa-a5de-6c1a73c65018"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{SUB_SUL}]]></textFieldExpression>
+								</textField>
+							</jr:tableFooter>
+							<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+								<textField hyperlinkType="ReportExecution" hyperlinkTarget="Blank">
+									<reportElement mode="Opaque" x="0" y="0" width="134" height="30" uuid="b211edd1-b820-4523-b200-7033659db4f0"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA["SUL"]]></textFieldExpression>
+									<hyperlinkParameter name="_report">
+										<hyperlinkParameterExpression><![CDATA["/ca_ppm/RUMO_ALL/bam_orc_fct_drilldown"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+									<hyperlinkParameter name="bam_operacao">
+										<hyperlinkParameterExpression><![CDATA["SUL"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+								</textField>
+							</jr:columnHeader>
+							<jr:detailCell style="Table_TD" height="30">
+								<textField pattern="#,##0;(#,##0)">
+									<reportElement x="0" y="0" width="134" height="30" uuid="d570b8b0-b7a2-4ece-95cc-f1498fc62b08"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{SUL}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="128" uuid="06746cb9-73bc-4a21-b086-a7887a4c4f0f">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+							<jr:tableHeader height="0">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</jr:tableHeader>
+							<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
+								<textField pattern="#,##0;(#,##0)">
+									<reportElement mode="Opaque" x="0" y="0" width="128" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="54bcb2af-ddae-437f-bc6b-cbb7be02a4b1"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{SUB_CORPORATIVO}]]></textFieldExpression>
+								</textField>
+							</jr:tableFooter>
+							<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+								<textField hyperlinkType="ReportExecution" hyperlinkTarget="Blank">
+									<reportElement mode="Opaque" x="0" y="0" width="128" height="30" uuid="b5719a32-8d8b-48d2-8148-4054cda6c42f"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA["CORPORATIVO"]]></textFieldExpression>
+									<hyperlinkParameter name="_report">
+										<hyperlinkParameterExpression><![CDATA["/ca_ppm/RUMO_ALL/bam_orc_fct_drilldown"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+									<hyperlinkParameter name="bam_operacao">
+										<hyperlinkParameterExpression><![CDATA["CORPORATIVO"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+								</textField>
+							</jr:columnHeader>
+							<jr:detailCell style="Table_TD" height="30">
+								<textField pattern="#,##0;(#,##0)">
+									<reportElement x="0" y="0" width="128" height="30" uuid="d7ead4fc-6264-4748-bd31-60d2cb73a16b"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{CORPORATIVO}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="105" uuid="2587708d-fc10-4e18-beb3-fd71b85a3e66">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+							<jr:tableHeader height="0">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</jr:tableHeader>
+							<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
+								<textField pattern="#,##0;(#,##0)">
+									<reportElement mode="Opaque" x="0" y="0" width="105" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="3b65eddd-bec6-409f-8d90-10dece20230d"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{SUB_TOTAL}]]></textFieldExpression>
+								</textField>
+							</jr:tableFooter>
+							<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+								<textField hyperlinkType="ReportExecution" hyperlinkTarget="Blank">
+									<reportElement mode="Opaque" x="0" y="0" width="105" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="ea5736c5-cbe7-4f68-9ceb-fdc314c3057c"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA["TOTAL"]]></textFieldExpression>
+									<hyperlinkParameter name="_report">
+										<hyperlinkParameterExpression><![CDATA["/ca_ppm/RUMO_ALL/bam_orc_fct_drilldown"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+								</textField>
+							</jr:columnHeader>
+							<jr:detailCell style="Table_TD" height="30">
+								<textField pattern="#,##0;(#,##0)">
+									<reportElement mode="Opaque" x="0" y="0" width="105" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="4592b910-e7ee-4ae3-9e3e-65554e65bcee"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{TOTAL_LINHA}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+					</jr:columnGroup>
+				</jr:table>
+			</componentElement>
+			<componentElement>
+				<reportElement positionType="Float" x="671" y="0" width="615" height="115" uuid="e08bdf34-06b1-4f21-b291-0878951f7be0">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+					<property name="com.jaspersoft.studio.components.autoresize.next" value="true"/>
+					<property name="com.jaspersoft.studio.components.autoresize.proportional" value="true"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="FORECAST" uuid="31bc49fe-1cc3-4630-be16-8392666a0eba">
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="124" uuid="10073346-5b87-467b-a645-4fae7f98e7ab">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
+							<textField>
+								<reportElement mode="Opaque" x="0" y="0" width="124" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="d9adf390-597d-4dff-a662-77c8d3fcb528"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="10" isBold="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA["Valor Total"]]></textFieldExpression>
+							</textField>
+						</jr:tableFooter>
+						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+							<box>
+								<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="124" height="30" uuid="3a56e047-310e-4896-b5bd-4a06568737ae"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="10" isBold="true"/>
+								</textElement>
+								<text><![CDATA[]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="124" height="30" uuid="d967477f-4c2a-496e-abfa-8adbc82f04f0"/>
+								<textElement textAlignment="Left" verticalAlignment="Middle">
+									<font size="10" isBold="true"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{TIPO_DEMANDA}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:columnGroup width="491" uuid="4666e26b-34eb-48e8-94a8-b79885edc526">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Columns [4]"/>
+						<jr:tableHeader height="25">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<box>
+								<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+								<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="491" height="25" forecolor="#FFFFFF" backcolor="#15008C" uuid="70f2aa97-dc29-4a3c-b89a-88d2c5f17cad"/>
+								<box>
+									<topPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="0.5" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[FORECAST]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:column width="124" uuid="9198f401-115c-4efc-b9e4-b74c1c31d4ed">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+							<jr:tableHeader height="0">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+							</jr:tableHeader>
+							<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
+								<textField pattern="#,##0;(#,##0)">
+									<reportElement mode="Opaque" x="0" y="0" width="124" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="b44b3bcb-5429-4c50-803e-f951f844b03a"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{TOTAL_NORTE_VAL}]]></textFieldExpression>
+								</textField>
+							</jr:tableFooter>
+							<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+								<textField pattern="" hyperlinkType="ReportExecution" hyperlinkTarget="Blank">
+									<reportElement mode="Opaque" x="0" y="0" width="124" height="30" uuid="8b8bef65-745e-47c9-acc5-674b98ff0678"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA["NORTE"]]></textFieldExpression>
+									<hyperlinkParameter name="_report">
+										<hyperlinkParameterExpression><![CDATA["/ca_ppm/RUMO_ALL/bam_forecast_drilldown"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+									<hyperlinkParameter name="bam_operacao">
+										<hyperlinkParameterExpression><![CDATA["NORTE"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+									<hyperlinkParameter name="bam_forecast">
+										<hyperlinkParameterExpression><![CDATA[java.util.Arrays.asList("liberado","nao_liberado","outros")]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+								</textField>
+							</jr:columnHeader>
+							<jr:detailCell style="Table_TD" height="30">
+								<textField pattern="#,##0;(#,##0)">
+									<reportElement x="0" y="0" width="124" height="30" uuid="d4a12b91-a35e-4891-bc5a-f3488abc2bd5"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{NORTE}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="134" uuid="5b1e8c9b-23df-4f64-829e-079303038594">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+							<jr:tableHeader height="0">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</jr:tableHeader>
+							<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
+								<textField pattern="#,##0;(#,##0)">
+									<reportElement mode="Opaque" x="0" y="0" width="134" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="8abb37e8-292d-439a-88d2-0aebac0037bf"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{TOTAL_SUL_VAL}]]></textFieldExpression>
+								</textField>
+							</jr:tableFooter>
+							<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+								<textField pattern="" hyperlinkType="ReportExecution" hyperlinkTarget="Blank">
+									<reportElement mode="Opaque" x="0" y="0" width="134" height="30" uuid="3d8b1e87-7c94-4b92-8a29-dfb4e44e0a44"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA["SUL"]]></textFieldExpression>
+									<hyperlinkParameter name="_report">
+										<hyperlinkParameterExpression><![CDATA["/ca_ppm/RUMO_ALL/bam_forecast_drilldown"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+									<hyperlinkParameter name="bam_forecast">
+										<hyperlinkParameterExpression><![CDATA[java.util.Arrays.asList("liberado","nao_liberado","outros")]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+									<hyperlinkParameter name="bam_operacao">
+										<hyperlinkParameterExpression><![CDATA["SUL"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+								</textField>
+							</jr:columnHeader>
+							<jr:detailCell style="Table_TD" height="30">
+								<textField pattern="#,##0;(#,##0)">
+									<reportElement x="0" y="0" width="134" height="30" uuid="331ec0e8-ca56-4152-9007-66cde570cc14"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{SUL}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="128" uuid="602600b5-0c2d-45df-83e3-8a866dfec0ff">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+							<jr:tableHeader height="0">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</jr:tableHeader>
+							<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
+								<textField pattern="#,##0;(#,##0)">
+									<reportElement mode="Opaque" x="0" y="0" width="128" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="ba742130-0753-49de-8137-245383df2d7e"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{TOTAL_CORP_VAL}]]></textFieldExpression>
+								</textField>
+							</jr:tableFooter>
+							<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+								<textField pattern="" hyperlinkType="ReportExecution" hyperlinkTarget="Blank">
+									<reportElement mode="Opaque" x="0" y="0" width="128" height="30" uuid="c71e3087-ee3c-4970-957e-4b5207f07728"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA["CORPORATIVO"]]></textFieldExpression>
+									<hyperlinkParameter name="_report">
+										<hyperlinkParameterExpression><![CDATA["/ca_ppm/RUMO_ALL/bam_forecast_drilldown"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+									<hyperlinkParameter name="bam_forecast">
+										<hyperlinkParameterExpression><![CDATA[java.util.Arrays.asList("liberado","nao_liberado","outros")]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+									<hyperlinkParameter name="bam_operacao">
+										<hyperlinkParameterExpression><![CDATA["CORPORATIVO"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+								</textField>
+							</jr:columnHeader>
+							<jr:detailCell style="Table_TD" height="30">
+								<textField pattern="#,##0;(#,##0)">
+									<reportElement x="0" y="0" width="128" height="30" uuid="488bdb49-ba75-4886-9b9a-976fce481d0b"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{CORPORATIVO}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="105" uuid="3031f6f1-69e3-4cc7-b91d-a38eda094713">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column5"/>
+							<jr:tableHeader height="0">
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							</jr:tableHeader>
+							<jr:tableFooter style="Table_TH" height="30" rowSpan="1">
+								<textField pattern="#,##0;(#,##0)">
+									<reportElement mode="Opaque" x="0" y="0" width="105" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="d82ce9e2-645f-4453-bf73-5cd6240e1dd1"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{TOTAL_TOTAL_VAL}]]></textFieldExpression>
+								</textField>
+							</jr:tableFooter>
+							<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+								<textField pattern="" hyperlinkType="ReportExecution" hyperlinkTarget="Blank">
+									<reportElement mode="Opaque" x="0" y="0" width="105" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="0dd7a66f-fbae-4bd2-a3f3-93c8628e1991"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA["TOTAL"]]></textFieldExpression>
+									<hyperlinkParameter name="_report">
+										<hyperlinkParameterExpression><![CDATA["/ca_ppm/RUMO_ALL/bam_forecast_drilldown"]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+									<hyperlinkParameter name="bam_forecast">
+										<hyperlinkParameterExpression><![CDATA[java.util.Arrays.asList("liberado","nao_liberado","outros")]]></hyperlinkParameterExpression>
+									</hyperlinkParameter>
+								</textField>
+							</jr:columnHeader>
+							<jr:detailCell style="Table_TD" height="30">
+								<textField pattern="#,##0;(#,##0)">
+									<reportElement mode="Opaque" x="0" y="0" width="105" height="30" forecolor="#FFFFFF" backcolor="#878787" uuid="02bb922d-3fd8-456b-baf4-20e7a951399f"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font size="10" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$V{TOTAL_LINHA}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+					</jr:columnGroup>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,1380 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.2.final using JasperReports Library version 6.4.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="projects" pageWidth="1190" pageHeight="859" whenNoDataType="AllSectionsNoDetail" columnWidth="1190" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" whenResourceMissingType="Error" uuid="68270571-4384-42fd-bbbb-42a48abfe3bb">
+	<property name="ireport.jasperserver.url" value="https://cppmrpt103.ondemand.ca.com/reportservice/"/>
+	<property name="ireport.jasperserver.user" value="reportdev|cppm9008"/>
+	<property name="ireport.jasperserver.report.resource" value="/ca_ppm/RUMO_ALL/RUMO_Status_Report_files/projects.jrxml"/>
+	<property name="ireport.jasperserver.reportUnit" value="/ca_ppm/RUMO_ALL/RUMO_Status_Report"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="RUMO - PRD"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#878787">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#EBEBEB">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_CH" mode="Opaque" backcolor="#868686">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_TD" mode="Opaque" backcolor="#E1E1E1">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="riscos" uuid="b787b70a-2f4b-48cb-b4ab-f2676117a198">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="RUMO - DEV"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="INV_ID" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT 
+  SUBSTR(RISCO.NAME,1,100) RISCO,
+  SUBSTR(RISK.RESOLUTION,1,100) ACAO
+FROM 
+  RIM_RISKS_AND_ISSUES RISK
+  JOIN ODF_CA_RISK ORISK ON ORISK.ID = RISK.ID
+  JOIN CMN_LOOKUPS_V RISCO ON ORISK.all_riscos_agrup = RISCO.LOOKUP_CODE AND RISCO.LOOKUP_TYPE = 'ALL_LKP_RISCOS_AGRUP' AND RISCO.LANGUAGE_CODE = 'pt'
+WHERE 
+  RISK.TYPE_CODE = 'RISK'
+  AND RISK.PK_ID = $P{INV_ID}
+  AND ROWNUM <= 3]]>
+		</queryString>
+		<field name="RISCO" class="java.lang.String"/>
+		<field name="ACAO" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="marcos" uuid="854801fd-393a-4a68-80e6-812588786969">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="RUMO - DEV"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="INV_ID" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT 
+	t.prid milestone_int_id,
+	t.prwbssequence wbs_sequence,
+	t.prexternalid milestone_id,
+	t.prid taskid,
+	t.prprojectid investment_id,
+	SUBSTR(t.prname,1,40) milestone_name,
+	t.prismilestone ismilestone,   
+	t.prstart start_date,
+	t.prfinish finish_date,
+	baseline.start_date baseline_start,
+	baseline.finish_date baseline_finish,    
+	tsk_d.days_late lateness,
+	tsk_d.days_late lateness_sl,
+	tsk_d.days_late_pct days_late_pct,
+	tsk_d.days_late_pct*100 days_late_pct_sl
+
+FROM 
+	PRTASK t   
+	INNER JOIN COP_TSK_DAYS_LATE_V tsk_d ON t.prid = tsk_d.task_id 
+	LEFT OUTER JOIN PRJ_BASELINE_DETAILS baseline ON baseline.object_id = t.prid AND UPPER(baseline.object_type) = 'TASK' AND baseline.is_current = 1
+
+WHERE  
+	t.prismilestone = 1
+	AND t.prstatus !=2
+	AND ROWNUM <= 7
+	AND t.prprojectid =  $P{INV_ID}]]>
+		</queryString>
+		<field name="MILESTONE_INT_ID" class="java.math.BigDecimal"/>
+		<field name="WBS_SEQUENCE" class="java.math.BigDecimal"/>
+		<field name="MILESTONE_ID" class="java.lang.String"/>
+		<field name="TASKID" class="java.math.BigDecimal"/>
+		<field name="INVESTMENT_ID" class="java.math.BigDecimal"/>
+		<field name="MILESTONE_NAME" class="java.lang.String"/>
+		<field name="ISMILESTONE" class="java.math.BigDecimal"/>
+		<field name="START_DATE" class="java.sql.Timestamp"/>
+		<field name="FINISH_DATE" class="java.sql.Timestamp"/>
+		<field name="BASELINE_START" class="java.sql.Timestamp"/>
+		<field name="BASELINE_FINISH" class="java.sql.Timestamp"/>
+		<field name="LATENESS" class="java.math.BigDecimal"/>
+		<field name="LATENESS_SL" class="java.math.BigDecimal"/>
+		<field name="DAYS_LATE_PCT" class="java.math.BigDecimal"/>
+		<field name="DAYS_LATE_PCT_SL" class="java.math.BigDecimal"/>
+	</subDataset>
+	<subDataset name="curva_s_fisica" uuid="d7c8e96a-e6a0-4179-bff4-f94144c55465">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="RUMO ALL - DEV"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="INV_ID" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT 
+	ALL_MES MES,
+	 ROUND(ALL_PCT_PLAN_MES*100,2) PLAN,
+	 ROUND(ALL_PCT_FORECAST_MES*100,2) FORECAST,
+	 ROUND(ALL_PCT_CONCL_MES*100,2) CONCLUIDO
+FROM 
+	odf_ca_all_obj_gst_avc_fis
+WHERE 
+	ODF_PARENT_ID =   $P{INV_ID}
+	AND all_ativo = 1]]>
+		</queryString>
+		<field name="MES" class="java.sql.Timestamp"/>
+		<field name="PLAN" class="java.math.BigDecimal"/>
+		<field name="FORECAST" class="java.math.BigDecimal"/>
+		<field name="CONCLUIDO" class="java.math.BigDecimal"/>
+		<sortField name="MES"/>
+	</subDataset>
+	<subDataset name="curva_s_fin" uuid="d9cb548a-8640-49bc-8d74-d0b14fde2a3f">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="RUMO - DEV"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="INV_ID" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT  NVL(PERIODO,SYSDATE) PERIODO,
+TIPO TIPO,
+SUM(NVL(VALOR,0)) OVER (PARTITION BY TIPO ORDER BY PERIODO) VALOR,
+RANK() OVER (PARTITION BY 1 ORDER BY PERIODO, ORDEM_TIPO) ordem
+
+FROM
+(
+SELECT PERIODO,
+TIPO,
+ORDEM_TIPO,
+SUM(VALOR) VALOR
+
+
+FROM
+
+(
+SELECT ID INV_ID
+, 'Projeto' TIPO 
+, 1 ORDEM_TIPO
+, TRUNC(SCHEDULE_START,'MONTH') PERIODO
+, NULL VALOR
+
+FROM INV_INVESTMENTS 
+
+WHERE ID = $P{INV_ID}
+
+UNION
+
+SELECT ID INV_ID
+, 'Real' TIPO 
+, 2 ORDEM_TIPO
+, TRUNC(SCHEDULE_START,'MONTH') PERIODO
+, NULL VALOR
+
+FROM INV_INVESTMENTS 
+
+WHERE ID = $P{INV_ID}
+
+UNION
+
+SELECT ID INV_ID
+, 'Forecast' TIPO 
+, 3 ORDEM_TIPO
+, TRUNC(SCHEDULE_START,'MONTH') PERIODO
+, NULL VALOR
+
+FROM INV_INVESTMENTS 
+
+WHERE ID = $P{INV_ID}
+
+UNION
+
+SELECT ID INV_ID
+, 'Projeto + Suplementação' TIPO 
+, 4 ORDEM_TIPO
+, TRUNC(SCHEDULE_START,'MONTH') PERIODO
+, NULL VALOR
+
+FROM INV_INVESTMENTS 
+
+WHERE ID = $P{INV_ID}
+
+UNION
+
+SELECT ID INV_ID
+, 'Orçamento' TIPO 
+, 5 ORDEM_TIPO
+, TRUNC(SCHEDULE_START,'MONTH') PERIODO
+, NULL VALOR
+
+FROM INV_INVESTMENTS 
+
+WHERE ID = $P{INV_ID}
+
+UNION
+
+SELECT
+INV_ID
+, TIPO
+, ORDEM_TIPO
+, PERIODO
+, SUM(VALOR) VALOR
+
+FROM(
+
+SELECT DISTINCT FPLAN.OBJECT_ID INV_ID
+, 'Forecast' TIPO 
+, 3 ORDEM_TIPO
+, TRUNC(NVL(PERIODOS.START_DATE,(SELECT SCHEDULE_FINISH FROM INV_INVESTMENTS WHERE ID = $P{INV_ID})),'MONTH') PERIODO
+, NVL(SUM(ROUND((SLICE.FINISH_DATE-SLICE.START_DATE)*SLICE.SLICE,2)),0) VALOR
+
+FROM FIN_PLANS FPLAN
+JOIN odf_ca_costplan OFPLAN ON FPLAN.ID = OFPLAN.ID AND OFPLAN.ALL_ATIVO = 1 AND FPLAN.PLAN_TYPE_CODE = 'FORECAST' AND FPLAN.OBJECT_ID = $P{INV_ID}
+LEFT JOIN FIN_COST_PLAN_DETAILS FPLAND ON FPLAND.PLAN_ID = FPLAN.ID
+JOIN biz_com_periods PER_INI ON FPLAN.START_PERIOD_ID = PER_INI.ID AND PER_INI.PERIOD_TYPE = FPLAN.PERIOD_TYPE_CODE
+JOIN biz_com_periods PER_FIM ON FPLAN.END_PERIOD_ID = PER_FIM.ID AND PER_FIM.PERIOD_TYPE = FPLAN.PERIOD_TYPE_CODE
+JOIN biz_com_periods PERIODOS ON PERIODOS.START_DATE <= PER_FIM.START_DATE AND PERIODOS.START_DATE >=PER_INI.START_DATE  AND PERIODOS.PERIOD_TYPE = FPLAN.PERIOD_TYPE_CODE
+LEFT JOIN ODF_SSL_CST_DTL_COST SLICE ON SLICE.PRJ_OBJECT_ID = FPLAND.ID AND SLICE.START_DATE = PERIODOS.START_DATE
+RIGHT JOIN CMN_LOOKUPS_V TIPO_PLANO ON TIPO_PLANO.LOOKUP_CODE = OFPLAN.ALL_TP_PLANO AND TIPO_PLANO.LANGUAGE_CODE = 'pt' AND TIPO_PLANO.LOOKUP_TYPE = 'ALL_LKP_TP_PLANO'
+
+WHERE TIPO_PLANO.LOOKUP_CODE  = 'all_forecast'
+AND PERIODOS.START_DATE <= (SELECT SCHEDULE_FINISH FROM INV_INVESTMENTS WHERE ID = $P{INV_ID})
+AND PERIODOS.START_DATE >= PER_INI.START_DATE
+GROUP BY FPLAN.OBJECT_ID 
+, TIPO_PLANO.NAME  
+, PERIODOS.START_DATE
+, OFPLAN.ALL_CUSTO_TOTAL
+
+UNION
+
+SELECT DISTINCT FPLAN.OBJECT_ID INV_ID
+, 'Forecast' TIPO 
+, 3 ORDEM_TIPO
+, TRUNC(PER_INI.START_DATE-1,'MONTH') PERIODO
+, NVL(SUM(ACTUAL.TOTALCOST),NVL(SUM(ROUND((SLICE.FINISH_DATE-SLICE.START_DATE)*SLICE.SLICE,2)),0)) VALOR
+
+FROM FIN_PLANS FPLAN
+JOIN odf_ca_costplan OFPLAN ON FPLAN.ID = OFPLAN.ID AND OFPLAN.ALL_ATIVO = 1 AND FPLAN.PLAN_TYPE_CODE = 'FORECAST' AND FPLAN.OBJECT_ID = $P{INV_ID}
+LEFT JOIN FIN_COST_PLAN_DETAILS FPLAND ON FPLAND.PLAN_ID = FPLAN.ID
+JOIN biz_com_periods PER_INI ON FPLAN.START_PERIOD_ID = PER_INI.ID AND PER_INI.PERIOD_TYPE = FPLAN.PERIOD_TYPE_CODE
+LEFT JOIN ODF_SSL_CST_DTL_COST SLICE ON SLICE.PRJ_OBJECT_ID = FPLAND.ID AND SLICE.START_DATE = PER_INI.START_DATE
+RIGHT JOIN CMN_LOOKUPS_V TIPO_PLANO ON TIPO_PLANO.LOOKUP_CODE = OFPLAN.ALL_TP_PLANO AND TIPO_PLANO.LANGUAGE_CODE = 'pt' AND TIPO_PLANO.LOOKUP_TYPE = 'ALL_LKP_TP_PLANO'
+JOIN PPA_WIP WIP ON WIP.MONTH_BEGIN < PER_INI.START_DATE AND FPLAN.OBJECT_ID = WIP.INVESTMENT_ID
+LEFT JOIN PPA_WIP_VALUES ACTUAL ON ACTUAL.TRANSNO = WIP.TRANSNO AND ACTUAL.CURRENCY_TYPE = 'HOME'
+
+WHERE TIPO_PLANO.LOOKUP_CODE  = 'all_forecast'
+AND WIP.STATUS = 0
+GROUP BY FPLAN.OBJECT_ID 
+, PER_INI.START_DATE
+
+
+UNION
+
+SELECT FPLAN.OBJECT_ID INV_ID
+, 'Orçamento' TIPO 
+, 5 ORDEM_TIPO
+, TRUNC(NVL(PERIODOS.START_DATE,(SELECT SCHEDULE_FINISH FROM INV_INVESTMENTS WHERE ID = $P{INV_ID})),'MONTH') PERIODO
+, SUM(ROUND((SLICE.FINISH_DATE-SLICE.START_DATE)*SLICE.SLICE,2)) VALOR
+
+FROM FIN_PLANS FPLAN
+JOIN odf_ca_costplan OFPLAN ON FPLAN.ID = OFPLAN.ID AND OFPLAN.ALL_ATIVO = 1 AND FPLAN.PLAN_TYPE_CODE = 'FORECAST' AND FPLAN.OBJECT_ID = $P{INV_ID}
+JOIN FIN_COST_PLAN_DETAILS FPLAND ON FPLAND.PLAN_ID = FPLAN.ID
+JOIN biz_com_periods PER_INI ON FPLAN.START_PERIOD_ID = PER_INI.ID AND PER_INI.PERIOD_TYPE = FPLAN.PERIOD_TYPE_CODE
+JOIN biz_com_periods PER_FIM ON FPLAN.END_PERIOD_ID = PER_FIM.ID AND PER_FIM.PERIOD_TYPE = FPLAN.PERIOD_TYPE_CODE
+JOIN biz_com_periods PERIODOS ON PERIODOS.START_DATE <= PER_FIM.START_DATE AND PERIODOS.START_DATE >=PER_INI.START_DATE AND PERIODOS.PERIOD_TYPE = FPLAN.PERIOD_TYPE_CODE
+LEFT JOIN ODF_SSL_CST_DTL_COST SLICE ON SLICE.PRJ_OBJECT_ID = FPLAND.ID AND SLICE.START_DATE = PERIODOS.START_DATE
+RIGHT JOIN CMN_LOOKUPS_V TIPO_PLANO ON TIPO_PLANO.LOOKUP_CODE = OFPLAN.ALL_TP_PLANO AND TIPO_PLANO.LANGUAGE_CODE = 'pt' AND TIPO_PLANO.LOOKUP_TYPE = 'ALL_LKP_TP_PLANO'
+
+WHERE TIPO_PLANO.LOOKUP_CODE  = 'all_orcamento'
+AND PERIODOS.START_DATE <= (SELECT SCHEDULE_FINISH FROM INV_INVESTMENTS WHERE ID = $P{INV_ID})
+AND PERIODOS.START_DATE >= PER_INI.START_DATE
+
+GROUP BY FPLAN.OBJECT_ID 
+, TIPO_PLANO.NAME  
+, PERIODOS.START_DATE 
+, OFPLAN.ALL_CUSTO_TOTAL
+
+UNION
+
+
+SELECT FPLAN.OBJECT_ID INV_ID
+, 'Projeto + Suplementação' TIPO 
+, 4 ORDEM_TIPO
+, TRUNC(NVL(SLICE.START_DATE,(SELECT SCHEDULE_FINISH FROM INV_INVESTMENTS WHERE ID = $P{INV_ID})),'MONTH') PERIODO
+, SUM(ROUND((SLICE.FINISH_DATE-SLICE.START_DATE)*SLICE.SLICE,2)) VALOR
+
+FROM FIN_PLANS FPLAN
+JOIN odf_ca_costplan OFPLAN ON FPLAN.ID = OFPLAN.ID AND OFPLAN.ALL_ATIVO = 1 AND FPLAN.PLAN_TYPE_CODE = 'FORECAST' AND FPLAN.OBJECT_ID = $P{INV_ID}
+JOIN FIN_COST_PLAN_DETAILS FPLAND ON FPLAND.PLAN_ID = FPLAN.ID
+JOIN ODF_SSL_CST_DTL_COST SLICE ON SLICE.PRJ_OBJECT_ID = FPLAND.ID
+RIGHT JOIN CMN_LOOKUPS_V TIPO_PLANO ON TIPO_PLANO.LOOKUP_CODE = OFPLAN.ALL_TP_PLANO AND TIPO_PLANO.LANGUAGE_CODE = 'pt' AND TIPO_PLANO.LOOKUP_TYPE = 'ALL_LKP_TP_PLANO'
+
+WHERE TIPO_PLANO.LOOKUP_CODE  = 'all_prj_suplementacao'
+
+GROUP BY FPLAN.OBJECT_ID 
+, TIPO_PLANO.NAME  
+, SLICE.START_DATE 
+, OFPLAN.ALL_CUSTO_TOTAL
+
+UNION
+
+
+SELECT INV_ID
+, 'Projeto' TIPO 
+, 1 ORDEM_TIPO
+, MES PERIODO
+, 0 VALOR
+  FROM 
+(
+SELECT INV_ID
+,ADD_MONTHS ( start_dt , LEVEL - 1) MES
+FROM     (SELECT INV_ID
+          ,  TRUNC ( START_DATE, 'MONTH') AS start_dt
+,TRUNC ( FINISH_DATE, 'MONTH') AS end_dt FROM 
+
+(
+SELECT FPLAN.OBJECT_ID INV_ID
+, MIN(SLICE.START_DATE) START_DATE
+, MAX(SLICE.START_DATE) FINISH_DATE
+
+FROM FIN_PLANS FPLAN
+JOIN odf_ca_costplan OFPLAN ON FPLAN.ID = OFPLAN.ID
+LEFT JOIN CMN_LOOKUPS_V TIPO_PLANO ON TIPO_PLANO.LOOKUP_CODE = OFPLAN.ALL_TP_PLANO AND TIPO_PLANO.LANGUAGE_CODE = 'pt' AND TIPO_PLANO.LOOKUP_TYPE = 'ALL_LKP_TP_PLANO'
+JOIN FIN_COST_PLAN_DETAILS FPLAND ON FPLAND.PLAN_ID = FPLAN.ID
+JOIN ODF_SSL_CST_DTL_COST SLICE ON SLICE.PRJ_OBJECT_ID = FPLAND.ID
+
+WHERE OFPLAN.ALL_ATIVO = 1
+AND FPLAN.PLAN_TYPE_CODE = 'FORECAST'
+AND FPLAN.OBJECT_ID = $P{INV_ID}
+
+GROUP BY FPLAN.OBJECT_ID 
+)
+)
+CONNECT BY     LEVEL <= 1 + MONTHS_BETWEEN ( end_dt, start_dt)
+)
+)PLANEJADO
+GROUP BY INV_ID, TIPO, PERIODO, ORDEM_TIPO
+
+
+UNION
+
+SELECT
+INV_ID
+, 'Projeto' TIPO
+, 1 ORDEM_TIPO
+, TRUNC(PERIODO,'MONTH') PERIODO
+, SUM(VALOR)
+
+FROM(
+SELECT FPLAN.OBJECT_ID INV_ID
+, SLICE.START_DATE PERIODO
+, SUM(ROUND((SLICE.FINISH_DATE-SLICE.START_DATE)*SLICE.SLICE,2)) VALOR
+
+FROM FIN_PLANS FPLAN
+JOIN odf_ca_costplan OFPLAN ON FPLAN.ID = OFPLAN.ID
+LEFT JOIN CMN_LOOKUPS_V TIPO_PLANO ON TIPO_PLANO.LOOKUP_CODE = OFPLAN.ALL_TP_PLANO AND TIPO_PLANO.LANGUAGE_CODE = 'pt' AND TIPO_PLANO.LOOKUP_TYPE = 'ALL_LKP_TP_PLANO'
+JOIN FIN_COST_PLAN_DETAILS FPLAND ON FPLAND.PLAN_ID = FPLAN.ID
+JOIN ODF_SSL_CST_DTL_COST SLICE ON SLICE.PRJ_OBJECT_ID = FPLAND.ID
+
+WHERE FPLAN.IS_PLAN_OF_RECORD = 1
+AND FPLAN.PLAN_TYPE_CODE = 'BUDGET'
+AND FPLAN.OBJECT_ID = $P{INV_ID}
+
+GROUP BY FPLAN.OBJECT_ID 
+, TIPO_PLANO.NAME  
+, SLICE.START_DATE 
+
+UNION
+
+SELECT INV_ID
+, MES PERIODO
+, 0 VALOR
+  FROM 
+(
+SELECT INV_ID
+,ADD_MONTHS ( start_dt , LEVEL - 1) MES
+FROM     (SELECT INV_ID
+          ,  TRUNC ( START_DATE, 'MONTH') AS start_dt
+,TRUNC ( FINISH_DATE, 'MONTH') AS end_dt FROM 
+
+(
+SELECT FPLAN.OBJECT_ID INV_ID
+, MIN(SLICE.START_DATE) START_DATE
+, MAX(SLICE.START_DATE) FINISH_DATE
+
+FROM FIN_PLANS FPLAN
+JOIN odf_ca_costplan OFPLAN ON FPLAN.ID = OFPLAN.ID
+LEFT JOIN CMN_LOOKUPS_V TIPO_PLANO ON TIPO_PLANO.LOOKUP_CODE = OFPLAN.ALL_TP_PLANO AND TIPO_PLANO.LANGUAGE_CODE = 'pt' AND TIPO_PLANO.LOOKUP_TYPE = 'ALL_LKP_TP_PLANO'
+JOIN FIN_COST_PLAN_DETAILS FPLAND ON FPLAND.PLAN_ID = FPLAN.ID
+JOIN ODF_SSL_CST_DTL_COST SLICE ON SLICE.PRJ_OBJECT_ID = FPLAND.ID
+
+WHERE FPLAN.IS_PLAN_OF_RECORD = 1
+AND FPLAN.PLAN_TYPE_CODE = 'BUDGET'
+AND FPLAN.OBJECT_ID = $P{INV_ID}
+
+GROUP BY FPLAN.OBJECT_ID 
+)
+)
+CONNECT BY     LEVEL <= 1 + MONTHS_BETWEEN ( end_dt, start_dt)
+)
+)ORCAMENTO
+GROUP BY INV_ID, PERIODO
+
+UNION 
+
+SELECT
+INV_ID
+, 'Real' TIPO
+, 2 ORDEM_TIPO
+, TRUNC(PERIODO,'MONTH') PERIODO
+, SUM(NVL(VALOR,0))
+
+FROM(
+
+SELECT WIP.INVESTMENT_ID INV_ID
+, WIP.MONTH_BEGIN PERIODO
+, SUM(ACTUAL.TOTALCOST) VALOR
+
+FROM PPA_WIP WIP 
+LEFT JOIN PPA_WIP_VALUES ACTUAL ON ACTUAL.TRANSNO = WIP.TRANSNO AND ACTUAL.CURRENCY_TYPE = 'HOME'
+
+WHERE WIP.INVESTMENT_ID = $P{INV_ID}
+AND WIP.STATUS = 0
+AND TRUNC(WIP.TRANSDATE,'MONTH') <= (
+SELECT 
+TRUNC(MAX(PER_INI.START_DATE),'MONTH')
+FROM FIN_PLANS FPLAN
+JOIN odf_ca_costplan OFPLAN ON FPLAN.ID = OFPLAN.ID AND OFPLAN.ALL_ATIVO = 1 AND FPLAN.PLAN_TYPE_CODE = 'FORECAST' AND FPLAN.OBJECT_ID = $P{INV_ID}
+JOIN FIN_COST_PLAN_DETAILS FPLAND ON FPLAND.PLAN_ID = FPLAN.ID
+JOIN biz_com_periods PER_INI ON FPLAN.START_PERIOD_ID = PER_INI.ID AND PER_INI.PERIOD_TYPE = FPLAN.PERIOD_TYPE_CODE
+WHERE OFPLAN.ALL_TP_PLANO = 'all_forecast'
+)
+
+GROUP BY WIP.INVESTMENT_ID 
+, WIP.MONTH_BEGIN
+
+UNION
+--Obter todas as datas
+SELECT INV_ID
+, MES PERIODO
+, 0 VALOR
+  FROM 
+(
+SELECT INV_ID
+,ADD_MONTHS ( start_dt , LEVEL - 1) MES
+FROM     (SELECT INV_ID
+          ,  TRUNC ( START_DATE, 'MONTH') AS start_dt
+,TRUNC ( FINISH_DATE, 'MONTH') AS end_dt FROM 
+
+(
+SELECT WIP.INVESTMENT_ID INV_ID
+, MIN(WIP.MONTH_BEGIN) AS START_DATE
+, MAX(WIP.MONTH_BEGIN) FINISH_DATE
+
+FROM PPA_WIP WIP 
+LEFT JOIN PPA_WIP_VALUES ACTUAL ON ACTUAL.TRANSNO = WIP.TRANSNO AND ACTUAL.CURRENCY_TYPE = 'HOME'
+
+WHERE WIP.INVESTMENT_ID = $P{INV_ID}
+
+GROUP BY WIP.INVESTMENT_ID 
+)
+)
+CONNECT BY     LEVEL <= 1 + MONTHS_BETWEEN ( end_dt, start_dt)
+)
+) REALIZADO
+
+GROUP BY INV_ID, PERIODO
+
+) VALORES
+GROUP BY
+PERIODO ,
+TIPO , 
+ORDEM_TIPO
+) TOTAL
+
+WHERE 1=1]]>
+		</queryString>
+		<field name="PERIODO" class="java.sql.Timestamp"/>
+		<field name="TIPO" class="java.lang.String"/>
+		<field name="VALOR" class="java.math.BigDecimal"/>
+		<field name="ORDEM" class="java.math.BigDecimal"/>
+		<sortField name="PERIODO"/>
+		<sortField name="ORDEM"/>
+	</subDataset>
+	<subDataset name="sol_mud" uuid="a4657b7f-ed1e-476a-8e9f-ae2f9af8adc7">
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="RUMO - PRD"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="INV_ID" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT
+TIPO,
+VALOR_INICIAL,
+NOVO_VALOR,
+(NOVO_VALOR-VALOR_INICIAL) DELTA
+FROM
+(
+	SELECT 
+	  INVI.ID INV_ID,
+	  INVI.CODE INV_CODE,
+	  INVI.NAME INV_NAME,
+	  RIM.ID CR_ID,
+	  RIM.RIM_RISK_ISSUE_CODE CR_CODE,
+	  RIM.NAME CR_NAME,
+	  CR.EFFECT_ON_COST CR_CUSTO,
+	  CR.EFFECT_ON_SCHEDULE CR_CRONO,
+	  'Custo (R$)' TIPO,
+	  (
+		SELECT 
+			SUM(ROUND((fp_cost.finish_date - fp_cost.start_date)*fp_cost.slice,2))
+		FROM 
+			INV_INVESTMENTS INV
+			LEFT JOIN FIN_PLANS FP ON INV.ID = FP.OBJECT_ID AND FP.PLAN_TYPE_CODE = 'BUDGET'
+			LEFT JOIN FIN_COST_PLAN_DETAILS FPD on FP.ID = FPD.PLAN_ID
+			LEFT JOIN ODF_SSL_CST_DTL_COST FP_COST ON FPD.ID = FP_COST.PRJ_OBJECT_ID
+		WHERE 
+			FP.ID = (SELECT ID FROM FIN_PLANS WHERE PLAN_TYPE_CODE = 'BUDGET' AND OBJECT_ID = INVI.ID AND REVISION = ((SELECT FP2.REVISION FROM FIN_PLANS FP2 JOIN ODF_CA_CHANGE OCR2 ON OCR2.ALL_PLANO_ORC = FP2.ID WHERE OCR2.ID = RIM.ID))-1)
+			AND FP.OBJECT_ID = INVI.ID
+	  )VALOR_INICIAL,
+	  (
+		SELECT 
+			SUM(ROUND((fp_cost.finish_date - fp_cost.start_date)*fp_cost.slice,2))
+		FROM 
+			INV_INVESTMENTS INV
+			LEFT JOIN FIN_PLANS FP ON INV.ID = FP.OBJECT_ID AND FP.PLAN_TYPE_CODE = 'BUDGET'
+			LEFT JOIN FIN_COST_PLAN_DETAILS FPD on FP.ID = FPD.PLAN_ID
+			LEFT JOIN ODF_SSL_CST_DTL_COST FP_COST ON FPD.ID = FP_COST.PRJ_OBJECT_ID
+		WHERE 
+			FP.ID = OCR.ALL_PLANO_ORC
+			AND FP.OBJECT_ID = INVI.ID
+	  )NOVO_VALOR,
+	   RIM.IMPACT_DESCRIPTION CR_ESCOPO
+	FROM 
+	  INV_INVESTMENTS INVI
+	  INNER JOIN ODF_CA_INV OCINV ON INVI.ID = OCINV.ID
+	  INNER JOIN ODF_CA_PROJECT OCPRJ ON OCPRJ.ID = INVI.ID
+	  INNER JOIN RIM_RISKS_AND_ISSUES RIM ON RIM.PK_ID = INVI.ID AND RIM.TYPE_CODE = 'CHANGE'
+	  INNER JOIN RIM_CHANGE_REQUESTS CR ON CR.ID = RIM.ID
+	  LEFT JOIN ODF_CA_CHANGE OCR ON OCR.ID = RIM.ID
+	WHERE 
+	  INVI.ID = $P{INV_ID} 
+)CUSTO
+
+UNION
+
+SELECT
+TIPO,
+VALOR_INICIAL,
+NOVO_VALOR,
+(NOVO_VALOR-VALOR_INICIAL) DELTA
+FROM
+(
+	SELECT 
+	  INVI.ID INV_ID,
+	  INVI.CODE INV_CODE,
+	  INVI.NAME INV_NAME,
+	  RIM.ID CR_ID,
+	  RIM.RIM_RISK_ISSUE_CODE CR_CODE,
+	  RIM.NAME CR_NAME,
+	  'Prazo (dias)' TIPO,
+	   OCR.all_baseline BASELINE,
+		(
+			SELECT ROUND(MAX(BASED.FINISH_DATE) - MIN(BASED.START_DATE)) 
+			FROM PRJ_BASELINE_DETAILS BASED 
+			INNER JOIN PRJ_BASELINES BASE ON BASE.ID = BASED.BASELINE_ID
+			WHERE BASED.BASELINE_ID = NVL((
+											SELECT MAX(OCR2.all_baseline) 
+											FROM ODF_CA_CHANGE OCR2 
+											INNER JOIN RIM_RISKS_AND_ISSUES RIM2 ON RIM2.PK_ID = $P{INV_ID} AND RIM2.TYPE_CODE = 'CHANGE'
+											WHERE OCR2.all_baseline < OCR.all_baseline
+										  ),(SELECT MIN(BASE.ID) FROM PRJ_BASELINES BASE WHERE BASE.PROJECT_ID = $P{INV_ID}))
+		)VALOR_INICIAL,
+	   (
+			SELECT ROUND(MAX(BASED.FINISH_DATE) - MIN(BASED.START_DATE)) 
+			FROM PRJ_BASELINE_DETAILS BASED 
+			INNER JOIN PRJ_BASELINES BASE ON BASE.ID = BASED.BASELINE_ID
+			WHERE BASED.BASELINE_ID = OCR.all_baseline AND BASE.PROJECT_ID = INVI.ID
+	   )NOVO_VALOR
+	FROM 
+	  INV_INVESTMENTS INVI
+	  INNER JOIN ODF_CA_INV OCINV ON INVI.ID = OCINV.ID
+	  INNER JOIN ODF_CA_PROJECT OCPRJ ON OCPRJ.ID = INVI.ID
+	  INNER JOIN RIM_RISKS_AND_ISSUES RIM ON RIM.PK_ID = INVI.ID AND RIM.TYPE_CODE = 'CHANGE'
+	  INNER JOIN RIM_CHANGE_REQUESTS CR ON CR.ID = RIM.ID
+	  LEFT JOIN ODF_CA_CHANGE OCR ON OCR.ID = RIM.ID
+	WHERE 
+	  INVI.ID = $P{INV_ID} 
+	  AND OCR.all_baseline IS NOT NULL
+)PRAZO
+WHERE rownum<=4]]>
+		</queryString>
+		<field name="TIPO" class="java.lang.String"/>
+		<field name="VALOR_INICIAL" class="java.math.BigDecimal"/>
+		<field name="NOVO_VALOR" class="java.math.BigDecimal"/>
+		<field name="DELTA" class="java.math.BigDecimal"/>
+	</subDataset>
+	<parameter name="AREA" class="java.lang.String" isForPrompting="false"/>
+	<parameter name="ger_proj" class="java.util.Collection"/>
+	<parameter name="class" class="java.util.Collection"/>
+	<parameter name="operacao" class="java.lang.String"/>
+	<parameter name="status" class="java.util.Collection"/>
+	<parameter name="adm_licencas" class="java.util.Collection"/>
+	<parameter name="org_exec" class="java.util.Collection"/>
+	<parameter name="tipo_org" class="java.lang.String"/>
+	<parameter name="projeto" class="java.util.Collection"/>
+	<queryString>
+		<![CDATA[SELECT 
+	PRJ.ODF_PK INV_ID
+	, PRJ.UNIQUE_CODE INV_CODE
+	, SUBSTR(PRJ.NAME,1,70) INV_NAME
+	, PRJ.SCHEDULE_START DATA_INI
+	, PRJ.SCHEDULE_FINISH DATA_FIM
+	, NVL(ROUND(PRJ.all_pct_planejado*100),0) PCT_PLAN
+	, NVL(ROUND(PRJ.all_pct_conc*100),0) PCT_CONC
+	, MAN.FIRST_NAME || ' ' || MAN.LAST_NAME GERENTE
+	, AREA.NAME AREA
+	, STATUS_RPT.COP_REPORT_DATE RPT_DATE
+	, STATUS_RPT.cop_key_accomplish PRINC_REAL
+	, STATUS_RPT.cop_report_update PONTOS_CRIT
+	, STATUS_RPT.cop_upcoming_act PROX_ATIV
+	, EXE.NAME ORG
+	, NVL(FIN.BUDGET_CST_TOTAL,0) VALOR
+	, NVL((SELECT COUNT(RIM.PK_ID) FROM RIM_RISKS_AND_ISSUES RIM WHERE RIM.PK_ID = PRJ.ODF_PK AND RIM.TYPE_CODE = 'CHANGE'),0) QTD_CR
+
+FROM 
+	ODF_PROJECT_V2 PRJ
+	LEFT JOIN ODF_OBJECT_INSTANCE_MAPPING MAP ON MAP.PRIMARY_OBJECT_INSTANCE_ID = PRJ.ODF_PK
+	LEFT JOIN FIN_FINANCIALS FIN ON MAP.SECONDARY_OBJECT_INSTANCE_ID = FIN.ID
+	JOIN SRM_RESOURCES MAN ON PRJ.rumo_gerente_exib = MAN.USER_ID
+	JOIN CMN_LOOKUPS_V AREA ON PRJ.all_area = AREA.LOOKUP_CODE AND AREA.LOOKUP_TYPE = 'ALL_LKP_AREAS' AND AREA.LANGUAGE_CODE = 'pt'
+	LEFT JOIN ODF_CA_COP_PRJ_STATUSRPT STATUS_RPT ON STATUS_RPT.ODF_PARENT_ID = PRJ.ODF_PK
+	LEFT JOIN PRJ_OBS_ASSOCIATIONS OBS_ASS ON OBS_ASS.RECORD_ID = PRJ.ODF_PK AND OBS_ASS.TABLE_NAME = 'SRM_PROJECTS'
+	LEFT JOIN PRJ_OBS_UNITS EXE ON EXE.ID = OBS_ASS.UNIT_ID
+
+WHERE 
+	EXE.NAME IS NOT NULL
+	AND (STATUS_RPT.ID = (SELECT MAX(RPT.ID) FROM ODF_CA_COP_PRJ_STATUSRPT RPT WHERE RPT.ODF_PARENT_ID = PRJ.ODF_PK) OR STATUS_RPT.ID IS NULL)
+	AND PRJ.ALL_AREA =  $P{operacao} 
+	AND EXE.TYPE_ID = $P{tipo_org}
+	AND $X{IN,EXE.ID,org_exec}
+	AND $X{IN,PRJ.RUMO_GERENTE_EXIB,ger_proj}
+	AND $X{IN,PRJ.OBJ_REQUEST_CATEGORY,class}
+	AND $X{IN,PRJ.STAGE_CODE,status}
+	AND $X{IN,PRJ.MANAGER,adm_licencas}
+	AND $X{IN,PRJ.ODF_PK,projeto}]]>
+	</queryString>
+	<field name="INV_ID" class="java.math.BigDecimal"/>
+	<field name="INV_CODE" class="java.lang.String"/>
+	<field name="INV_NAME" class="java.lang.String"/>
+	<field name="DATA_INI" class="java.sql.Timestamp"/>
+	<field name="DATA_FIM" class="java.sql.Timestamp"/>
+	<field name="PCT_PLAN" class="java.math.BigDecimal"/>
+	<field name="PCT_CONC" class="java.math.BigDecimal"/>
+	<field name="GERENTE" class="java.lang.String"/>
+	<field name="AREA" class="java.lang.String"/>
+	<field name="RPT_DATE" class="java.sql.Timestamp"/>
+	<field name="PRINC_REAL" class="java.lang.String"/>
+	<field name="PONTOS_CRIT" class="java.lang.String"/>
+	<field name="PROX_ATIV" class="java.lang.String"/>
+	<field name="ORG" class="java.lang.String"/>
+	<field name="VALOR" class="java.math.BigDecimal"/>
+	<field name="QTD_CR" class="java.math.BigDecimal"/>
+	<sortField name="ORG"/>
+	<sortField name="VALOR" order="Descending"/>
+	<pageHeader>
+		<band height="83" splitType="Stretch">
+			<image hAlign="Center" vAlign="Middle" isUsingCache="true" onErrorType="Blank">
+				<reportElement x="0" y="0" width="98" height="83" uuid="6cb8c497-cad4-4529-9123-eb0b09add727">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<imageExpression><![CDATA["repo:escritorio_proj"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="130" y="0" width="799" height="82" uuid="bfbc6eab-d736-4d24-b5db-767ab49acb0c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="37"/>
+				</textElement>
+				<textFieldExpression><![CDATA["STATUS REPORT - PROJETOS"]]></textFieldExpression>
+			</textField>
+			<image hAlign="Center" vAlign="Middle" isUsingCache="true" onErrorType="Blank">
+				<reportElement x="995" y="0" width="195" height="82" uuid="5773a5e9-58a7-4658-a905-12d628ebf516">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<imageExpression><![CDATA["repo:rumo_logo"]]></imageExpression>
+			</image>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="776" splitType="Prevent">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+			<componentElement>
+				<reportElement x="800" y="10" width="388" height="258" uuid="78ff81b7-7348-40cd-8210-b34f97f9b26b">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table 1_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table 1_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table 1_TD"/>
+					<property name="com.jaspersoft.studio.components.autoresize.next" value="true"/>
+					<property name="com.jaspersoft.studio.components.autoresize.proportional" value="true"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="net.sf.jasperreports.export.headertoolbar.table.name" value=""/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
+					<datasetRun subDataset="marcos" uuid="04e3ec46-6513-4c8e-b34f-c083c71f6f5f">
+						<datasetParameter name="INV_ID">
+							<datasetParameterExpression><![CDATA[$F{INV_ID}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="260" uuid="d807dc41-ddce-4792-904b-af25ab7fbc10">
+						<jr:columnHeader style="Table 1_CH" height="30">
+							<box>
+								<topPen lineWidth="2.5" lineColor="#FFFFFF"/>
+								<leftPen lineWidth="2.5" lineColor="#FFFFFF"/>
+								<bottomPen lineWidth="2.5" lineColor="#FFFFFF"/>
+								<rightPen lineWidth="2.5" lineColor="#FFFFFF"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="260" height="30" forecolor="#FFFFFF" uuid="60538489-cf3d-4e73-a9a9-a97a051ddd5b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" size="16"/>
+								</textElement>
+								<text><![CDATA[Marco]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<box>
+								<topPen lineWidth="2.5" lineColor="#FFFFFF"/>
+								<leftPen lineWidth="2.5" lineColor="#FFFFFF"/>
+								<bottomPen lineWidth="2.5" lineColor="#FFFFFF"/>
+								<rightPen lineWidth="2.5" lineColor="#FFFFFF"/>
+							</box>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="260" height="30" uuid="cf025bed-c3a3-4eba-9018-22b75f295cd5"/>
+								<box padding="5"/>
+								<textElement>
+									<font fontName="Arial" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{MILESTONE_NAME}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="128" uuid="fa590969-8ae3-422e-9221-eed09327a46b">
+						<jr:columnHeader style="Table 1_CH" height="30">
+							<box>
+								<topPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+								<leftPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+								<bottomPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+								<rightPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="128" height="30" forecolor="#FFFFFF" uuid="bbf68334-6298-429d-ab5c-f92f71bf9a54"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" size="16"/>
+								</textElement>
+								<text><![CDATA[Data]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 1_TD" height="30">
+							<box>
+								<topPen lineWidth="2.5" lineColor="#FFFFFF"/>
+								<leftPen lineWidth="2.5" lineColor="#FFFFFF"/>
+								<bottomPen lineWidth="2.5" lineColor="#FFFFFF"/>
+								<rightPen lineWidth="2.5" lineColor="#FFFFFF"/>
+							</box>
+							<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="128" height="30" uuid="4146b584-5aea-4a00-9bab-876efb372020"/>
+								<box padding="5"/>
+								<textElement textAlignment="Center">
+									<font fontName="Arial" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{FINISH_DATE})]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<componentElement>
+				<reportElement x="360" y="10" width="428" height="380" uuid="ad42cc0e-11a9-4799-b2b0-8d86776c66f9"/>
+				<hc:chart xmlns:hc="http://jaspersoft.com/highcharts" xsi:schemaLocation="http://jaspersoft.com/highcharts http://jaspersoft.com/schema/highcharts.xsd" type="Line">
+					<hc:chartSetting name="default">
+						<hc:chartProperty name="com.jaspersoft.jasperreports.highcharts.interactive" value="false"/>
+						<hc:chartProperty name="credits.enabled" value="false"/>
+						<hc:chartProperty name="credits.href">
+							<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="credits.text">
+							<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="plotOptions.series.animation">
+							<hc:propertyExpression><![CDATA[Boolean.FALSE]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="plotOptions.series.connectNulls">
+							<hc:propertyExpression><![CDATA[Boolean.FALSE]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="plotOptions.series.dataLabels.enabled" value="true"/>
+						<hc:chartProperty name="plotOptions.series.dataLabels.format">
+							<hc:propertyExpression><![CDATA["{y} %"]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="plotOptions.series.tooltip.valueSuffix">
+							<hc:propertyExpression><![CDATA["%"]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="title.text">
+							<hc:propertyExpression><![CDATA["Curva S Física"]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="xAxis.gridLineColor" value="white"/>
+						<hc:chartProperty name="yAxis.gridLineColor" value="white"/>
+						<hc:chartProperty name="yAxis.max">
+							<hc:propertyExpression><![CDATA[100]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="yAxis.min">
+							<hc:propertyExpression><![CDATA[0]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="yAxis.title.text">
+							<hc:propertyExpression><![CDATA["%"]]></hc:propertyExpression>
+						</hc:chartProperty>
+					</hc:chartSetting>
+					<multiAxisData>
+						<multiAxisDataset>
+							<dataset>
+								<datasetRun subDataset="curva_s_fisica" uuid="a21c1005-b7e5-42dc-a54f-845535836c95">
+									<datasetParameter name="INV_ID">
+										<datasetParameterExpression><![CDATA[$F{INV_ID}]]></datasetParameterExpression>
+									</datasetParameter>
+									<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+								</datasetRun>
+							</dataset>
+						</multiAxisDataset>
+						<dataAxis axis="Rows">
+							<axisLevel name="Mes">
+								<labelExpression><![CDATA["Level Label expression"]]></labelExpression>
+								<axisLevelBucket order="None" class="java.lang.String">
+									<bucketExpression><![CDATA[new SimpleDateFormat("MMM yy").format($F{MES})]]></bucketExpression>
+								</axisLevelBucket>
+							</axisLevel>
+						</dataAxis>
+						<dataAxis axis="Columns"/>
+						<multiAxisMeasure name="% Planejado" class="java.math.BigDecimal" calculation="Nothing">
+							<labelExpression><![CDATA["% Planejado"]]></labelExpression>
+							<valueExpression><![CDATA[$F{PLAN}]]></valueExpression>
+						</multiAxisMeasure>
+						<multiAxisMeasure name="% Concluido" class="java.math.BigDecimal" calculation="Nothing">
+							<labelExpression><![CDATA["% Concluído"]]></labelExpression>
+							<valueExpression><![CDATA[$F{CONCLUIDO}]]></valueExpression>
+						</multiAxisMeasure>
+					</multiAxisData>
+					<hc:series name="% Concluido"/>
+					<hc:series name="% Planejado"/>
+				</hc:chart>
+			</componentElement>
+			<componentElement>
+				<reportElement x="360" y="400" width="428" height="358" uuid="f32086fc-fd5b-43a4-a334-3f33478c6e66"/>
+				<hc:chart xmlns:hc="http://jaspersoft.com/highcharts" xsi:schemaLocation="http://jaspersoft.com/highcharts http://jaspersoft.com/schema/highcharts.xsd" type="Line">
+					<hc:chartSetting name="default">
+						<hc:chartProperty name="credits.enabled" value="false"/>
+						<hc:chartProperty name="credits.href">
+							<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="credits.text">
+							<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="plotOptions.series.dataLabels.enabled" value="true"/>
+						<hc:chartProperty name="plotOptions.series.marker.symbol">
+							<hc:propertyExpression><![CDATA["circle"]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="title.text">
+							<hc:propertyExpression><![CDATA["Curva S Financeira"]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="xAxis.gridLineColor" value="white"/>
+						<hc:chartProperty name="yAxis.gridLineColor" value="white"/>
+						<hc:chartProperty name="yAxis.title.text">
+							<hc:propertyExpression><![CDATA["Valor"]]></hc:propertyExpression>
+						</hc:chartProperty>
+					</hc:chartSetting>
+					<multiAxisData>
+						<multiAxisDataset>
+							<dataset>
+								<datasetRun subDataset="curva_s_fin" uuid="7b740dcd-78b7-42b1-aa64-22f4ee55127b">
+									<datasetParameter name="INV_ID">
+										<datasetParameterExpression><![CDATA[$F{INV_ID}]]></datasetParameterExpression>
+									</datasetParameter>
+									<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+								</datasetRun>
+							</dataset>
+						</multiAxisDataset>
+						<dataAxis axis="Rows">
+							<axisLevel name="Mes">
+								<labelExpression><![CDATA["Level Label expression"]]></labelExpression>
+								<axisLevelBucket order="None" class="java.lang.String">
+									<bucketExpression><![CDATA[new SimpleDateFormat("MMM yy").format($F{PERIODO})]]></bucketExpression>
+								</axisLevelBucket>
+							</axisLevel>
+						</dataAxis>
+						<dataAxis axis="Columns">
+							<axisLevel name="Tipo">
+								<labelExpression><![CDATA[]]></labelExpression>
+								<axisLevelBucket order="None" class="java.lang.String">
+									<bucketExpression><![CDATA[$F{TIPO}]]></bucketExpression>
+									<bucketProperty name="color"><![CDATA[$F{TIPO}.toString().equals("Projeto") ? "#70B3B4"
+: $F{TIPO}.toString().equals("Real") ? "#133A49"
+: $F{TIPO}.toString().equals("Forecast") ? "#3DAC64"
+: $F{TIPO}.toString().equals("Orçamento") ? "#957E90"
+: "#ACACAC"]]></bucketProperty>
+								</axisLevelBucket>
+							</axisLevel>
+						</dataAxis>
+						<multiAxisMeasure name="Valor" class="java.math.BigDecimal" calculation="Nothing">
+							<labelExpression><![CDATA[""]]></labelExpression>
+							<valueExpression><![CDATA[$F{VALOR}]]></valueExpression>
+						</multiAxisMeasure>
+					</multiAxisData>
+					<hc:series name="Valor">
+						<hc:contributor name="SeriesProperty">
+							<hc:contributorProperty name="color" valueType="Bucket" value="Tipo.color"/>
+						</hc:contributor>
+					</hc:series>
+				</hc:chart>
+			</componentElement>
+			<image hAlign="Center" vAlign="Middle" onErrorType="Blank">
+				<reportElement x="9" y="510" width="341" height="248" uuid="54498dbc-852c-485a-8a3d-07bf4075c87c"/>
+				<imageExpression><![CDATA[$F{INV_CODE}]]></imageExpression>
+			</image>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" mode="Opaque" x="10" y="10" width="340" height="40" forecolor="#FFFFFF" backcolor="#8A8A8A" uuid="57d0ceda-9f2a-4800-97c1-ff6ba89c2f56"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Arial" size="14" isBold="true" isUnderline="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INV_CODE} + " - " + $F{INV_NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="230" y="50" width="120" height="30" uuid="d800f4ee-0957-487a-8abd-a87590820269"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{AREA}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="50" width="79" height="30" uuid="4791937f-4551-44c3-bd34-f3d5c1603b2f"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Gerente: "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="189" y="90" width="110" height="30" uuid="823f3291-332a-4ed5-9138-24f38dcb5a44"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["% Concluído:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="120" width="171" height="20" uuid="30ae6569-20a9-4c37-a50e-ddc200df637e"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Data de início:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="190" y="120" width="160" height="20" uuid="729e944c-61d6-4bf2-9bab-e961638318ac"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Data de término: "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="170" width="130" height="30" uuid="d9f168ce-7f3d-4ea5-a347-fc3cded80d5e"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Data do relatório: "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="9" y="310" width="341" height="20" uuid="ef73bb9f-c13a-4250-bed5-daf5199515cf"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Pontos críticos:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="210" width="340" height="20" uuid="cb798d75-73b9-43dd-9bc7-5df362dfb606"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Principais realizações:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="9" y="410" width="340" height="20" uuid="2947aad4-6ccf-4108-8263-d6e12e55c5dd"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Próximas atividades:"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="10" y="430" width="340" height="70" uuid="73cbf600-0fdb-45ee-9c5c-cf762f575c4f"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PROX_ATIV}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="9" y="330" width="341" height="70" uuid="f1c82d2a-3937-4576-8933-f4c3fb3e047c"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PONTOS_CRIT}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="9" y="230" width="340" height="70" uuid="469841ff-eb95-4e30-846f-0b35072ea7e9"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PRINC_REAL}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="140" y="170" width="210" height="30" uuid="d54ebf45-8fff-4daf-b17e-326642a00e70"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{RPT_DATE})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="89" y="50" width="131" height="30" uuid="aeb13be5-050d-4e99-9c5b-ffd0b4d0aa1e"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{GERENTE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="299" y="90" width="51" height="30" uuid="9b2ff54a-9c87-4578-a051-65b64450a49a"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PCT_CONC}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="140" width="171" height="20" uuid="ba6b9903-3bff-4511-aee2-5e0a6b751678"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{DATA_INI})]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="190" y="140" width="160" height="20" uuid="fac50dd0-cb85-4bd6-9cff-2a2145179678"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy").format($F{DATA_FIM})]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="793" y="10" width="1" height="746" uuid="84ab4447-70fd-4419-91a2-237e87e395ce"/>
+			</line>
+			<line>
+				<reportElement x="355" y="11" width="1" height="745" uuid="3e9ea31f-2ba8-4f4c-b437-dcae8425549b"/>
+			</line>
+			<line>
+				<reportElement x="0" y="770" width="1190" height="1" uuid="6baddf5a-bfa6-4519-a318-f329e668f73a"/>
+			</line>
+			<textField>
+				<reportElement x="10" y="90" width="110" height="30" uuid="ad563daf-b905-4019-b671-70fd3bcb1f4e"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["% Planejado:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="120" y="90" width="51" height="30" uuid="1850a944-441d-4fcb-bd57-06c29ae11c8b"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{PCT_PLAN}]]></textFieldExpression>
+			</textField>
+			<componentElement>
+				<reportElement x="800" y="270" width="388" height="258" uuid="072e9acb-7483-46a9-b10f-bbf8877bcb3b">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.HorizontalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+					<property name="net.sf.jasperreports.export.headertoolbar.table.name" value=""/>
+					<property name="com.jaspersoft.studio.components.autoresize.proportional" value="true"/>
+					<property name="com.jaspersoft.studio.components.autoresize.next" value="true"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
+					<datasetRun subDataset="riscos" uuid="91f2adaa-b2f4-4abd-adfd-3509c894f525">
+						<datasetParameter name="INV_ID">
+							<datasetParameterExpression><![CDATA[$F{INV_ID}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="194" uuid="0dcd3efe-df28-4501-a273-feb5a37a4404">
+						<jr:columnHeader style="Table_CH" height="30">
+							<box>
+								<topPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+								<leftPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+								<bottomPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+								<rightPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="194" height="30" forecolor="#FFFFFF" uuid="3bbe21bf-ad5f-4dab-bff1-f7f0b5d95210"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" size="16"/>
+								</textElement>
+								<text><![CDATA[Risco]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<box>
+								<topPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+								<leftPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+								<bottomPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+								<rightPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+							</box>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="194" height="30" uuid="daf78841-f7a0-45d4-b792-42f2af89e462"/>
+								<box topPadding="5" leftPadding="5" bottomPadding="1" rightPadding="1"/>
+								<textElement>
+									<font fontName="Arial" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{RISCO}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="194" uuid="4bcaef4c-63e0-4f52-918b-f496996fe2a6">
+						<jr:columnHeader style="Table_CH" height="30">
+							<box>
+								<topPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+								<leftPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+								<bottomPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+								<rightPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="194" height="30" forecolor="#FFFFFF" uuid="c97144a4-aba5-4cb1-9fdf-1ee835d8155f"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" size="16"/>
+								</textElement>
+								<text><![CDATA[Ação]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<box>
+								<topPen lineWidth="2.5" lineColor="#FFFFFF"/>
+								<leftPen lineWidth="2.5" lineColor="#FFFFFF"/>
+								<bottomPen lineWidth="2.5" lineColor="#FFFFFF"/>
+								<rightPen lineWidth="2.5" lineColor="#FFFFFF"/>
+							</box>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="194" height="30" uuid="3c83abf5-b005-491a-9815-b1b96c64d33d"/>
+								<box topPadding="5" leftPadding="5" bottomPadding="1" rightPadding="1"/>
+								<textElement>
+									<font fontName="Arial" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{ACAO}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<componentElement>
+				<reportElement x="800" y="560" width="388" height="198" uuid="ba860ad0-2426-4b57-bc9e-643106da509e">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+					<property name="net.sf.jasperreports.export.headertoolbar.table.name" value=""/>
+					<property name="com.jaspersoft.studio.components.autoresize.proportional" value="true"/>
+					<property name="com.jaspersoft.studio.components.autoresize.next" value="true"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" whenNoDataType="AllSectionsNoDetail">
+					<datasetRun subDataset="sol_mud" uuid="18645ab6-a2b8-4517-bd52-29371d7aa833">
+						<datasetParameter name="INV_ID">
+							<datasetParameterExpression><![CDATA[$F{INV_ID}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="101" uuid="664fad0b-5cd1-4e20-bd16-dde1ec06b45a">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<box>
+								<topPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+								<leftPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+								<bottomPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+								<rightPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="101" height="30" forecolor="#FFFFFF" uuid="de8f7363-1a75-44df-8084-307fc7cab7aa"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" size="16"/>
+								</textElement>
+								<text><![CDATA[SM]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<box>
+								<topPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+								<leftPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+								<bottomPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+								<rightPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+							</box>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="101" height="30" uuid="49cb80e7-4121-4421-b9e5-fb62b743d92d"/>
+								<box topPadding="5" leftPadding="5" bottomPadding="1" rightPadding="1"/>
+								<textElement>
+									<font fontName="Arial" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{TIPO}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="100" uuid="9763eb8f-6b5e-43a0-aa27-0b01ed21f234">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<box>
+								<topPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+								<leftPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+								<bottomPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+								<rightPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="100" height="30" forecolor="#FFFFFF" uuid="10be24d6-d0c5-4c2e-89a4-ff063bdd56e1"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" size="16"/>
+								</textElement>
+								<text><![CDATA[Valor inicial]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<box>
+								<topPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+								<leftPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+								<bottomPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+								<rightPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+							</box>
+							<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="100" height="30" uuid="3889c925-f1af-4ef0-b438-1223466df0a2"/>
+								<box topPadding="5" leftPadding="5" bottomPadding="1" rightPadding="1"/>
+								<textElement>
+									<font fontName="Arial" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{VALOR_INICIAL}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="100" uuid="aa7d1996-762c-42c9-8e3d-5f56b31737e1">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<box>
+								<topPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+								<leftPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+								<bottomPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+								<rightPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="100" height="30" forecolor="#FFFFFF" uuid="08edbb3c-edba-44fc-81af-b9fef96e78f0"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" size="16"/>
+								</textElement>
+								<text><![CDATA[Novo valor]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<box>
+								<topPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+								<leftPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+								<bottomPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+								<rightPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+							</box>
+							<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="100" height="30" uuid="702d191e-92e5-4bf5-bed4-0be7291891e6"/>
+								<box topPadding="5" leftPadding="5" bottomPadding="1" rightPadding="1"/>
+								<textElement>
+									<font fontName="Arial" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{NOVO_VALOR}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="87" uuid="4c889af1-9f65-4c20-8f4c-d6098c726163">
+						<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+						<jr:columnHeader style="Table_CH" height="30" rowSpan="1">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<box>
+								<topPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+								<leftPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+								<bottomPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+								<rightPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+							</box>
+							<staticText>
+								<reportElement x="0" y="0" width="87" height="30" forecolor="#FFFFFF" uuid="6685c5f6-2d78-433a-b098-baf69e413e44"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Arial" size="16"/>
+								</textElement>
+								<text><![CDATA[Delta]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<box>
+								<topPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+								<leftPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+								<bottomPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+								<rightPen lineWidth="2.5" lineStyle="Solid" lineColor="#FFFFFF"/>
+							</box>
+							<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="87" height="30" uuid="f9892286-e50d-41f9-917e-820938b3d9cf"/>
+								<box topPadding="5" leftPadding="5" bottomPadding="1" rightPadding="1"/>
+								<textElement>
+									<font fontName="Arial" size="12"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{DELTA}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<textField>
+				<reportElement mode="Opaque" x="800" y="528" width="298" height="30" backcolor="#F5F5F5" uuid="dec78b1f-13ef-415f-ab0f-15f7d7fcb652"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Quantidade de Solicitações de mudança:"]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0">
+				<reportElement mode="Opaque" x="1098" y="528" width="90" height="30" backcolor="#F5F5F5" uuid="d7964d44-adbb-41e9-b618-a410825a41e0"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Arial" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QTD_CR}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
