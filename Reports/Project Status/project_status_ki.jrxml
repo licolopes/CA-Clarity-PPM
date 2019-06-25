@@ -1,0 +1,2508 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.2.final using JasperReports Library version 6.4.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="project_status_ki" pageWidth="1210" pageHeight="680" orientation="Landscape" columnWidth="1210" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" whenResourceMissingType="Error" uuid="e8baba7e-a461-49ec-ba3f-ec04798cf838">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="HONDA - PROD - JDBC"/>
+	<property name="ireport.jasperserver.url" value="https://cppmrpt103.ondemand.ca.com/reportservice/"/>
+	<property name="ireport.jasperserver.user" value="report_dev|cppm9100"/>
+	<property name="ireport.jasperserver.report.resource" value="/ca_ppm/Honda/honda_project_status_v7_files/project_status_ki.jrxml"/>
+	<property name="ireport.jasperserver.reportUnit" value="/ca_ppm/Honda/honda_project_status_v7"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_CH" mode="Opaque" backcolor="#FFC8AB">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 2_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 2_CH" mode="Opaque" backcolor="#FFC8AB">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 2_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 3_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 3_CH" mode="Opaque" backcolor="#FFC8AB">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 3_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="Dados" uuid="ad04ddc9-aee2-42ee-a983-c3c6fc633acd">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="HONDA - PRD"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
+		<parameter name="data_referencia" class="java.util.Date"/>
+		<parameter name="owner" class="java.util.Collection"/>
+		<parameter name="portfolio" class="java.lang.String"/>
+		<parameter name="fase" class="java.util.Collection"/>
+		<queryString>
+			<![CDATA[SELECT
+	STATUS_FINAL,
+	STATUS_ORDER,
+	COUNT(INV_ID) QTD
+FROM
+(
+	SELECT
+	INV_ID,
+	INV_CODE,
+	INV_NAME,
+	EXTRA,
+	FASE,
+	STATUS,
+	SCHEDULE_STATUS,
+	STATUS_FINAL,
+	OWNER,
+	CASE
+		WHEN STATUS_FINAL = 'No Prazo' THEN 10
+		WHEN STATUS_FINAL = 'Demanda No Prazo' THEN 20
+		WHEN STATUS_FINAL = 'On hold' THEN 30
+		WHEN STATUS_FINAL = 'Demanda On hold' THEN 40
+		WHEN STATUS_FINAL = 'Atrasado' THEN 50
+		WHEN STATUS_FINAL = 'Demanda Atrasada' THEN 60		
+		WHEN STATUS_FINAL = 'Cancelado' THEN 70
+		WHEN STATUS_FINAL = 'Demanda Cancelado' THEN 80
+		WHEN STATUS_FINAL = 'Extra' THEN 90
+		WHEN STATUS_FINAL = 'Sem Status' THEN 100
+		WHEN STATUS_FINAL = 'Concluído' THEN 110		
+		END STATUS_ORDER	
+	FROM
+	(
+		SELECT
+		INV_ID,
+		INV_CODE,
+		INV_NAME,
+		EXTRA,
+		FASE,
+		OWNER,
+		STATUS,
+		SCHEDULE_STATUS,
+		CASE
+			WHEN FASE IN ('Con') THEN 'Concluído'
+			WHEN SCHEDULE_STATUS IS NULL THEN 'Sem Status'
+			WHEN EXTRA = 1 THEN 'Extra'
+			WHEN FASE IN ('A00','U0','U1','J0') AND STATUS IN ('hon_lkp_cancelada','hon_lkp_cancelado') THEN 'Demanda Cancelada'
+			WHEN FASE IN ('A00','U0','U1','J0') AND STATUS IN ('hon_lkp_on_hold') THEN 'Demanda On hold'
+			WHEN FASE IN ('A00','U0','U1','J0') AND SCHEDULE_STATUS < 0 THEN 'Demanda Atrasada'
+			WHEN FASE IN ('A00','U0','U1','J0') AND SCHEDULE_STATUS >= 0 THEN 'Demanda No Prazo'
+			WHEN STATUS IN ('hon_lkp_cancelada','hon_lkp_cancelado') THEN 'Cancelado'
+			WHEN STATUS IN ('hon_lkp_on_hold') THEN 'On hold'
+			WHEN SCHEDULE_STATUS < 0 THEN 'Atrasado'
+			ELSE 'No Prazo' 
+			END STATUS_FINAL
+		FROM
+		(
+			SELECT
+			T1.INV_ID,
+			T1.INV_CODE,
+			T1.INV_NAME,
+			T1.EXTRA,
+			T1.OWNER,
+			CASE
+				WHEN T1.FASE_PRJ = 'Con' THEN T1.FASE_PRJ
+				WHEN T2.FASE_ATUAL IS NULL THEN T1.FASE_PRJ
+				ELSE T2.FASE_ATUAL
+				END FASE,
+			T1.FASE_PRJ,
+			T1.STATUS,
+			T2.CRONO_STATUS	SCHEDULE_STATUS
+			FROM
+			(
+				SELECT 
+					INVI.ID INV_ID,
+					INVI.CODE INV_CODE,
+					INVI.NAME INV_NAME,
+					STAGE_ATU.NAME FASE_PRJ,
+					STATUS.LOOKUP_CODE STATUS,
+					OCINV.hon_extra EXTRA,
+					OWNER.NAME OWNER_FULL,
+					CASE 
+						WHEN OWNER.NAME LIKE 'S - CS' THEN 'CS' 
+						WHEN OWNER.NAME LIKE 'S - PARTS' THEN 'SP' 
+						WHEN OWNER.NAME LIKE 'EDB - HDA' THEN 'EDB - HDA' 
+						WHEN OWNER.NAME LIKE 'HAB - BR - E' THEN 'HAB - E' 
+						WHEN OWNER.NAME LIKE 'HAB - BR - DB' THEN 'HAB - DB'		
+						WHEN SUBSTR(OWNER.NAME,0,INSTR(OWNER.NAME,' ')-1) = 'TI' THEN 'IT' ELSE SUBSTR(OWNER.NAME,0,INSTR(OWNER.NAME,' ')-1) 
+						END OWNER					
+				FROM 
+					INV_INVESTMENTS INVI
+					LEFT JOIN ODF_CA_INV OCINV ON INVI.ID = OCINV.ID
+					LEFT JOIN CMN_LOOKUPS_V STATUS ON STATUS.LOOKUP_CODE = OCINV.hon_status AND STATUS.LANGUAGE_CODE = 'pt' AND STATUS.LOOKUP_TYPE = 'HON_STATUS_INVESTIMENTO'
+					LEFT JOIN CMN_LOOKUPS_V STAGE_ATU ON INVI.STAGE_CODE = STAGE_ATU.LOOKUP_CODE AND   STAGE_ATU.LANGUAGE_CODE = 'pt' AND STAGE_ATU.LOOKUP_TYPE = 'INV_STAGE_TYPE' AND STAGE_ATU.PARENT_LOOKUP_CODE = 'hon_hsdm'
+					LEFT JOIN CMN_LOOKUPS_V OWNER ON OWNER.LOOKUP_CODE = OCINV.hon_area AND OWNER.LANGUAGE_CODE = 'pt' AND OWNER.LOOKUP_TYPE = 'HON_LKP_AREA'
+					LEFT JOIN PFM_INVESTMENTS PFMI ON PFMI.INVESTMENT_ID = INVI.ID
+					LEFT JOIN PFM_PORTFOLIOS PFMP ON PFMI.PORTFOLIO_ID = PFMP.ID AND PFMP.IS_ACTIVE = 1
+				WHERE 
+					PFMP.ID = $P{portfolio}
+					AND INVI.ODF_OBJECT_CODE = 'project'
+			)T1
+			
+			LEFT JOIN
+
+			(
+				SELECT
+					DENSE_RANK() OVER (PARTITION BY SRPT.ODF_PARENT_ID ORDER BY SRPT.COP_REPORT_DATE DESC) SRPT_RANK,
+					SRPT.ODF_PARENT_ID INV_ID,
+					SRPT.NAME SRPT_NAME,
+					SRPT.COP_REPORT_DATE DT_RELATORIO,
+					FASE_ATUAL.NAME FASE_ATUAL,
+					FASE_PLAN.NAME FASE_PLAN,
+					TO_CHAR(SRPT.hon_dt_fase_real,'DD/MM/YY') DT_FASE_REAL,
+					TO_CHAR(SRPT.hon_dt_fase_plan,'DD/MM/YY') DT_FASE_PLAN,
+					TO_CHAR(SRPT.hon_target,'DD/MM/YY') TARGET,
+					SRPT.cop_schedule_status CRONO_STATUS,
+					SRPT.cop_key_accomplish PRINCIP_REAL,
+					SRPT.cop_schedule_exp VARIACAO_PLANO,
+					SRPT.cop_upcoming_act PLANO_ACAO,
+					CASE 
+						WHEN SRPT.cop_schedule_status = -20 THEN 1
+						WHEN SRPT.cop_schedule_status = -5 THEN 2        
+						WHEN SRPT.cop_schedule_status = 0 THEN 3
+						WHEN SRPT.cop_schedule_status = 5 THEN 4
+						WHEN SRPT.cop_schedule_status = 20 THEN 5     
+						ELSE 0
+						END EVAL_SCHEDULE,
+					CASE 
+						WHEN SRPT.cop_cost_eft_status = -20 THEN 1
+						WHEN SRPT.cop_cost_eft_status = -5 THEN 2        
+						WHEN SRPT.cop_cost_eft_status = 0 THEN 3
+						WHEN SRPT.cop_cost_eft_status = 5 THEN 4
+						WHEN SRPT.cop_cost_eft_status = 20 THEN 5     
+						ELSE 0
+						END EVAL_BUDGET
+				FROM
+					ODF_CA_COP_PRJ_STATUSRPT SRPT
+					LEFT JOIN CMN_LOOKUPS_V FASE_ATUAL ON FASE_ATUAL.LOOKUP_CODE = SRPT.hon_fase_atual AND FASE_ATUAL.LANGUAGE_CODE = 'pt' AND FASE_ATUAL.LOOKUP_TYPE = 'HON_LKP_FASE_PROJETO'
+					LEFT JOIN CMN_LOOKUPS_V FASE_PLAN ON FASE_PLAN.LOOKUP_CODE = SRPT.hon_fase_planejada AND FASE_PLAN.LANGUAGE_CODE = 'pt' AND FASE_PLAN.LOOKUP_TYPE = 'HON_LKP_FASE_PROJETO'
+				WHERE
+					TRUNC(SRPT.COP_REPORT_DATE,'MONTH') = TRUNC($P{data_referencia},'MONTH')
+					AND SRPT.COP_REPORT_STATUS = 'FINAL' 
+					AND SRPT.HON_TIPO_REL_STATUS = 'mensal'
+			)T2 ON T2.INV_ID = T1.INV_ID AND T2.SRPT_RANK = 1
+		)T3
+		WHERE 
+			$X{IN,OWNER,owner}
+			AND $X{IN,FASE,fase}
+	)T4
+)T5
+GROUP BY
+	STATUS_FINAL,
+	STATUS_ORDER
+
+ORDER BY
+	STATUS_ORDER ASC]]>
+		</queryString>
+		<field name="STATUS_FINAL" class="java.lang.String"/>
+		<field name="STATUS_ORDER" class="java.math.BigDecimal"/>
+		<field name="QTD" class="java.math.BigDecimal"/>
+	</subDataset>
+	<subDataset name="fases" uuid="cddd98ce-a58a-419c-97a8-83f89e242efb">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="HONDA - PRD"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
+		<parameter name="data_referencia" class="java.util.Date"/>
+		<parameter name="owner" class="java.util.Collection"/>
+		<parameter name="portfolio" class="java.lang.String"/>
+		<parameter name="fase" class="java.util.Collection"/>
+		<queryString>
+			<![CDATA[SELECT
+	INV_ID,
+	STATUS,
+	STATUS_ORDER,
+	FASE,
+	FASE_ORDER
+FROM
+(
+	SELECT
+	INV_ID,
+	FASE,
+	STATUS_FINAL STATUS,
+	CASE
+		WHEN STATUS_FINAL = 'Concluído' THEN 10
+		WHEN STATUS_FINAL = 'Sem Status' THEN 20
+		WHEN STATUS_FINAL = 'Extra' THEN 30
+		WHEN STATUS_FINAL = 'Demanda Cancelada' THEN 40
+		WHEN STATUS_FINAL = 'Demanda On hold' THEN 50
+		WHEN STATUS_FINAL = 'Demanda Atrasada' THEN 60
+		WHEN STATUS_FINAL = 'Demanda No Prazo' THEN 70
+		WHEN STATUS_FINAL = 'Cancelado' THEN 80
+		WHEN STATUS_FINAL = 'On hold' THEN 90
+		WHEN STATUS_FINAL = 'Atrasado' THEN 100
+		WHEN STATUS_FINAL = 'No Prazo' THEN 110		
+		END STATUS_ORDER,	
+	CASE
+		WHEN FASE = 'A00' THEN 10
+		WHEN FASE = 'U0' THEN 20
+		WHEN FASE = 'U1' THEN 30
+		WHEN FASE = 'J0' THEN 40
+		WHEN FASE = 'J1' THEN 50
+		WHEN FASE = 'J2' THEN 60
+		WHEN FASE = 'J3' THEN 70
+		WHEN FASE = 'J4' THEN 80
+		WHEN FASE = 'J5' THEN 90
+		WHEN FASE = 'OPA' THEN 100
+		WHEN FASE = 'PRD' THEN 110
+		WHEN FASE = 'P0' THEN 120
+		WHEN FASE = 'Con' THEN 130
+		WHEN STATUS_FINAL = 'Sem Status' THEN 140
+		END FASE_ORDER	
+	FROM
+	(
+		SELECT
+		INV_ID,
+		INV_CODE,
+		INV_NAME,
+		EXTRA,
+		FASE,
+		OWNER,
+		STATUS,
+		SCHEDULE_STATUS,
+		CASE
+			WHEN FASE = 'Con' THEN 'Concluído'
+			WHEN SCHEDULE_STATUS IS NULL THEN 'Sem Status'
+			WHEN EXTRA = 1 THEN 'Extra'
+			WHEN FASE IN ('A00','U0','U1','J0') AND STATUS IN ('hon_lkp_cancelada','hon_lkp_cancelado') THEN 'Demanda Cancelada'
+			WHEN FASE IN ('A00','U0','U1','J0') AND STATUS IN ('hon_lkp_on_hold') THEN 'Demanda On hold'
+			WHEN FASE IN ('A00','U0','U1','J0') AND SCHEDULE_STATUS < 0 THEN 'Demanda Atrasada'
+			WHEN FASE IN ('A00','U0','U1','J0') AND SCHEDULE_STATUS >= 0 THEN 'Demanda No Prazo'
+			WHEN STATUS IN ('hon_lkp_cancelada','hon_lkp_cancelado') THEN 'Cancelado'
+			WHEN STATUS IN ('hon_lkp_on_hold') THEN 'On hold'
+			WHEN SCHEDULE_STATUS < 0 THEN 'Atrasado'
+			ELSE 'No Prazo' 
+			END STATUS_FINAL
+		FROM
+		(
+			SELECT
+			T1.INV_ID,
+			T1.INV_CODE,
+			T1.INV_NAME,
+			T1.EXTRA,
+			T1.OWNER,
+			CASE
+				WHEN T1.FASE_PRJ = 'Con' THEN T1.FASE_PRJ
+				WHEN T2.FASE_ATUAL IS NULL THEN T1.FASE_PRJ
+				ELSE T2.FASE_ATUAL
+				END FASE,
+			T1.FASE_PRJ,
+			T1.STATUS,
+			T2.CRONO_STATUS	SCHEDULE_STATUS
+			FROM
+			(
+				SELECT 
+					INVI.ID INV_ID,
+					INVI.CODE INV_CODE,
+					INVI.NAME INV_NAME,
+					STAGE_ATU.NAME FASE_PRJ,
+					STATUS.LOOKUP_CODE STATUS,
+					OCINV.hon_extra EXTRA,
+					OWNER.NAME OWNER_FULL,
+					CASE 
+						WHEN OWNER.NAME LIKE 'S - CS' THEN 'CS' 
+						WHEN OWNER.NAME LIKE 'S - PARTS' THEN 'SP' 
+						WHEN OWNER.NAME LIKE 'EDB - HDA' THEN 'EDB - HDA' 
+						WHEN OWNER.NAME LIKE 'HAB - BR - E' THEN 'HAB - E' 
+						WHEN OWNER.NAME LIKE 'HAB - BR - DB' THEN 'HAB - DB'		
+						WHEN SUBSTR(OWNER.NAME,0,INSTR(OWNER.NAME,' ')-1) = 'TI' THEN 'IT' ELSE SUBSTR(OWNER.NAME,0,INSTR(OWNER.NAME,' ')-1) 
+						END OWNER					
+				FROM 
+					INV_INVESTMENTS INVI
+					LEFT JOIN ODF_CA_INV OCINV ON INVI.ID = OCINV.ID
+					LEFT JOIN CMN_LOOKUPS_V STATUS ON STATUS.LOOKUP_CODE = OCINV.hon_status AND STATUS.LANGUAGE_CODE = 'pt' AND STATUS.LOOKUP_TYPE = 'HON_STATUS_INVESTIMENTO'
+					LEFT JOIN CMN_LOOKUPS_V STAGE_ATU ON INVI.STAGE_CODE = STAGE_ATU.LOOKUP_CODE AND   STAGE_ATU.LANGUAGE_CODE = 'pt' AND STAGE_ATU.LOOKUP_TYPE = 'INV_STAGE_TYPE' AND STAGE_ATU.PARENT_LOOKUP_CODE = 'hon_hsdm'
+					LEFT JOIN CMN_LOOKUPS_V OWNER ON OWNER.LOOKUP_CODE = OCINV.hon_area AND OWNER.LANGUAGE_CODE = 'pt' AND OWNER.LOOKUP_TYPE = 'HON_LKP_AREA'
+					LEFT JOIN PFM_INVESTMENTS PFMI ON PFMI.INVESTMENT_ID = INVI.ID
+					LEFT JOIN PFM_PORTFOLIOS PFMP ON PFMI.PORTFOLIO_ID = PFMP.ID AND PFMP.IS_ACTIVE = 1
+				WHERE 
+					PFMP.ID = $P{portfolio}
+					AND INVI.ODF_OBJECT_CODE = 'project'
+			)T1
+			
+			LEFT JOIN
+
+			(
+				SELECT
+					DENSE_RANK() OVER (PARTITION BY SRPT.ODF_PARENT_ID ORDER BY SRPT.COP_REPORT_DATE DESC) SRPT_RANK,
+					SRPT.ODF_PARENT_ID INV_ID,
+					SRPT.NAME SRPT_NAME,
+					SRPT.COP_REPORT_DATE DT_RELATORIO,
+					FASE_ATUAL.NAME FASE_ATUAL,
+					FASE_PLAN.NAME FASE_PLAN,
+					TO_CHAR(SRPT.hon_dt_fase_real,'DD/MM/YY') DT_FASE_REAL,
+					TO_CHAR(SRPT.hon_dt_fase_plan,'DD/MM/YY') DT_FASE_PLAN,
+					TO_CHAR(SRPT.hon_target,'DD/MM/YY') TARGET,
+					SRPT.cop_schedule_status CRONO_STATUS,
+					SRPT.cop_key_accomplish PRINCIP_REAL,
+					SRPT.cop_schedule_exp VARIACAO_PLANO,
+					SRPT.cop_upcoming_act PLANO_ACAO,
+					CASE 
+						WHEN SRPT.cop_schedule_status = -20 THEN 1
+						WHEN SRPT.cop_schedule_status = -5 THEN 2        
+						WHEN SRPT.cop_schedule_status = 0 THEN 3
+						WHEN SRPT.cop_schedule_status = 5 THEN 4
+						WHEN SRPT.cop_schedule_status = 20 THEN 5     
+						ELSE 0
+						END EVAL_SCHEDULE,
+					CASE 
+						WHEN SRPT.cop_cost_eft_status = -20 THEN 1
+						WHEN SRPT.cop_cost_eft_status = -5 THEN 2        
+						WHEN SRPT.cop_cost_eft_status = 0 THEN 3
+						WHEN SRPT.cop_cost_eft_status = 5 THEN 4
+						WHEN SRPT.cop_cost_eft_status = 20 THEN 5     
+						ELSE 0
+						END EVAL_BUDGET
+				FROM
+					ODF_CA_COP_PRJ_STATUSRPT SRPT
+					LEFT JOIN CMN_LOOKUPS_V FASE_ATUAL ON FASE_ATUAL.LOOKUP_CODE = SRPT.hon_fase_atual AND FASE_ATUAL.LANGUAGE_CODE = 'pt' AND FASE_ATUAL.LOOKUP_TYPE = 'HON_LKP_FASE_PROJETO'
+					LEFT JOIN CMN_LOOKUPS_V FASE_PLAN ON FASE_PLAN.LOOKUP_CODE = SRPT.hon_fase_planejada AND FASE_PLAN.LANGUAGE_CODE = 'pt' AND FASE_PLAN.LOOKUP_TYPE = 'HON_LKP_FASE_PROJETO'
+				WHERE
+					TRUNC(SRPT.COP_REPORT_DATE,'MONTH') = TRUNC($P{data_referencia},'MONTH')
+					AND SRPT.COP_REPORT_STATUS = 'FINAL' 
+					AND SRPT.HON_TIPO_REL_STATUS = 'mensal'
+			)T2 ON T2.INV_ID = T1.INV_ID AND T2.SRPT_RANK = 1
+		)T3
+		WHERE 
+			$X{IN,OWNER,owner}
+			AND $X{IN,FASE,fase}
+	)T4
+)T5
+ORDER BY
+	FASE_ORDER ASC,
+	STATUS_ORDER ASC]]>
+		</queryString>
+		<field name="INV_ID" class="java.math.BigDecimal"/>
+		<field name="STATUS" class="java.lang.String"/>
+		<field name="STATUS_ORDER" class="java.math.BigDecimal"/>
+		<field name="FASE" class="java.lang.String"/>
+		<field name="FASE_ORDER" class="java.math.BigDecimal"/>
+	</subDataset>
+	<subDataset name="owner" uuid="2d20de73-5e4f-45e7-ba94-aad350618854">
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="HONDA - PRD"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
+		<parameter name="data_referencia" class="java.util.Date"/>
+		<parameter name="owner" class="java.util.Collection"/>
+		<parameter name="portfolio" class="java.lang.String"/>
+		<parameter name="fase" class="java.util.Collection"/>
+		<queryString>
+			<![CDATA[SELECT
+INV_ID,
+STATUS,
+STATUS_ORDER,
+FASE,
+FASE_ORDER,
+OWNER
+FROM
+(
+	SELECT
+	INV_ID,
+	FASE,
+	OWNER,
+	STATUS_FINAL STATUS,
+	CASE
+		WHEN STATUS_FINAL = 'Concluído' THEN 10
+		WHEN STATUS_FINAL = 'Sem Status' THEN 20
+		WHEN STATUS_FINAL = 'Extra' THEN 30
+		WHEN STATUS_FINAL = 'Demanda Cancelada' THEN 40
+		WHEN STATUS_FINAL = 'Demanda On hold' THEN 50
+		WHEN STATUS_FINAL = 'Demanda Atrasada' THEN 60
+		WHEN STATUS_FINAL = 'Demanda No Prazo' THEN 70
+		WHEN STATUS_FINAL = 'Cancelado' THEN 80
+		WHEN STATUS_FINAL = 'On hold' THEN 90
+		WHEN STATUS_FINAL = 'Atrasado' THEN 100
+		WHEN STATUS_FINAL = 'No Prazo' THEN 110		
+		END STATUS_ORDER,	
+	CASE
+		WHEN FASE = 'A00' THEN 10
+		WHEN FASE = 'U0' THEN 20
+		WHEN FASE = 'U1' THEN 30
+		WHEN FASE = 'J0' THEN 40
+		WHEN FASE = 'J1' THEN 50
+		WHEN FASE = 'J2' THEN 60
+		WHEN FASE = 'J3' THEN 70
+		WHEN FASE = 'J4' THEN 80
+		WHEN FASE = 'J5' THEN 90
+		WHEN FASE = 'OPA' THEN 100
+		WHEN FASE = 'PRD' THEN 110
+		WHEN FASE = 'P0' THEN 120
+		WHEN FASE = 'Con' THEN 130
+		WHEN STATUS_FINAL = 'Sem Status' THEN 140
+		END FASE_ORDER	
+	FROM
+	(
+		SELECT
+		INV_ID,
+		INV_CODE,
+		INV_NAME,
+		EXTRA,
+		FASE,
+		OWNER,
+		STATUS,
+		SCHEDULE_STATUS,
+		CASE
+			WHEN FASE IN ('Con') THEN 'Concluído'
+			WHEN SCHEDULE_STATUS IS NULL THEN 'Sem Status'
+			WHEN EXTRA = 1 THEN 'Extra'
+			WHEN FASE IN ('A00','U0','U1','J0') AND STATUS IN ('hon_lkp_cancelada','hon_lkp_cancelado') THEN 'Demanda Cancelada'
+			WHEN FASE IN ('A00','U0','U1','J0') AND STATUS IN ('hon_lkp_on_hold') THEN 'Demanda On hold'
+			WHEN FASE IN ('A00','U0','U1','J0') AND SCHEDULE_STATUS < 0 THEN 'Demanda Atrasada'
+			WHEN FASE IN ('A00','U0','U1','J0') AND SCHEDULE_STATUS >= 0 THEN 'Demanda No Prazo'
+			WHEN STATUS IN ('hon_lkp_cancelada','hon_lkp_cancelado') THEN 'Cancelado'
+			WHEN STATUS IN ('hon_lkp_on_hold') THEN 'On hold'
+			WHEN SCHEDULE_STATUS < 0 THEN 'Atrasado'
+			ELSE 'No Prazo' 
+			END STATUS_FINAL
+		FROM
+		(
+			SELECT
+			T1.INV_ID,
+			T1.INV_CODE,
+			T1.INV_NAME,
+			T1.EXTRA,
+			T1.OWNER,
+			CASE
+				WHEN T1.FASE_PRJ = 'Con' THEN T1.FASE_PRJ
+				WHEN T2.FASE_ATUAL IS NULL THEN T1.FASE_PRJ
+				ELSE T2.FASE_ATUAL
+				END FASE,
+			T1.FASE_PRJ,
+			T1.STATUS,
+			T2.CRONO_STATUS	SCHEDULE_STATUS
+			FROM
+			(
+				SELECT 
+					INVI.ID INV_ID,
+					INVI.CODE INV_CODE,
+					INVI.NAME INV_NAME,
+					STAGE_ATU.NAME FASE_PRJ,
+					STATUS.LOOKUP_CODE STATUS,
+					OCINV.hon_extra EXTRA,
+					OWNER.NAME OWNER_FULL,
+					CASE 
+						WHEN OWNER.NAME LIKE 'S - CS' THEN 'CS' 
+						WHEN OWNER.NAME LIKE 'S - PARTS' THEN 'SP' 
+						WHEN OWNER.NAME LIKE 'EDB - HDA' THEN 'EDB - HDA' 
+						WHEN OWNER.NAME LIKE 'HAB - BR - E' THEN 'HAB - E' 
+						WHEN OWNER.NAME LIKE 'HAB - BR - DB' THEN 'HAB - DB'		
+						WHEN SUBSTR(OWNER.NAME,0,INSTR(OWNER.NAME,' ')-1) = 'TI' THEN 'IT' ELSE SUBSTR(OWNER.NAME,0,INSTR(OWNER.NAME,' ')-1) 
+						END OWNER					
+				FROM 
+					INV_INVESTMENTS INVI
+					LEFT JOIN ODF_CA_INV OCINV ON INVI.ID = OCINV.ID
+					LEFT JOIN CMN_LOOKUPS_V STATUS ON STATUS.LOOKUP_CODE = OCINV.hon_status AND STATUS.LANGUAGE_CODE = 'pt' AND STATUS.LOOKUP_TYPE = 'HON_STATUS_INVESTIMENTO'
+					LEFT JOIN CMN_LOOKUPS_V STAGE_ATU ON INVI.STAGE_CODE = STAGE_ATU.LOOKUP_CODE AND   STAGE_ATU.LANGUAGE_CODE = 'pt' AND STAGE_ATU.LOOKUP_TYPE = 'INV_STAGE_TYPE' AND STAGE_ATU.PARENT_LOOKUP_CODE = 'hon_hsdm'
+					LEFT JOIN CMN_LOOKUPS_V OWNER ON OWNER.LOOKUP_CODE = OCINV.hon_area AND OWNER.LANGUAGE_CODE = 'pt' AND OWNER.LOOKUP_TYPE = 'HON_LKP_AREA'
+					LEFT JOIN PFM_INVESTMENTS PFMI ON PFMI.INVESTMENT_ID = INVI.ID
+					LEFT JOIN PFM_PORTFOLIOS PFMP ON PFMI.PORTFOLIO_ID = PFMP.ID AND PFMP.IS_ACTIVE = 1
+				WHERE 
+					PFMP.ID = $P{portfolio}
+					AND INVI.ODF_OBJECT_CODE = 'project'
+			)T1
+			
+			LEFT JOIN
+
+			(
+				SELECT
+					DENSE_RANK() OVER (PARTITION BY SRPT.ODF_PARENT_ID ORDER BY SRPT.COP_REPORT_DATE DESC) SRPT_RANK,
+					SRPT.ODF_PARENT_ID INV_ID,
+					SRPT.NAME SRPT_NAME,
+					SRPT.COP_REPORT_DATE DT_RELATORIO,
+					FASE_ATUAL.NAME FASE_ATUAL,
+					FASE_PLAN.NAME FASE_PLAN,
+					TO_CHAR(SRPT.hon_dt_fase_real,'DD/MM/YY') DT_FASE_REAL,
+					TO_CHAR(SRPT.hon_dt_fase_plan,'DD/MM/YY') DT_FASE_PLAN,
+					TO_CHAR(SRPT.hon_target,'DD/MM/YY') TARGET,
+					SRPT.cop_schedule_status CRONO_STATUS,
+					SRPT.cop_key_accomplish PRINCIP_REAL,
+					SRPT.cop_schedule_exp VARIACAO_PLANO,
+					SRPT.cop_upcoming_act PLANO_ACAO,
+					CASE 
+						WHEN SRPT.cop_schedule_status = -20 THEN 1
+						WHEN SRPT.cop_schedule_status = -5 THEN 2        
+						WHEN SRPT.cop_schedule_status = 0 THEN 3
+						WHEN SRPT.cop_schedule_status = 5 THEN 4
+						WHEN SRPT.cop_schedule_status = 20 THEN 5     
+						ELSE 0
+						END EVAL_SCHEDULE,
+					CASE 
+						WHEN SRPT.cop_cost_eft_status = -20 THEN 1
+						WHEN SRPT.cop_cost_eft_status = -5 THEN 2        
+						WHEN SRPT.cop_cost_eft_status = 0 THEN 3
+						WHEN SRPT.cop_cost_eft_status = 5 THEN 4
+						WHEN SRPT.cop_cost_eft_status = 20 THEN 5     
+						ELSE 0
+						END EVAL_BUDGET
+				FROM
+					ODF_CA_COP_PRJ_STATUSRPT SRPT
+					LEFT JOIN CMN_LOOKUPS_V FASE_ATUAL ON FASE_ATUAL.LOOKUP_CODE = SRPT.hon_fase_atual AND FASE_ATUAL.LANGUAGE_CODE = 'pt' AND FASE_ATUAL.LOOKUP_TYPE = 'HON_LKP_FASE_PROJETO'
+					LEFT JOIN CMN_LOOKUPS_V FASE_PLAN ON FASE_PLAN.LOOKUP_CODE = SRPT.hon_fase_planejada AND FASE_PLAN.LANGUAGE_CODE = 'pt' AND FASE_PLAN.LOOKUP_TYPE = 'HON_LKP_FASE_PROJETO'
+				WHERE
+					TRUNC(SRPT.COP_REPORT_DATE,'MONTH') = TRUNC($P{data_referencia},'MONTH')
+					AND SRPT.COP_REPORT_STATUS = 'FINAL' 
+					AND SRPT.HON_TIPO_REL_STATUS = 'mensal'
+			)T2 ON T2.INV_ID = T1.INV_ID AND T2.SRPT_RANK = 1
+		)T3
+		WHERE 
+			$X{IN,OWNER,owner}
+			AND $X{IN,FASE,fase}
+	)T4
+)T5
+ORDER BY
+	OWNER ASC,
+	FASE_ORDER ASC,
+	STATUS_ORDER ASC]]>
+		</queryString>
+		<field name="INV_ID" class="java.math.BigDecimal"/>
+		<field name="STATUS" class="java.lang.String"/>
+		<field name="STATUS_ORDER" class="java.math.BigDecimal"/>
+		<field name="FASE" class="java.lang.String"/>
+		<field name="FASE_ORDER" class="java.math.BigDecimal"/>
+		<field name="OWNER" class="java.lang.String"/>
+		<sortField name="FASE_ORDER"/>
+		<sortField name="OWNER"/>
+	</subDataset>
+	<subDataset name="Status_kpi" uuid="80093026-5440-4dd6-9fac-344571819858">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="HONDA - PRD"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
+		<parameter name="data_referencia" class="java.util.Date"/>
+		<parameter name="owner" class="java.util.Collection"/>
+		<parameter name="portfolio" class="java.lang.String"/>
+		<parameter name="fase" class="java.util.Collection"/>
+		<queryString>
+			<![CDATA[SELECT 
+TIPO.NAME META
+, SUM(TOTAL) TOTAL
+, SUM(QTD_KPI) QTD_KPI
+, ROUND(SUM(PCT_KPI),2) PCT_KPI
+, SUM(TARGET) TARGET
+, SUM(TARGET) - SUM(PCT_KPI) EVAL
+, CASE
+	WHEN (SUM(TARGET)-SUM(PCT_KPI)) <= 0.80 THEN 1
+	WHEN (SUM(TARGET)-SUM(PCT_KPI)) > 0.80 AND (SUM(TARGET)-SUM(PCT_KPI)) <= 0.94 THEN 2
+	WHEN (SUM(TARGET)-SUM(PCT_KPI)) > 0.94 AND (SUM(TARGET)-SUM(PCT_KPI)) <= 1.05 THEN 3
+	WHEN (SUM(TARGET)-SUM(PCT_KPI)) > 1.05 AND (SUM(TARGET)-SUM(PCT_KPI)) <= 1.19 THEN 4
+	WHEN (SUM(TARGET)-SUM(PCT_KPI)) > 1.19 THEN 5
+	END EVAL_ID
+FROM
+(
+	SELECT
+		COUNT(INV_ID) TOTAL
+		, SUM(ON_TIME) QTD_KPI
+		, SUM(ON_TIME)/COUNT(INV_ID) PCT_KPI
+		, 0 TARGET
+		, 'on_time_delivery' TIPO
+		, 1 ORDEM
+	FROM
+	(
+		SELECT
+			INV_ID
+			, CASE
+				WHEN FASE_SR IS NULL THEN FASE_PRJ
+				ELSE FASE_SR
+				END FASE
+			, CASE 
+				WHEN SCHEDULE_STATUS IN (0,5,20) 
+				THEN 1 
+				ELSE 0 
+				END ON_TIME
+			, CASE 
+				WHEN OWNER LIKE 'S - CS' THEN 'CS' 
+				WHEN OWNER LIKE 'S - PARTS' THEN 'SP' 
+				WHEN OWNER LIKE 'EDB - HDA' THEN 'EDB - HDA' 
+				WHEN OWNER LIKE 'HAB - BR - E' THEN 'HAB - E' 
+				WHEN OWNER LIKE 'HAB - BR - DB' THEN 'HAB - DB'		
+				WHEN SUBSTR(OWNER,0,INSTR(OWNER,' ')-1) = 'TI' THEN 'IT' ELSE SUBSTR(OWNER,0,INSTR(OWNER,' ')-1) 
+				END OWNER
+		FROM
+		(
+			SELECT 
+				INVI.ID INV_ID,
+				STAGE_ATU.NAME FASE_PRJ,
+				CASE
+					WHEN (STATUS_RPT.COP_REPORT_STATUS = 'FINAL' AND STATUS_RPT.HON_TIPO_REL_STATUS = 'mensal')
+					THEN STAGE_RPT.NAME
+					ELSE NULL
+					END FASE_SR,
+				CASE
+					WHEN (STATUS_RPT.COP_REPORT_STATUS = 'FINAL' AND STATUS_RPT.HON_TIPO_REL_STATUS = 'mensal')
+					THEN STATUS_RPT.COP_SCHEDULE_STATUS
+					ELSE NULL
+					END SCHEDULE_STATUS,
+				STATUS.LOOKUP_CODE STATUS,
+				OWNER.NAME OWNER	
+			FROM 
+				INV_INVESTMENTS INVI
+				JOIN ODF_CA_INV OCINV ON INVI.ID = OCINV.ID
+				LEFT JOIN CMN_LOOKUPS_V STATUS ON STATUS.LOOKUP_CODE = OCINV.hon_status AND STATUS.LANGUAGE_CODE = 'pt' AND STATUS.LOOKUP_TYPE = 'HON_STATUS_INVESTIMENTO'
+				LEFT JOIN CMN_LOOKUPS_V STAGE_ATU ON INVI.STAGE_CODE = STAGE_ATU.LOOKUP_CODE AND   STAGE_ATU.LANGUAGE_CODE = 'pt' AND STAGE_ATU.LOOKUP_TYPE = 'INV_STAGE_TYPE' AND STAGE_ATU.PARENT_LOOKUP_CODE = 'hon_hsdm'
+				LEFT JOIN CMN_LOOKUPS_V OWNER ON OWNER.LOOKUP_CODE = OCINV.hon_area AND OWNER.LANGUAGE_CODE = 'pt' AND OWNER.LOOKUP_TYPE = 'HON_LKP_AREA'
+				LEFT JOIN (SELECT MAX(ID) MAX_ID, ODF_PARENT_ID INV_ID FROM odf_ca_cop_prj_statusrpt WHERE TRUNC(COP_REPORT_DATE,'MONTH') <= TRUNC($P{data_referencia},'MONTH') AND COP_REPORT_STATUS = 'FINAL' AND HON_TIPO_REL_STATUS = 'mensal' GROUP BY ODF_PARENT_ID) MAX_REPORT ON MAX_REPORT.INV_ID = INVI.ID
+				LEFT JOIN odf_ca_cop_prj_statusrpt STATUS_RPT ON MAX_REPORT.MAX_ID = STATUS_RPT.ID 
+				LEFT JOIN PFM_INVESTMENTS PFMI ON PFMI.INVESTMENT_ID = INVI.ID
+				LEFT JOIN PFM_PORTFOLIOS PFMP ON PFMI.PORTFOLIO_ID = PFMP.ID
+				LEFT JOIN (SELECT MAX(ID) MAX_AUDIT, OBJECT_ID INV_ID from cmn_audits where ATTRIBUTE_CODE = 'stage_code' AND  LAST_UPDATED_DATE <= TRUNC( $P{data_referencia} ,'MONTH') GROUP BY OBJECT_ID) MAX_AUDIT ON MAX_AUDIT.INV_ID = INVI.ID
+				LEFT JOIN CMN_AUDITS AUD ON AUD.ID = MAX_AUDIT.MAX_AUDIT
+				LEFT JOIN CMN_LOOKUPS_V STAGE ON AUD.RAW_VALUE_AFTER = STAGE.LOOKUP_CODE AND   STAGE.LANGUAGE_CODE = 'pt' AND STAGE.LOOKUP_TYPE = 'INV_STAGE_TYPE' AND STAGE.PARENT_LOOKUP_CODE = 'hon_hsdm' 
+				LEFT JOIN CMN_LOOKUPS_V STAGE_RPT ON STAGE_RPT.LOOKUP_CODE = STATUS_RPT.hon_fase_atual AND STAGE_RPT.LANGUAGE_CODE = 'pt' AND STAGE_RPT.LOOKUP_TYPE = 'HON_LKP_FASE_PROJETO'
+			WHERE 
+				PFMP.ID = $P{portfolio} 
+				AND INVI.ODF_OBJECT_CODE = 'project'
+		)
+	)
+	WHERE 
+		$X{IN,OWNER,owner}
+		AND $X{IN,FASE,fase}
+
+	UNION
+
+	SELECT 
+	0 TOTAL
+	, 0 QTD_KPI
+	, 0 PCT_KPI
+	, HON_META TARGET_PCT
+	, HON_TIPO_META
+	,1 ORDEM
+	FROM
+		ODF_CA_HON_META META
+	WHERE 
+		META.hon_tipo_meta = 'on_time_delivery'
+		AND META.HON_DATA_INI = (SELECT MAX(HON_DATA_INI) FROM ODF_CA_HON_META WHERE HON_TIPO_META = 'on_time_delivery' AND HON_DATA_INI <= TRUNC( $P{data_referencia} ,'MONTH') )
+
+) 
+KPI
+JOIN CMN_LOOKUPS_V TIPO ON TIPO.LOOKUP_TYPE = 'HON_LKP_TIPOS_META' AND TIPO.LOOKUP_CODE = KPI.TIPO AND TIPO.LANGUAGE_CODE = 'pt'
+
+GROUP BY
+TIPO.NAME
+
+UNION ALL
+
+SELECT 
+TIPO.NAME META
+, SUM(TOTAL) TOTAL
+, SUM(QTD_KPI) QTD_KPI
+, ROUND(SUM(PCT_KPI),2) PCT_KPI
+, SUM(TARGET) TARGET
+, SUM(TARGET) - SUM(PCT_KPI) EVAL
+, CASE
+	WHEN (SUM(TARGET)-SUM(PCT_KPI)) <= 0.80 THEN 1
+	WHEN (SUM(TARGET)-SUM(PCT_KPI)) > 0.80 AND (SUM(TARGET)-SUM(PCT_KPI)) <= 0.94 THEN 2
+	WHEN (SUM(TARGET)-SUM(PCT_KPI)) > 0.94 AND (SUM(TARGET)-SUM(PCT_KPI)) <= 1.05 THEN 3
+	WHEN (SUM(TARGET)-SUM(PCT_KPI)) > 1.05 AND (SUM(TARGET)-SUM(PCT_KPI)) <= 1.19 THEN 4
+	WHEN (SUM(TARGET)-SUM(PCT_KPI)) > 1.19 THEN 5
+	END EVAL_ID
+FROM
+
+(
+	SELECT
+		COUNT(INV_ID) TOTAL
+		, SUM(ON_TIME) QTD_KPI
+		, SUM(ON_TIME)/COUNT(INV_ID) PCT_KPI
+		, 0 TARGET
+		, 'prj_cost_on_plan' TIPO
+		, 2 ORDEM
+	FROM
+	(
+		SELECT
+			INV_ID
+			, CASE
+				WHEN FASE_SR IS NULL THEN FASE_PRJ
+				ELSE FASE_SR
+				END FASE
+			, CASE 
+				WHEN COST_STATUS IN (0,5,20) 
+				THEN 1 
+				ELSE 0 
+				END ON_TIME
+			, CASE 
+				WHEN OWNER LIKE 'S - CS' THEN 'CS' 
+				WHEN OWNER LIKE 'S - PARTS' THEN 'SP' 
+				WHEN OWNER LIKE 'EDB - HDA' THEN 'EDB - HDA' 
+				WHEN OWNER LIKE 'HAB - BR - E' THEN 'HAB - E' 
+				WHEN OWNER LIKE 'HAB - BR - DB' THEN 'HAB - DB'		
+				WHEN SUBSTR(OWNER,0,INSTR(OWNER,' ')-1) = 'TI' THEN 'IT' ELSE SUBSTR(OWNER,0,INSTR(OWNER,' ')-1) 
+				END OWNER
+		FROM
+		(
+			SELECT 
+				INVI.ID INV_ID,
+				STAGE_ATU.NAME FASE_PRJ,
+				CASE
+					WHEN (STATUS_RPT.COP_REPORT_STATUS = 'FINAL' AND STATUS_RPT.HON_TIPO_REL_STATUS = 'mensal')
+					THEN STAGE_RPT.NAME
+					ELSE NULL
+					END FASE_SR,
+				CASE
+					WHEN (STATUS_RPT.COP_REPORT_STATUS = 'FINAL' AND STATUS_RPT.HON_TIPO_REL_STATUS = 'mensal')
+					THEN STATUS_RPT.COP_COST_EFT_STATUS
+					ELSE NULL
+					END COST_STATUS,
+				STATUS.LOOKUP_CODE STATUS,
+				OWNER.NAME OWNER	
+			FROM 
+				INV_INVESTMENTS INVI
+				JOIN ODF_CA_INV OCINV ON INVI.ID = OCINV.ID
+				LEFT JOIN CMN_LOOKUPS_V STATUS ON STATUS.LOOKUP_CODE = OCINV.hon_status AND STATUS.LANGUAGE_CODE = 'pt' AND STATUS.LOOKUP_TYPE = 'HON_STATUS_INVESTIMENTO'
+				LEFT JOIN CMN_LOOKUPS_V STAGE_ATU ON INVI.STAGE_CODE = STAGE_ATU.LOOKUP_CODE AND   STAGE_ATU.LANGUAGE_CODE = 'pt' AND STAGE_ATU.LOOKUP_TYPE = 'INV_STAGE_TYPE' AND STAGE_ATU.PARENT_LOOKUP_CODE = 'hon_hsdm'
+				LEFT JOIN CMN_LOOKUPS_V OWNER ON OWNER.LOOKUP_CODE = OCINV.hon_area AND OWNER.LANGUAGE_CODE = 'pt' AND OWNER.LOOKUP_TYPE = 'HON_LKP_AREA'
+				LEFT JOIN (SELECT MAX(ID) MAX_ID, ODF_PARENT_ID INV_ID FROM odf_ca_cop_prj_statusrpt WHERE TRUNC(COP_REPORT_DATE,'MONTH') <= TRUNC($P{data_referencia},'MONTH') AND COP_REPORT_STATUS = 'FINAL' AND HON_TIPO_REL_STATUS = 'mensal' GROUP BY ODF_PARENT_ID) MAX_REPORT ON MAX_REPORT.INV_ID = INVI.ID
+				LEFT JOIN odf_ca_cop_prj_statusrpt STATUS_RPT ON MAX_REPORT.MAX_ID = STATUS_RPT.ID 
+				LEFT JOIN PFM_INVESTMENTS PFMI ON PFMI.INVESTMENT_ID = INVI.ID
+				LEFT JOIN PFM_PORTFOLIOS PFMP ON PFMI.PORTFOLIO_ID = PFMP.ID
+				LEFT JOIN (SELECT MAX(ID) MAX_AUDIT, OBJECT_ID INV_ID from cmn_audits where ATTRIBUTE_CODE = 'stage_code' AND  LAST_UPDATED_DATE <= TRUNC( $P{data_referencia} ,'MONTH') GROUP BY OBJECT_ID) MAX_AUDIT ON MAX_AUDIT.INV_ID = INVI.ID
+				LEFT JOIN CMN_AUDITS AUD ON AUD.ID = MAX_AUDIT.MAX_AUDIT
+				LEFT JOIN CMN_LOOKUPS_V STAGE ON AUD.RAW_VALUE_AFTER = STAGE.LOOKUP_CODE AND   STAGE.LANGUAGE_CODE = 'pt' AND STAGE.LOOKUP_TYPE = 'INV_STAGE_TYPE' AND STAGE.PARENT_LOOKUP_CODE = 'hon_hsdm' 
+				LEFT JOIN CMN_LOOKUPS_V STAGE_RPT ON STAGE_RPT.LOOKUP_CODE = STATUS_RPT.hon_fase_atual AND STAGE_RPT.LANGUAGE_CODE = 'pt' AND STAGE_RPT.LOOKUP_TYPE = 'HON_LKP_FASE_PROJETO'
+			WHERE 
+				 PFMP.ID = $P{portfolio} 
+				AND INVI.ODF_OBJECT_CODE = 'project'
+		)
+	)
+	WHERE 
+		$X{IN,OWNER,owner}
+		AND $X{IN,FASE,fase}
+
+	UNION
+
+	SELECT 
+		0 TOTAL
+		, 0 QTD_KPI
+		, 0 PCT_KPI
+		, HON_META TARGET_PCT
+		, HON_TIPO_META
+		, 2 ORDEM
+	FROM
+		ODF_CA_HON_META META
+	WHERE 
+		META.hon_tipo_meta = 'prj_cost_on_plan'
+		AND META.HON_DATA_INI = (SELECT MAX(HON_DATA_INI) FROM ODF_CA_HON_META WHERE HON_TIPO_META = 'on_time_delivery' AND HON_DATA_INI <= TRUNC( $P{data_referencia} ,'MONTH'))
+) KPI
+JOIN CMN_LOOKUPS_V TIPO ON TIPO.LOOKUP_TYPE = 'HON_LKP_TIPOS_META' AND TIPO.LOOKUP_CODE = KPI.TIPO AND TIPO.LANGUAGE_CODE = 'pt'
+
+GROUP BY
+TIPO.NAME]]>
+		</queryString>
+		<field name="META" class="java.lang.String"/>
+		<field name="TOTAL" class="java.math.BigDecimal"/>
+		<field name="QTD_KPI" class="java.math.BigDecimal"/>
+		<field name="PCT_KPI" class="java.math.BigDecimal"/>
+		<field name="TARGET" class="java.math.BigDecimal"/>
+		<field name="EVAL" class="java.math.BigDecimal"/>
+		<field name="EVAL_ID" class="java.math.BigDecimal"/>
+	</subDataset>
+	<subDataset name="tests_kpi" uuid="a161bc40-c0d2-4016-ae6e-d87ff1d3940b">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="HONDA - PRD"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
+		<parameter name="data_referencia" class="java.util.Date"/>
+		<parameter name="owner" class="java.util.Collection"/>
+		<parameter name="portfolio" class="java.lang.String"/>
+		<parameter name="fase" class="java.util.Collection"/>
+		<queryString>
+			<![CDATA[SELECT 
+TIPO.NAME META
+, SUM(TOTAL) TOTAL
+, SUM(QTD_KPI) QTD_KPI
+, ROUND(SUM(PCT_KPI),2) PCT_KPI
+, SUM(TARGET) TARGET
+, SUM(TARGET) - SUM(PCT_KPI) EVAL
+, CASE
+	WHEN (SUM(TARGET)-SUM(PCT_KPI)) <= 0.80 THEN 1
+	WHEN (SUM(TARGET)-SUM(PCT_KPI)) > 0.80 AND (SUM(TARGET)-SUM(PCT_KPI)) <= 0.94 THEN 2
+	WHEN (SUM(TARGET)-SUM(PCT_KPI)) > 0.94 AND (SUM(TARGET)-SUM(PCT_KPI)) <= 1.05 THEN 3
+	WHEN (SUM(TARGET)-SUM(PCT_KPI)) > 1.05 AND (SUM(TARGET)-SUM(PCT_KPI)) <= 1.19 THEN 4
+	WHEN (SUM(TARGET)-SUM(PCT_KPI)) > 1.19 THEN 5
+	END EVAL_ID
+FROM
+(
+	SELECT
+	SUM(TESTE) TOTAL
+	, SUM(ISSUE) QTD_KPI
+	, SUM(ISSUE)/SUM(TESTE) PCT_KPI
+	, 0 TARGET
+	, 'issues_j4_req' TIPO
+	, 3  ORDEM
+	FROM
+	(
+		SELECT
+		TESTE,
+		ISSUE,
+		CASE
+			WHEN FASE_SR IS NULL THEN FASE_PRJ
+			ELSE FASE_SR
+			END FASE,
+		OWNER
+		FROM
+		(
+			SELECT 
+			1 TESTE
+			, 0 ISSUE
+			, STAGE.NAME FASE_PRJ
+			, CASE
+				WHEN (STATUS_RPT.COP_REPORT_STATUS = 'FINAL' AND STATUS_RPT.HON_TIPO_REL_STATUS = 'mensal')
+				THEN STAGE_RPT.NAME
+				ELSE NULL
+				END FASE_SR
+			, CASE 
+				WHEN OWNER.NAME LIKE 'S - CS' THEN 'CS' 
+				WHEN OWNER.NAME LIKE 'S - PARTS' THEN 'SP' 
+				WHEN OWNER.NAME LIKE 'EDB - HDA' THEN 'EDB - HDA' 
+				WHEN OWNER.NAME LIKE 'HAB - BR - E' THEN 'HAB - E' 
+				WHEN OWNER.NAME LIKE 'HAB - BR - DB' THEN 'HAB - DB'		
+				WHEN SUBSTR(OWNER.NAME,0,INSTR(OWNER.NAME,' ')-1) = 'TI' THEN 'IT' ELSE SUBSTR(OWNER.NAME,0,INSTR(OWNER.NAME,' ')-1) 
+				END OWNER 				
+			FROM 
+				INV_INVESTMENTS INVI
+				LEFT JOIN ODF_CA_INV OCINV ON INVI.ID = OCINV.ID
+				LEFT JOIN CMN_LOOKUPS_V STATUS ON STATUS.LOOKUP_CODE = OCINV.hon_status AND STATUS.LANGUAGE_CODE = 'pt' AND STATUS.LOOKUP_TYPE = 'HON_STATUS_INVESTIMENTO'
+				LEFT JOIN CMN_LOOKUPS_V STAGE_ATU ON INVI.STAGE_CODE = STAGE_ATU.LOOKUP_CODE AND   STAGE_ATU.LANGUAGE_CODE = 'pt' AND STAGE_ATU.LOOKUP_TYPE = 'INV_STAGE_TYPE' AND STAGE_ATU.PARENT_LOOKUP_CODE = 'hon_hsdm'
+				LEFT JOIN CMN_LOOKUPS_V OWNER ON OWNER.LOOKUP_CODE = OCINV.hon_area AND OWNER.LANGUAGE_CODE = 'pt' AND OWNER.LOOKUP_TYPE = 'HON_LKP_AREA'
+				LEFT JOIN (SELECT MAX(ID) MAX_ID, ODF_PARENT_ID INV_ID FROM odf_ca_cop_prj_statusrpt WHERE TRUNC(COP_REPORT_DATE,'MONTH') <= TRUNC($P{data_referencia},'MONTH') AND COP_REPORT_STATUS = 'FINAL' AND HON_TIPO_REL_STATUS = 'mensal' GROUP BY ODF_PARENT_ID) MAX_REPORT ON MAX_REPORT.INV_ID = INVI.ID
+				LEFT JOIN odf_ca_cop_prj_statusrpt STATUS_RPT ON MAX_REPORT.MAX_ID = STATUS_RPT.ID 
+				LEFT JOIN PFM_INVESTMENTS PFMI ON PFMI.INVESTMENT_ID = INVI.ID
+				LEFT JOIN PFM_PORTFOLIOS PFMP ON PFMI.PORTFOLIO_ID = PFMP.ID
+				LEFT JOIN (SELECT MAX(ID) MAX_AUDIT, OBJECT_ID INV_ID from cmn_audits where ATTRIBUTE_CODE = 'stage_code' AND  LAST_UPDATED_DATE <= TRUNC( $P{data_referencia} ,'MONTH') GROUP BY OBJECT_ID) MAX_AUDIT ON MAX_AUDIT.INV_ID = INVI.ID
+				LEFT JOIN CMN_AUDITS AUD ON AUD.ID = MAX_AUDIT.MAX_AUDIT
+				LEFT JOIN CMN_LOOKUPS_V STAGE ON AUD.RAW_VALUE_AFTER = STAGE.LOOKUP_CODE AND STAGE.LANGUAGE_CODE = 'pt' AND STAGE.LOOKUP_TYPE = 'INV_STAGE_TYPE' AND STAGE.PARENT_LOOKUP_CODE = 'hon_hsdm' 
+				LEFT JOIN CMN_LOOKUPS_V STAGE_RPT ON STAGE_RPT.LOOKUP_CODE = STATUS_RPT.hon_fase_atual AND STAGE_RPT.LANGUAGE_CODE = 'pt' AND STAGE_RPT.LOOKUP_TYPE = 'HON_LKP_FASE_PROJETO'
+				LEFT JOIN ODF_CA_HON_TESTES TESTES ON TESTES.ODF_PARENT_ID = INVI.ID
+			WHERE 
+				 PFMP.ID = $P{portfolio} 
+				AND INVI.ODF_OBJECT_CODE = 'project'
+				AND TESTES.hon_fase_testes = 'hon_lkp_j4_ti'
+		)
+
+		UNION
+
+		SELECT
+		TESTE,
+		ISSUE,
+		CASE
+			WHEN FASE_SR IS NULL THEN FASE_PRJ
+			ELSE FASE_SR
+			END FASE,
+		OWNER
+		FROM
+		(
+			SELECT 
+				0 TESTE
+				, 1 ISSUE
+				, STAGE.NAME FASE_PRJ
+				, CASE
+					WHEN (STATUS_RPT.COP_REPORT_STATUS = 'FINAL' AND STATUS_RPT.HON_TIPO_REL_STATUS = 'mensal')
+					THEN STAGE_RPT.NAME
+					ELSE NULL
+					END FASE_SR
+				, CASE 
+					WHEN OWNER.NAME LIKE 'S - CS' THEN 'CS' 
+					WHEN OWNER.NAME LIKE 'S - PARTS' THEN 'SP' 
+					WHEN OWNER.NAME LIKE 'EDB - HDA' THEN 'EDB - HDA' 
+					WHEN OWNER.NAME LIKE 'HAB - BR - E' THEN 'HAB - E' 
+					WHEN OWNER.NAME LIKE 'HAB - BR - DB' THEN 'HAB - DB'		
+					WHEN SUBSTR(OWNER.NAME,0,INSTR(OWNER.NAME,' ')-1) = 'TI' THEN 'IT' ELSE SUBSTR(OWNER.NAME,0,INSTR(OWNER.NAME,' ')-1) 
+					END OWNER 					
+			FROM 
+				INV_INVESTMENTS INVI
+				LEFT JOIN ODF_CA_INV OCINV ON INVI.ID = OCINV.ID
+				LEFT JOIN CMN_LOOKUPS_V STATUS ON STATUS.LOOKUP_CODE = OCINV.hon_status AND STATUS.LANGUAGE_CODE = 'pt' AND STATUS.LOOKUP_TYPE = 'HON_STATUS_INVESTIMENTO'
+				LEFT JOIN CMN_LOOKUPS_V STAGE_ATU ON INVI.STAGE_CODE = STAGE_ATU.LOOKUP_CODE AND   STAGE_ATU.LANGUAGE_CODE = 'pt' AND STAGE_ATU.LOOKUP_TYPE = 'INV_STAGE_TYPE' AND STAGE_ATU.PARENT_LOOKUP_CODE = 'hon_hsdm'
+				LEFT JOIN CMN_LOOKUPS_V OWNER ON OWNER.LOOKUP_CODE = OCINV.hon_area AND OWNER.LANGUAGE_CODE = 'pt' AND OWNER.LOOKUP_TYPE = 'HON_LKP_AREA'
+				LEFT JOIN (SELECT MAX(ID) MAX_ID, ODF_PARENT_ID INV_ID FROM odf_ca_cop_prj_statusrpt WHERE TRUNC(COP_REPORT_DATE,'MONTH') <= TRUNC($P{data_referencia},'MONTH') AND COP_REPORT_STATUS = 'FINAL' AND HON_TIPO_REL_STATUS = 'mensal' GROUP BY ODF_PARENT_ID) MAX_REPORT ON MAX_REPORT.INV_ID = INVI.ID
+				LEFT JOIN odf_ca_cop_prj_statusrpt STATUS_RPT ON MAX_REPORT.MAX_ID = STATUS_RPT.ID 
+				LEFT JOIN PFM_INVESTMENTS PFMI ON PFMI.INVESTMENT_ID = INVI.ID
+				LEFT JOIN PFM_PORTFOLIOS PFMP ON PFMI.PORTFOLIO_ID = PFMP.ID
+				LEFT JOIN (SELECT MAX(ID) MAX_AUDIT, OBJECT_ID INV_ID from cmn_audits where ATTRIBUTE_CODE = 'stage_code' AND  LAST_UPDATED_DATE <= TRUNC( $P{data_referencia},'MONTH')-1 GROUP BY OBJECT_ID) MAX_AUDIT ON MAX_AUDIT.INV_ID = INVI.ID
+				LEFT JOIN CMN_AUDITS AUD ON AUD.ID = MAX_AUDIT.MAX_AUDIT
+				LEFT JOIN CMN_LOOKUPS_V STAGE ON AUD.RAW_VALUE_AFTER = STAGE.LOOKUP_CODE AND   STAGE.LANGUAGE_CODE = 'pt' AND STAGE.LOOKUP_TYPE = 'INV_STAGE_TYPE' AND STAGE.PARENT_LOOKUP_CODE = 'hon_hsdm' 
+				LEFT JOIN CMN_LOOKUPS_V STAGE_RPT ON STAGE_RPT.LOOKUP_CODE = STATUS_RPT.hon_fase_atual AND STAGE_RPT.LANGUAGE_CODE = 'pt' AND STAGE_RPT.LOOKUP_TYPE = 'HON_LKP_FASE_PROJETO'
+				LEFT JOIN RIM_RISKS_AND_ISSUES ISSUE ON ISSUE.PK_ID = INVI.ID JOIN ODF_CA_ISSUE OCI ON ISSUE.ID = OCI.ID
+
+			WHERE
+				 PFMP.ID = $P{portfolio} 
+				AND INVI.ODF_OBJECT_CODE = 'project'
+				AND ISSUE.TYPE_CODE = 'ISSUE'
+				AND OCI.hon_fase_testes = 'hon_lkp_j4_ti'
+		)
+	)
+	WHERE 
+		$X{IN,OWNER,owner}
+		AND $X{IN,FASE,fase}
+
+	UNION
+
+	SELECT 
+		0 TOTAL
+		, 0 QTD_KPI
+		, 0 PCT_KPI
+		, HON_META TARGET_PCT
+		, HON_TIPO_META
+		, 3 ORDEM
+
+	FROM
+		ODF_CA_HON_META META
+	WHERE 
+		META.hon_tipo_meta = 'issues_j4_req'
+		AND META.HON_DATA_INI = (SELECT MAX(HON_DATA_INI) FROM ODF_CA_HON_META WHERE HON_TIPO_META = 'issues_j4_req' AND HON_DATA_INI <= TRUNC( $P{data_referencia} ,'MONTH'))
+
+) KPI
+JOIN CMN_LOOKUPS_V TIPO ON TIPO.LOOKUP_TYPE = 'HON_LKP_TIPOS_META' AND TIPO.LOOKUP_CODE = KPI.TIPO AND TIPO.LANGUAGE_CODE = 'pt'
+
+GROUP BY
+TIPO.NAME
+
+UNION ALL
+
+SELECT 
+TIPO.NAME META
+, SUM(TOTAL) TOTAL
+, SUM(QTD_KPI) QTD_KPI
+, ROUND(SUM(PCT_KPI),2) PCT_KPI
+, SUM(TARGET) TARGET
+, SUM(TARGET) - SUM(PCT_KPI) EVAL
+, CASE
+	WHEN (SUM(TARGET)-SUM(PCT_KPI)) <= 0.80 THEN 1
+	WHEN (SUM(TARGET)-SUM(PCT_KPI)) > 0.80 AND (SUM(TARGET)-SUM(PCT_KPI)) <= 0.94 THEN 2
+	WHEN (SUM(TARGET)-SUM(PCT_KPI)) > 0.94 AND (SUM(TARGET)-SUM(PCT_KPI)) <= 1.05 THEN 3
+	WHEN (SUM(TARGET)-SUM(PCT_KPI)) > 1.05 AND (SUM(TARGET)-SUM(PCT_KPI)) <= 1.19 THEN 4
+	WHEN (SUM(TARGET)-SUM(PCT_KPI)) > 1.19 THEN 5
+	END EVAL_ID
+FROM
+(
+	SELECT
+	SUM(TESTE) TOTAL
+	, SUM(ISSUE) QTD_KPI
+	, SUM(ISSUE)/SUM(TESTE) PCT_KPI
+	, 0 TARGET
+	, 'issues_j5_req' TIPO
+	, 4  ORDEM
+	FROM
+	(
+		SELECT
+		TESTE,
+		ISSUE,
+		CASE
+			WHEN FASE_SR IS NULL THEN FASE_PRJ
+			ELSE FASE_SR
+			END FASE,
+		OWNER
+		FROM
+		(
+			SELECT 
+			1 TESTE
+			, 0 ISSUE
+			, STAGE.NAME FASE_PRJ
+			, CASE
+				WHEN (STATUS_RPT.COP_REPORT_STATUS = 'FINAL' AND STATUS_RPT.HON_TIPO_REL_STATUS = 'mensal')
+				THEN STAGE_RPT.NAME
+				ELSE NULL
+				END FASE_SR
+			, CASE 
+				WHEN OWNER.NAME LIKE 'S - CS' THEN 'CS' 
+				WHEN OWNER.NAME LIKE 'S - PARTS' THEN 'SP' 
+				WHEN OWNER.NAME LIKE 'EDB - HDA' THEN 'EDB - HDA' 
+				WHEN OWNER.NAME LIKE 'HAB - BR - E' THEN 'HAB - E' 
+				WHEN OWNER.NAME LIKE 'HAB - BR - DB' THEN 'HAB - DB'		
+				WHEN SUBSTR(OWNER.NAME,0,INSTR(OWNER.NAME,' ')-1) = 'TI' THEN 'IT' ELSE SUBSTR(OWNER.NAME,0,INSTR(OWNER.NAME,' ')-1) 
+				END OWNER 		
+		FROM 
+			INV_INVESTMENTS INVI
+			LEFT JOIN ODF_CA_INV OCINV ON INVI.ID = OCINV.ID
+			LEFT JOIN CMN_LOOKUPS_V STATUS ON STATUS.LOOKUP_CODE = OCINV.hon_status AND STATUS.LANGUAGE_CODE = 'pt' AND STATUS.LOOKUP_TYPE = 'HON_STATUS_INVESTIMENTO'
+			LEFT JOIN CMN_LOOKUPS_V STAGE_ATU ON INVI.STAGE_CODE = STAGE_ATU.LOOKUP_CODE AND   STAGE_ATU.LANGUAGE_CODE = 'pt' AND STAGE_ATU.LOOKUP_TYPE = 'INV_STAGE_TYPE' AND STAGE_ATU.PARENT_LOOKUP_CODE = 'hon_hsdm'
+			LEFT JOIN CMN_LOOKUPS_V OWNER ON OWNER.LOOKUP_CODE = OCINV.hon_area AND OWNER.LANGUAGE_CODE = 'pt' AND OWNER.LOOKUP_TYPE = 'HON_LKP_AREA'
+				LEFT JOIN (SELECT MAX(ID) MAX_ID, ODF_PARENT_ID INV_ID FROM odf_ca_cop_prj_statusrpt WHERE TRUNC(COP_REPORT_DATE,'MONTH') <= TRUNC($P{data_referencia},'MONTH') AND COP_REPORT_STATUS = 'FINAL' AND HON_TIPO_REL_STATUS = 'mensal' GROUP BY ODF_PARENT_ID) MAX_REPORT ON MAX_REPORT.INV_ID = INVI.ID
+				LEFT JOIN odf_ca_cop_prj_statusrpt STATUS_RPT ON MAX_REPORT.MAX_ID = STATUS_RPT.ID 
+			LEFT JOIN PFM_INVESTMENTS PFMI ON PFMI.INVESTMENT_ID = INVI.ID
+			LEFT JOIN PFM_PORTFOLIOS PFMP ON PFMI.PORTFOLIO_ID = PFMP.ID
+			LEFT JOIN (SELECT MAX(ID) MAX_AUDIT, OBJECT_ID INV_ID from cmn_audits where ATTRIBUTE_CODE = 'stage_code' AND  LAST_UPDATED_DATE <= TRUNC( $P{data_referencia} ,'MONTH') GROUP BY OBJECT_ID) MAX_AUDIT ON MAX_AUDIT.INV_ID = INVI.ID
+			LEFT JOIN CMN_AUDITS AUD ON AUD.ID = MAX_AUDIT.MAX_AUDIT
+			LEFT JOIN CMN_LOOKUPS_V STAGE ON AUD.RAW_VALUE_AFTER = STAGE.LOOKUP_CODE AND   STAGE.LANGUAGE_CODE = 'pt' AND STAGE.LOOKUP_TYPE = 'INV_STAGE_TYPE' AND STAGE.PARENT_LOOKUP_CODE = 'hon_hsdm' 
+			LEFT JOIN CMN_LOOKUPS_V STAGE_RPT ON STAGE_RPT.LOOKUP_CODE = STATUS_RPT.hon_fase_atual AND STAGE_RPT.LANGUAGE_CODE = 'pt' AND STAGE_RPT.LOOKUP_TYPE = 'HON_LKP_FASE_PROJETO'
+			LEFT JOIN ODF_CA_HON_TESTES TESTES ON TESTES.ODF_PARENT_ID = INVI.ID
+		WHERE 
+			PFMP.ID = $P{portfolio} 
+			AND INVI.ODF_OBJECT_CODE = 'project'
+			AND TESTES.hon_fase_testes = 'hon_lkp_homologacao'
+			AND $X{IN,STAGE_RPT.NAME,fase}
+		)
+
+		UNION
+
+		SELECT
+		TESTE,
+		ISSUE,
+		CASE
+			WHEN FASE_SR IS NULL THEN FASE_PRJ
+			ELSE FASE_SR
+			END FASE,
+		OWNER
+		FROM
+		(
+			SELECT 
+			0 TESTE
+			, 1 ISSUE
+			, STAGE.NAME FASE_PRJ
+			, CASE
+				WHEN (STATUS_RPT.COP_REPORT_STATUS = 'FINAL' AND STATUS_RPT.HON_TIPO_REL_STATUS = 'mensal')
+				THEN STAGE_RPT.NAME
+				ELSE NULL
+				END FASE_SR
+			, CASE 
+				WHEN OWNER.NAME LIKE 'S - CS' THEN 'CS' 
+				WHEN OWNER.NAME LIKE 'S - PARTS' THEN 'SP' 
+				WHEN OWNER.NAME LIKE 'EDB - HDA' THEN 'EDB - HDA' 
+				WHEN OWNER.NAME LIKE 'HAB - BR - E' THEN 'HAB - E' 
+				WHEN OWNER.NAME LIKE 'HAB - BR - DB' THEN 'HAB - DB'		
+				WHEN SUBSTR(OWNER.NAME,0,INSTR(OWNER.NAME,' ')-1) = 'TI' THEN 'IT' ELSE SUBSTR(OWNER.NAME,0,INSTR(OWNER.NAME,' ')-1) 
+				END OWNER 			
+		FROM 
+			INV_INVESTMENTS INVI
+			LEFT JOIN ODF_CA_INV OCINV ON INVI.ID = OCINV.ID
+			LEFT JOIN CMN_LOOKUPS_V STATUS ON STATUS.LOOKUP_CODE = OCINV.hon_status AND STATUS.LANGUAGE_CODE = 'pt' AND STATUS.LOOKUP_TYPE = 'HON_STATUS_INVESTIMENTO'
+			LEFT JOIN CMN_LOOKUPS_V STAGE_ATU ON INVI.STAGE_CODE = STAGE_ATU.LOOKUP_CODE AND   STAGE_ATU.LANGUAGE_CODE = 'pt' AND STAGE_ATU.LOOKUP_TYPE = 'INV_STAGE_TYPE' AND STAGE_ATU.PARENT_LOOKUP_CODE = 'hon_hsdm'
+			LEFT JOIN CMN_LOOKUPS_V OWNER ON OWNER.LOOKUP_CODE = OCINV.hon_area AND OWNER.LANGUAGE_CODE = 'pt' AND OWNER.LOOKUP_TYPE = 'HON_LKP_AREA'
+				LEFT JOIN (SELECT MAX(ID) MAX_ID, ODF_PARENT_ID INV_ID FROM odf_ca_cop_prj_statusrpt WHERE TRUNC(COP_REPORT_DATE,'MONTH') <= TRUNC($P{data_referencia},'MONTH') AND COP_REPORT_STATUS = 'FINAL' AND HON_TIPO_REL_STATUS = 'mensal' GROUP BY ODF_PARENT_ID) MAX_REPORT ON MAX_REPORT.INV_ID = INVI.ID
+				LEFT JOIN odf_ca_cop_prj_statusrpt STATUS_RPT ON MAX_REPORT.MAX_ID = STATUS_RPT.ID 
+			LEFT JOIN PFM_INVESTMENTS PFMI ON PFMI.INVESTMENT_ID = INVI.ID
+			LEFT JOIN PFM_PORTFOLIOS PFMP ON PFMI.PORTFOLIO_ID = PFMP.ID
+			LEFT JOIN (SELECT MAX(ID) MAX_AUDIT, OBJECT_ID INV_ID from cmn_audits where ATTRIBUTE_CODE = 'stage_code' AND  LAST_UPDATED_DATE <= TRUNC( $P{data_referencia} ,'MONTH') GROUP BY OBJECT_ID) MAX_AUDIT ON MAX_AUDIT.INV_ID = INVI.ID
+			LEFT JOIN CMN_AUDITS AUD ON AUD.ID = MAX_AUDIT.MAX_AUDIT
+			LEFT JOIN CMN_LOOKUPS_V STAGE ON AUD.RAW_VALUE_AFTER = STAGE.LOOKUP_CODE AND   STAGE.LANGUAGE_CODE = 'pt' AND STAGE.LOOKUP_TYPE = 'INV_STAGE_TYPE' AND STAGE.PARENT_LOOKUP_CODE = 'hon_hsdm' 
+			LEFT JOIN CMN_LOOKUPS_V STAGE_RPT ON STAGE_RPT.LOOKUP_CODE = STATUS_RPT.hon_fase_atual AND STAGE_RPT.LANGUAGE_CODE = 'pt' AND STAGE_RPT.LOOKUP_TYPE = 'HON_LKP_FASE_PROJETO'
+			LEFT JOIN RIM_RISKS_AND_ISSUES ISSUE ON ISSUE.PK_ID = INVI.ID
+			LEFT JOIN ODF_CA_ISSUE OCI ON ISSUE.ID = OCI.ID
+		WHERE 
+			PFMP.ID = $P{portfolio} 
+			AND INVI.ODF_OBJECT_CODE = 'project'
+			AND ISSUE.TYPE_CODE = 'ISSUE'
+			AND OCI.hon_fase_testes = 'hon_lkp_homologacao'
+		)
+
+	)
+	WHERE 
+		$X{IN,OWNER,owner}
+		AND $X{IN,FASE,fase}
+
+	UNION
+
+	SELECT 
+		0 TOTAL
+		, 0 QTD_KPI
+		, 0 PCT_KPI
+		, HON_META TARGET_PCT
+		, HON_TIPO_META
+		, 4 ORDEM
+	FROM
+		ODF_CA_HON_META META
+	WHERE 
+		META.hon_tipo_meta = 'issues_j5_req'
+		AND META.HON_DATA_INI = (SELECT MAX(HON_DATA_INI) FROM ODF_CA_HON_META WHERE HON_TIPO_META = 'issues_j5_req' AND HON_DATA_INI <= TRUNC( $P{data_referencia} ,'MONTH'))
+
+) KPI
+JOIN CMN_LOOKUPS_V TIPO ON TIPO.LOOKUP_TYPE = 'HON_LKP_TIPOS_META' AND TIPO.LOOKUP_CODE = KPI.TIPO AND TIPO.LANGUAGE_CODE = 'pt'
+
+GROUP BY
+TIPO.NAME
+
+
+UNION ALL
+
+SELECT 
+TIPO.NAME META
+, SUM(TOTAL) TOTAL
+, SUM(QTD_KPI) QTD_KPI
+, ROUND(SUM(PCT_KPI),2) PCT_KPI
+, SUM(TARGET) TARGET
+, SUM(TARGET) - SUM(PCT_KPI) EVAL
+, CASE
+	WHEN (SUM(TARGET)-SUM(PCT_KPI)) <= 0.80 THEN 1
+	WHEN (SUM(TARGET)-SUM(PCT_KPI)) > 0.80 AND (SUM(TARGET)-SUM(PCT_KPI)) <= 0.94 THEN 2
+	WHEN (SUM(TARGET)-SUM(PCT_KPI)) > 0.94 AND (SUM(TARGET)-SUM(PCT_KPI)) <= 1.05 THEN 3
+	WHEN (SUM(TARGET)-SUM(PCT_KPI)) > 1.05 AND (SUM(TARGET)-SUM(PCT_KPI)) <= 1.19 THEN 4
+	WHEN (SUM(TARGET)-SUM(PCT_KPI)) > 1.19 THEN 5
+	END EVAL_ID
+FROM
+
+(
+	SELECT
+	SUM(TESTE) TOTAL
+	, SUM(ISSUE) QTD_KPI
+	, SUM(ISSUE)/SUM(TESTE) PCT_KPI
+	, 0 TARGET
+	, 'issues_ao_req' TIPO
+	, 5  ORDEM
+	FROM
+	(
+		SELECT
+		TESTE,
+		ISSUE,
+		CASE
+			WHEN FASE_SR IS NULL THEN FASE_PRJ
+			ELSE FASE_SR
+			END FASE,
+		OWNER
+		FROM
+		(
+			SELECT 
+				1 TESTE
+				, 0 ISSUE
+				, STAGE.NAME FASE_PRJ
+				, CASE
+					WHEN (STATUS_RPT.COP_REPORT_STATUS = 'FINAL' AND STATUS_RPT.HON_TIPO_REL_STATUS = 'mensal')
+					THEN STAGE_RPT.NAME
+					ELSE NULL
+					END FASE_SR
+				, CASE 
+					WHEN OWNER.NAME LIKE 'S - CS' THEN 'CS' 
+					WHEN OWNER.NAME LIKE 'S - PARTS' THEN 'SP' 
+					WHEN OWNER.NAME LIKE 'EDB - HDA' THEN 'EDB - HDA' 
+					WHEN OWNER.NAME LIKE 'HAB - BR - E' THEN 'HAB - E' 
+					WHEN OWNER.NAME LIKE 'HAB - BR - DB' THEN 'HAB - DB'		
+					WHEN SUBSTR(OWNER.NAME,0,INSTR(OWNER.NAME,' ')-1) = 'TI' THEN 'IT' ELSE SUBSTR(OWNER.NAME,0,INSTR(OWNER.NAME,' ')-1) 
+					END OWNER 					
+			FROM 
+				INV_INVESTMENTS INVI
+				LEFT JOIN ODF_CA_INV OCINV ON INVI.ID = OCINV.ID
+				LEFT JOIN CMN_LOOKUPS_V STATUS ON STATUS.LOOKUP_CODE = OCINV.hon_status AND STATUS.LANGUAGE_CODE = 'pt' AND STATUS.LOOKUP_TYPE = 'HON_STATUS_INVESTIMENTO'
+				LEFT JOIN CMN_LOOKUPS_V STAGE_ATU ON INVI.STAGE_CODE = STAGE_ATU.LOOKUP_CODE AND   STAGE_ATU.LANGUAGE_CODE = 'pt' AND STAGE_ATU.LOOKUP_TYPE = 'INV_STAGE_TYPE' AND STAGE_ATU.PARENT_LOOKUP_CODE = 'hon_hsdm'
+				LEFT JOIN CMN_LOOKUPS_V OWNER ON OWNER.LOOKUP_CODE = OCINV.hon_area AND OWNER.LANGUAGE_CODE = 'pt' AND OWNER.LOOKUP_TYPE = 'HON_LKP_AREA'
+				LEFT JOIN (SELECT MAX(ID) MAX_ID, ODF_PARENT_ID INV_ID FROM odf_ca_cop_prj_statusrpt WHERE TRUNC(COP_REPORT_DATE,'MONTH') <= TRUNC($P{data_referencia},'MONTH') AND COP_REPORT_STATUS = 'FINAL' AND HON_TIPO_REL_STATUS = 'mensal' GROUP BY ODF_PARENT_ID) MAX_REPORT ON MAX_REPORT.INV_ID = INVI.ID
+				LEFT JOIN odf_ca_cop_prj_statusrpt STATUS_RPT ON MAX_REPORT.MAX_ID = STATUS_RPT.ID 
+				LEFT JOIN PFM_INVESTMENTS PFMI ON PFMI.INVESTMENT_ID = INVI.ID
+				LEFT JOIN PFM_PORTFOLIOS PFMP ON PFMI.PORTFOLIO_ID = PFMP.ID
+				LEFT JOIN (SELECT MAX(ID) MAX_AUDIT, OBJECT_ID INV_ID from cmn_audits where ATTRIBUTE_CODE = 'stage_code' AND  LAST_UPDATED_DATE <= TRUNC( $P{data_referencia} ,'MONTH') GROUP BY OBJECT_ID) MAX_AUDIT ON MAX_AUDIT.INV_ID = INVI.ID
+				LEFT JOIN CMN_AUDITS AUD ON AUD.ID = MAX_AUDIT.MAX_AUDIT
+				LEFT JOIN CMN_LOOKUPS_V STAGE ON AUD.RAW_VALUE_AFTER = STAGE.LOOKUP_CODE AND   STAGE.LANGUAGE_CODE = 'pt' AND STAGE.LOOKUP_TYPE = 'INV_STAGE_TYPE' AND STAGE.PARENT_LOOKUP_CODE = 'hon_hsdm' 
+				LEFT JOIN CMN_LOOKUPS_V STAGE_RPT ON STAGE_RPT.LOOKUP_CODE = STATUS_RPT.hon_fase_atual AND STAGE_RPT.LANGUAGE_CODE = 'pt' AND STAGE_RPT.LOOKUP_TYPE = 'HON_LKP_FASE_PROJETO'
+				LEFT JOIN ODF_CA_HON_TESTES TESTES ON TESTES.ODF_PARENT_ID = INVI.ID
+			WHERE 
+				PFMP.ID = $P{portfolio} 
+				AND INVI.ODF_OBJECT_CODE = 'project'
+				AND TESTES.hon_fase_testes = 'hon_lkp_operacao_assistida'
+		)
+
+		UNION
+
+		SELECT
+		TESTE,
+		ISSUE,
+		CASE
+			WHEN FASE_SR IS NULL THEN FASE_PRJ
+			ELSE FASE_SR
+			END FASE,
+		OWNER
+		FROM
+		(
+			SELECT 
+				0 TESTE
+				, 1 ISSUE
+				, STAGE.NAME FASE_PRJ
+				, CASE
+					WHEN (STATUS_RPT.COP_REPORT_STATUS = 'FINAL' AND STATUS_RPT.HON_TIPO_REL_STATUS = 'mensal')
+					THEN STAGE_RPT.NAME
+					ELSE NULL
+					END FASE_SR
+				, CASE 
+					WHEN OWNER.NAME LIKE 'S - CS' THEN 'CS' 
+					WHEN OWNER.NAME LIKE 'S - PARTS' THEN 'SP' 
+					WHEN OWNER.NAME LIKE 'EDB - HDA' THEN 'EDB - HDA' 
+					WHEN OWNER.NAME LIKE 'HAB - BR - E' THEN 'HAB - E' 
+					WHEN OWNER.NAME LIKE 'HAB - BR - DB' THEN 'HAB - DB'		
+					WHEN SUBSTR(OWNER.NAME,0,INSTR(OWNER.NAME,' ')-1) = 'TI' THEN 'IT' ELSE SUBSTR(OWNER.NAME,0,INSTR(OWNER.NAME,' ')-1) 
+					END OWNER 				
+			FROM 
+				INV_INVESTMENTS INVI
+				LEFT JOIN ODF_CA_INV OCINV ON INVI.ID = OCINV.ID
+				LEFT JOIN CMN_LOOKUPS_V STATUS ON STATUS.LOOKUP_CODE = OCINV.hon_status AND STATUS.LANGUAGE_CODE = 'pt' AND STATUS.LOOKUP_TYPE = 'HON_STATUS_INVESTIMENTO'
+				LEFT JOIN CMN_LOOKUPS_V STAGE_ATU ON INVI.STAGE_CODE = STAGE_ATU.LOOKUP_CODE AND   STAGE_ATU.LANGUAGE_CODE = 'pt' AND STAGE_ATU.LOOKUP_TYPE = 'INV_STAGE_TYPE' AND STAGE_ATU.PARENT_LOOKUP_CODE = 'hon_hsdm'
+				LEFT JOIN CMN_LOOKUPS_V OWNER ON OWNER.LOOKUP_CODE = OCINV.hon_area AND OWNER.LANGUAGE_CODE = 'pt' AND OWNER.LOOKUP_TYPE = 'HON_LKP_AREA'
+				LEFT JOIN (SELECT MAX(ID) MAX_ID, ODF_PARENT_ID INV_ID FROM odf_ca_cop_prj_statusrpt WHERE TRUNC(COP_REPORT_DATE,'MONTH') <= TRUNC($P{data_referencia},'MONTH') AND COP_REPORT_STATUS = 'FINAL' AND HON_TIPO_REL_STATUS = 'mensal' GROUP BY ODF_PARENT_ID) MAX_REPORT ON MAX_REPORT.INV_ID = INVI.ID
+				LEFT JOIN odf_ca_cop_prj_statusrpt STATUS_RPT ON MAX_REPORT.MAX_ID = STATUS_RPT.ID 
+				LEFT JOIN PFM_INVESTMENTS PFMI ON PFMI.INVESTMENT_ID = INVI.ID
+				LEFT JOIN PFM_PORTFOLIOS PFMP ON PFMI.PORTFOLIO_ID = PFMP.ID
+				LEFT JOIN (SELECT MAX(ID) MAX_AUDIT, OBJECT_ID INV_ID from cmn_audits where ATTRIBUTE_CODE = 'stage_code' AND  LAST_UPDATED_DATE <= TRUNC( $P{data_referencia} ,'MONTH') GROUP BY OBJECT_ID) MAX_AUDIT ON MAX_AUDIT.INV_ID = INVI.ID
+				LEFT JOIN CMN_AUDITS AUD ON AUD.ID = MAX_AUDIT.MAX_AUDIT
+				LEFT JOIN CMN_LOOKUPS_V STAGE ON AUD.RAW_VALUE_AFTER = STAGE.LOOKUP_CODE AND   STAGE.LANGUAGE_CODE = 'pt' AND STAGE.LOOKUP_TYPE = 'INV_STAGE_TYPE' AND STAGE.PARENT_LOOKUP_CODE = 'hon_hsdm' 
+				LEFT JOIN CMN_LOOKUPS_V STAGE_RPT ON STAGE_RPT.LOOKUP_CODE = STATUS_RPT.hon_fase_atual AND STAGE_RPT.LANGUAGE_CODE = 'pt' AND STAGE_RPT.LOOKUP_TYPE = 'HON_LKP_FASE_PROJETO'
+				LEFT JOIN RIM_RISKS_AND_ISSUES ISSUE ON ISSUE.PK_ID = INVI.ID
+				LEFT JOIN ODF_CA_ISSUE OCI ON ISSUE.ID = OCI.ID
+			WHERE 
+				PFMP.ID = $P{portfolio} 
+				AND INVI.ODF_OBJECT_CODE = 'project'
+				AND ISSUE.TYPE_CODE = 'ISSUE'
+				AND OCI.HON_FASE_TESTES = 'hon_lkp_operacao_assistida'
+		)
+
+	)
+	WHERE 
+		$X{IN,OWNER,owner}
+		AND $X{IN,FASE,fase}
+	UNION
+
+	SELECT 
+		0 TOTAL
+		, 0 QTD_KPI
+		, 0 PCT_KPI
+		, HON_META TARGET_PCT
+		, HON_TIPO_META
+		, 5 ORDEM
+	FROM
+		ODF_CA_HON_META META
+	WHERE 
+		META.hon_tipo_meta = 'issues_ao_req'
+		AND META.HON_DATA_INI = (SELECT MAX(HON_DATA_INI) FROM ODF_CA_HON_META WHERE HON_TIPO_META = 'issues_j5_req' AND HON_DATA_INI <= TRUNC( $P{data_referencia} ,'MONTH'))
+
+) KPI
+JOIN CMN_LOOKUPS_V TIPO ON TIPO.LOOKUP_TYPE = 'HON_LKP_TIPOS_META' AND TIPO.LOOKUP_CODE = KPI.TIPO AND TIPO.LANGUAGE_CODE = 'pt'
+
+GROUP BY
+TIPO.NAME]]>
+		</queryString>
+		<field name="META" class="java.lang.String"/>
+		<field name="TOTAL" class="java.math.BigDecimal"/>
+		<field name="QTD_KPI" class="java.math.BigDecimal"/>
+		<field name="PCT_KPI" class="java.math.BigDecimal"/>
+		<field name="TARGET" class="java.math.BigDecimal"/>
+		<field name="EVAL" class="java.math.BigDecimal"/>
+		<field name="EVAL_ID" class="java.math.BigDecimal"/>
+	</subDataset>
+	<subDataset name="changes_kpi" uuid="8830fff6-4c35-43c8-bc1c-43ee8536d4fd">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="HONDA - PRD"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
+		<parameter name="data_referencia" class="java.util.Date"/>
+		<parameter name="owner" class="java.util.Collection"/>
+		<parameter name="portfolio" class="java.lang.String"/>
+		<parameter name="fase" class="java.util.Collection"/>
+		<queryString>
+			<![CDATA[SELECT 
+TIPO.NAME META,
+SUM(TOTAL) TOTAL,
+SUM(QTD_KPI) QTD_KPI,
+ROUND(SUM(PCT_KPI),2) PCT_KPI,
+SUM(TARGET) TARGET,
+SUM(TARGET) - SUM(PCT_KPI) EVAL,
+CASE
+	WHEN (SUM(TARGET)-SUM(PCT_KPI)) <= 0.80 THEN 1
+	WHEN (SUM(TARGET)-SUM(PCT_KPI)) > 0.80 AND (SUM(TARGET)-SUM(PCT_KPI)) <= 0.94 THEN 2
+	WHEN (SUM(TARGET)-SUM(PCT_KPI)) > 0.94 AND (SUM(TARGET)-SUM(PCT_KPI)) <= 1.05 THEN 3
+	WHEN (SUM(TARGET)-SUM(PCT_KPI)) > 1.05 AND (SUM(TARGET)-SUM(PCT_KPI)) <= 1.19 THEN 4
+	WHEN (SUM(TARGET)-SUM(PCT_KPI)) > 1.19 THEN 5
+	END EVAL_ID
+FROM
+
+(
+	SELECT
+	SUM(REQUISITO) TOTAL,
+	SUM(CHANGE) QTD_KPI,
+	CASE WHEN SUM(REQUISITO) > 0 AND SUM(CHANGE) > 0 THEN SUM(CHANGE)/SUM(REQUISITO) ELSE 0 END PCT_KPI,
+	NULL TARGET,
+	'scope_changes_req_j0' TIPO,
+	6 ORDEM
+	FROM
+	(
+		SELECT 
+			1 REQUISITO,
+			0 CHANGE,
+			CASE 
+				WHEN OWNER.NAME LIKE 'S - CS' THEN 'CS' 
+				WHEN OWNER.NAME LIKE 'S - PARTS' THEN 'SP' 
+				WHEN OWNER.NAME LIKE 'EDB - HDA' THEN 'EDB - HDA' 
+				WHEN OWNER.NAME LIKE 'HAB - BR - E' THEN 'HAB - E' 
+				WHEN OWNER.NAME LIKE 'HAB - BR - DB' THEN 'HAB - DB'		
+				WHEN SUBSTR(OWNER.NAME,0,INSTR(OWNER.NAME,' ')-1) = 'TI' THEN 'IT' ELSE SUBSTR(OWNER.NAME,0,INSTR(OWNER.NAME,' ')-1) 
+				END OWNER 
+		FROM 
+			INV_INVESTMENTS INVI
+			JOIN ODF_CA_INV OCINV ON INVI.ID = OCINV.ID
+			LEFT JOIN CMN_LOOKUPS_V STATUS ON STATUS.LOOKUP_CODE = OCINV.hon_status AND STATUS.LANGUAGE_CODE = 'pt' AND STATUS.LOOKUP_TYPE = 'HON_STATUS_INVESTIMENTO'
+			JOIN CMN_LOOKUPS_V STAGE_ATU ON INVI.STAGE_CODE = STAGE_ATU.LOOKUP_CODE AND   STAGE_ATU.LANGUAGE_CODE = 'pt' AND STAGE_ATU.LOOKUP_TYPE = 'INV_STAGE_TYPE' AND STAGE_ATU.PARENT_LOOKUP_CODE = 'hon_hsdm'
+			JOIN CMN_LOOKUPS_V OWNER ON OWNER.LOOKUP_CODE = OCINV.hon_area AND OWNER.LANGUAGE_CODE = 'pt' AND OWNER.LOOKUP_TYPE = 'HON_LKP_AREA'
+				LEFT JOIN (SELECT MAX(ID) MAX_ID, ODF_PARENT_ID INV_ID FROM odf_ca_cop_prj_statusrpt WHERE TRUNC(COP_REPORT_DATE,'MONTH') <= TRUNC($P{data_referencia},'MONTH') AND COP_REPORT_STATUS = 'FINAL' AND HON_TIPO_REL_STATUS = 'mensal' GROUP BY ODF_PARENT_ID) MAX_REPORT ON MAX_REPORT.INV_ID = INVI.ID
+				LEFT JOIN odf_ca_cop_prj_statusrpt STATUS_RPT ON MAX_REPORT.MAX_ID = STATUS_RPT.ID 
+			LEFT JOIN PFM_INVESTMENTS PFMI ON PFMI.INVESTMENT_ID = INVI.ID
+			LEFT JOIN PFM_PORTFOLIOS PFMP ON PFMI.PORTFOLIO_ID = PFMP.ID
+			LEFT JOIN (SELECT MAX(ID) MAX_AUDIT, OBJECT_ID INV_ID from cmn_audits where ATTRIBUTE_CODE = 'stage_code' AND  LAST_UPDATED_DATE <= TRUNC( $P{data_referencia},'MONTH') GROUP BY OBJECT_ID) MAX_AUDIT ON MAX_AUDIT.INV_ID = INVI.ID
+			LEFT JOIN CMN_AUDITS AUD ON AUD.ID = MAX_AUDIT.MAX_AUDIT
+			LEFT JOIN CMN_LOOKUPS_V STAGE ON AUD.RAW_VALUE_AFTER = STAGE.LOOKUP_CODE AND   STAGE.LANGUAGE_CODE = 'pt' AND STAGE.LOOKUP_TYPE = 'INV_STAGE_TYPE' AND STAGE.PARENT_LOOKUP_CODE = 'hon_hsdm' 
+			LEFT JOIN CMN_LOOKUPS_V STAGE_RPT ON STAGE_RPT.LOOKUP_CODE = STATUS_RPT.hon_fase_atual AND STAGE_RPT.LANGUAGE_CODE = 'pt' AND STAGE_RPT.LOOKUP_TYPE = 'HON_LKP_FASE_PROJETO'
+			JOIN ODF_CA_HON_REQUISITOS REQ ON INVI.ID = REQ.ODF_PARENT_ID
+		WHERE 
+			PFMP.ID = $P{portfolio} 
+			AND INVI.ODF_OBJECT_CODE = 'project'
+			AND (REQ.hon_fase_inclusao IN ('hon_lkp_u0','hon_lkp_u1','hon_lkp_j0') AND REQ.hon_fase_cancel IS NULL)
+			AND $X{IN,STAGE_RPT.NAME,fase}
+
+		UNION
+
+		SELECT 
+			0 REQUISITO,
+			1 CHANGE,
+				CASE 
+				WHEN OWNER.NAME LIKE 'S - CS' THEN 'CS' 
+				WHEN OWNER.NAME LIKE 'S - PARTS' THEN 'SP' 
+				WHEN OWNER.NAME LIKE 'EDB - HDA' THEN 'EDB - HDA' 
+				WHEN OWNER.NAME LIKE 'HAB - BR - E' THEN 'HAB - E' 
+				WHEN OWNER.NAME LIKE 'HAB - BR - DB' THEN 'HAB - DB'		
+				WHEN SUBSTR(OWNER.NAME,0,INSTR(OWNER.NAME,' ')-1) = 'TI' THEN 'IT' ELSE SUBSTR(OWNER.NAME,0,INSTR(OWNER.NAME,' ')-1) 
+				END OWNER
+		FROM 
+			INV_INVESTMENTS INVI
+			JOIN ODF_CA_INV OCINV ON INVI.ID = OCINV.ID
+			LEFT JOIN CMN_LOOKUPS_V STATUS ON STATUS.LOOKUP_CODE = OCINV.hon_status AND STATUS.LANGUAGE_CODE = 'pt' AND STATUS.LOOKUP_TYPE = 'HON_STATUS_INVESTIMENTO'
+			JOIN CMN_LOOKUPS_V STAGE_ATU ON INVI.STAGE_CODE = STAGE_ATU.LOOKUP_CODE AND   STAGE_ATU.LANGUAGE_CODE = 'pt' AND STAGE_ATU.LOOKUP_TYPE = 'INV_STAGE_TYPE' AND STAGE_ATU.PARENT_LOOKUP_CODE = 'hon_hsdm'
+			JOIN CMN_LOOKUPS_V OWNER ON OWNER.LOOKUP_CODE = OCINV.hon_area AND OWNER.LANGUAGE_CODE = 'pt' AND OWNER.LOOKUP_TYPE = 'HON_LKP_AREA'
+				LEFT JOIN (SELECT MAX(ID) MAX_ID, ODF_PARENT_ID INV_ID FROM odf_ca_cop_prj_statusrpt WHERE TRUNC(COP_REPORT_DATE,'MONTH') <= TRUNC($P{data_referencia},'MONTH') AND COP_REPORT_STATUS = 'FINAL' AND HON_TIPO_REL_STATUS = 'mensal' GROUP BY ODF_PARENT_ID) MAX_REPORT ON MAX_REPORT.INV_ID = INVI.ID
+				LEFT JOIN odf_ca_cop_prj_statusrpt STATUS_RPT ON MAX_REPORT.MAX_ID = STATUS_RPT.ID 
+			LEFT JOIN PFM_INVESTMENTS PFMI ON PFMI.INVESTMENT_ID = INVI.ID
+			LEFT JOIN PFM_PORTFOLIOS PFMP ON PFMI.PORTFOLIO_ID = PFMP.ID
+			LEFT JOIN (SELECT MAX(ID) MAX_AUDIT, OBJECT_ID INV_ID from cmn_audits where ATTRIBUTE_CODE = 'stage_code' AND  LAST_UPDATED_DATE <= TRUNC( $P{data_referencia},'MONTH') GROUP BY OBJECT_ID) MAX_AUDIT ON MAX_AUDIT.INV_ID = INVI.ID
+			LEFT JOIN CMN_AUDITS AUD ON AUD.ID = MAX_AUDIT.MAX_AUDIT
+			LEFT JOIN CMN_LOOKUPS_V STAGE ON AUD.RAW_VALUE_AFTER = STAGE.LOOKUP_CODE AND   STAGE.LANGUAGE_CODE = 'pt' AND STAGE.LOOKUP_TYPE = 'INV_STAGE_TYPE' AND STAGE.PARENT_LOOKUP_CODE = 'hon_hsdm' 
+			LEFT JOIN CMN_LOOKUPS_V STAGE_RPT ON STAGE_RPT.LOOKUP_CODE = STATUS_RPT.hon_fase_atual AND STAGE_RPT.LANGUAGE_CODE = 'pt' AND STAGE_RPT.LOOKUP_TYPE = 'HON_LKP_FASE_PROJETO'
+			JOIN ODF_CA_HON_REQUISITOS OCREQ ON INVI.ID = OCREQ.ODF_PARENT_ID
+		WHERE 
+			PFMP.ID = $P{portfolio} 
+			AND INVI.ODF_OBJECT_CODE = 'project'
+			AND OCREQ.hon_fase_inclusao IN ('hon_lkp_u0','hon_lkp_u1','hon_lkp_j0')
+			AND $X{IN,STAGE_RPT.NAME,fase}
+		
+		UNION ALL
+
+		SELECT 
+			0 REQUISITO,
+			1 CHANGE,
+				CASE 
+				WHEN OWNER.NAME LIKE 'S - CS' THEN 'CS' 
+				WHEN OWNER.NAME LIKE 'S - PARTS' THEN 'SP' 
+				WHEN OWNER.NAME LIKE 'EDB - HDA' THEN 'EDB - HDA' 
+				WHEN OWNER.NAME LIKE 'HAB - BR - E' THEN 'HAB - E' 
+				WHEN OWNER.NAME LIKE 'HAB - BR - DB' THEN 'HAB - DB'		
+				WHEN SUBSTR(OWNER.NAME,0,INSTR(OWNER.NAME,' ')-1) = 'TI' THEN 'IT' ELSE SUBSTR(OWNER.NAME,0,INSTR(OWNER.NAME,' ')-1) 
+				END OWNER
+		FROM 
+			INV_INVESTMENTS INVI
+			JOIN ODF_CA_INV OCINV ON INVI.ID = OCINV.ID
+			LEFT JOIN CMN_LOOKUPS_V STATUS ON STATUS.LOOKUP_CODE = OCINV.hon_status AND STATUS.LANGUAGE_CODE = 'pt' AND STATUS.LOOKUP_TYPE = 'HON_STATUS_INVESTIMENTO'
+			JOIN CMN_LOOKUPS_V STAGE_ATU ON INVI.STAGE_CODE = STAGE_ATU.LOOKUP_CODE AND   STAGE_ATU.LANGUAGE_CODE = 'pt' AND STAGE_ATU.LOOKUP_TYPE = 'INV_STAGE_TYPE' AND STAGE_ATU.PARENT_LOOKUP_CODE = 'hon_hsdm'
+			JOIN CMN_LOOKUPS_V OWNER ON OWNER.LOOKUP_CODE = OCINV.hon_area AND OWNER.LANGUAGE_CODE = 'pt' AND OWNER.LOOKUP_TYPE = 'HON_LKP_AREA'
+				LEFT JOIN (SELECT MAX(ID) MAX_ID, ODF_PARENT_ID INV_ID FROM odf_ca_cop_prj_statusrpt WHERE TRUNC(COP_REPORT_DATE,'MONTH') <= TRUNC($P{data_referencia},'MONTH') AND COP_REPORT_STATUS = 'FINAL' AND HON_TIPO_REL_STATUS = 'mensal' GROUP BY ODF_PARENT_ID) MAX_REPORT ON MAX_REPORT.INV_ID = INVI.ID
+				LEFT JOIN odf_ca_cop_prj_statusrpt STATUS_RPT ON MAX_REPORT.MAX_ID = STATUS_RPT.ID 
+			LEFT JOIN PFM_INVESTMENTS PFMI ON PFMI.INVESTMENT_ID = INVI.ID
+			LEFT JOIN PFM_PORTFOLIOS PFMP ON PFMI.PORTFOLIO_ID = PFMP.ID
+			LEFT JOIN (SELECT MAX(ID) MAX_AUDIT, OBJECT_ID INV_ID from cmn_audits where ATTRIBUTE_CODE = 'stage_code' AND  LAST_UPDATED_DATE <= TRUNC( $P{data_referencia},'MONTH') GROUP BY OBJECT_ID) MAX_AUDIT ON MAX_AUDIT.INV_ID = INVI.ID
+			LEFT JOIN CMN_AUDITS AUD ON AUD.ID = MAX_AUDIT.MAX_AUDIT
+			LEFT JOIN CMN_LOOKUPS_V STAGE ON AUD.RAW_VALUE_AFTER = STAGE.LOOKUP_CODE AND   STAGE.LANGUAGE_CODE = 'pt' AND STAGE.LOOKUP_TYPE = 'INV_STAGE_TYPE' AND STAGE.PARENT_LOOKUP_CODE = 'hon_hsdm' 
+			LEFT JOIN CMN_LOOKUPS_V STAGE_RPT ON STAGE_RPT.LOOKUP_CODE = STATUS_RPT.hon_fase_atual AND STAGE_RPT.LANGUAGE_CODE = 'pt' AND STAGE_RPT.LOOKUP_TYPE = 'HON_LKP_FASE_PROJETO'
+			JOIN ODF_CA_HON_REQUISITOS OCREQ ON INVI.ID = OCREQ.ODF_PARENT_ID
+		WHERE 
+			PFMP.ID = $P{portfolio} 
+			AND INVI.ODF_OBJECT_CODE = 'project'
+			AND OCREQ.hon_fase_cancel IN ('hon_lkp_u0','hon_lkp_u1','hon_lkp_j0')
+			AND $X{IN,STAGE_RPT.NAME,fase}
+		
+		UNION ALL
+
+		SELECT 
+			0 REQUISITO,
+			1 CHANGE,
+				CASE 
+				WHEN OWNER.NAME LIKE 'S - CS' THEN 'CS' 
+				WHEN OWNER.NAME LIKE 'S - PARTS' THEN 'SP' 
+				WHEN OWNER.NAME LIKE 'EDB - HDA' THEN 'EDB - HDA' 
+				WHEN OWNER.NAME LIKE 'HAB - BR - E' THEN 'HAB - E' 
+				WHEN OWNER.NAME LIKE 'HAB - BR - DB' THEN 'HAB - DB'		
+				WHEN SUBSTR(OWNER.NAME,0,INSTR(OWNER.NAME,' ')-1) = 'TI' THEN 'IT' ELSE SUBSTR(OWNER.NAME,0,INSTR(OWNER.NAME,' ')-1) 
+				END OWNER
+		FROM 
+			INV_INVESTMENTS INVI
+			JOIN ODF_CA_INV OCINV ON INVI.ID = OCINV.ID
+			LEFT JOIN CMN_LOOKUPS_V STATUS ON STATUS.LOOKUP_CODE = OCINV.hon_status AND STATUS.LANGUAGE_CODE = 'pt' AND STATUS.LOOKUP_TYPE = 'HON_STATUS_INVESTIMENTO'
+			JOIN CMN_LOOKUPS_V STAGE_ATU ON INVI.STAGE_CODE = STAGE_ATU.LOOKUP_CODE AND   STAGE_ATU.LANGUAGE_CODE = 'pt' AND STAGE_ATU.LOOKUP_TYPE = 'INV_STAGE_TYPE' AND STAGE_ATU.PARENT_LOOKUP_CODE = 'hon_hsdm'
+			JOIN CMN_LOOKUPS_V OWNER ON OWNER.LOOKUP_CODE = OCINV.hon_area AND OWNER.LANGUAGE_CODE = 'pt' AND OWNER.LOOKUP_TYPE = 'HON_LKP_AREA'
+				LEFT JOIN (SELECT MAX(ID) MAX_ID, ODF_PARENT_ID INV_ID FROM odf_ca_cop_prj_statusrpt WHERE TRUNC(COP_REPORT_DATE,'MONTH') <= TRUNC($P{data_referencia},'MONTH') AND COP_REPORT_STATUS = 'FINAL' AND HON_TIPO_REL_STATUS = 'mensal' GROUP BY ODF_PARENT_ID) MAX_REPORT ON MAX_REPORT.INV_ID = INVI.ID
+				LEFT JOIN odf_ca_cop_prj_statusrpt STATUS_RPT ON MAX_REPORT.MAX_ID = STATUS_RPT.ID 
+			LEFT JOIN PFM_INVESTMENTS PFMI ON PFMI.INVESTMENT_ID = INVI.ID
+			LEFT JOIN PFM_PORTFOLIOS PFMP ON PFMI.PORTFOLIO_ID = PFMP.ID
+			LEFT JOIN (SELECT MAX(ID) MAX_AUDIT, OBJECT_ID INV_ID from cmn_audits where ATTRIBUTE_CODE = 'stage_code' AND  LAST_UPDATED_DATE <= TRUNC( $P{data_referencia},'MONTH') GROUP BY OBJECT_ID) MAX_AUDIT ON MAX_AUDIT.INV_ID = INVI.ID
+			LEFT JOIN CMN_AUDITS AUD ON AUD.ID = MAX_AUDIT.MAX_AUDIT
+			LEFT JOIN CMN_LOOKUPS_V STAGE ON AUD.RAW_VALUE_AFTER = STAGE.LOOKUP_CODE AND   STAGE.LANGUAGE_CODE = 'pt' AND STAGE.LOOKUP_TYPE = 'INV_STAGE_TYPE' AND STAGE.PARENT_LOOKUP_CODE = 'hon_hsdm' 
+			LEFT JOIN CMN_LOOKUPS_V STAGE_RPT ON STAGE_RPT.LOOKUP_CODE = STATUS_RPT.hon_fase_atual AND STAGE_RPT.LANGUAGE_CODE = 'pt' AND STAGE_RPT.LOOKUP_TYPE = 'HON_LKP_FASE_PROJETO'
+			JOIN ODF_CA_HON_REQUISITOS OCREQ ON INVI.ID = OCREQ.ODF_PARENT_ID
+		WHERE 
+			 PFMP.ID = $P{portfolio} 
+			AND INVI.ODF_OBJECT_CODE = 'project'
+			AND OCREQ.hon_fase_alteracao IN ('hon_lkp_u0','hon_lkp_u1','hon_lkp_j0')
+			AND $X{IN,STAGE_RPT.NAME,fase}
+	)
+	WHERE 
+		$X{IN,OWNER,owner}
+
+	UNION
+
+	SELECT 
+		0 TOTAL,
+		0 QTD_KPI,
+		0 PCT_KPI,
+		HON_META TARGET_PCT,
+		HON_TIPO_META,
+		6 ORDEM
+	FROM
+		ODF_CA_HON_META META
+	WHERE 
+		META.hon_tipo_meta = 'scope_changes_req_j0'
+		AND META.HON_DATA_INI = (SELECT MAX(HON_DATA_INI) FROM ODF_CA_HON_META WHERE HON_TIPO_META = 'scope_changes_req_j0' AND TRUNC(HON_DATA_INI,'MONTH') = TRUNC($P{data_referencia} ,'MONTH') )
+
+) KPI
+JOIN CMN_LOOKUPS_V TIPO ON TIPO.LOOKUP_TYPE = 'HON_LKP_TIPOS_META' AND TIPO.LOOKUP_CODE = KPI.TIPO AND TIPO.LANGUAGE_CODE = 'pt'
+
+GROUP BY
+TIPO.NAME
+
+UNION ALL
+
+SELECT 
+TIPO.NAME META,
+SUM(TOTAL) TOTAL,
+SUM(QTD_KPI) QTD_KPI,
+ROUND(SUM(PCT_KPI),2) PCT_KPI,
+SUM(TARGET) TARGET,
+SUM(TARGET) - SUM(PCT_KPI) EVAL,
+CASE
+	WHEN (SUM(TARGET)-SUM(PCT_KPI)) <= 0.80 THEN 1
+	WHEN (SUM(TARGET)-SUM(PCT_KPI)) > 0.80 AND (SUM(TARGET)-SUM(PCT_KPI)) <= 0.94 THEN 2
+	WHEN (SUM(TARGET)-SUM(PCT_KPI)) > 0.94 AND (SUM(TARGET)-SUM(PCT_KPI)) <= 1.05 THEN 3
+	WHEN (SUM(TARGET)-SUM(PCT_KPI)) > 1.05 AND (SUM(TARGET)-SUM(PCT_KPI)) <= 1.19 THEN 4
+	WHEN (SUM(TARGET)-SUM(PCT_KPI)) > 1.19 THEN 5
+	END EVAL_ID
+FROM
+(
+	SELECT
+		SUM(REQUISITO) TOTAL,
+		SUM(CHANGE) QTD_KPI,
+		CASE WHEN SUM(REQUISITO) > 0 AND SUM(CHANGE) > 0 THEN SUM(CHANGE)/SUM(REQUISITO) ELSE 0 END PCT_KPI,
+		NULL TARGET,
+		'scope_changes_req' TIPO,
+		7  ORDEM
+	FROM
+	(
+		SELECT 
+			CASE WHEN REQ.hon_fase_cancel IS NULL THEN 1 ELSE -1 END REQUISITO,
+			0 CHANGE,
+			CASE 
+				WHEN OWNER.NAME LIKE 'S - CS' THEN 'CS' 
+				WHEN OWNER.NAME LIKE 'S - PARTS' THEN 'SP' 
+				WHEN OWNER.NAME LIKE 'EDB - HDA' THEN 'EDB - HDA' 
+				WHEN OWNER.NAME LIKE 'HAB - BR - E' THEN 'HAB - E' 
+				WHEN OWNER.NAME LIKE 'HAB - BR - DB' THEN 'HAB - DB'		
+				WHEN SUBSTR(OWNER.NAME,0,INSTR(OWNER.NAME,' ')-1) = 'TI' THEN 'IT' ELSE SUBSTR(OWNER.NAME,0,INSTR(OWNER.NAME,' ')-1) 
+				END OWNER
+		FROM 
+			INV_INVESTMENTS INVI
+			JOIN ODF_CA_INV OCINV ON INVI.ID = OCINV.ID
+			LEFT JOIN CMN_LOOKUPS_V STATUS ON STATUS.LOOKUP_CODE = OCINV.hon_status AND STATUS.LANGUAGE_CODE = 'pt' AND STATUS.LOOKUP_TYPE = 'HON_STATUS_INVESTIMENTO'
+			JOIN CMN_LOOKUPS_V STAGE_ATU ON INVI.STAGE_CODE = STAGE_ATU.LOOKUP_CODE AND   STAGE_ATU.LANGUAGE_CODE = 'pt' AND STAGE_ATU.LOOKUP_TYPE = 'INV_STAGE_TYPE' AND STAGE_ATU.PARENT_LOOKUP_CODE = 'hon_hsdm'
+			JOIN CMN_LOOKUPS_V OWNER ON OWNER.LOOKUP_CODE = OCINV.hon_area AND OWNER.LANGUAGE_CODE = 'pt' AND OWNER.LOOKUP_TYPE = 'HON_LKP_AREA'
+				LEFT JOIN (SELECT MAX(ID) MAX_ID, ODF_PARENT_ID INV_ID FROM odf_ca_cop_prj_statusrpt WHERE TRUNC(COP_REPORT_DATE,'MONTH') <= TRUNC($P{data_referencia},'MONTH') AND COP_REPORT_STATUS = 'FINAL' AND HON_TIPO_REL_STATUS = 'mensal' GROUP BY ODF_PARENT_ID) MAX_REPORT ON MAX_REPORT.INV_ID = INVI.ID
+				LEFT JOIN odf_ca_cop_prj_statusrpt STATUS_RPT ON MAX_REPORT.MAX_ID = STATUS_RPT.ID 
+			LEFT JOIN PFM_INVESTMENTS PFMI ON PFMI.INVESTMENT_ID = INVI.ID
+			LEFT JOIN PFM_PORTFOLIOS PFMP ON PFMI.PORTFOLIO_ID = PFMP.ID
+			LEFT JOIN (SELECT MAX(ID) MAX_AUDIT, OBJECT_ID INV_ID from cmn_audits where ATTRIBUTE_CODE = 'stage_code' AND  LAST_UPDATED_DATE <= TRUNC( $P{data_referencia},'MONTH') GROUP BY OBJECT_ID) MAX_AUDIT ON MAX_AUDIT.INV_ID = INVI.ID
+			LEFT JOIN CMN_AUDITS AUD ON AUD.ID = MAX_AUDIT.MAX_AUDIT
+			LEFT JOIN CMN_LOOKUPS_V STAGE ON AUD.RAW_VALUE_AFTER = STAGE.LOOKUP_CODE AND   STAGE.LANGUAGE_CODE = 'pt' AND STAGE.LOOKUP_TYPE = 'INV_STAGE_TYPE' AND STAGE.PARENT_LOOKUP_CODE = 'hon_hsdm' 
+			LEFT JOIN CMN_LOOKUPS_V STAGE_RPT ON STAGE_RPT.LOOKUP_CODE = STATUS_RPT.hon_fase_atual AND STAGE_RPT.LANGUAGE_CODE = 'pt' AND STAGE_RPT.LOOKUP_TYPE = 'HON_LKP_FASE_PROJETO'
+			JOIN ODF_CA_HON_REQUISITOS REQ ON REQ.ODF_PARENT_ID = INVI.ID
+		WHERE 
+			PFMP.ID = $P{portfolio} 
+			AND INVI.ODF_OBJECT_CODE = 'project'
+			AND (REQ.hon_fase_inclusao IN ('hon_lkp_j1','hon_lkp_j2','hon_lkp_j3','hon_lkp_j4','hon_lkp_j5') AND REQ.hon_fase_cancel IS NULL)
+			AND $X{IN,STAGE_RPT.NAME,fase}
+
+		UNION
+
+		SELECT 
+			0 REQUISITO,
+			1 CHANGE,
+				CASE 
+				WHEN OWNER.NAME LIKE 'S - CS' THEN 'CS' 
+				WHEN OWNER.NAME LIKE 'S - PARTS' THEN 'SP' 
+				WHEN OWNER.NAME LIKE 'EDB - HDA' THEN 'EDB - HDA' 
+				WHEN OWNER.NAME LIKE 'HAB - BR - E' THEN 'HAB - E' 
+				WHEN OWNER.NAME LIKE 'HAB - BR - DB' THEN 'HAB - DB'		
+				WHEN SUBSTR(OWNER.NAME,0,INSTR(OWNER.NAME,' ')-1) = 'TI' THEN 'IT' ELSE SUBSTR(OWNER.NAME,0,INSTR(OWNER.NAME,' ')-1) 
+				END OWNER
+		FROM 
+			INV_INVESTMENTS INVI
+			JOIN ODF_CA_INV OCINV ON INVI.ID = OCINV.ID
+			LEFT JOIN CMN_LOOKUPS_V STATUS ON STATUS.LOOKUP_CODE = OCINV.hon_status AND STATUS.LANGUAGE_CODE = 'pt' AND STATUS.LOOKUP_TYPE = 'HON_STATUS_INVESTIMENTO'
+			JOIN CMN_LOOKUPS_V STAGE_ATU ON INVI.STAGE_CODE = STAGE_ATU.LOOKUP_CODE AND   STAGE_ATU.LANGUAGE_CODE = 'pt' AND STAGE_ATU.LOOKUP_TYPE = 'INV_STAGE_TYPE' AND STAGE_ATU.PARENT_LOOKUP_CODE = 'hon_hsdm'
+			JOIN CMN_LOOKUPS_V OWNER ON OWNER.LOOKUP_CODE = OCINV.hon_area AND OWNER.LANGUAGE_CODE = 'pt' AND OWNER.LOOKUP_TYPE = 'HON_LKP_AREA'
+				LEFT JOIN (SELECT MAX(ID) MAX_ID, ODF_PARENT_ID INV_ID FROM odf_ca_cop_prj_statusrpt WHERE TRUNC(COP_REPORT_DATE,'MONTH') <= TRUNC($P{data_referencia},'MONTH') AND COP_REPORT_STATUS = 'FINAL' AND HON_TIPO_REL_STATUS = 'mensal' GROUP BY ODF_PARENT_ID) MAX_REPORT ON MAX_REPORT.INV_ID = INVI.ID
+				LEFT JOIN odf_ca_cop_prj_statusrpt STATUS_RPT ON MAX_REPORT.MAX_ID = STATUS_RPT.ID 
+			LEFT JOIN PFM_INVESTMENTS PFMI ON PFMI.INVESTMENT_ID = INVI.ID
+			LEFT JOIN PFM_PORTFOLIOS PFMP ON PFMI.PORTFOLIO_ID = PFMP.ID
+			LEFT JOIN (SELECT MAX(ID) MAX_AUDIT, OBJECT_ID INV_ID from cmn_audits where ATTRIBUTE_CODE = 'stage_code' AND  LAST_UPDATED_DATE <= TRUNC( $P{data_referencia},'MONTH') GROUP BY OBJECT_ID) MAX_AUDIT ON MAX_AUDIT.INV_ID = INVI.ID
+			LEFT JOIN CMN_AUDITS AUD ON AUD.ID = MAX_AUDIT.MAX_AUDIT
+			LEFT JOIN CMN_LOOKUPS_V STAGE ON AUD.RAW_VALUE_AFTER = STAGE.LOOKUP_CODE AND   STAGE.LANGUAGE_CODE = 'pt' AND STAGE.LOOKUP_TYPE = 'INV_STAGE_TYPE' AND STAGE.PARENT_LOOKUP_CODE = 'hon_hsdm' 
+			LEFT JOIN CMN_LOOKUPS_V STAGE_RPT ON STAGE_RPT.LOOKUP_CODE = STATUS_RPT.hon_fase_atual AND STAGE_RPT.LANGUAGE_CODE = 'pt' AND STAGE_RPT.LOOKUP_TYPE = 'HON_LKP_FASE_PROJETO'
+			JOIN ODF_CA_HON_REQUISITOS OCREQ ON INVI.ID = OCREQ.ODF_PARENT_ID
+		WHERE 
+			PFMP.ID = $P{portfolio} 
+			AND INVI.ODF_OBJECT_CODE = 'project'
+			AND OCREQ.hon_fase_inclusao IN ('hon_lkp_j1','hon_lkp_j2','hon_lkp_j3','hon_lkp_j4','hon_lkp_j5')
+			AND $X{IN,STAGE_RPT.NAME,fase}
+		
+		UNION ALL
+
+		SELECT 
+			0 REQUISITO,
+			1 CHANGE,
+				CASE 
+				WHEN OWNER.NAME LIKE 'S - CS' THEN 'CS' 
+				WHEN OWNER.NAME LIKE 'S - PARTS' THEN 'SP' 
+				WHEN OWNER.NAME LIKE 'EDB - HDA' THEN 'EDB - HDA' 
+				WHEN OWNER.NAME LIKE 'HAB - BR - E' THEN 'HAB - E' 
+				WHEN OWNER.NAME LIKE 'HAB - BR - DB' THEN 'HAB - DB'		
+				WHEN SUBSTR(OWNER.NAME,0,INSTR(OWNER.NAME,' ')-1) = 'TI' THEN 'IT' ELSE SUBSTR(OWNER.NAME,0,INSTR(OWNER.NAME,' ')-1) 
+				END OWNER
+		FROM 
+			INV_INVESTMENTS INVI
+			JOIN ODF_CA_INV OCINV ON INVI.ID = OCINV.ID
+			LEFT JOIN CMN_LOOKUPS_V STATUS ON STATUS.LOOKUP_CODE = OCINV.hon_status AND STATUS.LANGUAGE_CODE = 'pt' AND STATUS.LOOKUP_TYPE = 'HON_STATUS_INVESTIMENTO'
+			JOIN CMN_LOOKUPS_V STAGE_ATU ON INVI.STAGE_CODE = STAGE_ATU.LOOKUP_CODE AND   STAGE_ATU.LANGUAGE_CODE = 'pt' AND STAGE_ATU.LOOKUP_TYPE = 'INV_STAGE_TYPE' AND STAGE_ATU.PARENT_LOOKUP_CODE = 'hon_hsdm'
+			JOIN CMN_LOOKUPS_V OWNER ON OWNER.LOOKUP_CODE = OCINV.hon_area AND OWNER.LANGUAGE_CODE = 'pt' AND OWNER.LOOKUP_TYPE = 'HON_LKP_AREA'
+				LEFT JOIN (SELECT MAX(ID) MAX_ID, ODF_PARENT_ID INV_ID FROM odf_ca_cop_prj_statusrpt WHERE TRUNC(COP_REPORT_DATE,'MONTH') <= TRUNC($P{data_referencia},'MONTH') AND COP_REPORT_STATUS = 'FINAL' AND HON_TIPO_REL_STATUS = 'mensal' GROUP BY ODF_PARENT_ID) MAX_REPORT ON MAX_REPORT.INV_ID = INVI.ID
+				LEFT JOIN odf_ca_cop_prj_statusrpt STATUS_RPT ON MAX_REPORT.MAX_ID = STATUS_RPT.ID 
+			LEFT JOIN PFM_INVESTMENTS PFMI ON PFMI.INVESTMENT_ID = INVI.ID
+			LEFT JOIN PFM_PORTFOLIOS PFMP ON PFMI.PORTFOLIO_ID = PFMP.ID
+			LEFT JOIN (SELECT MAX(ID) MAX_AUDIT, OBJECT_ID INV_ID from cmn_audits where ATTRIBUTE_CODE = 'stage_code' AND  LAST_UPDATED_DATE <= TRUNC( $P{data_referencia},'MONTH') GROUP BY OBJECT_ID) MAX_AUDIT ON MAX_AUDIT.INV_ID = INVI.ID
+			LEFT JOIN CMN_AUDITS AUD ON AUD.ID = MAX_AUDIT.MAX_AUDIT
+			LEFT JOIN CMN_LOOKUPS_V STAGE ON AUD.RAW_VALUE_AFTER = STAGE.LOOKUP_CODE AND   STAGE.LANGUAGE_CODE = 'pt' AND STAGE.LOOKUP_TYPE = 'INV_STAGE_TYPE' AND STAGE.PARENT_LOOKUP_CODE = 'hon_hsdm' 
+			LEFT JOIN CMN_LOOKUPS_V STAGE_RPT ON STAGE_RPT.LOOKUP_CODE = STATUS_RPT.hon_fase_atual AND STAGE_RPT.LANGUAGE_CODE = 'pt' AND STAGE_RPT.LOOKUP_TYPE = 'HON_LKP_FASE_PROJETO'
+			JOIN ODF_CA_HON_REQUISITOS OCREQ ON INVI.ID = OCREQ.ODF_PARENT_ID
+		WHERE 
+			PFMP.ID = $P{portfolio} 
+			AND INVI.ODF_OBJECT_CODE = 'project'
+			AND OCREQ.hon_fase_cancel IN ('hon_lkp_j1','hon_lkp_j2','hon_lkp_j3','hon_lkp_j4','hon_lkp_j5')
+			AND $X{IN,STAGE_RPT.NAME,fase}
+		
+		UNION ALL
+
+		SELECT 
+			0 REQUISITO,
+			1 CHANGE,
+				CASE 
+				WHEN OWNER.NAME LIKE 'S - CS' THEN 'CS' 
+				WHEN OWNER.NAME LIKE 'S - PARTS' THEN 'SP' 
+				WHEN OWNER.NAME LIKE 'EDB - HDA' THEN 'EDB - HDA' 
+				WHEN OWNER.NAME LIKE 'HAB - BR - E' THEN 'HAB - E' 
+				WHEN OWNER.NAME LIKE 'HAB - BR - DB' THEN 'HAB - DB'		
+				WHEN SUBSTR(OWNER.NAME,0,INSTR(OWNER.NAME,' ')-1) = 'TI' THEN 'IT' ELSE SUBSTR(OWNER.NAME,0,INSTR(OWNER.NAME,' ')-1) 
+				END OWNER
+		FROM 
+			INV_INVESTMENTS INVI
+			JOIN ODF_CA_INV OCINV ON INVI.ID = OCINV.ID
+			LEFT JOIN CMN_LOOKUPS_V STATUS ON STATUS.LOOKUP_CODE = OCINV.hon_status AND STATUS.LANGUAGE_CODE = 'pt' AND STATUS.LOOKUP_TYPE = 'HON_STATUS_INVESTIMENTO'
+			JOIN CMN_LOOKUPS_V STAGE_ATU ON INVI.STAGE_CODE = STAGE_ATU.LOOKUP_CODE AND   STAGE_ATU.LANGUAGE_CODE = 'pt' AND STAGE_ATU.LOOKUP_TYPE = 'INV_STAGE_TYPE' AND STAGE_ATU.PARENT_LOOKUP_CODE = 'hon_hsdm'
+			JOIN CMN_LOOKUPS_V OWNER ON OWNER.LOOKUP_CODE = OCINV.hon_area AND OWNER.LANGUAGE_CODE = 'pt' AND OWNER.LOOKUP_TYPE = 'HON_LKP_AREA'
+				LEFT JOIN (SELECT MAX(ID) MAX_ID, ODF_PARENT_ID INV_ID FROM odf_ca_cop_prj_statusrpt WHERE TRUNC(COP_REPORT_DATE,'MONTH') <= TRUNC($P{data_referencia},'MONTH') AND COP_REPORT_STATUS = 'FINAL' AND HON_TIPO_REL_STATUS = 'mensal' GROUP BY ODF_PARENT_ID) MAX_REPORT ON MAX_REPORT.INV_ID = INVI.ID
+				LEFT JOIN odf_ca_cop_prj_statusrpt STATUS_RPT ON MAX_REPORT.MAX_ID = STATUS_RPT.ID 
+			LEFT JOIN PFM_INVESTMENTS PFMI ON PFMI.INVESTMENT_ID = INVI.ID
+			LEFT JOIN PFM_PORTFOLIOS PFMP ON PFMI.PORTFOLIO_ID = PFMP.ID
+			LEFT JOIN (SELECT MAX(ID) MAX_AUDIT, OBJECT_ID INV_ID from cmn_audits where ATTRIBUTE_CODE = 'stage_code' AND  LAST_UPDATED_DATE <= TRUNC( $P{data_referencia},'MONTH') GROUP BY OBJECT_ID) MAX_AUDIT ON MAX_AUDIT.INV_ID = INVI.ID
+			LEFT JOIN CMN_AUDITS AUD ON AUD.ID = MAX_AUDIT.MAX_AUDIT
+			LEFT JOIN CMN_LOOKUPS_V STAGE ON AUD.RAW_VALUE_AFTER = STAGE.LOOKUP_CODE AND   STAGE.LANGUAGE_CODE = 'pt' AND STAGE.LOOKUP_TYPE = 'INV_STAGE_TYPE' AND STAGE.PARENT_LOOKUP_CODE = 'hon_hsdm' 
+			LEFT JOIN CMN_LOOKUPS_V STAGE_RPT ON STAGE_RPT.LOOKUP_CODE = STATUS_RPT.hon_fase_atual AND STAGE_RPT.LANGUAGE_CODE = 'pt' AND STAGE_RPT.LOOKUP_TYPE = 'HON_LKP_FASE_PROJETO'
+			JOIN ODF_CA_HON_REQUISITOS OCREQ ON INVI.ID = OCREQ.ODF_PARENT_ID
+		WHERE 
+			PFMP.ID = $P{portfolio} 
+			AND INVI.ODF_OBJECT_CODE = 'project'
+			AND OCREQ.hon_fase_alteracao IN ('hon_lkp_j1','hon_lkp_j2','hon_lkp_j3','hon_lkp_j4','hon_lkp_j5')
+			AND $X{IN,STAGE_RPT.NAME,fase}
+	)
+	WHERE 
+		$X{IN,OWNER,owner}
+
+	UNION
+
+	SELECT 
+		0 TOTAL,
+		0 QTD_KPI,
+		0 PCT_KPI,
+		HON_META TARGET_PCT,
+		HON_TIPO_META,
+		7 ORDEM
+	FROM
+		ODF_CA_HON_META META
+	WHERE 
+		META.hon_tipo_meta = 'scope_changes_req'
+		AND META.HON_DATA_INI = (SELECT MAX(HON_DATA_INI) FROM ODF_CA_HON_META WHERE HON_TIPO_META = 'scope_changes_req' AND TRUNC(HON_DATA_INI,'MONTH') <= TRUNC($P{data_referencia} ,'MONTH') )
+
+) KPI
+JOIN CMN_LOOKUPS_V TIPO ON TIPO.LOOKUP_TYPE = 'HON_LKP_TIPOS_META' AND TIPO.LOOKUP_CODE = KPI.TIPO AND TIPO.LANGUAGE_CODE = 'pt'
+
+GROUP BY
+TIPO.NAME]]>
+		</queryString>
+		<field name="META" class="java.lang.String"/>
+		<field name="TOTAL" class="java.math.BigDecimal"/>
+		<field name="QTD_KPI" class="java.math.BigDecimal"/>
+		<field name="PCT_KPI" class="java.math.BigDecimal"/>
+		<field name="TARGET" class="java.math.BigDecimal"/>
+		<field name="EVAL" class="java.math.BigDecimal"/>
+		<field name="EVAL_ID" class="java.math.BigDecimal"/>
+	</subDataset>
+	<parameter name="data_referencia" class="java.util.Date">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="owner" class="java.util.Collection"/>
+	<parameter name="portfolio" class="java.lang.String"/>
+	<parameter name="fase" class="java.util.Collection"/>
+	<queryString>
+		<![CDATA[SELECT NULL FROM DUAL]]>
+	</queryString>
+	<field name="NULL" class="java.lang.String"/>
+	<pageHeader>
+		<band height="60">
+			<textField>
+				<reportElement x="0" y="0" width="1210" height="60" uuid="aca2a643-a1a4-4796-970a-ef0e01389002"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="26"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Projects Status "+ (MONTH($P{data_referencia}).intValue()<=3?YEAR($P{data_referencia})-1924:YEAR($P{data_referencia})-1923) +"ki - " + (MONTH($P{data_referencia}).intValue()==1?"JAN":MONTH($P{data_referencia}).intValue()==2?"FEB":MONTH($P{data_referencia}).intValue()==3?"MAR":MONTH($P{data_referencia}).intValue()==4?"APR":MONTH($P{data_referencia}).intValue()==5?"MAY":MONTH($P{data_referencia}).intValue()==6?"JUN":MONTH($P{data_referencia}).intValue()==7?"JUL":MONTH($P{data_referencia}).intValue()==8?"AUG":MONTH($P{data_referencia}).intValue()==9?"SEP":MONTH($P{data_referencia}).intValue()==10?"OCT":MONTH($P{data_referencia}).intValue()==11?"NOV":"DEC") + "/" + YEAR($P{data_referencia}).toString()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="620">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<componentElement>
+				<reportElement x="0" y="0" width="680" height="370" uuid="90b6eb5b-4aa1-4b44-8db8-19b58419ba9b">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<hc:chart xmlns:hc="http://jaspersoft.com/highcharts" xsi:schemaLocation="http://jaspersoft.com/highcharts http://jaspersoft.com/schema/highcharts.xsd" type="Pie">
+					<hc:chartSetting name="default">
+						<hc:chartProperty name="chart.alignTicks">
+							<hc:propertyExpression><![CDATA[Boolean.TRUE]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="chart.zoomType">
+							<hc:propertyExpression><![CDATA["xy"]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="colors">
+							<hc:propertyExpression><![CDATA[java.util.Arrays.asList("#f45b5b","#91e8e1","#e4d354","#90ed7d","#7cb5ec","#f7a35c","#8085e9","#f15c80","#2b908f","#FF8080")]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="credits.enabled">
+							<hc:propertyExpression><![CDATA[false]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="credits.href">
+							<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="credits.text">
+							<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="plotOptions.pie.dataLabels.enabled" value="TRUE"/>
+						<hc:chartProperty name="plotOptions.pie.dataLabels.format">
+							<hc:propertyExpression><![CDATA["{point.y}; {point.percentage:.0f} %"]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="plotOptions.pie.showInLegend" value="true"/>
+						<hc:chartProperty name="plotOptions.series.showInLegend">
+							<hc:propertyExpression><![CDATA[Boolean.TRUE]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="title.style.fontSize">
+							<hc:propertyExpression><![CDATA["20"]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="title.text">
+							<hc:propertyExpression><![CDATA["Geral"]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="tooltip.enabled">
+							<hc:propertyExpression><![CDATA[Boolean.FALSE]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="yAxis.title.text">
+							<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+						</hc:chartProperty>
+					</hc:chartSetting>
+					<multiAxisData>
+						<multiAxisDataset>
+							<dataset>
+								<datasetRun subDataset="Dados" uuid="d85d7913-ee86-4a88-859b-45c35bb166bd">
+									<datasetParameter name="data_referencia">
+										<datasetParameterExpression><![CDATA[$P{data_referencia}]]></datasetParameterExpression>
+									</datasetParameter>
+									<datasetParameter name="owner">
+										<datasetParameterExpression><![CDATA[$P{owner}]]></datasetParameterExpression>
+									</datasetParameter>
+									<datasetParameter name="portfolio">
+										<datasetParameterExpression><![CDATA[$P{portfolio}]]></datasetParameterExpression>
+									</datasetParameter>
+									<datasetParameter name="fase">
+										<datasetParameterExpression><![CDATA[$P{fase}]]></datasetParameterExpression>
+									</datasetParameter>
+									<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+								</datasetRun>
+							</dataset>
+						</multiAxisDataset>
+						<dataAxis axis="Rows">
+							<axisLevel name="Status">
+								<labelExpression><![CDATA[]]></labelExpression>
+								<axisLevelBucket order="None" class="java.lang.String">
+									<bucketExpression><![CDATA[$F{STATUS_FINAL}]]></bucketExpression>
+									<bucketProperty name="color"><![CDATA[$F{STATUS_FINAL}.toString().equals("No Prazo") ? "#89a54e"
+: $F{STATUS_FINAL}.toString().equals("Demanda No Prazo") ? "#c8d7a8"
+: $F{STATUS_FINAL}.toString().equals("On hold") ? "#404040"
+: $F{STATUS_FINAL}.toString().equals("Demanda On hold") ? "#d9d9d9"
+: $F{STATUS_FINAL}.toString().equals("Atrasado") ? "#ff5050"
+: $F{STATUS_FINAL}.toString().equals("Demanda Atrasada") ? "#ff9999"
+: $F{STATUS_FINAL}.toString().equals("Cancelado") ? "#9933ff"
+: $F{STATUS_FINAL}.toString().equals("Demanda Cancelada") ? "#cc99ff"
+: $F{STATUS_FINAL}.toString().equals("Extra") ? "#ffff66"
+: $F{STATUS_FINAL}.toString().equals("Sem Status") ? "#91E8E1"
+: $F{STATUS_FINAL}.toString().equals("Concluído") ? "#7CB5EC"
+: "#b9cde5"]]></bucketProperty>
+								</axisLevelBucket>
+							</axisLevel>
+						</dataAxis>
+						<dataAxis axis="Columns"/>
+						<multiAxisMeasure name="QTD" class="java.lang.Integer" calculation="Nothing">
+							<labelExpression><![CDATA["Geral"]]></labelExpression>
+							<valueExpression><![CDATA[$F{QTD}]]></valueExpression>
+						</multiAxisMeasure>
+					</multiAxisData>
+					<hc:series name="QTD">
+						<hc:contributor name="SeriesItemProperty">
+							<hc:contributorProperty name="color" valueType="Bucket" value="Status.color"/>
+						</hc:contributor>
+					</hc:series>
+				</hc:chart>
+			</componentElement>
+			<componentElement>
+				<reportElement x="680" y="0" width="528" height="370" uuid="d6136780-66ce-413c-9c7a-e00afd414a0c">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<hc:chart xmlns:hc="http://jaspersoft.com/highcharts" xsi:schemaLocation="http://jaspersoft.com/highcharts http://jaspersoft.com/schema/highcharts.xsd" type="StackedColumn">
+					<hc:chartSetting name="default">
+						<hc:chartProperty name="chart.zoomType">
+							<hc:propertyExpression><![CDATA["xy"]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="colors">
+							<hc:propertyExpression><![CDATA[java.util.Arrays.asList("#f45b5b","#91e8e1","#e4d354","#90ed7d","#7cb5ec","#f7a35c","#8085e9","#f15c80","#2b908f","#FF8080")]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="credits.enabled">
+							<hc:propertyExpression><![CDATA[false]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="credits.href">
+							<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="credits.text">
+							<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="legend.enabled">
+							<hc:propertyExpression><![CDATA[Boolean.FALSE]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="plotOptions.series.dataLabels.enabled" value="TRUE"/>
+						<hc:chartProperty name="title.style.fontSize">
+							<hc:propertyExpression><![CDATA["20"]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="title.text">
+							<hc:propertyExpression><![CDATA["Status por Fase do Projeto"]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="xAxis.labels.rotation">
+							<hc:propertyExpression><![CDATA[new Integer(0)]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="yAxis.title.text">
+							<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="legend.floating_customSimpleMode" value="true"/>
+						<hc:chartProperty name="legend.floating">
+							<hc:propertyExpression><![CDATA[false]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="xAxis.gridLineColor" value="white"/>
+						<hc:chartProperty name="yAxis.gridLineColor" value="white"/>
+						<hc:chartProperty name="legend.layout" value="vertical"/>
+						<hc:chartProperty name="yAxis.labels.enabled">
+							<hc:propertyExpression><![CDATA[FALSE( )]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="legend.align" value="right"/>
+						<hc:chartProperty name="legend.verticalAlign" value="middle"/>
+					</hc:chartSetting>
+					<multiAxisData>
+						<multiAxisDataset>
+							<dataset>
+								<datasetRun subDataset="fases" uuid="a590d244-0086-42e5-b098-b849f36c44ae">
+									<datasetParameter name="data_referencia">
+										<datasetParameterExpression><![CDATA[$P{data_referencia}]]></datasetParameterExpression>
+									</datasetParameter>
+									<datasetParameter name="owner">
+										<datasetParameterExpression><![CDATA[$P{owner}]]></datasetParameterExpression>
+									</datasetParameter>
+									<datasetParameter name="portfolio">
+										<datasetParameterExpression><![CDATA[$P{portfolio}]]></datasetParameterExpression>
+									</datasetParameter>
+									<datasetParameter name="fase">
+										<datasetParameterExpression><![CDATA[$P{fase}]]></datasetParameterExpression>
+									</datasetParameter>
+									<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+								</datasetRun>
+							</dataset>
+						</multiAxisDataset>
+						<dataAxis axis="Rows">
+							<axisLevel name="Fase">
+								<labelExpression><![CDATA[]]></labelExpression>
+								<axisLevelBucket order="None" class="java.lang.String">
+									<bucketExpression><![CDATA[$F{FASE}]]></bucketExpression>
+								</axisLevelBucket>
+							</axisLevel>
+						</dataAxis>
+						<dataAxis axis="Columns">
+							<axisLevel name="Status">
+								<labelExpression><![CDATA[]]></labelExpression>
+								<axisLevelBucket order="None" class="java.lang.String">
+									<bucketExpression><![CDATA[$F{STATUS}]]></bucketExpression>
+									<bucketProperty name="color"><![CDATA[$F{STATUS}.toString().equals("No Prazo") ? "#89a54e"
+: $F{STATUS}.toString().equals("Demanda No Prazo") ? "#c8d7a8"
+: $F{STATUS}.toString().equals("On hold") ? "#404040"
+: $F{STATUS}.toString().equals("Demanda On hold") ? "#d9d9d9"
+: $F{STATUS}.toString().equals("Atrasado") ? "#ff5050"
+: $F{STATUS}.toString().equals("Demanda Atrasada") ? "#ff9999"
+: $F{STATUS}.toString().equals("Cancelado") ? "#9933ff"
+: $F{STATUS}.toString().equals("Demanda Cancelada") ? "#cc99ff"
+: $F{STATUS}.toString().equals("Extra") ? "#ffff66"
+: $F{STATUS}.toString().equals("Sem Status") ? "#91E8E1"
+: $F{STATUS}.toString().equals("Concluído") ? "#7CB5EC"
+: "#b9cde5"]]></bucketProperty>
+								</axisLevelBucket>
+							</axisLevel>
+						</dataAxis>
+						<multiAxisMeasure name="Qtd" class="java.lang.Integer" calculation="Count">
+							<labelExpression><![CDATA[""]]></labelExpression>
+							<valueExpression><![CDATA[$F{INV_ID}]]></valueExpression>
+						</multiAxisMeasure>
+					</multiAxisData>
+					<hc:series name="Qtd">
+						<hc:contributor name="SeriesItemProperty">
+							<hc:contributorProperty name="color" valueType="Bucket" value="Status.color"/>
+						</hc:contributor>
+					</hc:series>
+				</hc:chart>
+			</componentElement>
+			<componentElement>
+				<reportElement x="0" y="370" width="680" height="250" uuid="ca54e665-2d47-41ff-8593-e6ab84be3186">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<hc:chart xmlns:hc="http://jaspersoft.com/highcharts" xsi:schemaLocation="http://jaspersoft.com/highcharts http://jaspersoft.com/schema/highcharts.xsd" type="StackedColumn">
+					<hc:chartSetting name="default">
+						<hc:chartProperty name="chart.zoomType">
+							<hc:propertyExpression><![CDATA["xy"]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="colors">
+							<hc:propertyExpression><![CDATA[java.util.Arrays.asList("#f45b5b","#91e8e1","#e4d354","#90ed7d","#7cb5ec","#f7a35c","#8085e9","#f15c80","#2b908f","#FF8080")]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="credits.enabled">
+							<hc:propertyExpression><![CDATA[false]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="credits.href">
+							<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="credits.text">
+							<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="legend.enabled">
+							<hc:propertyExpression><![CDATA[Boolean.FALSE]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="plotOptions.series.dataLabels.enabled" value="TRUE"/>
+						<hc:chartProperty name="title.style.fontSize">
+							<hc:propertyExpression><![CDATA["20"]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="title.text">
+							<hc:propertyExpression><![CDATA["Status por Negócio (Owner)"]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="xAxis.labels.rotation">
+							<hc:propertyExpression><![CDATA[new Integer(0)]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="yAxis.title.text">
+							<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+						</hc:chartProperty>
+						<hc:chartProperty name="yAxis.gridLineColor" value="white"/>
+						<hc:chartProperty name="xAxis.gridLineColor" value="white"/>
+						<hc:chartProperty name="yAxis.labels.enabled">
+							<hc:propertyExpression><![CDATA[FALSE( )]]></hc:propertyExpression>
+						</hc:chartProperty>
+					</hc:chartSetting>
+					<multiAxisData>
+						<multiAxisDataset>
+							<dataset>
+								<datasetRun subDataset="owner" uuid="1a1c1461-850d-454f-aba9-3114f249b879">
+									<datasetParameter name="data_referencia">
+										<datasetParameterExpression><![CDATA[$P{data_referencia}]]></datasetParameterExpression>
+									</datasetParameter>
+									<datasetParameter name="owner">
+										<datasetParameterExpression><![CDATA[$P{owner}]]></datasetParameterExpression>
+									</datasetParameter>
+									<datasetParameter name="portfolio">
+										<datasetParameterExpression><![CDATA[$P{portfolio}]]></datasetParameterExpression>
+									</datasetParameter>
+									<datasetParameter name="fase">
+										<datasetParameterExpression><![CDATA[$P{fase}]]></datasetParameterExpression>
+									</datasetParameter>
+									<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+								</datasetRun>
+							</dataset>
+						</multiAxisDataset>
+						<dataAxis axis="Rows">
+							<axisLevel name="OWNER">
+								<labelExpression><![CDATA[]]></labelExpression>
+								<axisLevelBucket order="None" class="java.lang.String">
+									<bucketExpression><![CDATA[$F{OWNER}]]></bucketExpression>
+								</axisLevelBucket>
+							</axisLevel>
+							<axisLevel name="FASE">
+								<labelExpression><![CDATA[]]></labelExpression>
+								<axisLevelBucket order="None" class="java.lang.String">
+									<bucketExpression><![CDATA[$F{FASE}]]></bucketExpression>
+								</axisLevelBucket>
+							</axisLevel>
+						</dataAxis>
+						<dataAxis axis="Columns">
+							<axisLevel name="Status">
+								<labelExpression><![CDATA[]]></labelExpression>
+								<axisLevelBucket order="None" class="java.lang.String">
+									<bucketExpression><![CDATA[$F{STATUS}]]></bucketExpression>
+									<bucketProperty name="color"><![CDATA[$F{STATUS}.toString().equals("No Prazo") ? "#89a54e"
+: $F{STATUS}.toString().equals("Demanda No Prazo") ? "#c8d7a8"
+: $F{STATUS}.toString().equals("On hold") ? "#404040"
+: $F{STATUS}.toString().equals("Demanda On hold") ? "#d9d9d9"
+: $F{STATUS}.toString().equals("Atrasado") ? "#ff5050"
+: $F{STATUS}.toString().equals("Demanda Atrasada") ? "#ff9999"
+: $F{STATUS}.toString().equals("Cancelado") ? "#9933ff"
+: $F{STATUS}.toString().equals("Demanda Cancelada") ? "#cc99ff"
+: $F{STATUS}.toString().equals("Extra") ? "#ffff66"
+: $F{STATUS}.toString().equals("Sem Status") ? "#91E8E1"
+: $F{STATUS}.toString().equals("Concluído") ? "#7CB5EC"
+: "#b9cde5"]]></bucketProperty>
+								</axisLevelBucket>
+							</axisLevel>
+						</dataAxis>
+						<multiAxisMeasure name="Measure1" class="java.lang.Integer" calculation="Count">
+							<labelExpression><![CDATA[""]]></labelExpression>
+							<valueExpression><![CDATA[$F{INV_ID}]]></valueExpression>
+						</multiAxisMeasure>
+					</multiAxisData>
+					<hc:series name="Measure1">
+						<hc:contributor name="SeriesItemProperty">
+							<hc:contributorProperty name="color" valueType="Bucket" value="Status.color"/>
+						</hc:contributor>
+					</hc:series>
+				</hc:chart>
+			</componentElement>
+			<componentElement>
+				<reportElement x="680" y="370" width="530" height="70" uuid="e9477a65-d9a7-4157-b966-237ff6a46b51">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table 1_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table 1_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table 1_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="Status_kpi" uuid="b477cf25-2e92-45ed-8055-9a16f10a0185">
+						<datasetParameter name="data_referencia">
+							<datasetParameterExpression><![CDATA[$P{data_referencia}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="fase">
+							<datasetParameterExpression><![CDATA[$P{fase}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="owner">
+							<datasetParameterExpression><![CDATA[$P{owner}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="portfolio">
+							<datasetParameterExpression><![CDATA[$P{portfolio}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="240" uuid="4d2380c8-ca50-4358-86aa-98ab7de72215">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<jr:columnHeader style="Table 1_CH" height="30">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<staticText>
+								<reportElement x="0" y="0" width="240" height="30" uuid="2b0ff1a8-5340-45a0-ab1b-a9f06362b750"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Metric]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 1_TD" height="20">
+							<textField>
+								<reportElement x="0" y="0" width="240" height="20" uuid="162598af-5109-43fa-948e-6a2c8bc58904"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{META}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="70" uuid="964dc5c7-3bf1-4841-85e3-4571e170149f">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<jr:columnHeader style="Table 1_CH" height="30">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<staticText>
+								<reportElement x="0" y="0" width="70" height="30" uuid="241d5c5b-bc2c-4a1e-b83e-9c316dff0da0"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Qty Projects Total]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 1_TD" height="20">
+							<textField>
+								<reportElement x="0" y="0" width="70" height="20" uuid="4c5bfd08-8170-431e-aa71-bd819e3997a9"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{TOTAL}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="110" uuid="244cea34-117c-4ab8-93a3-9919b3f9942a">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<jr:columnHeader style="Table 1_CH" height="30">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<staticText>
+								<reportElement x="0" y="0" width="110" height="30" uuid="3554cb5b-b4da-4515-aed1-c7031eec3d62"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Qty Projects
+on time/on budget]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 1_TD" height="20">
+							<textField>
+								<reportElement x="0" y="0" width="110" height="20" uuid="bc9c607d-5181-473b-b042-ae42aea3b14c"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{QTD_KPI}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="40" uuid="19d1e850-e5f6-468f-b38e-2f868225a64b">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<jr:columnHeader style="Table 1_CH" height="30">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<staticText>
+								<reportElement x="0" y="0" width="40" height="30" uuid="31db95a6-0c07-4103-b3de-6bb5666e9390"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Target]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 1_TD" height="20">
+							<textField pattern="###0.##%">
+								<reportElement x="0" y="0" width="40" height="20" uuid="a5e7cc77-c97a-449c-9ba8-5421bbcbb22c"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{TARGET}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="40" uuid="c6daac04-517e-47e6-885f-ccf778fab097">
+						<jr:columnHeader style="Table 1_CH" height="30">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<staticText>
+								<reportElement x="0" y="0" width="40" height="30" uuid="9ec804ee-91d0-48ed-b42b-2ec3e72cb374"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Real]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 1_TD" height="20">
+							<textField pattern="###0.##%">
+								<reportElement x="0" y="0" width="40" height="20" uuid="62dac7e8-67c0-45b9-85a1-6c2634a65545"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{PCT_KPI}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="30" uuid="77ffbdc1-85cc-4707-a79b-919359a9b031">
+						<jr:columnHeader style="Table 1_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="30" height="30" uuid="97767c9b-1431-499d-88c7-2ac0f2d45b7e"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Eval]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 1_TD" height="20">
+							<image scaleImage="RealSize" hAlign="Center" vAlign="Middle" onErrorType="Icon">
+								<reportElement x="0" y="0" width="30" height="20" uuid="4ffcf750-dc3a-4400-b3b2-a53de039dc0b">
+									<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+								</reportElement>
+								<box>
+									<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+								<imageExpression><![CDATA[$F{EVAL_ID}.toString().equals("1") ? "Honda___Quadrado_Preenchido" 
+: $F{EVAL_ID}.toString().equals("2") ? "hon_tri_preto"
+: $F{EVAL_ID}.toString().equals("3") ? "hon_circ_preto"
+: $F{EVAL_ID}.toString().equals("4") ? "hon_circ_dup"
+: "hon_quad_preto"]]></imageExpression>
+							</image>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<componentElement>
+				<reportElement x="680" y="440" width="530" height="90" uuid="755379bc-4e15-4360-bbde-71c6e96d157e">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table 2_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table 2_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table 2_TD"/>
+					<property name="net.sf.jasperreports.export.headertoolbar.table.name" value=""/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="tests_kpi" uuid="0fc82660-dc08-4484-92b6-0b90f4fa9648">
+						<datasetParameter name="data_referencia">
+							<datasetParameterExpression><![CDATA[$P{data_referencia}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="fase">
+							<datasetParameterExpression><![CDATA[$P{fase}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="owner">
+							<datasetParameterExpression><![CDATA[$P{owner}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="portfolio">
+							<datasetParameterExpression><![CDATA[$P{portfolio}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="240" uuid="0959c95b-8ef6-476e-ae46-3fa4fa6ee3f7">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<jr:columnHeader style="Table 2_CH" height="30">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<staticText>
+								<reportElement x="0" y="0" width="240" height="30" uuid="4e11bebe-1cd4-42d6-84f1-3dfd9db0761f"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 2_TD" height="20">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField>
+								<reportElement x="0" y="0" width="240" height="20" uuid="db7f5aae-6740-4ba3-b2ea-0b85b7602b0c"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{META}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="70" uuid="9ff78da4-6339-40bd-9e33-265baf039787">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<jr:columnHeader style="Table 2_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="70" height="30" uuid="524821f0-b4c6-432c-adba-0a69183b4566"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Qty Scenarios]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 2_TD" height="20">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField>
+								<reportElement x="0" y="0" width="70" height="20" uuid="c8e8223e-a285-4cc5-be2f-24be2aa118e0"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{TOTAL}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="110" uuid="3fda8cb4-0bef-4c14-b317-44113c92b017">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<jr:columnHeader style="Table 2_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="110" height="30" uuid="552843fc-912b-4c72-a8bd-95cfd1df97ac"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Qty Issues]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 2_TD" height="20">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField>
+								<reportElement x="0" y="0" width="110" height="20" uuid="def89d20-2adf-4f11-8f1f-de6e86156a1f"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{QTD_KPI}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="40" uuid="21011abe-2c46-4607-b4bd-9b25079895af">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<jr:columnHeader style="Table 2_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="40" height="30" uuid="90d98502-ff5e-4d08-b540-38ac69ca9fc0"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Target]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 2_TD" height="20">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField pattern="###0.##%">
+								<reportElement x="0" y="0" width="40" height="20" uuid="1d4409cf-9986-4343-952e-95d97460d527"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{TARGET}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="40" uuid="a054b2aa-4fb2-4b60-9bf6-1be8ba715096">
+						<jr:columnHeader style="Table 2_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="40" height="30" uuid="e907ffba-c248-401d-b00a-e12a0111858a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Real]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 2_TD" height="20">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField pattern="###0.##%">
+								<reportElement x="0" y="0" width="40" height="20" uuid="6d778b25-dcb5-4655-b20f-7e2fa14479d6"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{PCT_KPI}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="30" uuid="2cb4f154-c1fc-4ab0-aced-d83fe488d678">
+						<jr:columnHeader style="Table 2_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="30" height="30" uuid="b0d370d3-940b-4316-9b3a-e9e4819274fc"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Eval]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 2_TD" height="20">
+							<image scaleImage="RealSize" hAlign="Center" vAlign="Middle" onErrorType="Icon">
+								<reportElement x="0" y="0" width="30" height="20" uuid="9ff3f71a-81fc-4e3f-8dd7-997067e6c36d">
+									<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+								</reportElement>
+								<box>
+									<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+								<imageExpression><![CDATA[$F{EVAL_ID}.toString().equals("1") ? "Honda___Quadrado_Preenchido" 
+: $F{EVAL_ID}.toString().equals("2") ? "hon_tri_preto"
+: $F{EVAL_ID}.toString().equals("3") ? "hon_circ_preto"
+: $F{EVAL_ID}.toString().equals("4") ? "hon_circ_dup"
+: "hon_quad_preto"]]></imageExpression>
+							</image>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+			<componentElement>
+				<reportElement x="680" y="530" width="530" height="90" isPrintWhenDetailOverflows="true" uuid="c7782d1c-a76d-43c3-974b-21e9163f31ac">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table 3_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table 3_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table 3_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="changes_kpi" uuid="12af646d-26a2-49d0-beba-20f226196230">
+						<datasetParameter name="data_referencia">
+							<datasetParameterExpression><![CDATA[$P{data_referencia}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="fase">
+							<datasetParameterExpression><![CDATA[$P{fase}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="owner">
+							<datasetParameterExpression><![CDATA[$P{owner}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="portfolio">
+							<datasetParameterExpression><![CDATA[$P{portfolio}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="240" uuid="23ab6bf3-3ea0-4c33-ae79-0678b9869538">
+						<jr:columnHeader style="Table 3_CH" height="30">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 3_TD" height="20">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField>
+								<reportElement x="0" y="0" width="240" height="20" uuid="a0310ccf-e188-4505-b85b-dc3de1cdb9bd"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{META}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="70" uuid="5ecb475a-660a-461d-86e3-1e3428a8af6a">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<jr:columnHeader style="Table 3_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="70" height="30" uuid="f6713511-4c0e-469c-bed6-38b0690bff8f"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Qty Reqs]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 3_TD" height="20">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isBlankWhenNull="true">
+								<reportElement positionType="Float" x="0" y="0" width="70" height="20" uuid="bcc19660-7276-461b-8275-c0b9a472c058"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{TOTAL}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="110" uuid="d7f3578d-bfb3-404b-9001-ec09d63b6409">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<jr:columnHeader style="Table 3_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="110" height="30" uuid="a4db3e17-4bdd-48df-aea7-7b3b5d315c8e"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Qty Changes]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 3_TD" height="20">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="110" height="20" uuid="a15760a8-ee6c-41a0-a2ce-8bb8562f1a0d"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{QTD_KPI}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="40" uuid="22663374-ae4e-483c-93b7-ea4f6efa5bbc">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<jr:columnHeader style="Table 3_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="40" height="30" uuid="4702baa7-83cf-4d4e-aa1e-817b34b176d3"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Target]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 3_TD" height="20">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField pattern="###0.##%" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="40" height="20" uuid="3b937124-e07f-4c19-8014-069aac185d64"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{TARGET}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="40" uuid="8bcca477-9dca-4bc7-acf5-5534d04a7002">
+						<jr:columnHeader style="Table 3_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="40" height="30" uuid="3a5960e8-0d18-4af7-a815-b2cb7922de5a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Real]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 3_TD" height="20">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField pattern="###0.##%" isBlankWhenNull="true">
+								<reportElement x="0" y="0" width="40" height="20" uuid="24f8f675-64d0-4a35-bd99-adaf7b9eaf88"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{PCT_KPI}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="30" uuid="468b3cb8-98ab-4833-9e43-fce21a903211">
+						<jr:columnHeader style="Table 3_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="30" height="30" uuid="25853c55-8e69-448c-8aea-a321726481d3"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[Eval]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table 3_TD" height="20">
+							<image scaleImage="RealSize" hAlign="Center" vAlign="Middle" onErrorType="Icon">
+								<reportElement x="0" y="0" width="30" height="20" uuid="b76328cd-ba00-4628-8b99-3a8d514c4f42">
+									<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+								</reportElement>
+								<box>
+									<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+									<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								</box>
+								<imageExpression><![CDATA[$F{EVAL_ID}.toString().equals("1") ? "Honda___Quadrado_Preenchido" 
+: $F{EVAL_ID}.toString().equals("2") ? "hon_tri_preto"
+: $F{EVAL_ID}.toString().equals("3") ? "hon_circ_preto"
+: $F{EVAL_ID}.toString().equals("4") ? "hon_circ_dup"
+: "hon_quad_preto"]]></imageExpression>
+							</image>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+</jasperReport>
