@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.4.2.final using JasperReports Library version 6.4.1  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="san_brisc" pageWidth="842" pageHeight="520" orientation="Landscape" columnWidth="792" leftMargin="25" rightMargin="25" topMargin="20" bottomMargin="20" uuid="b652a3f4-3013-4ebb-b2e5-953726d7023b">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SANOFI - PRD"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
-	<property name="ireport.jasperserver.url" value="https://cppmrpt103s.ondemand.ca.com/reportservice/"/>
-	<property name="ireport.jasperserver.user" value="reportdev|cppm9188"/>
-	<property name="ireport.jasperserver.reportUnit" value="/ca_ppm/sanofi/san_brisco"/>
-	<property name="ireport.jasperserver.report.resource" value="/ca_ppm/sanofi/san_brisco_files/main_jrxml"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<style name="Table_TH" mode="Opaque" backcolor="#808080">
 		<box>
