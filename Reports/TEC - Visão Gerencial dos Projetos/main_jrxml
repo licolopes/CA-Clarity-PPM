@@ -3,10 +3,6 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Visão Gerencial de Projetos" pageWidth="1000" pageHeight="1200" orientation="Landscape" columnWidth="960" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6cdb58a5-e4a2-413f-8547-619eb77a1e11">
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
-	<property name="ireport.jasperserver.url" value="https://cppmrpt103s.ondemand.ca.com/reportservice/"/>
-	<property name="ireport.jasperserver.user" value="report_dev|cppm2058_test"/>
-	<property name="ireport.jasperserver.report.resource" value="/ca_ppm/tecban/tb_visao_ger_proj_files/main_jrxml"/>
-	<property name="ireport.jasperserver.reportUnit" value="/ca_ppm/tecban/tb_visao_ger_proj"/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
@@ -16,7 +12,6 @@
 	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
 	<subDataset name="Raia de Priorização" uuid="3fe210c0-1fb9-42d9-b05b-517945ae3c85">
-		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="TECBAN - TESTE"/>
 		<parameter name="clientes" class="java.util.Collection"/>
 		<parameter name="dir_solicitante" class="java.util.Collection"/>
 		<parameter name="raia" class="java.util.Collection"/>
