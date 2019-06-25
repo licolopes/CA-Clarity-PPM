@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.4.2.final using JasperReports Library version 6.4.1  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="san_gestao_lanc" pageWidth="1100" pageHeight="842" orientation="Landscape" columnWidth="1060" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5ac33139-a960-423e-b6b7-e0118062fe5e">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SANOFI - PROD"/>
-	<property name="ireport.jasperserver.url" value="https://cppmrpt103s.ondemand.ca.com/reportservice/"/>
-	<property name="ireport.jasperserver.user" value="reportdev|cppm9188"/>
-	<property name="ireport.jasperserver.report.resource" value="/ca_ppm/sanofi/san_gest_lanc_files/main_jrxml"/>
-	<property name="ireport.jasperserver.reportUnit" value="/ca_ppm/sanofi/san_gest_lanc"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
