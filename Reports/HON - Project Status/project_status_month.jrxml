@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.4.2.final using JasperReports Library version 6.4.1  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="project_status_table" pageWidth="1210" pageHeight="680" orientation="Landscape" columnWidth="1210" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="7db0f7a7-dc25-4895-9db4-c53bd646cd35">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="HONDA - PRD"/>
-	<property name="ireport.jasperserver.url" value="https://cppmrpt103.ondemand.ca.com/reportservice/"/>
-	<property name="ireport.jasperserver.user" value="report_dev|cppm9100"/>
-	<property name="ireport.jasperserver.report.resource" value="/ca_ppm/Honda/honda_project_status_v7_files/project_status_month.jrxml"/>
-	<property name="ireport.jasperserver.reportUnit" value="/ca_ppm/Honda/honda_project_status_v7"/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
