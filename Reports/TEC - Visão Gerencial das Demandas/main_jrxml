@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.4.2.final using JasperReports Library version 6.4.1  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Visão Gerencial" pageWidth="1000" pageHeight="1200" orientation="Landscape" columnWidth="960" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6cdb58a5-e4a2-413f-8547-619eb77a1e11">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="TECBAN - TEST"/>
-	<property name="com.jaspersoft.studio.unit." value="pixel"/>
-	<property name="ireport.jasperserver.url" value="https://cppmrpt103s.ondemand.ca.com/reportservice/"/>
-	<property name="ireport.jasperserver.user" value="report_dev|cppm2058_test"/>
-	<property name="ireport.jasperserver.report.resource" value="/ca_ppm/tecban/tb_visao_gerencial_files/main_jrxml"/>
-	<property name="ireport.jasperserver.reportUnit" value="/ca_ppm/tecban/tb_visao_gerencial"/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
