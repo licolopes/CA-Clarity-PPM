@@ -1,0 +1,949 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.2.final using JasperReports Library version 6.4.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="unimed_ta_proj" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f2e6b09e-5b48-4b93-a43d-12191ee49682">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="UNIMED - PRD"/>
+	<property name="ireport.jasperserver.url" value="https://cppmrpt103.ondemand.ca.com/reportservice/"/>
+	<property name="ireport.jasperserver.user" value="reportdev|cppm9187"/>
+	<property name="ireport.jasperserver.report.resource" value="/ca_ppm/unimed/unimed_rpt_abertura_proj_files/main_jrxml"/>
+	<property name="ireport.jasperserver.reportUnit" value="/ca_ppm/unimed/unimed_rpt_abertura_proj"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#DCDCDC">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#FFBFBF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab_CG" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab_CT" mode="Opaque" backcolor="#60BF60">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab_CD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab 1_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab 1_CG" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab 1_CT" mode="Opaque" backcolor="#00E06C">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab 1_CD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab 2_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab 2_CG" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab 2_CT" mode="Opaque" backcolor="#64E356">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab 2_CD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab 3_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab 3_CG" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab 3_CT" mode="Opaque" backcolor="#00D43C">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab 3_CD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab 4_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab 4_CG" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab 4_CT" mode="Opaque" backcolor="#CCCCCC">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab 4_CD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_TH" mode="Opaque" backcolor="#A9A9A9">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_CH" mode="Opaque" backcolor="#FFBFBF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="team" uuid="6187c1fb-c2f8-4a23-9434-306ea8765e4b">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="UNIMED - PRD"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="project_hide" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT DISTINCT
+  CR_AVA.ID AVALIADORES_ID,
+  CR_AVA.FIRST_NAME || ' ' || CR_AVA.LAST_NAME AVALIADORES,
+  (
+	SELECT UNIT.NAME
+	FROM PRJ_OBS_ASSOCIATIONS ASSOCRES        
+	JOIN PRJ_OBS_UNITS_FLAT FLAT ON FLAT.UNIT_ID = ASSOCRES.UNIT_ID 
+	JOIN PRJ_OBS_UNITS UNIT ON UNIT.ID = ASSOCRES.UNIT_ID
+	JOIN PRJ_OBS_TYPES OBS_TYPE ON OBS_TYPE.ID = UNIT.TYPE_ID AND OBS_TYPE.UNIQUE_NAME = 'um_org'
+	WHERE ASSOCRES.RECORD_ID = CR_AVA.ID AND UPPER(ASSOCRES.TABLE_NAME) = 'SRM_RESOURCES'
+  )ORGANOGRAMA
+FROM 
+  INV_INVESTMENTS INV
+  LEFT JOIN ODF_CA_INV OINV ON OINV.ID = INV.ID
+  LEFT JOIN ODF_MULTI_VALUED_LOOKUPS MUL ON MUL.OBJECT = 'project' AND MUL.ATTRIBUTE = 'um_facilitadores' AND MUL.PK_ID = INV.ID
+  LEFT JOIN SRM_RESOURCES CR_AVA ON CR_AVA.ID = MUL.VALUE
+WHERE
+  INV.ID = $P{project_hide}]]>
+		</queryString>
+		<field name="AVALIADORES_ID" class="java.math.BigDecimal"/>
+		<field name="AVALIADORES" class="java.lang.String"/>
+		<field name="ORGANOGRAMA" class="java.lang.String"/>
+		<sortField name="AVALIADORES"/>
+	</subDataset>
+	<parameter name="project_hide" class="java.lang.String"/>
+	<parameter name="param_tabertura" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+*
+FROM
+(
+  SELECT 
+    INV.ID INV_ID,
+    INV.CODE INV_CODE,
+    INV.NAME INV_NAME,
+    MGR.FIRST_NAME || ' ' || MGR.LAST_NAME INV_MANAGER,  
+	DAS.FIRST_NAME || ' ' || DAS.LAST_NAME INV_DAS,
+	GAS.FIRST_NAME || ' ' || GAS.LAST_NAME INV_GAS,
+    OPRJ.OBJ_OBJECTIVE INV_OBJECTIVE,
+	OINV.UM_JUSTIFICATIVA INV_JUST,
+    OINV.UM_BENEFICIOS INV_BENEFICIOS,
+    TA.CODE TA_CODE,
+    TA.NAME TA_NAME,
+    CRIADO_POR.FIRST_NAME || ' ' || CRIADO_POR.LAST_NAME TA_PREPARADO_POR,
+    TA.CREATED_DATE TA_DATA_CRIACAO,
+    TAMGR.FIRST_NAME || ' ' || TAMGR.LAST_NAME TA_MANAGER,
+    TA.PBK_SYNOPSIS TA_SINOPSE,
+    TA.PBK_PURPOSE_DTL TA_DPNN,
+    TA.PBK_PRD_DESC_PRDSER TA_PS,
+    TA.PBK_PRD_DESC_DEL TA_DPSE,
+    TA.PBK_ASSUMPTION TA_PREMISSAS,
+    TA.PBK_CONSTRAINT TA_REST,
+    TA.PBK_ISSUE TA_RISCOS,
+    TA.PBK_PRD_DESC_GRUPOE TA_GRP_ENTREGAS,
+    TA.pbk_estimate_cost TA_EST_CUSTO,
+    OBSU.NAME AREA_CLIENTE    
+  FROM
+    INV_INVESTMENTS INV
+    LEFT JOIN ODF_CA_PBK_PRJ_CHARTER TA ON TA.ODF_PARENT_ID = INV.ID
+    LEFT JOIN SRM_RESOURCES MGR ON MGR.USER_ID = INV.MANAGER_ID
+    LEFT JOIN SRM_RESOURCES CRIADO_POR ON CRIADO_POR.USER_ID = TA.CREATED_BY
+    LEFT JOIN SRM_RESOURCES TAMGR ON TAMGR.ID = TA.PBK_PRJ_MGR
+    LEFT JOIN ODF_CA_PROJECT OPRJ ON OPRJ.ID = INV.ID
+    LEFT JOIN ODF_CA_INV OINV ON OINV.ID = INV.ID
+    LEFT JOIN SRM_RESOURCES DAS ON DAS.ID = OPRJ.obj_stakeholder1
+    LEFT JOIN SRM_RESOURCES GAS ON GAS.ID = OPRJ.obj_stakeholder3
+    LEFT JOIN PRJ_OBS_ASSOCIATIONS OBSA ON OBSA.RECORD_ID = INV.ID
+    LEFT JOIN PRJ_OBS_UNITS_FLAT OBSF ON OBSA.UNIT_ID = OBSF.UNIT_ID
+    LEFT JOIN PRJ_OBS_UNITS OBSU ON OBSU.ID = OBSF.BRANCH_UNIT_ID
+    LEFT JOIN PRJ_OBS_OBJECT_TYPES OOT ON OOT.TYPE_ID = OBSU.TYPE_ID AND OOT.TABLE_NAME = 'SRM_PROJECTS'    
+  WHERE
+    INV.ID = $P{project_hide}
+    AND TA.ID = $P{param_tabertura} 
+  ORDER BY
+    TA.CREATED_DATE ASC,
+    OBSU.DEPTH DESC
+)T1
+WHERE
+  ROWNUM <= 1]]>
+	</queryString>
+	<field name="INV_ID" class="java.math.BigDecimal"/>
+	<field name="INV_CODE" class="java.lang.String"/>
+	<field name="INV_NAME" class="java.lang.String"/>
+	<field name="INV_MANAGER" class="java.lang.String"/>
+	<field name="INV_DAS" class="java.lang.String"/>
+	<field name="INV_GAS" class="java.lang.String"/>
+	<field name="INV_OBJECTIVE" class="java.lang.String"/>
+	<field name="INV_JUST" class="java.lang.String"/>
+	<field name="INV_BENEFICIOS" class="java.lang.String"/>
+	<field name="TA_CODE" class="java.lang.String"/>
+	<field name="TA_NAME" class="java.lang.String"/>
+	<field name="TA_PREPARADO_POR" class="java.lang.String"/>
+	<field name="TA_DATA_CRIACAO" class="java.sql.Timestamp"/>
+	<field name="TA_MANAGER" class="java.lang.String"/>
+	<field name="TA_SINOPSE" class="java.lang.String"/>
+	<field name="TA_DPNN" class="java.lang.String"/>
+	<field name="TA_PS" class="java.lang.String"/>
+	<field name="TA_DPSE" class="java.lang.String"/>
+	<field name="TA_PREMISSAS" class="java.lang.String"/>
+	<field name="TA_REST" class="java.lang.String"/>
+	<field name="TA_RISCOS" class="java.lang.String"/>
+	<field name="TA_GRP_ENTREGAS" class="java.lang.String"/>
+	<field name="TA_EST_CUSTO" class="java.lang.String"/>
+	<field name="AREA_CLIENTE" class="java.lang.String"/>
+	<title>
+		<band height="727" splitType="Stretch">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="0" y="320" width="555" height="37" forecolor="#000000" uuid="882d0654-52ef-4b61-8bc2-010a0b8180d2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Trebuchet MS" size="20" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INV_NAME}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="0" y="355" width="555" height="37" forecolor="#000000" uuid="15564e73-df84-4fc4-9402-03152fd3bbe2"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Trebuchet MS" size="20" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Termo de Abertura"]]></textFieldExpression>
+			</textField>
+			<break>
+				<reportElement x="0" y="726" width="555" height="1" uuid="b1df8003-5cfa-47d0-ae33-e80ab0f4f4e3"/>
+			</break>
+			<textField>
+				<reportElement x="369" y="650" width="185" height="20" forecolor="#000000" uuid="3931a273-4de2-41e0-bfbf-9239fc8c3f85"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Trebuchet MS" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Unimed do Brasil"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="369" y="670" width="185" height="20" forecolor="#000000" uuid="f13ff7fa-bad4-4dbb-af8d-4c8a6b476df2"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Trebuchet MS" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{AREA_CLIENTE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="369" y="690" width="185" height="20" forecolor="#000000" uuid="e18ca11c-9909-4f17-9158-b95de4f6195e"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font fontName="Trebuchet MS" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["("+ new SimpleDateFormat("MM").format($F{TA_DATA_CRIACAO}) + "/" + new SimpleDateFormat("yyyy").format($F{TA_DATA_CRIACAO}) +")"]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="435" y="0" width="120" height="60" uuid="2328b5d6-6781-4fb2-8f40-e9d101ce385b"/>
+				<imageExpression><![CDATA["repo:unimed_logo"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="74">
+			<textField>
+				<reportElement x="0" y="20" width="555" height="40" forecolor="#949494" uuid="d3304e43-6b0c-4255-80a3-c28c7ef70c78"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Trebuchet MS" size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Termo de Abertura de Projeto"]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="435" y="0" width="120" height="60" uuid="6749f853-4838-446e-b715-1262d4be569b"/>
+				<imageExpression><![CDATA["repo:unimed_logo"]]></imageExpression>
+			</image>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="200">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField>
+				<reportElement x="0" y="0" width="555" height="20" forecolor="#000000" uuid="1f5e28ad-84eb-4222-b01c-2d4514866282"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Trebuchet MS" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Dados do Projeto"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="a298d6dd-34ba-4e00-95e1-6ad23bfefbf1"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="45" width="555" height="25" uuid="1cd44dd5-05b4-41ea-a9a7-11ae58449b91"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Trebuchet MS" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INV_CODE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="85" width="555" height="25" uuid="be7e0225-6a55-4374-953d-1a9d08668d85"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Trebuchet MS" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INV_NAME}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="125" width="555" height="25" uuid="f04a75e8-a123-4c42-b414-530e73a464a5"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Trebuchet MS" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{AREA_CLIENTE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="30" width="555" height="15" uuid="696fe026-b7bc-48e7-938c-f00b17f39bed"/>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Trebuchet MS" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ID do Projeto:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="70" width="555" height="15" uuid="9782355b-c172-402b-986c-c78e2dc7b291">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Trebuchet MS" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Título do Projeto:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="110" width="555" height="15" uuid="db5c31ba-fba0-42b0-a761-72b6084c25aa">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Trebuchet MS" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Área Cliente"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="150" width="555" height="15" uuid="75852b33-0504-4787-b744-dcb02b920274">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Trebuchet MS" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Responsável Cliente"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="165" width="555" height="25" uuid="2e47d923-be03-4d91-a51c-7a1dc2525491"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Trebuchet MS" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INV_GAS}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="120">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField>
+				<reportElement x="0" y="0" width="555" height="20" forecolor="#000000" uuid="fa85a5b0-7cfd-447a-a57e-35e9250419dc"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Trebuchet MS" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Aspectos Gerenciais"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="896d2f13-181d-48e8-8533-cb72c6ec11df"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="0" y="30" width="555" height="15" uuid="9c4a696d-4980-4374-b683-e45ebe33fc9b">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Trebuchet MS" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Autor:"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="45" width="555" height="25" uuid="80a400e8-b0ff-4268-9393-96d43553bdba"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Trebuchet MS" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TA_PREPARADO_POR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="70" width="555" height="15" uuid="c4498d0c-2a7d-40bf-8d5e-eceb90076538">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Trebuchet MS" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Criado em:"]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="0" y="85" width="555" height="25" uuid="7f848424-2102-45de-a1fc-d915e0d0bed4"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font fontName="Trebuchet MS" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TA_DATA_CRIACAO}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="60">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField>
+				<reportElement x="0" y="0" width="555" height="20" forecolor="#000000" uuid="02254df2-b3d8-4968-a7f1-18817950d3f7"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Trebuchet MS" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["1.	JUSTIFICATIVA"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="3f585a25-f52a-4ecd-b236-3a4d4db62a47"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="0" y="30" width="555" height="20" uuid="b2ccd61e-08e0-478b-8393-b6c6099216fb"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INV_JUST}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="60">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField>
+				<reportElement x="0" y="0" width="555" height="20" forecolor="#000000" uuid="dd97d497-4627-4093-906a-8e4463948a54"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Trebuchet MS" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["2.	OBJETIVOS "]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="1de554e6-d28a-4d32-ae5a-444c0dc013cb"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="0" y="30" width="555" height="20" uuid="7bbd5051-5f06-4b09-a876-4259fb0cc878"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INV_OBJECTIVE}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="60">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField>
+				<reportElement x="0" y="0" width="555" height="20" forecolor="#000000" uuid="b4db7ed6-9ff2-4688-82fd-103b76da1023"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Trebuchet MS" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["3.	BENEFÍCIOS"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="7e278b88-84f4-48b7-ac8a-8a6830024d8b"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="0" y="30" width="555" height="20" uuid="63fb1551-bdaf-45cd-ae64-18cb69b16fd6"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INV_BENEFICIOS}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="60">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField>
+				<reportElement x="0" y="0" width="555" height="20" forecolor="#000000" uuid="c33ef53a-fad2-47ca-ba4b-99255c45b056"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Trebuchet MS" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["4.	PRODUTO / SERVIÇO"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="15e967bb-558f-4ea8-97ce-6cf3ec8d9503"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="0" y="30" width="555" height="20" uuid="dd54dedf-f33c-48ee-a23f-26f326732d3d"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TA_PS}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="60">
+			<textField>
+				<reportElement x="0" y="0" width="555" height="20" forecolor="#000000" uuid="0a4c0bc5-f294-4686-b1c2-91c10454140f"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Trebuchet MS" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["5.	REQUISITOS ALTO NÍVEL "]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="3842d112-8a4b-4cbe-a3ac-0360a6f32a06"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="0" y="30" width="555" height="20" uuid="a1e2e5bd-392b-411c-8ed9-3017eb3994b6"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TA_DPSE}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="59">
+			<textField>
+				<reportElement x="0" y="0" width="555" height="20" forecolor="#000000" uuid="6d03ec04-455e-4bf2-bd53-13969fcc4a7d"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Trebuchet MS" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["6.	MARCO"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="f6bb86b7-1521-402d-b02a-926286e677e7"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="0" y="30" width="555" height="20" uuid="6c320f3e-f5f0-4b08-a0c2-154460d573d9"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TA_GRP_ENTREGAS}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="61">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField>
+				<reportElement x="0" y="0" width="555" height="20" forecolor="#000000" uuid="3d60fcd7-131e-435a-bb99-a2f39baaaaec"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Trebuchet MS" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["7.	ORÇAMENTO PRÉVIO"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="d09eb679-30c3-4f45-9354-e7db03e4a52a"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="0" y="30" width="555" height="20" uuid="c36d4b8b-6dcc-4c67-b9fd-5dec6812d228"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TA_EST_CUSTO}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="93">
+			<textField>
+				<reportElement x="0" y="0" width="555" height="20" forecolor="#000000" uuid="da843fa6-379a-4f34-afe5-996d8fefed64"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Trebuchet MS" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["8.	RECURSOS HUMANOS"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="54a423d4-ba90-4d3c-ab7e-9a1c446dc2a9"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<componentElement>
+				<reportElement positionType="Float" x="0" y="30" width="555" height="40" uuid="0cce9694-884c-4670-9a4d-2be8f59c6de1">
+					<property name="net.sf.jasperreports.export.headertoolbar.table.name" value=""/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="team" uuid="074b9d1a-b550-48c6-abcc-f6f953654dcd">
+						<datasetParameter name="project_hide">
+							<datasetParameterExpression><![CDATA[$P{project_hide}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="220" uuid="ef3a5e61-eed7-48de-a9d5-b2e3bc127774">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<jr:tableHeader style="Table 1_TH" height="20">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="220" height="20" backcolor="#D4D4D4" uuid="635f6062-8eaa-4a8f-b786-24274983f75e"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Trebuchet MS" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Recurso]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table 1_TD" height="20">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="220" height="20" uuid="4494bba2-6759-4f7f-b3d6-689ebd3a1670"/>
+								<textElement textAlignment="Left" verticalAlignment="Middle">
+									<font fontName="Trebuchet MS"/>
+									<paragraph lineSpacing="Fixed" leftIndent="5"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{AVALIADORES}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="250" uuid="f85d058c-703b-4d84-aa7e-f6ef5e53987a">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<jr:tableHeader style="Table 1_TH" height="20">
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<staticText>
+								<reportElement mode="Opaque" x="0" y="0" width="250" height="20" backcolor="#D4D4D4" uuid="393c6651-135c-4c4b-a5cb-ff611f8a000d"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle">
+									<font fontName="Trebuchet MS" size="12" isBold="true"/>
+								</textElement>
+								<text><![CDATA[Organograma]]></text>
+							</staticText>
+						</jr:tableHeader>
+						<jr:detailCell style="Table 1_TD" height="20">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<property name="com.jaspersoft.studio.unit.height" value="px"/>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="250" height="20" uuid="f028455f-4768-4014-8267-1b33df461a53"/>
+								<textElement textAlignment="Left" verticalAlignment="Middle">
+									<font fontName="Trebuchet MS"/>
+									<paragraph lineSpacing="Fixed" leftIndent="5"/>
+								</textElement>
+								<textFieldExpression><![CDATA[$F{ORGANOGRAMA}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+		<band height="60">
+			<textField>
+				<reportElement x="0" y="0" width="555" height="20" forecolor="#000000" uuid="f0090fdf-3994-4adf-905d-eba960461e42"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Trebuchet MS" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["9.	PREMISSAS"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="3790c1ce-1bd5-4a52-8c98-56156737ce9a"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="0" y="30" width="555" height="20" uuid="25fa5135-21d1-44a8-980a-5847d583e74e"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TA_PREMISSAS}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="60">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField>
+				<reportElement x="0" y="0" width="555" height="20" forecolor="#000000" uuid="d28b3897-f57e-4f7b-94a9-fd139e466ab0"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Trebuchet MS" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["10.	RESTRIÇÕES"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="c666bcd4-a26d-4270-8c74-7c8d5bca2f27"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="0" y="30" width="555" height="20" uuid="4b44349b-bb44-4131-92c1-ce5e048669ad"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TA_REST}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="60">
+			<textField>
+				<reportElement x="0" y="0" width="555" height="20" forecolor="#000000" uuid="ea1426d8-6c03-4323-ac7b-1f7cda910075"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font fontName="Trebuchet MS" size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["11.	RISCOS"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="d6bf2cfb-dab4-4122-b7e8-7e330fb59e43"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="0" y="30" width="555" height="20" uuid="38a34c3b-e80c-43b4-a2c8-6a783e3d7e2f"/>
+				<textElement>
+					<font fontName="Trebuchet MS" size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TA_RISCOS}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="225">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<frame>
+				<reportElement positionType="Float" x="0" y="80" width="555" height="41" uuid="d47e70ae-d4a9-4eef-80b0-dff3b71a60d6"/>
+				<textField isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="230" height="25" uuid="50486432-4dfb-412c-96b8-6a50749586e1"/>
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
+						<font fontName="Trebuchet MS" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{INV_GAS}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="25" width="230" height="15" uuid="067d213a-2f92-494b-bd78-613fb54bc249">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Trebuchet MS" size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Gestor da Área Solicitante"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="230" y="0" width="30" height="25" uuid="1174b7ef-f579-44c9-bf1e-b56fe5a867de">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
+						<font fontName="Trebuchet MS" size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Data:"]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+					<reportElement x="260" y="0" width="79" height="25" uuid="97335b90-369b-4bc0-9584-88333bdcef25"/>
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
+						<font fontName="Trebuchet MS" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{TA_DATA_CRIACAO}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="40" width="555" height="1" uuid="53265c05-79c1-4e91-aef1-dfaa0d3719e4"/>
+					<graphicElement>
+						<pen lineWidth="2.0"/>
+					</graphicElement>
+				</line>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="185" width="555" height="40" uuid="1762e935-5efb-4c87-95f3-211dcf3f095b"/>
+				<textField isBlankWhenNull="true">
+					<reportElement x="0" y="0" width="230" height="25" uuid="03efdd0c-b9c3-4096-a4fd-e0b251e70d59"/>
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
+						<font fontName="Trebuchet MS" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{INV_DAS}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="25" width="230" height="15" uuid="6818278b-f109-4e4a-a750-451df1eca4ed">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Trebuchet MS" size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Diretor da Área Solicitante"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="230" y="0" width="30" height="25" uuid="91caae5b-1087-4160-8e3b-517c7007e135">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
+						<font fontName="Trebuchet MS" size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Data:"]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+					<reportElement x="260" y="0" width="79" height="25" uuid="24903aa3-9019-4bc2-92b1-9fe4146933a7"/>
+					<textElement textAlignment="Center" verticalAlignment="Bottom">
+						<font fontName="Trebuchet MS" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{TA_DATA_CRIACAO}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="39" width="555" height="1" uuid="3c95a5b8-3226-41aa-a2bd-70c7034fb5f0"/>
+					<graphicElement>
+						<pen lineWidth="2.0"/>
+					</graphicElement>
+				</line>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" x="0" y="0" width="555" height="21" uuid="5fa587cf-b90b-416f-b78a-375bd07581ce"/>
+				<textField>
+					<reportElement x="0" y="0" width="555" height="20" forecolor="#000000" uuid="b2c7113c-171d-49c2-a09c-d6676190dd6d"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Trebuchet MS" size="14" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["12.	APROVAÇÃO DO TERMO DE ABERTURA"]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="20" width="555" height="1" uuid="77f93d38-d74a-4cfc-82da-e40298bbc060"/>
+					<graphicElement>
+						<pen lineWidth="2.0"/>
+					</graphicElement>
+				</line>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

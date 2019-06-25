@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.2.final using JasperReports Library version 6.4.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Signatures" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="01b953bc-db98-488c-b2fd-1733ba093d77">
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="UNIMED - DEV"/>
+	<property name="ireport.jasperserver.url" value="https://cppmrpt103.ondemand.ca.com/reportservice/"/>
+	<property name="ireport.jasperserver.user" value="reportdev|cppm9187"/>
+	<property name="ireport.jasperserver.report.resource" value="/ca_ppm/unimed/unimed_rpt_aceite_proj_files/Signatures.jrxml"/>
+	<property name="ireport.jasperserver.reportUnit" value="/ca_ppm/unimed/unimed_rpt_aceite_proj"/>
+	<parameter name="param_tap" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+  CLIENTE.FIRST_NAME || ' ' || CLIENTE.LAST_NAME SIG_CLIENTE,
+  TA.UM_DATA SIG_DATA
+FROM 
+  ODF_MULTI_VALUED_LOOKUPS MUL
+  INNER JOIN SRM_RESOURCES CLIENTE ON CLIENTE.ID = MUL.VALUE
+  INNER JOIN ODF_CA_UM_TERMO_ACEITE_PRJ TA ON TA.ID = MUL.PK_ID
+WHERE 
+  MUL.OBJECT = 'um_termo_aceite_prj' 
+  AND MUL.ATTRIBUTE = 'um_cliente'
+  AND TA.ID = $P{param_tap} 
+ORDER BY
+  CLIENTE.FIRST_NAME || ' ' || CLIENTE.LAST_NAME ASC]]>
+	</queryString>
+	<field name="SIG_CLIENTE" class="java.lang.String"/>
+	<field name="SIG_DATA" class="java.sql.Timestamp"/>
+	<detail>
+		<band height="91">
+			<textField>
+				<reportElement x="0" y="57" width="298" height="30" uuid="3b50b66a-b3a7-411f-94e0-fca973c67ee4"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SIG_CLIENTE}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="298" y="57" width="102" height="30" uuid="df556e46-3dc7-47e7-b9ef-05f0cf5c89ce"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SIG_DATA}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="90" width="595" height="1" uuid="562cfd18-3a5c-48cd-a751-6261ecb98b36"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+		</band>
+	</detail>
+</jasperReport>

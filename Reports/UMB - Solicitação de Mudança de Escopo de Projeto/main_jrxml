@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.2.final using JasperReports Library version 6.4.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="unimed_cr_proj" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f2e6b09e-5b48-4b93-a43d-12191ee49682">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="UNIMED - DEV"/>
+	<property name="ireport.jasperserver.url" value="https://cppmrpt103.ondemand.ca.com/reportservice/"/>
+	<property name="ireport.jasperserver.user" value="reportdev|cppm9187"/>
+	<property name="ireport.jasperserver.report.resource" value="/ca_ppm/unimed/unimed_rpt_cr_proj_files/main_jrxml"/>
+	<property name="ireport.jasperserver.reportUnit" value="/ca_ppm/unimed/unimed_rpt_cr_proj"/>
+	<parameter name="project_hide" class="java.lang.String"/>
+	<parameter name="cr_hide" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT 
+  INV.ID INV_ID,
+  INV.CODE INV_CODE,
+  INV.NAME INV_NAME,
+  MGR.FIRST_NAME || ' ' || MGR.LAST_NAME INV_MANAGER,
+  RESP.FIRST_NAME || ' ' || RESP.LAST_NAME CR_RESPONSAVEL,
+  CR.CREATED_DATE CR_CRIADO_EM,
+  CRIADO_POR.FIRST_NAME || ' ' || CRIADO_POR.LAST_NAME CR_CRIADO_POR,
+  RISK.DESCRIPTION CR_DESCRICAO,
+  RISK.ASSUMPTIONS CR_MOTIVO,
+  RISK.TARGET_RESOLUTION_DATE CR_DATA,
+  OCR.ubdatasol CR_DATA_SOL,
+  PR.DESCRIPTION || ' ' || '(' || PR.NAME || ')' CR_PRIORIDADE
+FROM
+  INV_INVESTMENTS INV
+  LEFT JOIN RIM_RISKS_AND_ISSUES RISK ON RISK.PK_ID = INV.ID
+  LEFT JOIN RIM_CHANGE_REQUESTS CR ON CR.ID = RISK.ID
+  LEFT JOIN ODF_CA_CHANGE OCR ON OCR.ID = CR.ID
+  LEFT JOIN SRM_RESOURCES MGR ON MGR.USER_ID = INV.MANAGER_ID
+  LEFT JOIN SRM_RESOURCES RESP ON RESP.USER_ID = RISK.ASSIGNED_TO
+  LEFT JOIN SRM_RESOURCES CRIADO_POR ON CRIADO_POR.USER_ID = CR.CREATED_BY
+  LEFT JOIN CMN_LOOKUPS_V PR ON PR.LOOKUP_CODE = RISK.PRIORITY_CODE AND PR.LOOKUP_TYPE = 'RIM_PRIORITY' AND PR.LANGUAGE_CODE = 'pt'
+WHERE
+  INV.ID =  $P{project_hide} 
+  AND CR.ID = $P{cr_hide}]]>
+	</queryString>
+	<field name="INV_ID" class="java.math.BigDecimal"/>
+	<field name="INV_CODE" class="java.lang.String"/>
+	<field name="INV_NAME" class="java.lang.String"/>
+	<field name="INV_MANAGER" class="java.lang.String"/>
+	<field name="CR_RESPONSAVEL" class="java.lang.String"/>
+	<field name="CR_CRIADO_EM" class="java.sql.Timestamp"/>
+	<field name="CR_CRIADO_POR" class="java.lang.String"/>
+	<field name="CR_DESCRICAO" class="java.lang.String"/>
+	<field name="CR_MOTIVO" class="java.lang.String"/>
+	<field name="CR_DATA" class="java.sql.Timestamp"/>
+	<field name="CR_DATA_SOL" class="java.sql.Timestamp"/>
+	<field name="CR_PRIORIDADE" class="java.lang.String"/>
+	<title>
+		<band height="63" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="20" width="555" height="40" forecolor="#949494" uuid="1def7e95-9d14-452b-95d0-5dab4dcf50a5"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Solicitação de Mudança"]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="435" y="0" width="120" height="60" uuid="4f84e78a-5af1-43c2-8c9d-1557b7cc9e18"/>
+				<imageExpression><![CDATA["repo:unimed_logo"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<detail>
+		<band height="147">
+			<textField>
+				<reportElement x="0" y="0" width="555" height="20" forecolor="#000000" uuid="1f5e28ad-84eb-4222-b01c-2d4514866282"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Dados da Solicitação"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="a298d6dd-34ba-4e00-95e1-6ad23bfefbf1"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="120" y="35" width="435" height="25" uuid="1cd44dd5-05b4-41ea-a9a7-11ae58449b91"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INV_CODE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="120" y="60" width="435" height="25" uuid="be7e0225-6a55-4374-953d-1a9d08668d85"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INV_NAME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="120" y="85" width="435" height="25" uuid="f04a75e8-a123-4c42-b414-530e73a464a5"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INV_MANAGER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="35" width="120" height="25" uuid="696fe026-b7bc-48e7-938c-f00b17f39bed"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ID do Projeto:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="60" width="120" height="25" uuid="9782355b-c172-402b-986c-c78e2dc7b291"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Título do Projeto:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="85" width="120" height="25" uuid="db5c31ba-fba0-42b0-a761-72b6084c25aa"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Gerente do projeto:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="110" width="120" height="25" uuid="75852b33-0504-4787-b744-dcb02b920274"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Solicitante:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="120" y="110" width="435" height="25" uuid="2e47d923-be03-4d91-a51c-7a1dc2525491">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CR_RESPONSAVEL}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="110">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField>
+				<reportElement x="0" y="0" width="555" height="20" forecolor="#000000" uuid="7ffefb05-d3f6-4b6f-ba83-cfe027bef128"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Aspectos Gerenciais"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="1ced318c-75b4-4786-8bf0-165484b74ee1"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="0" y="30" width="555" height="15" uuid="1f4fde1b-8d13-44b1-9c24-b68da636c74b">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Autor:"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="45" width="555" height="25" uuid="b5a0f7fc-94c4-4d06-98c0-07e396807163"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CR_CRIADO_POR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="70" width="555" height="15" uuid="67a433a1-3f7a-4134-ad2e-daa129547dbf">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Criado em:"]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="0" y="85" width="555" height="25" uuid="06022ab9-f7d7-47c8-b8eb-0f5a47618b4e"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CR_CRIADO_EM}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="60">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField>
+				<reportElement x="0" y="0" width="555" height="20" forecolor="#000000" uuid="fa85a5b0-7cfd-447a-a57e-35e9250419dc"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Descrição da Mudança"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="896d2f13-181d-48e8-8533-cb72c6ec11df"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="0" y="30" width="555" height="20" uuid="b2c1c733-674c-40ba-8838-8cd06957de98"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CR_DESCRICAO}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="60">
+			<textField>
+				<reportElement x="0" y="0" width="555" height="20" forecolor="#000000" uuid="3dc66b9e-f05a-40aa-9442-3447a56ededa"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Motivo da Mudança"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="c17c6136-5921-4030-b97d-96ee3b79b17a"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement positionType="Float" x="0" y="30" width="555" height="20" uuid="843dcab2-0515-45a1-be11-d620b6a4cd28"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CR_MOTIVO}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="100">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField>
+				<reportElement x="0" y="0" width="555" height="20" forecolor="#000000" uuid="5fc86749-a1ed-4a52-b186-297d9c6bb52d"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Assinaturas"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="970c8b57-2f51-4243-94dd-ea01e32af978"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="70" y="70" width="230" height="25" uuid="5aee0687-fca8-4b0e-86f8-dd636ed5d332"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CR_RESPONSAVEL}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yy" isBlankWhenNull="true">
+				<reportElement x="300" y="70" width="80" height="25" uuid="dcd3d361-a84f-4b9c-a62c-0afc8147406d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CR_DATA_SOL}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="99" width="555" height="1" uuid="3f8cca8b-d7f6-4981-8fa6-5f336f86292a"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="70" width="70" height="25" uuid="92d3bc20-eb10-49eb-b759-31cfb8a7a54f"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Solicitante:"]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

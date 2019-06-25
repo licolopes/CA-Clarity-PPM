@@ -1,0 +1,1327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.2.final using JasperReports Library version 6.4.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="unimed_rpt_painel_portf" pageWidth="1200" pageHeight="2000" orientation="Landscape" columnWidth="1160" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c5cf41b3-2712-418f-b38f-a66e99b8029d">
+	<property name="ireport.jasperserver.url" value="https://cppmrpt103.ondemand.ca.com/reportservice/"/>
+	<property name="ireport.jasperserver.user" value="reportdev|cppm9187"/>
+	<property name="ireport.jasperserver.reportUnit" value="/ca_ppm/unimed/unimed_rpt_painel_portf"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="ireport.jasperserver.report.resource" value="/ca_ppm/unimed/unimed_rpt_painel_portf_files/main_jrxml"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="UNIMED - PRD"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<subDataset name="RISK_OPEN" uuid="f802535c-e126-4108-bfff-cfb707fd072a">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="UNIMED - PRD"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="tipo_proj" class="java.util.Collection"/>
+		<parameter name="dir_resp" class="java.util.Collection"/>
+		<parameter name="area_resp" class="java.util.Collection"/>
+		<queryString>
+			<![CDATA[SELECT
+	INV_ID,
+	INV_CODE,
+	INV_NAME,
+	COUNT(INV_ID) QTD
+FROM
+(
+  SELECT DISTINCT
+    INV.ID INV_ID,
+    INV.CODE INV_CODE,
+    INV.NAME INV_NAME,
+    RIM.ID RISCO_ID,  
+    RIM.RIM_RISK_ISSUE_CODE RISCO_CODE,
+    RIM.NAME RISCO_NAME,
+	TP.NAME TP_NAME,
+	TP.LOOKUP_CODE TP_CODE,
+	DAS.FIRST_NAME || ' ' || DAS.LAST_NAME DIRETOR_NAME,
+	DAS.UNIQUE_NAME DIRETOR_CODE,
+	OBSU.NAME AREA_CLIENTE  
+  FROM
+    INV_INVESTMENTS INV
+	INNER JOIN INV_PROJECTS INVP ON INVP.PRID = INV.ID
+	INNER JOIN ODF_CA_PROJECT OPRJ ON OPRJ.ID = INV.ID
+    INNER JOIN RIM_RISKS_AND_ISSUES RIM ON RIM.PK_ID = INV.ID AND RIM.TYPE_CODE = 'RISK'
+	LEFT JOIN CMN_LOOKUPS_V TP ON TP.LOOKUP_CODE = OPRJ.obj_request_type AND TP.LOOKUP_TYPE = 'OBJ_IDEA_PROJECT_TYPE' AND TP.LANGUAGE_CODE = 'pt'
+	LEFT JOIN SRM_RESOURCES DAS ON DAS.ID = OPRJ.obj_stakeholder1
+	LEFT JOIN PRJ_OBS_ASSOCIATIONS OBSA ON OBSA.RECORD_ID = INV.ID
+	JOIN PRJ_OBS_UNITS_FLAT OBSF ON OBSA.UNIT_ID = OBSF.UNIT_ID
+	JOIN PRJ_OBS_UNITS OBSU ON OBSU.ID = OBSF.BRANCH_UNIT_ID AND OBSU.DEPTH = (
+																				SELECT MAX(OBSU2.DEPTH) 
+																				FROM PRJ_OBS_ASSOCIATIONS OBSA2
+																				LEFT JOIN PRJ_OBS_UNITS_FLAT OBSF2 ON OBSA2.UNIT_ID = OBSF2.UNIT_ID
+																				LEFT JOIN PRJ_OBS_UNITS OBSU2 ON OBSU2.ID = OBSF2.BRANCH_UNIT_ID
+																				WHERE OBSA2.RECORD_ID = INV.ID 
+																			)
+	JOIN PRJ_OBS_OBJECT_TYPES OOT ON OOT.TYPE_ID = OBSU.TYPE_ID AND OOT.TABLE_NAME = 'SRM_PROJECTS' AND OOT.TYPE_ID = 5000003
+  WHERE
+  	INV.IS_ACTIVE = 1
+    AND INVP.IS_TEMPLATE = 0
+	AND RIM.STATUS_CODE = 'OPEN'	
+)RISCO
+
+WHERE
+	$X{IN,TP_CODE,tipo_proj} 
+	AND $X{IN,DIRETOR_CODE,dir_resp} 
+	AND $X{IN,AREA_CLIENTE,area_resp} 
+	
+GROUP BY
+	INV_ID,
+	INV_CODE,
+	INV_NAME]]>
+		</queryString>
+		<field name="INV_ID" class="java.math.BigDecimal"/>
+		<field name="INV_CODE" class="java.lang.String"/>
+		<field name="INV_NAME" class="java.lang.String"/>
+		<field name="QTD" class="java.math.BigDecimal"/>
+		<sortField name="QTD" order="Descending"/>
+	</subDataset>
+	<subDataset name="ISSUE_OPEN" uuid="c67014cc-c826-48ef-a54b-72cb29a8901b">
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="UNIMED - PRD"/>
+		<parameter name="tipo_proj" class="java.util.Collection"/>
+		<parameter name="dir_resp" class="java.util.Collection"/>
+		<parameter name="area_resp" class="java.util.Collection"/>
+		<queryString>
+			<![CDATA[SELECT
+INV_ID,
+INV_CODE,
+INV_NAME,
+COUNT(INV_ID) QTD
+FROM
+(
+  SELECT DISTINCT
+    INV.ID INV_ID,
+    INV.CODE INV_CODE,
+    INV.NAME INV_NAME,
+    RIM.ID ISSUE_ID,  
+    RIM.RIM_RISK_ISSUE_CODE ISSUE_CODE,
+    RIM.NAME ISSUE_NAME,
+	TP.NAME TP_NAME,
+	TP.LOOKUP_CODE TP_CODE,
+	DAS.FIRST_NAME || ' ' || DAS.LAST_NAME DIRETOR_NAME,
+	DAS.UNIQUE_NAME DIRETOR_CODE,
+	OBSU.NAME AREA_CLIENTE
+  FROM
+    INV_INVESTMENTS INV
+	INNER JOIN INV_PROJECTS INVP ON INVP.PRID = INV.ID
+	INNER JOIN ODF_CA_PROJECT OPRJ ON OPRJ.ID = INV.ID
+    INNER JOIN RIM_RISKS_AND_ISSUES RIM ON RIM.PK_ID = INV.ID AND RIM.TYPE_CODE = 'ISSUE'
+	LEFT JOIN CMN_LOOKUPS_V TP ON TP.LOOKUP_CODE = OPRJ.obj_request_type AND TP.LOOKUP_TYPE = 'OBJ_IDEA_PROJECT_TYPE' AND TP.LANGUAGE_CODE = 'pt'	
+	LEFT JOIN SRM_RESOURCES DAS ON DAS.ID = OPRJ.obj_stakeholder1
+	LEFT JOIN PRJ_OBS_ASSOCIATIONS OBSA ON OBSA.RECORD_ID = INV.ID
+	JOIN PRJ_OBS_UNITS_FLAT OBSF ON OBSA.UNIT_ID = OBSF.UNIT_ID
+	JOIN PRJ_OBS_UNITS OBSU ON OBSU.ID = OBSF.BRANCH_UNIT_ID AND OBSU.DEPTH = (
+																				SELECT MAX(OBSU2.DEPTH) 
+																				FROM PRJ_OBS_ASSOCIATIONS OBSA2
+																				LEFT JOIN PRJ_OBS_UNITS_FLAT OBSF2 ON OBSA2.UNIT_ID = OBSF2.UNIT_ID
+																				LEFT JOIN PRJ_OBS_UNITS OBSU2 ON OBSU2.ID = OBSF2.BRANCH_UNIT_ID
+																				WHERE OBSA2.RECORD_ID = INV.ID 
+																			)
+	JOIN PRJ_OBS_OBJECT_TYPES OOT ON OOT.TYPE_ID = OBSU.TYPE_ID AND OOT.TABLE_NAME = 'SRM_PROJECTS' AND OOT.TYPE_ID = 5000003
+  WHERE
+    INV.IS_ACTIVE = 1
+	AND INVP.IS_TEMPLATE = 0
+	AND RIM.STATUS_CODE = 'OPEN'	
+)RISCO
+
+WHERE
+	$X{IN,TP_CODE,tipo_proj} 
+	AND $X{IN,DIRETOR_CODE,dir_resp} 
+	AND $X{IN,AREA_CLIENTE,area_resp} 
+	
+GROUP BY
+	INV_ID,
+	INV_CODE,
+	INV_NAME]]>
+		</queryString>
+		<field name="INV_ID" class="java.math.BigDecimal"/>
+		<field name="INV_CODE" class="java.lang.String"/>
+		<field name="INV_NAME" class="java.lang.String"/>
+		<field name="QTD" class="java.math.BigDecimal"/>
+	</subDataset>
+	<subDataset name="PROJ_PRAZO" uuid="153d4e38-0111-454a-a06d-07f5a2d6f615">
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="UNIMED - PRD"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="tipo_proj" class="java.util.Collection"/>
+		<parameter name="dir_resp" class="java.util.Collection"/>
+		<parameter name="area_resp" class="java.util.Collection"/>
+		<queryString>
+			<![CDATA[SELECT
+DIF,
+COUNT(INV_ID) QTD
+FROM
+(
+	SELECT DISTINCT
+	  INV.ID INV_ID,
+	  INV.CODE INV_CODE,
+	  INV.NAME INV_NAME,
+	  TO_DATE(MIN(TSK.PRSTART),'DD/MM/YYYY') TSK_START,
+	  TO_DATE(MAX(TSK.PRFINISH),'DD/MM/YYYY') TSK_FINISH,
+	  TO_DATE(BLD.START_DATE,'DD/MM/YYYY') BL_START,
+	  TO_DATE(BLD.FINISH_DATE,'DD/MM/YYYY') BL_FINISH,
+	  CASE
+		WHEN (TO_DATE(MAX(TSK.PRFINISH),'DD/MM/YYYY') - TO_DATE(BLD.FINISH_DATE,'DD/MM/YYYY')) > 0 THEN 'Fora do prazo'
+		ELSE 'No prazo'
+		END DIF,
+	  TP.NAME TP_NAME,
+	  TP.LOOKUP_CODE TP_CODE,
+	  DAS.FIRST_NAME || ' ' || DAS.LAST_NAME DIRETOR_NAME,
+	  DAS.UNIQUE_NAME DIRETOR_CODE,
+	  OBSU.NAME AREA_CLIENTE
+	FROM
+	  INV_INVESTMENTS INV
+	  INNER JOIN INV_PROJECTS INVP ON INVP.PRID = INV.ID
+	  INNER JOIN ODF_CA_PROJECT OPRJ ON OPRJ.ID = INV.ID
+	  INNER JOIN PRTASK TSK ON TSK.PRPROJECTID = INV.ID
+	  INNER JOIN PRJ_BASELINES BL ON BL.PROJECT_ID = INV.ID AND BL.IS_CURRENT = 1
+	  INNER JOIN PRJ_BASELINE_DETAILS BLD ON BLD.BASELINE_ID = BL.ID AND BLD.OBJECT_TYPE = 'PROJECT'
+	  LEFT JOIN CMN_LOOKUPS_V TP ON TP.LOOKUP_CODE = OPRJ.obj_request_type AND TP.LOOKUP_TYPE = 'OBJ_IDEA_PROJECT_TYPE' AND TP.LANGUAGE_CODE = 'pt'
+	  LEFT JOIN SRM_RESOURCES DAS ON DAS.ID = OPRJ.obj_stakeholder1
+	  LEFT JOIN PRJ_OBS_ASSOCIATIONS OBSA ON OBSA.RECORD_ID = INV.ID
+	  JOIN PRJ_OBS_UNITS_FLAT OBSF ON OBSA.UNIT_ID = OBSF.UNIT_ID
+	  JOIN PRJ_OBS_UNITS OBSU ON OBSU.ID = OBSF.BRANCH_UNIT_ID AND OBSU.DEPTH = (
+																					SELECT MAX(OBSU2.DEPTH) 
+																					FROM PRJ_OBS_ASSOCIATIONS OBSA2
+																					LEFT JOIN PRJ_OBS_UNITS_FLAT OBSF2 ON OBSA2.UNIT_ID = OBSF2.UNIT_ID
+																					LEFT JOIN PRJ_OBS_UNITS OBSU2 ON OBSU2.ID = OBSF2.BRANCH_UNIT_ID
+																					WHERE OBSA2.RECORD_ID = INV.ID 
+																				)
+	  JOIN PRJ_OBS_OBJECT_TYPES OOT ON OOT.TYPE_ID = OBSU.TYPE_ID AND OOT.TABLE_NAME = 'SRM_PROJECTS' AND OOT.TYPE_ID = 5000003
+	WHERE
+	  INV.IS_ACTIVE = 1
+	  AND INVP.IS_TEMPLATE = 0
+	GROUP BY
+	  INV.ID,
+	  INV.CODE,
+	  INV.NAME,
+	  BLD.START_DATE,
+	  BLD.FINISH_DATE,
+	  TP.NAME,
+	  TP.LOOKUP_CODE,
+	  DAS.FIRST_NAME,
+	  DAS.LAST_NAME,
+	  DAS.UNIQUE_NAME,
+	  OBSU.NAME
+)AMTS
+
+WHERE
+	$X{IN,TP_CODE,tipo_proj} 
+	AND $X{IN,DIRETOR_CODE,dir_resp} 
+	AND $X{IN,AREA_CLIENTE,area_resp} 
+	
+GROUP BY
+	DIF]]>
+		</queryString>
+		<field name="DIF" class="java.lang.String"/>
+		<field name="QTD" class="java.math.BigDecimal"/>
+	</subDataset>
+	<subDataset name="PROJ_SAUDAVEIS" uuid="106cee2f-a83d-47c6-bb97-87ed44a71d86">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="UNIMED - PRD"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
+		<parameter name="tipo_proj" class="java.util.Collection"/>
+		<parameter name="dir_resp" class="java.util.Collection"/>
+		<parameter name="area_resp" class="java.util.Collection"/>
+		<queryString>
+			<![CDATA[SELECT
+INV_STATUS,
+COUNT(INV_ID) QTD
+FROM
+(
+	SELECT
+		INV.ID INV_ID,
+		INV.CODE INV_CODE,
+		INV.NAME INV_NAME,
+		NVL(IND.NAME,'Em branco') INV_STATUS,
+		TP.NAME TP_NAME,
+		TP.LOOKUP_CODE TP_CODE,
+		DAS.FIRST_NAME || ' ' || DAS.LAST_NAME DIRETOR_NAME,
+		DAS.UNIQUE_NAME DIRETOR_CODE,
+		OBSU.NAME AREA_CLIENTE  
+	FROM
+		INV_INVESTMENTS INV
+		INNER JOIN INV_PROJECTS INVP ON INVP.PRID = INV.ID
+		INNER JOIN ODF_CA_PROJECT OPRJ ON OPRJ.ID = INV.ID
+		LEFT JOIN CMN_LOOKUPS_V IND ON IND.LOOKUP_ENUM = INV.status_indicator AND IND.LOOKUP_TYPE = 'INVESTMENT_STATUS_INDICATOR' AND IND.LANGUAGE_CODE = 'pt'		
+		LEFT JOIN CMN_LOOKUPS_V TP ON TP.LOOKUP_CODE = OPRJ.obj_request_type AND TP.LOOKUP_TYPE = 'OBJ_IDEA_PROJECT_TYPE' AND TP.LANGUAGE_CODE = 'pt'
+		LEFT JOIN SRM_RESOURCES DAS ON DAS.ID = OPRJ.obj_stakeholder1
+		LEFT JOIN PRJ_OBS_ASSOCIATIONS OBSA ON OBSA.RECORD_ID = INV.ID
+		JOIN PRJ_OBS_UNITS_FLAT OBSF ON OBSA.UNIT_ID = OBSF.UNIT_ID
+		JOIN PRJ_OBS_UNITS OBSU ON OBSU.ID = OBSF.BRANCH_UNIT_ID AND OBSU.DEPTH = (
+																					SELECT MAX(OBSU2.DEPTH) 
+																					FROM PRJ_OBS_ASSOCIATIONS OBSA2
+																					LEFT JOIN PRJ_OBS_UNITS_FLAT OBSF2 ON OBSA2.UNIT_ID = OBSF2.UNIT_ID
+																					LEFT JOIN PRJ_OBS_UNITS OBSU2 ON OBSU2.ID = OBSF2.BRANCH_UNIT_ID
+																					WHERE OBSA2.RECORD_ID = INV.ID 
+																				)
+		JOIN PRJ_OBS_OBJECT_TYPES OOT ON OOT.TYPE_ID = OBSU.TYPE_ID AND OOT.TABLE_NAME = 'SRM_PROJECTS' AND OOT.TYPE_ID = 5000003
+	WHERE
+		INV.IS_ACTIVE = 1
+		AND INVP.IS_TEMPLATE = 0
+)AMTS
+
+WHERE
+  $X{IN,TP_CODE,tipo_proj} 
+  AND $X{IN,DIRETOR_CODE,dir_resp} 
+  AND $X{IN,AREA_CLIENTE,area_resp} 
+  
+GROUP BY
+  INV_STATUS]]>
+		</queryString>
+		<field name="INV_STATUS" class="java.lang.String"/>
+		<field name="QTD" class="java.math.BigDecimal"/>
+	</subDataset>
+	<subDataset name="TSK_TEMPO" uuid="223903d4-bc60-488e-b6f4-d3d716d9e354">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="UNIMED - PRD"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="598"/>
+		<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="388"/>
+		<parameter name="tipo_proj" class="java.util.Collection"/>
+		<parameter name="dir_resp" class="java.util.Collection"/>
+		<parameter name="area_resp" class="java.util.Collection"/>
+		<queryString>
+			<![CDATA[SELECT
+DIF,
+ORDEM,
+COUNT(INV_ID) QTD
+FROM
+(
+	SELECT DISTINCT
+	INV_ID,
+	DIF,
+	ORDEM
+	FROM
+	(
+		SELECT
+		T3.INV_ID,
+		T3.INV_CODE,
+		T3.INV_NAME,
+		T3.TSK_TOTAL,
+		T3.TSK_ATRASADAS,
+		T3.DIF_PERC,
+		T3.DIF,
+		CASE
+		  WHEN T3.DIF = '> 1% e <= 10%' THEN 10
+		  WHEN T3.DIF = '> 10%  e <= 25%' THEN 20
+		  WHEN T3.DIF = '> 25%  e <= 50%' THEN 30
+		  WHEN T3.DIF = '> 50%  e <= 75%' THEN 40
+		  WHEN T3.DIF = '> 75%' THEN 50
+		  END ORDEM,
+		TASK.TP_CODE,
+		TASK.TP_NAME,
+		TASK.DIRETOR_CODE,
+		TASK.DIRETOR_NAME,
+		TASK.AREA_CLIENTE,
+		TASK.TSK_ID,
+		TASK.TSK_NAME,
+		TASK.TSK_START,
+		TASK.TSK_FINISH,
+		TASK.BL_START,
+		TASK.BL_FINISH,
+		TASK.TSK_STATUS,
+		(TO_DATE(TASK.TSK_FINISH,'DD/MM/YYYY') - TO_DATE(TASK.BL_FINISH,'DD/MM/YYYY')) DIAS
+		FROM
+		(
+			SELECT
+			  INV_ID,
+			  INV_CODE,
+			  INV_NAME,
+			  TSK_TOTAL,
+			  TSK_ATRASADAS,
+			  ROUND((TSK_ATRASADAS/TSK_TOTAL),2) DIF_PERC,
+			  CASE
+				WHEN ROUND((TSK_ATRASADAS/TSK_TOTAL),2) > 0 AND ROUND((TSK_ATRASADAS/TSK_TOTAL),2) <= 0.10 THEN '> 1% e <= 10%'
+				WHEN ROUND((TSK_ATRASADAS/TSK_TOTAL),2) > 0.10 AND ROUND((TSK_ATRASADAS/TSK_TOTAL),2) <= 0.25 THEN '> 10%  e <= 25%'
+				WHEN ROUND((TSK_ATRASADAS/TSK_TOTAL),2) > 0.25 AND ROUND((TSK_ATRASADAS/TSK_TOTAL),2) <= 0.50 THEN '> 25%  e <= 50%'
+				WHEN ROUND((TSK_ATRASADAS/TSK_TOTAL),2) > 0.50 AND ROUND((TSK_ATRASADAS/TSK_TOTAL),2) <= 0.75 THEN '> 50%  e <= 75%'
+				WHEN ROUND((TSK_ATRASADAS/TSK_TOTAL),2) > 0.75 THEN '> 75%'
+				END DIF	  
+			FROM
+			(
+			  SELECT
+				INV_ID,
+				INV_CODE,
+				INV_NAME,
+				(SELECT COUNT(PRID) FROM PRTASK TSK2 WHERE TSK2.PRPROJECTID = INV_ID AND TSK2.PRISTASK = 1) TSK_TOTAL,
+				SUM(TSK_ATRASADAS) TSK_ATRASADAS
+			  FROM
+			  (
+				SELECT DISTINCT
+				  INV.ID INV_ID,
+				  INV.CODE INV_CODE,
+				  INV.NAME INV_NAME,
+				  TSK.PRNAME TSK_NAME,
+				  STATUS.NAME TSK_STATUS,
+				  TO_DATE(TSK.PRSTART,'DD/MM/YYYY') TSK_START,
+				  TO_DATE(TSK.PRFINISH,'DD/MM/YYYY') TSK_FINISH,
+				  TO_DATE(BLD.START_DATE,'DD/MM/YYYY') BL_START,
+				  TO_DATE(BLD.FINISH_DATE,'DD/MM/YYYY') BL_FINISH,
+				  CASE
+					WHEN (TO_DATE(TSK.PRFINISH,'DD/MM/YYYY') - TO_DATE(BLD.FINISH_DATE,'DD/MM/YYYY')) > 0 THEN 1
+					ELSE 0
+					END TSK_ATRASADAS			  
+				FROM
+				  INV_INVESTMENTS INV
+				  INNER JOIN INV_PROJECTS INVP ON INVP.PRID = INV.ID
+				  LEFT JOIN PRTASK TSK ON TSK.PRPROJECTID = INV.ID
+				  LEFT JOIN PRJ_BASELINES BL ON BL.PROJECT_ID = INV.ID AND BL.IS_CURRENT = 1
+				  LEFT JOIN PRJ_BASELINE_DETAILS BLD ON BLD.OBJECT_ID = TSK.PRID AND BLD.OBJECT_TYPE = 'TASK' AND BLD.BASELINE_ID = BL.ID			
+				  LEFT JOIN CMN_LOOKUPS_V STATUS ON STATUS.LOOKUP_CODE = TSK.PRSTATUS AND STATUS.LOOKUP_TYPE = 'prTaskStatus' AND STATUS.LANGUAGE_CODE = 'pt'
+				WHERE
+				  INV.IS_ACTIVE = 1
+				  AND INVP.IS_TEMPLATE = 0
+				  AND TSK.PRISTASK = 1
+			  )T1
+			  GROUP BY
+				INV_ID,
+				INV_CODE,
+				INV_NAME
+			)T2
+		)T3
+
+		JOIN
+
+		(
+			SELECT DISTINCT
+				  INV.ID INV_ID,
+				  INV.CODE INV_CODE,
+				  INV.NAME INV_NAME,
+				  TSK.PRID TSK_ID,
+				  TSK.PRNAME TSK_NAME,
+				  TSK.PRSTART TSK_START,
+				  TSK.PRFINISH TSK_FINISH,
+				  BLD.START_DATE BL_START,
+				  BLD.FINISH_DATE BL_FINISH,
+				  STATUS.NAME TSK_STATUS,
+				  TP.NAME TP_NAME,
+				  TP.LOOKUP_CODE TP_CODE,
+				  DAS.FIRST_NAME || ' ' || DAS.LAST_NAME DIRETOR_NAME,
+				  DAS.UNIQUE_NAME DIRETOR_CODE,
+				  OBSU.NAME AREA_CLIENTE
+				FROM
+				  INV_INVESTMENTS INV
+				  INNER JOIN INV_PROJECTS INVP ON INVP.PRID = INV.ID
+				  LEFT JOIN PRTASK TSK ON TSK.PRPROJECTID = INV.ID
+				  LEFT JOIN PRJ_BASELINES BL ON BL.PROJECT_ID = INV.ID AND BL.IS_CURRENT = 1
+				  LEFT JOIN PRJ_BASELINE_DETAILS BLD ON BLD.OBJECT_ID = TSK.PRID AND BLD.OBJECT_TYPE = 'TASK' AND BLD.BASELINE_ID = BL.ID
+				  INNER JOIN ODF_CA_PROJECT OPRJ ON OPRJ.ID = INV.ID
+				  LEFT JOIN CMN_LOOKUPS_V TP ON TP.LOOKUP_CODE = OPRJ.obj_request_type AND TP.LOOKUP_TYPE = 'OBJ_IDEA_PROJECT_TYPE' AND TP.LANGUAGE_CODE = 'pt'
+				  LEFT JOIN SRM_RESOURCES DAS ON DAS.ID = OPRJ.obj_stakeholder1
+				  LEFT JOIN PRJ_OBS_ASSOCIATIONS OBSA ON OBSA.RECORD_ID = INV.ID
+				  JOIN PRJ_OBS_UNITS_FLAT OBSF ON OBSA.UNIT_ID = OBSF.UNIT_ID
+				  JOIN PRJ_OBS_UNITS OBSU ON OBSU.ID = OBSF.BRANCH_UNIT_ID AND OBSU.DEPTH = (
+																							SELECT MAX(OBSU2.DEPTH) 
+																							FROM PRJ_OBS_ASSOCIATIONS OBSA2
+																							LEFT JOIN PRJ_OBS_UNITS_FLAT OBSF2 ON OBSA2.UNIT_ID = OBSF2.UNIT_ID
+																							LEFT JOIN PRJ_OBS_UNITS OBSU2 ON OBSU2.ID = OBSF2.BRANCH_UNIT_ID
+																							WHERE OBSA2.RECORD_ID = INV.ID 
+																						)
+				  JOIN PRJ_OBS_OBJECT_TYPES OOT ON OOT.TYPE_ID = OBSU.TYPE_ID AND OOT.TABLE_NAME = 'SRM_PROJECTS' AND OOT.TYPE_ID = 5000003
+				  LEFT JOIN CMN_LOOKUPS_V STATUS ON STATUS.LOOKUP_CODE = TSK.PRSTATUS AND STATUS.LOOKUP_TYPE = 'prTaskStatus' AND STATUS.LANGUAGE_CODE = 'pt'
+				WHERE
+				  INV.IS_ACTIVE = 1
+				  AND INVP.IS_TEMPLATE = 0
+				  AND TSK.PRISTASK = 1
+				  AND (TO_DATE(TSK.PRFINISH,'DD/MM/YYYY') - TO_DATE(BLD.FINISH_DATE,'DD/MM/YYYY')) > 0
+
+		)TASK
+
+		ON TASK.INV_ID = T3.INV_ID
+
+		WHERE
+			T3.DIF IS NOT NULL
+	)FINAL
+		
+	WHERE
+		$X{IN,TP_CODE,tipo_proj} 
+		AND $X{IN,DIRETOR_CODE,dir_resp} 
+		AND $X{IN,AREA_CLIENTE,area_resp}
+)FINAL2
+
+GROUP BY
+DIF,
+ORDEM]]>
+		</queryString>
+		<field name="DIF" class="java.lang.String"/>
+		<field name="ORDEM" class="java.math.BigDecimal"/>
+		<field name="QTD" class="java.math.BigDecimal"/>
+		<sortField name="ORDEM"/>
+	</subDataset>
+	<subDataset name="DEVIO_HORAS" uuid="3bf216ad-e0cf-411f-90c2-1369fb4a5e64">
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="UNIMED - PRD"/>
+		<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w1" value="585"/>
+		<property name="com.jaspersoft.studio.property.dataset.dialog.DatasetDialog.sash.w2" value="401"/>
+		<queryString>
+			<![CDATA[SELECT
+(TSK_FINISH - BL_FINISH),
+T1.*
+FROM
+(
+  SELECT DISTINCT
+    INV.ID INV_ID,
+    INV.CODE INV_CODE,
+    INV.NAME INV_NAME,
+    MIN(TSK.PRSTART) TSK_START,
+    MAX(TSK.PRFINISH) TSK_FINISH,
+    MIN(BLD.START_DATE) BL_START,
+    MAX(BLD.FINISH_DATE) BL_FINISH
+  FROM
+    INV_INVESTMENTS INV
+    INNER JOIN INV_PROJECTS INVP ON INVP.PRID = INV.ID
+    INNER JOIN PRTASK TSK ON TSK.PRPROJECTID = INV.ID
+    INNER JOIN PRJ_BASELINES BL ON BL.PROJECT_ID = INV.ID AND BL.IS_CURRENT = 1
+    INNER JOIN PRJ_BASELINE_DETAILS BLD ON BLD.OBJECT_ID = TSK.PRID AND BLD.OBJECT_TYPE = 'TASK' AND BLD.BASELINE_ID = BL.ID
+  WHERE
+    INV.IS_ACTIVE = 1
+    AND INVP.IS_TEMPLATE = 0
+    AND TSK.PRISTASK = 1  
+  GROUP BY
+    INV.ID,
+    INV.CODE,
+    INV.NAME
+)T1]]>
+		</queryString>
+		<field name="(TSK_FINISH-BL_FINISH)" class="java.math.BigDecimal"/>
+		<field name="INV_ID" class="java.math.BigDecimal"/>
+		<field name="INV_CODE" class="java.lang.String"/>
+		<field name="INV_NAME" class="java.lang.String"/>
+		<field name="TSK_START" class="java.sql.Timestamp"/>
+		<field name="TSK_FINISH" class="java.sql.Timestamp"/>
+		<field name="BL_START" class="java.sql.Timestamp"/>
+		<field name="BL_FINISH" class="java.sql.Timestamp"/>
+	</subDataset>
+	<subDataset name="TEMPO_MEDIO" uuid="7d75d029-9c4e-4d24-a274-fa803bc4d6a7">
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="UNIMED - PRD"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="tipo_proj" class="java.util.Collection"/>
+		<parameter name="dir_resp" class="java.util.Collection"/>
+		<parameter name="area_resp" class="java.util.Collection"/>
+		<queryString>
+			<![CDATA[SELECT
+INV_ID,
+INV_NAME,
+DURACAO,
+(
+	SELECT 
+		ROUND(AVG(DURACAO)) 
+	FROM
+	(
+		SELECT (TO_DATE(OCP.UM_DT_EXEC,'DD/MM/YYYY') - TO_DATE(OCP.UM_DT_INICIO,'DD/MM/YYYY')) DURACAO			
+		FROM INV_INVESTMENTS INV
+		INNER JOIN INV_PROJECTS INVP ON INVP.PRID = INV.ID
+		INNER JOIN ODF_CA_PROJECT OCP ON OCP.ID = INV.ID
+		LEFT JOIN CMN_LOOKUPS_V TP ON TP.LOOKUP_CODE = OCP.obj_request_type AND TP.LOOKUP_TYPE = 'OBJ_IDEA_PROJECT_TYPE' AND TP.LANGUAGE_CODE = 'pt'
+		LEFT JOIN SRM_RESOURCES DAS ON DAS.ID = OCP.obj_stakeholder1
+		LEFT JOIN PRJ_OBS_ASSOCIATIONS OBSA ON OBSA.RECORD_ID = INV.ID
+		JOIN PRJ_OBS_UNITS_FLAT OBSF ON OBSA.UNIT_ID = OBSF.UNIT_ID
+		JOIN PRJ_OBS_UNITS OBSU ON OBSU.ID = OBSF.BRANCH_UNIT_ID AND OBSU.DEPTH = (
+																					SELECT MAX(OBSU2.DEPTH) 
+																					FROM PRJ_OBS_ASSOCIATIONS OBSA2
+																					LEFT JOIN PRJ_OBS_UNITS_FLAT OBSF2 ON OBSA2.UNIT_ID = OBSF2.UNIT_ID
+																					LEFT JOIN PRJ_OBS_UNITS OBSU2 ON OBSU2.ID = OBSF2.BRANCH_UNIT_ID
+																					WHERE OBSA2.RECORD_ID = INV.ID 
+																				)
+		JOIN PRJ_OBS_OBJECT_TYPES OOT ON OOT.TYPE_ID = OBSU.TYPE_ID AND OOT.TABLE_NAME = 'SRM_PROJECTS' AND OOT.TYPE_ID = 5000003	
+		WHERE INV.IS_ACTIVE = 1 AND INVP.IS_TEMPLATE = 0 AND OCP.UM_DT_EXEC IS NOT NULL AND OCP.UM_DT_INICIO IS NOT NULL
+		AND $X{IN,TP_CODE,tipo_proj} AND $X{IN,DIRETOR_CODE,dir_resp} AND $X{IN,AREA_CLIENTE,area_resp} 
+		AND (TO_DATE(OCP.UM_DT_EXEC,'DD/MM/YYYY') - TO_DATE(OCP.UM_DT_INICIO,'DD/MM/YYYY')) > 0
+	)T2
+)MEDIA
+FROM
+(
+	SELECT DISTINCT
+		INV.ID INV_ID,
+		INV.CODE INV_CODE,
+		INV.NAME INV_NAME,
+		TP.NAME TP_NAME,
+		TP.LOOKUP_CODE TP_CODE,
+		DAS.FIRST_NAME || ' ' || DAS.LAST_NAME DIRETOR_NAME,
+		DAS.UNIQUE_NAME DIRETOR_CODE,
+		OBSU.NAME AREA_CLIENTE,
+		OCP.UM_DT_INICIO DT_CRIACAO,
+		OCP.UM_DT_EXEC DT_EXECUCAO,
+		(TO_DATE(OCP.UM_DT_EXEC,'DD/MM/YYYY') - TO_DATE(OCP.UM_DT_INICIO,'DD/MM/YYYY')) DURACAO			
+	FROM
+		INV_INVESTMENTS INV
+		INNER JOIN INV_PROJECTS INVP ON INVP.PRID = INV.ID
+		INNER JOIN ODF_CA_PROJECT OCP ON OCP.ID = INV.ID	
+		LEFT JOIN CMN_LOOKUPS_V TP ON TP.LOOKUP_CODE = OCP.obj_request_type AND TP.LOOKUP_TYPE = 'OBJ_IDEA_PROJECT_TYPE' AND TP.LANGUAGE_CODE = 'pt'
+		LEFT JOIN SRM_RESOURCES DAS ON DAS.ID = OCP.obj_stakeholder1
+		LEFT JOIN PRJ_OBS_ASSOCIATIONS OBSA ON OBSA.RECORD_ID = INV.ID
+		JOIN PRJ_OBS_UNITS_FLAT OBSF ON OBSA.UNIT_ID = OBSF.UNIT_ID
+		JOIN PRJ_OBS_UNITS OBSU ON OBSU.ID = OBSF.BRANCH_UNIT_ID AND OBSU.DEPTH = (
+																					SELECT MAX(OBSU2.DEPTH) 
+																					FROM PRJ_OBS_ASSOCIATIONS OBSA2
+																					LEFT JOIN PRJ_OBS_UNITS_FLAT OBSF2 ON OBSA2.UNIT_ID = OBSF2.UNIT_ID
+																					LEFT JOIN PRJ_OBS_UNITS OBSU2 ON OBSU2.ID = OBSF2.BRANCH_UNIT_ID
+																					WHERE OBSA2.RECORD_ID = INV.ID 
+																				)
+		JOIN PRJ_OBS_OBJECT_TYPES OOT ON OOT.TYPE_ID = OBSU.TYPE_ID AND OOT.TABLE_NAME = 'SRM_PROJECTS' AND OOT.TYPE_ID = 5000003	
+	WHERE
+		INV.IS_ACTIVE = 1
+		AND INVP.IS_TEMPLATE = 0
+		AND OCP.UM_DT_EXEC IS NOT NULL
+		AND OCP.UM_DT_INICIO IS NOT NULL
+)T1
+WHERE
+	$X{IN,TP_CODE,tipo_proj} 
+	AND $X{IN,DIRETOR_CODE,dir_resp} 
+	AND $X{IN,AREA_CLIENTE,area_resp}
+	AND DURACAO > 0]]>
+		</queryString>
+		<field name="INV_ID" class="java.math.BigDecimal"/>
+		<field name="INV_NAME" class="java.lang.String"/>
+		<field name="DURACAO" class="java.math.BigDecimal"/>
+		<field name="MEDIA" class="java.math.BigDecimal"/>
+		<sortField name="DURACAO"/>
+	</subDataset>
+	<subDataset name="Dataset1" uuid="59eca714-ecff-452c-80bd-c320711f0a0e">
+		<queryString>
+			<![CDATA[]]>
+		</queryString>
+	</subDataset>
+	<parameter name="tipo_proj" class="java.util.Collection"/>
+	<parameter name="dir_resp" class="java.util.Collection"/>
+	<parameter name="area_resp" class="java.util.Collection"/>
+	<queryString>
+		<![CDATA[SELECT
+ROUND(SUM(QTD_PROJETOS_EST),0) QTD_PROJETOS_EST,
+ROUND(SUM(QTD_PROJETOS_OP),0) QTD_PROJETOS_OP,
+ROUND(SUM(MEDIA),0) MEDIA
+FROM
+(
+	SELECT 
+		COUNT(INV.ID) QTD_PROJETOS_EST,
+		0 QTD_PROJETOS_OP,
+		0 MEDIA
+	FROM 
+		INV_INVESTMENTS INV
+		JOIN INV_PROJECTS INVP ON INVP.PRID = INV.ID
+		JOIN ODF_CA_PROJECT OCP ON OCP.ID = INV.ID
+	WHERE 
+		INV.IS_ACTIVE = 1 
+		AND INVP.IS_TEMPLATE = 0
+		AND OCP.obj_request_type = 'type100'
+		
+	UNION
+	
+	SELECT 
+		0 QTD_PROJETOS_EST,
+		COUNT(INV.ID) QTD_PROJETOS_OP,
+		0 MEDIA
+	FROM 
+		INV_INVESTMENTS INV
+		JOIN INV_PROJECTS INVP ON INVP.PRID = INV.ID
+		JOIN ODF_CA_PROJECT OCP ON OCP.ID = INV.ID
+	WHERE 
+		INV.IS_ACTIVE = 1 
+		AND INVP.IS_TEMPLATE = 0
+		AND OCP.obj_request_type = 'type200'
+
+	UNION
+
+	SELECT
+		0 QTD_PROJETOS_EST,
+		0 QTD_PROJETOS_OP,
+		AVG(DURACAO) MEDIA
+	FROM
+	(
+		SELECT DISTINCT
+			INV.ID INV_ID,
+			INV.CODE INV_CODE,
+			INV.NAME INV_NAME,
+			OCP.UM_DT_INICIO DT_CRIACAO,
+			OCP.UM_DT_EXEC DT_EXECUCAO,
+			(TO_DATE(OCP.UM_DT_EXEC,'DD/MM/YYYY') - TO_DATE(OCP.UM_DT_INICIO,'DD/MM/YYYY')) DURACAO					
+		FROM
+			INV_INVESTMENTS INV
+			INNER JOIN INV_PROJECTS INVP ON INVP.PRID = INV.ID
+			INNER JOIN ODF_CA_PROJECT OCP ON OCP.ID = INV.ID			
+		WHERE
+			INV.IS_ACTIVE = 1
+			AND INVP.IS_TEMPLATE = 0
+			AND OCP.UM_DT_EXEC IS NOT NULL
+			AND OCP.UM_DT_INICIO IS NOT NULL
+			AND (TO_DATE(OCP.UM_DT_EXEC,'DD/MM/YYYY') - TO_DATE(OCP.UM_DT_INICIO,'DD/MM/YYYY')) >0
+	)T1		
+)FINAL]]>
+	</queryString>
+	<field name="QTD_PROJETOS_EST" class="java.math.BigDecimal"/>
+	<field name="QTD_PROJETOS_OP" class="java.math.BigDecimal"/>
+	<field name="MEDIA" class="java.math.BigDecimal"/>
+	<title>
+		<band height="100">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<image>
+				<reportElement x="0" y="0" width="180" height="89" uuid="3384d6c8-c0fb-41ef-8791-77e687695822"/>
+				<imageExpression><![CDATA["repo:/ca_ppm/resources/images/unimed_logo"]]></imageExpression>
+			</image>
+			<line>
+				<reportElement x="0" y="88" width="1160" height="1" uuid="96a1fd54-92f0-4f39-99ec-cebe5b9f8f52"/>
+			</line>
+			<textField>
+				<reportElement x="0" y="0" width="1160" height="89" uuid="74acfedb-e50a-444c-ae9d-57444e415419"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="34" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Painel do Portfólio"]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="355">
+			<frame>
+				<reportElement x="160" y="0" width="500" height="355" uuid="d679abfe-66f8-4f08-8d1c-26b28a8e7789"/>
+				<textField>
+					<reportElement x="0" y="0" width="500" height="30" forecolor="#919191" uuid="574a7c0c-2856-4259-9043-77fc1260f730"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="22" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["% de Projetos no Prazo"]]></textFieldExpression>
+				</textField>
+				<componentElement>
+					<reportElement x="0" y="30" width="500" height="320" uuid="47027601-d55f-4e80-bb35-6669e83f26ad"/>
+					<hc:chart xmlns:hc="http://jaspersoft.com/highcharts" xsi:schemaLocation="http://jaspersoft.com/highcharts http://jaspersoft.com/schema/highcharts.xsd" type="Pie">
+						<hc:chartSetting name="default">
+							<hc:chartProperty name="chart.plotShadow">
+								<hc:propertyExpression><![CDATA[Boolean.TRUE]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="chart.zoomType">
+								<hc:propertyExpression><![CDATA["xy"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="colors">
+								<hc:propertyExpression><![CDATA[java.util.Arrays.asList("#008040","#90ed7d","#7cb5ec","#434348","#f7a35c","#8085e9","#f15c80","#e4d354","#f45b5b","#91e8e1")]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="credits.enabled">
+								<hc:propertyExpression><![CDATA[false]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="credits.href">
+								<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="credits.text">
+								<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="legend.enabled">
+								<hc:propertyExpression><![CDATA[Boolean.FALSE]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="plotOptions.pie.dataLabels.enabled" value="true"/>
+							<hc:chartProperty name="plotOptions.pie.dataLabels.format">
+								<hc:propertyExpression><![CDATA["{point.name} | {point.percentage:.0f} %"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="plotOptions.pie.showInLegend" value="false"/>
+							<hc:chartProperty name="title.text">
+								<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="xAxis.gridLineColor" value="white"/>
+							<hc:chartProperty name="yAxis.gridLineColor" value="white"/>
+							<hc:chartProperty name="yAxis.labels.enabled">
+								<hc:propertyExpression><![CDATA[FALSE( )]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="yAxis.title.text">
+								<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+							</hc:chartProperty>
+						</hc:chartSetting>
+						<multiAxisData>
+							<multiAxisDataset>
+								<dataset>
+									<datasetRun subDataset="PROJ_PRAZO" uuid="9581b0f9-cbdb-4565-a054-5597552d2094">
+										<datasetParameter name="tipo_proj">
+											<datasetParameterExpression><![CDATA[$P{tipo_proj}]]></datasetParameterExpression>
+										</datasetParameter>
+										<datasetParameter name="dir_resp">
+											<datasetParameterExpression><![CDATA[$P{dir_resp}]]></datasetParameterExpression>
+										</datasetParameter>
+										<datasetParameter name="area_resp">
+											<datasetParameterExpression><![CDATA[$P{area_resp}]]></datasetParameterExpression>
+										</datasetParameter>
+										<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+									</datasetRun>
+								</dataset>
+							</multiAxisDataset>
+							<dataAxis axis="Rows">
+								<axisLevel name="Prazo">
+									<labelExpression><![CDATA["Level Label expression"]]></labelExpression>
+									<axisLevelBucket class="java.lang.String">
+										<bucketExpression><![CDATA[$F{DIF}]]></bucketExpression>
+										<bucketProperty name="area_resp"><![CDATA[$P{area_resp}]]></bucketProperty>
+										<bucketProperty name="color"><![CDATA[$F{DIF}.toString().equals("No prazo") ? "#B1D34B" 
+: $F{DIF}.toString().equals("Fora do prazo") ? "#ED1651"
+: "#C4CBCF"]]></bucketProperty>
+										<bucketProperty name="dir_resp"><![CDATA[$P{dir_resp}]]></bucketProperty>
+										<bucketProperty name="prazo"><![CDATA[$F{DIF}]]></bucketProperty>
+										<bucketProperty name="tipo_proj"><![CDATA[$P{tipo_proj}]]></bucketProperty>
+									</axisLevelBucket>
+								</axisLevel>
+							</dataAxis>
+							<dataAxis axis="Columns"/>
+							<multiAxisMeasure name="Porcentagem" class="java.lang.Integer" calculation="Nothing">
+								<labelExpression><![CDATA["Quantidade"]]></labelExpression>
+								<valueExpression><![CDATA[$F{QTD}]]></valueExpression>
+							</multiAxisMeasure>
+						</multiAxisData>
+						<hc:series name="Quantidade">
+							<hc:contributor name="SeriesItemProperty">
+								<hc:contributorProperty name="color" valueType="Bucket" value="Prazo.area_resp"/>
+							</hc:contributor>
+						</hc:series>
+						<hc:series name="Porcentagem">
+							<hc:contributor name="SeriesItemProperty">
+								<hc:contributorProperty name="color" valueType="Bucket" value="Prazo.color"/>
+							</hc:contributor>
+							<hc:contributor name="SeriesItemHyperlink">
+								<hc:contributorProperty name="hyperlinkTarget" valueType="Constant" value="Blank"/>
+								<hc:contributorProperty name="hyperlinkType" valueType="Constant" value="ReportExecution"/>
+								<hc:contributorProperty name="_report" valueType="Expression">
+									<hc:valueExpression><![CDATA["/ca_ppm/unimed/unimed_rpt_dd_prj_prazo"]]></hc:valueExpression>
+								</hc:contributorProperty>
+								<hc:contributorProperty name="area_resp" valueType="Bucket" value="Prazo.area_resp"/>
+								<hc:contributorProperty name="dir_resp" valueType="Bucket" value="Prazo.dir_resp"/>
+								<hc:contributorProperty name="tipo_proj" valueType="Bucket" value="Prazo.tipo_proj"/>
+								<hc:contributorProperty name="prazo" valueType="Bucket" value="Prazo.prazo"/>
+							</hc:contributor>
+						</hc:series>
+					</hc:chart>
+				</componentElement>
+			</frame>
+			<frame>
+				<reportElement x="660" y="0" width="500" height="355" uuid="9d42299b-4183-4776-b451-2a0bd0a44bd1"/>
+				<textField>
+					<reportElement x="0" y="0" width="500" height="30" forecolor="#919191" uuid="2945f461-faa0-4d97-b513-7913e8b22447"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="22" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["% de Projetos Saudáveis"]]></textFieldExpression>
+				</textField>
+				<componentElement>
+					<reportElement x="0" y="30" width="500" height="320" uuid="7a5e6552-fcfa-4b47-ab71-f34e62ebd551"/>
+					<hc:chart xmlns:hc="http://jaspersoft.com/highcharts" xsi:schemaLocation="http://jaspersoft.com/highcharts http://jaspersoft.com/schema/highcharts.xsd" type="Pie">
+						<hc:chartSetting name="default">
+							<hc:chartProperty name="chart.plotShadow">
+								<hc:propertyExpression><![CDATA[Boolean.TRUE]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="chart.zoomType">
+								<hc:propertyExpression><![CDATA["xy"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="colors">
+								<hc:propertyExpression><![CDATA[java.util.Arrays.asList("#008040","#90ed7d","#7cb5ec","#434348","#f7a35c","#8085e9","#f15c80","#e4d354","#f45b5b","#91e8e1")]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="credits.enabled">
+								<hc:propertyExpression><![CDATA[false]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="credits.href">
+								<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="credits.text">
+								<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="legend.enabled">
+								<hc:propertyExpression><![CDATA[Boolean.FALSE]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="plotOptions.pie.dataLabels.enabled" value="true"/>
+							<hc:chartProperty name="plotOptions.pie.dataLabels.format">
+								<hc:propertyExpression><![CDATA["{point.name} | {point.percentage:.0f} %"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="plotOptions.pie.showInLegend" value="false"/>
+							<hc:chartProperty name="title.text">
+								<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="xAxis.gridLineColor" value="white"/>
+							<hc:chartProperty name="yAxis.gridLineColor" value="white"/>
+							<hc:chartProperty name="yAxis.labels.enabled">
+								<hc:propertyExpression><![CDATA[FALSE( )]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="yAxis.title.text">
+								<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+							</hc:chartProperty>
+						</hc:chartSetting>
+						<multiAxisData>
+							<multiAxisDataset>
+								<dataset>
+									<datasetRun subDataset="PROJ_SAUDAVEIS" uuid="9c5d0b84-dd69-4501-bbca-fdb57a70da75">
+										<datasetParameter name="tipo_proj">
+											<datasetParameterExpression><![CDATA[$P{tipo_proj}]]></datasetParameterExpression>
+										</datasetParameter>
+										<datasetParameter name="dir_resp">
+											<datasetParameterExpression><![CDATA[$P{dir_resp}]]></datasetParameterExpression>
+										</datasetParameter>
+										<datasetParameter name="area_resp">
+											<datasetParameterExpression><![CDATA[$P{area_resp}]]></datasetParameterExpression>
+										</datasetParameter>
+										<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+									</datasetRun>
+								</dataset>
+							</multiAxisDataset>
+							<dataAxis axis="Rows">
+								<axisLevel name="STATUS">
+									<labelExpression><![CDATA["Level Label expression"]]></labelExpression>
+									<axisLevelBucket class="java.lang.String">
+										<bucketExpression><![CDATA[$F{INV_STATUS}]]></bucketExpression>
+										<bucketProperty name="area_resp"><![CDATA[$P{area_resp}]]></bucketProperty>
+										<bucketProperty name="color"><![CDATA[$F{INV_STATUS}.toString().equals("Em dia") ? "#B1D34B" 
+: $F{INV_STATUS}.toString().equals("Em risco") ? "#FFCB08"
+: $F{INV_STATUS}.toString().equals("Crítico") ? "#ED1651"
+: "#C4CBCF"]]></bucketProperty>
+										<bucketProperty name="dir_resp"><![CDATA[$P{dir_resp}]]></bucketProperty>
+										<bucketProperty name="prj_saudaveis"><![CDATA[$F{INV_STATUS}]]></bucketProperty>
+										<bucketProperty name="tipo_proj"><![CDATA[$P{tipo_proj}]]></bucketProperty>
+									</axisLevelBucket>
+								</axisLevel>
+							</dataAxis>
+							<dataAxis axis="Columns"/>
+							<multiAxisMeasure name="Porcentagem" class="java.lang.Integer" calculation="Nothing">
+								<labelExpression><![CDATA["Quantidade"]]></labelExpression>
+								<valueExpression><![CDATA[$F{QTD}]]></valueExpression>
+							</multiAxisMeasure>
+						</multiAxisData>
+						<hc:series name="Quantidade">
+							<hc:contributor name="SeriesItemProperty">
+								<hc:contributorProperty name="color" valueType="Bucket" value="STATUS.area_resp"/>
+							</hc:contributor>
+						</hc:series>
+						<hc:series name="Porcentagem">
+							<hc:contributor name="SeriesItemProperty">
+								<hc:contributorProperty name="color" valueType="Bucket" value="STATUS.color"/>
+							</hc:contributor>
+							<hc:contributor name="SeriesItemHyperlink">
+								<hc:contributorProperty name="hyperlinkTarget" valueType="Constant" value="Blank"/>
+								<hc:contributorProperty name="hyperlinkType" valueType="Constant" value="ReportExecution"/>
+								<hc:contributorProperty name="_report" valueType="Expression">
+									<hc:valueExpression><![CDATA["/ca_ppm/unimed/unimed_rpt_dd_prj_saudaveis"]]></hc:valueExpression>
+								</hc:contributorProperty>
+								<hc:contributorProperty name="area_resp" valueType="Bucket" value="STATUS.area_resp"/>
+								<hc:contributorProperty name="dir_resp" valueType="Bucket" value="STATUS.dir_resp"/>
+								<hc:contributorProperty name="tipo_proj" valueType="Bucket" value="STATUS.prj_saudaveis"/>
+								<hc:contributorProperty name="prj_saudaveis" valueType="Bucket" value="STATUS.prj_saudaveis"/>
+								<hc:contributorProperty name="hyperlinkTarget" valueType="Constant" value="Blank"/>
+								<hc:contributorProperty name="hyperlinkType" valueType="Constant" value="ReportExecution"/>
+								<hc:contributorProperty name="_report" valueType="Expression">
+									<hc:valueExpression><![CDATA["/ca_ppm/unimed/unimed_rpt_dd_prj_saudaveis"]]></hc:valueExpression>
+								</hc:contributorProperty>
+								<hc:contributorProperty name="area_resp" valueType="Bucket" value="STATUS.area_resp"/>
+								<hc:contributorProperty name="dir_resp" valueType="Bucket" value="STATUS.dir_resp"/>
+								<hc:contributorProperty name="tipo_proj" valueType="Bucket" value="STATUS.tipo_proj"/>
+								<hc:contributorProperty name="prj_saudaveis" valueType="Bucket" value="STATUS.prj_saudaveis"/>
+							</hc:contributor>
+						</hc:series>
+					</hc:chart>
+				</componentElement>
+			</frame>
+			<textField>
+				<reportElement x="0" y="249" width="160" height="40" uuid="6f8c53dc-87dc-4865-9e28-0639cbfa8f64"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MEDIA} + " dias"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="210" width="160" height="39" forecolor="#919191" uuid="6b9d2ecf-3a8d-4186-a14f-ee35651c43f9"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["#Tempo médio de planejamento"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="90" width="160" height="40" uuid="ff0ea6b5-46cb-4dbb-bb4f-53abf8c8c7ee"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QTD_PROJETOS_EST}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="50" width="160" height="40" forecolor="#919191" uuid="1829ee4b-4513-4bce-9bec-c8eb646430dd"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["#Projetos Estratégicos"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="170" width="160" height="40" uuid="f1db6ea5-c8fe-4e53-995b-1b4674b81df8"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="20" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{QTD_PROJETOS_OP}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="130" width="160" height="40" forecolor="#919191" uuid="8de854b3-29a7-4a21-8fa8-fc1f88cf9c47"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["#Projetos Operacionais"]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="355">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<frame>
+				<reportElement x="0" y="0" width="580" height="350" uuid="ef6ede89-de65-4693-8ad3-329ee2fdf72e"/>
+				<textField>
+					<reportElement x="0" y="0" width="580" height="30" forecolor="#919191" uuid="7939487e-5e14-492e-ad9d-3d22cafd266d"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="22" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Qtd. de Riscos em Aberto por Projeto"]]></textFieldExpression>
+				</textField>
+				<componentElement>
+					<reportElement x="0" y="30" width="580" height="320" uuid="be552872-24e0-4c96-b851-29cf5ff7afbd"/>
+					<hc:chart xmlns:hc="http://jaspersoft.com/highcharts" xsi:schemaLocation="http://jaspersoft.com/highcharts http://jaspersoft.com/schema/highcharts.xsd" type="Bar">
+						<hc:chartSetting name="default">
+							<hc:chartProperty name="chart.zoomType">
+								<hc:propertyExpression><![CDATA["xy"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="colors">
+								<hc:propertyExpression><![CDATA[java.util.Arrays.asList("#00995D","#90ed7d","#7cb5ec","#434348","#f7a35c","#8085e9","#f15c80","#e4d354","#f45b5b","#91e8e1")]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="credits.enabled">
+								<hc:propertyExpression><![CDATA[false]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="credits.href">
+								<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="credits.text">
+								<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="legend.enabled">
+								<hc:propertyExpression><![CDATA[Boolean.FALSE]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="plotOptions.series.dataLabels.enabled" value="true"/>
+							<hc:chartProperty name="plotOptions.series.showInLegend" value="true"/>
+							<hc:chartProperty name="title.text">
+								<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="xAxis.gridLineColor" value="white"/>
+							<hc:chartProperty name="yAxis.gridLineColor" value="white"/>
+							<hc:chartProperty name="yAxis.labels.enabled">
+								<hc:propertyExpression><![CDATA[FALSE( )]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="yAxis.title.text">
+								<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="chart.plotShadow">
+								<hc:propertyExpression><![CDATA[Boolean.TRUE]]></hc:propertyExpression>
+							</hc:chartProperty>
+						</hc:chartSetting>
+						<multiAxisData>
+							<multiAxisDataset>
+								<dataset>
+									<datasetRun subDataset="RISK_OPEN" uuid="a3c61383-8b55-4d69-b6e7-ec3a2819ea21">
+										<datasetParameter name="tipo_proj">
+											<datasetParameterExpression><![CDATA[$P{tipo_proj}]]></datasetParameterExpression>
+										</datasetParameter>
+										<datasetParameter name="dir_resp">
+											<datasetParameterExpression><![CDATA[$P{dir_resp}]]></datasetParameterExpression>
+										</datasetParameter>
+										<datasetParameter name="area_resp">
+											<datasetParameterExpression><![CDATA[$P{area_resp}]]></datasetParameterExpression>
+										</datasetParameter>
+										<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+									</datasetRun>
+								</dataset>
+							</multiAxisDataset>
+							<dataAxis axis="Rows">
+								<axisLevel name="Nome">
+									<labelExpression><![CDATA["Level Label expression"]]></labelExpression>
+									<axisLevelBucket order="None" class="java.lang.String">
+										<bucketExpression><![CDATA[$F{INV_NAME}]]></bucketExpression>
+										<bucketProperty name="area_resp"><![CDATA[$P{area_resp}]]></bucketProperty>
+										<bucketProperty name="dir_resp"><![CDATA[$P{dir_resp}]]></bucketProperty>
+										<bucketProperty name="prj"><![CDATA[$F{INV_ID}]]></bucketProperty>
+										<bucketProperty name="tipo_proj"><![CDATA[$P{tipo_proj}]]></bucketProperty>
+									</axisLevelBucket>
+								</axisLevel>
+							</dataAxis>
+							<dataAxis axis="Columns"/>
+							<multiAxisMeasure name="Quantidade" class="java.math.BigDecimal" calculation="Nothing">
+								<labelExpression><![CDATA["Quantidade"]]></labelExpression>
+								<valueExpression><![CDATA[$F{QTD}]]></valueExpression>
+							</multiAxisMeasure>
+						</multiAxisData>
+						<hc:series name="Quantidade">
+							<hc:contributor name="SeriesItemHyperlink">
+								<hc:contributorProperty name="hyperlinkTarget" valueType="Constant" value="Blank"/>
+								<hc:contributorProperty name="hyperlinkType" valueType="Constant" value="ReportExecution"/>
+								<hc:contributorProperty name="_report" valueType="Expression">
+									<hc:valueExpression><![CDATA["/ca_ppm/unimed/unimed_rpt_dd_risk_open"]]></hc:valueExpression>
+								</hc:contributorProperty>
+								<hc:contributorProperty name="area_resp" valueType="Bucket" value="Nome.area_resp"/>
+								<hc:contributorProperty name="dir_resp" valueType="Bucket" value="Nome.dir_resp"/>
+								<hc:contributorProperty name="tipo_proj" valueType="Bucket" value="Nome.prj"/>
+								<hc:contributorProperty name="prj" valueType="Bucket" value="Nome.prj"/>
+								<hc:contributorProperty name="hyperlinkTarget" valueType="Constant" value="Blank"/>
+								<hc:contributorProperty name="hyperlinkType" valueType="Constant" value="ReportExecution"/>
+								<hc:contributorProperty name="_report" valueType="Expression">
+									<hc:valueExpression><![CDATA["/ca_ppm/unimed/unimed_rpt_dd_risk_open"]]></hc:valueExpression>
+								</hc:contributorProperty>
+								<hc:contributorProperty name="area_resp" valueType="Bucket" value="Nome.area_resp"/>
+								<hc:contributorProperty name="dir_resp" valueType="Bucket" value="Nome.dir_resp"/>
+								<hc:contributorProperty name="tipo_proj" valueType="Bucket" value="Nome.tipo_proj"/>
+								<hc:contributorProperty name="prj" valueType="Bucket" value="Nome.prj"/>
+							</hc:contributor>
+						</hc:series>
+					</hc:chart>
+				</componentElement>
+			</frame>
+			<frame>
+				<reportElement x="580" y="0" width="580" height="350" uuid="246771b1-601b-404c-a673-6ecb27efecab"/>
+				<textField>
+					<reportElement x="0" y="0" width="580" height="30" forecolor="#919191" uuid="81bf547c-929f-4517-85ba-a5fc4895504b"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="22" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Qtd. de Tarefas Atrasadas por Projeto"]]></textFieldExpression>
+				</textField>
+				<componentElement>
+					<reportElement x="0" y="30" width="580" height="320" uuid="885e8282-7c5b-42ef-b78a-a23174e89c45"/>
+					<hc:chart xmlns:hc="http://jaspersoft.com/highcharts" xsi:schemaLocation="http://jaspersoft.com/highcharts http://jaspersoft.com/schema/highcharts.xsd" type="Column">
+						<hc:chartSetting name="default">
+							<hc:chartProperty name="title.text" value=""/>
+							<hc:chartProperty name="credits.enabled" value="false"/>
+							<hc:chartProperty name="credits.href" value=""/>
+							<hc:chartProperty name="credits.text" value=""/>
+							<hc:chartProperty name="yAxis.title.text" value=""/>
+							<hc:chartProperty name="chart.zoomType" value="xy"/>
+							<hc:chartProperty name="colors_customSimpleMode" value="true"/>
+							<hc:chartProperty name="colors">
+								<hc:propertyExpression><![CDATA[Arrays.asList("#00995D","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#2b908f","#f45b5b","#91e8e1")]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="legend.enabled_customSimpleMode" value="true"/>
+							<hc:chartProperty name="legend.enabled">
+								<hc:propertyExpression><![CDATA[false]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="plotOptions.series.dataLabels.enabled" value="true"/>
+							<hc:chartProperty name="xAxis.gridLineColor" value="white"/>
+							<hc:chartProperty name="yAxis.gridLineColor" value="white"/>
+							<hc:chartProperty name="yAxis.labels.enabled">
+								<hc:propertyExpression><![CDATA[FALSE( )]]></hc:propertyExpression>
+							</hc:chartProperty>
+						</hc:chartSetting>
+						<multiAxisData>
+							<multiAxisDataset>
+								<dataset>
+									<datasetRun subDataset="TSK_TEMPO" uuid="f163fa0e-07b9-485a-b82b-12321fa250ca">
+										<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+									</datasetRun>
+								</dataset>
+							</multiAxisDataset>
+							<dataAxis axis="Rows">
+								<axisLevel name="DIF">
+									<labelExpression><![CDATA["Level Label expression"]]></labelExpression>
+									<axisLevelBucket order="None" class="java.lang.Comparable">
+										<bucketExpression><![CDATA[$F{DIF}]]></bucketExpression>
+										<bucketProperty name="area_resp"><![CDATA[$P{area_resp}]]></bucketProperty>
+										<bucketProperty name="dir_resp"><![CDATA[$P{dir_resp}]]></bucketProperty>
+										<bucketProperty name="status_atraso"><![CDATA[$F{DIF}]]></bucketProperty>
+										<bucketProperty name="tipo_proj"><![CDATA[$P{tipo_proj}]]></bucketProperty>
+									</axisLevelBucket>
+								</axisLevel>
+							</dataAxis>
+							<dataAxis axis="Columns"/>
+							<multiAxisMeasure name="Quantidade" class="java.lang.Number" calculation="Nothing">
+								<labelExpression><![CDATA["Quantidade"]]></labelExpression>
+								<valueExpression><![CDATA[$F{QTD}]]></valueExpression>
+							</multiAxisMeasure>
+						</multiAxisData>
+						<hc:series name="Quantidade">
+							<hc:contributor name="SeriesItemHyperlink">
+								<hc:contributorProperty name="hyperlinkTarget" valueType="Constant" value="Blank"/>
+								<hc:contributorProperty name="hyperlinkType" valueType="Constant" value="ReportExecution"/>
+								<hc:contributorProperty name="_report" valueType="Expression">
+									<hc:valueExpression><![CDATA["/ca_ppm/unimed/unimed_rpt_dd_prj_atraso"]]></hc:valueExpression>
+								</hc:contributorProperty>
+								<hc:contributorProperty name="area_resp" valueType="Bucket" value="DIF.area_resp"/>
+								<hc:contributorProperty name="dir_resp" valueType="Bucket" value="DIF.dir_resp"/>
+								<hc:contributorProperty name="status_atraso" valueType="Bucket" value="DIF.status_atraso"/>
+								<hc:contributorProperty name="tipo_proj" valueType="Bucket" value="DIF.tipo_proj"/>
+							</hc:contributor>
+						</hc:series>
+					</hc:chart>
+				</componentElement>
+			</frame>
+		</band>
+		<band height="355">
+			<frame>
+				<reportElement x="0" y="0" width="1160" height="350" uuid="a022e1d4-d7be-424a-a315-8a348cb8f352"/>
+				<textField>
+					<reportElement x="0" y="0" width="1160" height="30" forecolor="#919191" uuid="8dadce63-d22f-4aed-aa23-7a8f371f9eeb"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="22" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Tempo Médio de Planejamento"]]></textFieldExpression>
+				</textField>
+				<componentElement>
+					<reportElement x="0" y="30" width="1160" height="320" uuid="d190c79b-0bd2-4137-a06c-98d3c91d41c4"/>
+					<hc:chart xmlns:hc="http://jaspersoft.com/highcharts" xsi:schemaLocation="http://jaspersoft.com/highcharts http://jaspersoft.com/schema/highcharts.xsd" type="ColumnLine">
+						<hc:chartSetting name="default">
+							<hc:chartProperty name="title.text" value=""/>
+							<hc:chartProperty name="credits.enabled" value="false"/>
+							<hc:chartProperty name="credits.href" value=""/>
+							<hc:chartProperty name="credits.text" value=""/>
+							<hc:chartProperty name="chart.zoomType" value="xy"/>
+							<hc:chartProperty name="xAxis.gridLineColor" value="white"/>
+							<hc:chartProperty name="legend.enabled_customSimpleMode" value="true"/>
+							<hc:chartProperty name="legend.enabled">
+								<hc:propertyExpression><![CDATA[false]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="colors_customSimpleMode" value="true"/>
+							<hc:chartProperty name="colors">
+								<hc:propertyExpression><![CDATA[Arrays.asList("#00995D","#ED1651","#B1D34B","#434348","#90ed7d","#f7a35c","#8085e9","#f15c80","#e4d354","#91e8e1")]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="plotOptions.line.dataLabels.enabled" value="true"/>
+							<hc:chartProperty name="plotOptions.line.marker.enabled">
+								<hc:propertyExpression><![CDATA[FALSE( )]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="chart.events.load">
+								<hc:propertyExpression><![CDATA["function(){"+
+"this.yAxis[1].startOnTick = false;"+
+"this.yAxis[0].startOnTick = false;"+
+"this.yAxis[1].endOnTick = false;"+
+"this.yAxis[0].endOnTick = false;"+
+"this.yAxis[1].setExtremes(Math.min(this.yAxis[0].getExtremes().min,this.yAxis[1].getExtremes().min),Math.max(this.yAxis[0].getExtremes().max,this.yAxis[1].getExtremes().max));"+
+"this.yAxis[0].setExtremes(Math.min(this.yAxis[0].getExtremes().min,this.yAxis[1].getExtremes().min),Math.max(this.yAxis[0].getExtremes().max,this.yAxis[1].getExtremes().max));"+
+"}"]]></hc:propertyExpression>
+							</hc:chartProperty>
+						</hc:chartSetting>
+						<hc:chartSetting name="yAxis">
+							<hc:chartProperty name="_jrAxisIndex" value="0"/>
+							<hc:chartProperty name="gridLineColor" value="white"/>
+							<hc:chartProperty name="id">
+								<hc:propertyExpression><![CDATA["id0"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="labels.enabled">
+								<hc:propertyExpression><![CDATA[FALSE( )]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="min" value="0"/>
+							<hc:chartProperty name="title.style.color" value="white"/>
+						</hc:chartSetting>
+						<hc:chartSetting name="yAxis">
+							<hc:chartProperty name="_jrAxisIndex" value="1"/>
+							<hc:chartProperty name="gridLineColor" value="white"/>
+							<hc:chartProperty name="id">
+								<hc:propertyExpression><![CDATA["id1"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="labels.enabled">
+								<hc:propertyExpression><![CDATA[FALSE( )]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="linkedTo" value="0"/>
+							<hc:chartProperty name="min" value="0"/>
+							<hc:chartProperty name="title.style.color" value="white"/>
+						</hc:chartSetting>
+						<multiAxisData>
+							<multiAxisDataset>
+								<dataset>
+									<datasetRun subDataset="TEMPO_MEDIO" uuid="2d47fabc-477a-4c55-b7a5-73ff11c9e5c5">
+										<datasetParameter name="tipo_proj">
+											<datasetParameterExpression><![CDATA[$P{tipo_proj}]]></datasetParameterExpression>
+										</datasetParameter>
+										<datasetParameter name="dir_resp">
+											<datasetParameterExpression><![CDATA[$P{dir_resp}]]></datasetParameterExpression>
+										</datasetParameter>
+										<datasetParameter name="area_resp">
+											<datasetParameterExpression><![CDATA[$P{area_resp}]]></datasetParameterExpression>
+										</datasetParameter>
+										<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+									</datasetRun>
+								</dataset>
+							</multiAxisDataset>
+							<dataAxis axis="Rows">
+								<axisLevel name="Projetos">
+									<labelExpression><![CDATA["Level Label expression"]]></labelExpression>
+									<axisLevelBucket order="None" class="java.lang.String">
+										<bucketExpression><![CDATA[$F{INV_NAME}]]></bucketExpression>
+										<bucketProperty name="url"><![CDATA["https://cppm9187.ondemand.ca.com/niku/nu#action:projmgr.projectProperties&id=" + $F{INV_ID}]]></bucketProperty>
+									</axisLevelBucket>
+								</axisLevel>
+							</dataAxis>
+							<dataAxis axis="Columns"/>
+							<multiAxisMeasure name="Duração" class="java.lang.Number" calculation="Nothing">
+								<labelExpression><![CDATA["Dias até execução"]]></labelExpression>
+								<valueExpression><![CDATA[$F{DURACAO}]]></valueExpression>
+							</multiAxisMeasure>
+							<multiAxisMeasure name="Média" class="java.lang.Number" calculation="Nothing">
+								<labelExpression><![CDATA["Média"]]></labelExpression>
+								<valueExpression><![CDATA[$F{MEDIA}]]></valueExpression>
+							</multiAxisMeasure>
+						</multiAxisData>
+						<hc:series name="Duração">
+							<hc:contributor name="SeriesItemHyperlink">
+								<hc:contributorProperty name="hyperlinkTarget" valueType="Constant" value="Blank"/>
+								<hc:contributorProperty name="hyperlinkType" valueType="Constant" value="Reference"/>
+								<hc:contributorProperty name="hyperlinkReference" valueType="Bucket" value="Projetos.url"/>
+							</hc:contributor>
+						</hc:series>
+						<hc:series name="Média"/>
+					</hc:chart>
+				</componentElement>
+			</frame>
+		</band>
+		<band height="355">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<frame>
+				<reportElement x="0" y="0" width="1160" height="350" uuid="7359044e-a2f7-422a-8bfd-e3523f74ec46"/>
+				<textField>
+					<reportElement x="0" y="0" width="1160" height="30" forecolor="#919191" uuid="1ee4caa7-e56d-4cc9-9436-1014e92fe3be"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="22" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Qtd. de Ocorrências em Aberto por Projeto"]]></textFieldExpression>
+				</textField>
+				<componentElement>
+					<reportElement x="0" y="30" width="1160" height="320" uuid="712e5fe1-9b29-4f64-bcc7-559efce05773"/>
+					<hc:chart xmlns:hc="http://jaspersoft.com/highcharts" xsi:schemaLocation="http://jaspersoft.com/highcharts http://jaspersoft.com/schema/highcharts.xsd" type="TreeMap">
+						<hc:chartSetting name="default">
+							<hc:chartProperty name="title.text" value=""/>
+							<hc:chartProperty name="credits.enabled" value="false"/>
+							<hc:chartProperty name="credits.href" value=""/>
+							<hc:chartProperty name="credits.text" value=""/>
+							<hc:chartProperty name="yAxis.title.text" value=""/>
+							<hc:chartProperty name="chart.zoomType" value="xy"/>
+							<hc:chartProperty name="colors">
+								<hc:propertyExpression><![CDATA[Arrays.asList("#00995D","#B1D34B","#FFF0C7","#ED1651","#A3238E","#F47920","#FFCB08","#411564","#5B5C65","#682D00")]]></hc:propertyExpression>
+							</hc:chartProperty>
+						</hc:chartSetting>
+						<multiAxisData>
+							<multiAxisDataset>
+								<dataset>
+									<datasetRun subDataset="ISSUE_OPEN" uuid="aba03cc2-4b69-4e8d-aef8-b73895839621">
+										<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+									</datasetRun>
+								</dataset>
+							</multiAxisDataset>
+							<dataAxis axis="Rows">
+								<axisLevel name="Projetos">
+									<labelExpression><![CDATA["Level Label expression"]]></labelExpression>
+									<axisLevelBucket order="None" class="java.lang.String">
+										<bucketExpression><![CDATA[$F{INV_NAME}]]></bucketExpression>
+										<bucketProperty name="url"><![CDATA["https://cppm9187.ondemand.ca.com/niku/nu#action:itl.issueList&id=" + $F{INV_ID} + "&ui.page.space=mainnav.work"]]></bucketProperty>
+									</axisLevelBucket>
+								</axisLevel>
+							</dataAxis>
+							<dataAxis axis="Columns"/>
+							<multiAxisMeasure name="Quantidade" class="java.lang.Number" calculation="Nothing">
+								<labelExpression><![CDATA["Quantidade"]]></labelExpression>
+								<valueExpression><![CDATA[$F{QTD}]]></valueExpression>
+							</multiAxisMeasure>
+						</multiAxisData>
+						<hc:series name="Quantidade">
+							<hc:contributor name="SeriesItemHyperlink">
+								<hc:contributorProperty name="hyperlinkTarget" valueType="Constant" value="Blank"/>
+								<hc:contributorProperty name="hyperlinkType" valueType="Constant" value="Reference"/>
+								<hc:contributorProperty name="hyperlinkReference" valueType="Bucket" value="Projetos.url"/>
+							</hc:contributor>
+						</hc:series>
+					</hc:chart>
+				</componentElement>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

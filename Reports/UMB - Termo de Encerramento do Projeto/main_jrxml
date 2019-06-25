@@ -1,0 +1,489 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.2.final using JasperReports Library version 6.4.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="unimed_enc_proj" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="f2e6b09e-5b48-4b93-a43d-12191ee49682">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="UNIMED - PRD"/>
+	<property name="ireport.jasperserver.url" value="https://cppmrpt103.ondemand.ca.com/reportservice/"/>
+	<property name="ireport.jasperserver.user" value="reportdev|cppm9187"/>
+	<property name="ireport.jasperserver.report.resource" value="/ca_ppm/unimed/unimed_rpt_enc_proj_files/main_jrxml"/>
+	<property name="ireport.jasperserver.reportUnit" value="/ca_ppm/unimed/unimed_rpt_enc_proj"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#DCDCDC">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#FFBFBF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="project_hide" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+*
+FROM
+(
+	SELECT 
+	  INV.ID INV_ID,
+	  INV.CODE INV_CODE,
+	  INV.NAME INV_NAME,
+	  MGR.FIRST_NAME || ' ' || MGR.LAST_NAME INV_MANAGER,
+	  GAS.FIRST_NAME || ' ' || GAS.LAST_NAME INV_GAS,
+	  OPRJ.OBJ_OBJECTIVE INV_OBJECTIVE,
+	  OINV.UM_JUSTIFICATIVA INV_JUST,
+	  CRIADO_POR.FIRST_NAME || ' ' || CRIADO_POR.LAST_NAME CRIADO_POR,
+	  ENC.created_date DATA_CRIACAO,
+	  SITUACAO.NAME SITUACAO,
+	  ENC.pbk_cus_acd_prj_rslt RESULTADOS,
+	  ENC.pbk_cus_acpd_dlvrbls ENTREGAS,
+	  ENC.UB_CONS_FIN CONS_FINAIS,
+	  ENC.UB_TERMOENCERRAMENTO TERMO_ENC,
+    OBSU.NAME AREA_CLIENTE
+	FROM
+	  INV_INVESTMENTS INV
+	  LEFT JOIN ODF_CA_PBK_PRJ_CLSR ENC ON ENC.ODF_PARENT_ID = INV.ID
+	  LEFT JOIN SRM_RESOURCES MGR ON MGR.USER_ID = INV.MANAGER_ID
+	  LEFT JOIN SRM_RESOURCES CRIADO_POR ON CRIADO_POR.USER_ID = ENC.created_by	  
+	  LEFT JOIN ODF_CA_PROJECT OPRJ ON OPRJ.ID = INV.ID
+	  LEFT JOIN SRM_RESOURCES GAS ON GAS.ID = OPRJ.obj_stakeholder3
+	  LEFT JOIN ODF_CA_INV OINV ON OINV.ID = INV.ID
+	  LEFT JOIN CMN_LOOKUPS_V SITUACAO ON SITUACAO.LOOKUP_CODE = OINV.obj_work_status AND SITUACAO.LOOKUP_TYPE = 'OBJ_INVESTMENT_WORK_STATUS' AND SITUACAO.LANGUAGE_CODE = 'pt'  
+    LEFT JOIN PRJ_OBS_ASSOCIATIONS OBSA ON OBSA.RECORD_ID = INV.ID
+    LEFT JOIN PRJ_OBS_UNITS_FLAT OBSF ON OBSA.UNIT_ID = OBSF.UNIT_ID
+    LEFT JOIN PRJ_OBS_UNITS OBSU ON OBSU.ID = OBSF.BRANCH_UNIT_ID
+    LEFT JOIN PRJ_OBS_OBJECT_TYPES OOT ON OOT.TYPE_ID = OBSU.TYPE_ID AND OOT.TABLE_NAME = 'SRM_PROJECTS'
+  WHERE
+	  INV.ID = $P{project_hide}
+	ORDER BY
+	  ENC.created_date DESC,
+    OBSU.DEPTH DESC
+)ENCERRAMENTO
+WHERE
+  ROWNUM <= 1]]>
+	</queryString>
+	<field name="INV_ID" class="java.math.BigDecimal"/>
+	<field name="INV_CODE" class="java.lang.String"/>
+	<field name="INV_NAME" class="java.lang.String"/>
+	<field name="INV_MANAGER" class="java.lang.String"/>
+	<field name="INV_GAS" class="java.lang.String"/>
+	<field name="INV_OBJECTIVE" class="java.lang.String"/>
+	<field name="INV_JUST" class="java.lang.String"/>
+	<field name="CRIADO_POR" class="java.lang.String"/>
+	<field name="DATA_CRIACAO" class="java.sql.Timestamp"/>
+	<field name="SITUACAO" class="java.lang.String"/>
+	<field name="RESULTADOS" class="java.lang.String"/>
+	<field name="ENTREGAS" class="java.lang.String"/>
+	<field name="CONS_FINAIS" class="java.lang.String"/>
+	<field name="TERMO_ENC" class="java.lang.String"/>
+	<field name="AREA_CLIENTE" class="java.lang.String"/>
+	<sortField name="DATA_CRIACAO" order="Descending"/>
+	<title>
+		<band height="63" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="20" width="555" height="40" forecolor="#949494" uuid="1def7e95-9d14-452b-95d0-5dab4dcf50a5"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Termo de Encerramento de Projeto"]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="435" y="0" width="120" height="60" uuid="4f84e78a-5af1-43c2-8c9d-1557b7cc9e18"/>
+				<imageExpression><![CDATA["repo:unimed_logo"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<detail>
+		<band height="200">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField>
+				<reportElement x="0" y="0" width="555" height="20" forecolor="#000000" uuid="1f5e28ad-84eb-4222-b01c-2d4514866282"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Dados do Projeto"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="a298d6dd-34ba-4e00-95e1-6ad23bfefbf1"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="45" width="555" height="25" uuid="1cd44dd5-05b4-41ea-a9a7-11ae58449b91"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INV_CODE}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="85" width="555" height="25" uuid="be7e0225-6a55-4374-953d-1a9d08668d85"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INV_NAME}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="125" width="555" height="25" uuid="f04a75e8-a123-4c42-b414-530e73a464a5"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INV_GAS}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="30" width="555" height="15" uuid="696fe026-b7bc-48e7-938c-f00b17f39bed"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["ID do Projeto:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="70" width="555" height="15" uuid="9782355b-c172-402b-986c-c78e2dc7b291">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Título do Projeto:"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="110" width="555" height="15" uuid="db5c31ba-fba0-42b0-a761-72b6084c25aa">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Cliente Responsável"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="150" width="555" height="15" uuid="75852b33-0504-4787-b744-dcb02b920274">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Área Cliente"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="165" width="555" height="25" uuid="2e47d923-be03-4d91-a51c-7a1dc2525491"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{AREA_CLIENTE}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="120">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField>
+				<reportElement x="0" y="0" width="555" height="20" forecolor="#000000" uuid="fa85a5b0-7cfd-447a-a57e-35e9250419dc"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Aspectos Gerenciais"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="896d2f13-181d-48e8-8533-cb72c6ec11df"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField>
+				<reportElement x="0" y="30" width="555" height="15" uuid="9c4a696d-4980-4374-b683-e45ebe33fc9b">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Autor:"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="0" y="45" width="555" height="25" uuid="80a400e8-b0ff-4268-9393-96d43553bdba"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CRIADO_POR}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="70" width="555" height="15" uuid="c4498d0c-2a7d-40bf-8d5e-eceb90076538">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Criado em:"]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="0" y="85" width="555" height="25" uuid="7f848424-2102-45de-a1fc-d915e0d0bed4"/>
+				<textElement textAlignment="Left" verticalAlignment="Top">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DATA_CRIACAO}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="60">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField>
+				<reportElement x="0" y="0" width="555" height="20" forecolor="#000000" uuid="89340b07-09d5-4d19-ad0e-c3ab3b1e40be"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Análise Final - Status do Projeto"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="c3fa4389-6283-499d-ab41-e39a261efd16"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="0" y="30" width="555" height="20" uuid="d57912b6-075b-4961-94b2-948c3ebb89ee"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SITUACAO}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="60">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField>
+				<reportElement x="0" y="0" width="555" height="20" forecolor="#000000" uuid="3d700260-5cd6-4d3f-96d1-cdb6372261d1"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Objetivo do Projeto"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="545d8fe7-c599-44ba-b34e-85bd15000531"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="0" y="30" width="555" height="20" uuid="419cbde7-3c9b-4115-a212-f492466b9293"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INV_OBJECTIVE}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="60">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField>
+				<reportElement x="0" y="0" width="555" height="20" forecolor="#000000" uuid="02254df2-b3d8-4968-a7f1-18817950d3f7"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Justificativa do Projeto"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="3f585a25-f52a-4ecd-b236-3a4d4db62a47"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="0" y="30" width="555" height="20" uuid="b2ccd61e-08e0-478b-8393-b6c6099216fb"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INV_JUST}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="60">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField>
+				<reportElement x="0" y="0" width="555" height="20" forecolor="#000000" uuid="dd97d497-4627-4093-906a-8e4463948a54"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Resultados Obtidos"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="1de554e6-d28a-4d32-ae5a-444c0dc013cb"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="0" y="30" width="555" height="20" uuid="7bbd5051-5f06-4b09-a876-4259fb0cc878"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{RESULTADOS}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="60">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField>
+				<reportElement x="0" y="0" width="555" height="20" forecolor="#000000" uuid="873bbf3a-1491-41e4-bfd0-62f0c1120a73"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Relação de Entregas"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="0534a636-07bb-46aa-a446-435b9467afd5"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="0" y="30" width="555" height="20" uuid="edc0879c-1225-48bd-a579-ebab2df41a42"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ENTREGAS}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="60">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<textField>
+				<reportElement x="0" y="0" width="555" height="20" forecolor="#000000" uuid="b7e9d050-87f1-4cb8-a4ae-5f265b5b7eb7"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Considerações Finais"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="441ca9ee-fce4-43ec-b8b4-4f1327b55407"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="0" y="30" width="555" height="20" uuid="bb311063-52e7-480f-ac82-6f629c6aac55"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{CONS_FINAIS}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="64">
+			<textField>
+				<reportElement x="0" y="0" width="555" height="20" forecolor="#000000" uuid="998d34b2-8fa2-4a81-a129-c01af8551c14"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Termo de Encerramento"]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="8e38886f-7e0e-43ea-8dce-c9960d2c4ca4"/>
+				<graphicElement>
+					<pen lineWidth="2.0"/>
+				</graphicElement>
+			</line>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="0" y="30" width="555" height="30" uuid="18680204-bc50-4ffd-8932-49c995f743db"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TERMO_ENC}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="100">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<frame>
+				<reportElement positionType="Float" x="0" y="0" width="555" height="100" uuid="c7b36b95-f6b5-4508-9480-c58fa48da581"/>
+				<textField isBlankWhenNull="true">
+					<reportElement x="0" y="55" width="250" height="25" uuid="25d3bc8c-f79f-4c60-b5cc-7738797798b6"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{INV_GAS}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="80" width="250" height="15" uuid="c3b5d7f7-993d-45c6-ae34-2e1053a73acc">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Gerente da Área Cliente"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="250" y="55" width="30" height="25" uuid="73df1c8a-00c8-4cc1-af36-eb371125a530">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Data:"]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd/MM/yy" isBlankWhenNull="true">
+					<reportElement x="280" y="55" width="65" height="25" uuid="d591773f-a119-4588-b483-d32f152e8605"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{DATA_CRIACAO}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="99" width="555" height="1" uuid="2a8b6be8-1324-4981-a66e-98f615606397"/>
+					<graphicElement>
+						<pen lineWidth="2.0"/>
+					</graphicElement>
+				</line>
+			</frame>
+		</band>
+		<band height="100">
+			<frame>
+				<reportElement positionType="Float" x="0" y="0" width="555" height="100" uuid="afb40466-0b23-4386-81cc-e37930c3995e"/>
+				<textField isBlankWhenNull="true">
+					<reportElement x="0" y="55" width="250" height="25" uuid="359f82c2-c3ab-4d1f-96b9-60224ea2e414">
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{INV_MANAGER}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="0" y="80" width="250" height="15" uuid="819b1c93-22c8-4254-97a2-0a72955749bb">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Gerente do Projeto"]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="250" y="55" width="30" height="25" uuid="8222a56d-80f1-4f70-9d7e-53ebf323b645">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="10"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Data:"]]></textFieldExpression>
+				</textField>
+				<textField pattern="dd/MM/yy" isBlankWhenNull="true">
+					<reportElement x="280" y="55" width="65" height="25" uuid="25212403-93ba-43b4-b0f3-1f11b81b6f77"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{DATA_CRIACAO}]]></textFieldExpression>
+				</textField>
+				<line>
+					<reportElement x="0" y="99" width="555" height="1" uuid="db518e2d-8f7e-406f-8a19-ee9365023989"/>
+					<graphicElement>
+						<pen lineWidth="2.0"/>
+					</graphicElement>
+				</line>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

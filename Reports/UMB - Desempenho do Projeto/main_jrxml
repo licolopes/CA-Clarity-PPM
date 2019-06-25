@@ -1,0 +1,1963 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.2.final using JasperReports Library version 6.4.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="des_prj" pageWidth="1075" pageHeight="1100" orientation="Landscape" whenNoDataType="NoDataSection" columnWidth="1015" leftMargin="30" rightMargin="30" topMargin="20" bottomMargin="20" uuid="11e29b74-2a1e-41e4-81f7-7b05716edc15">
+	<property name="ireport.jasperserver.url" value="https://cppmrpt103.ondemand.ca.com/reportservice/"/>
+	<property name="ireport.jasperserver.user" value="reportdev|cppm9187"/>
+	<property name="ireport.jasperserver.report.resource" value="/ca_ppm/unimed/unimed_rpt_des_prj_v2_files/main_jrxml"/>
+	<property name="ireport.jasperserver.reportUnit" value="/ca_ppm/unimed/unimed_rpt_des_prj_v2"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="UNIMED - PRD"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab_CH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 1_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 2_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 2_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 2_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 3_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 3_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 3_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 4_TH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 4_CH" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 4_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab 1_CH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab 1_CG" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab 1_CT" mode="Opaque" backcolor="#005FB3">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab 1_CD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab 2_CH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab 2_CG" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab 2_CT" mode="Opaque" backcolor="#005FB3">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab 2_CD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 5_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 5_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 5_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab 3_CH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab 3_CG" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab 3_CT" mode="Opaque" backcolor="#005FB3">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab 3_CD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab 4_CH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab 4_CG" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab 4_CT" mode="Opaque" backcolor="#005FB3">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab 4_CD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab 5_CH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab 5_CG" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab 5_CT" mode="Opaque" backcolor="#005FB3">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Crosstab 5_CD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 6_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 7_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 7_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 7_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 8_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 8_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 8_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table 9_TH" mode="Opaque" backcolor="#D3D3D3">
+		<box>
+			<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<leftPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<rightPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="Table 9_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<leftPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<rightPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="Table 9_CH" mode="Opaque" backcolor="#FFBFBF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<leftPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<rightPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="Table 10_TH" mode="Opaque" backcolor="#D3D3D3">
+		<box>
+			<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<leftPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<rightPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="Table 10_CH" mode="Opaque" backcolor="#FFBFBF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<leftPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<rightPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="Table 10_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<leftPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<rightPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="Table 11_TH" mode="Opaque" backcolor="#D3D3D3">
+		<box>
+			<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<leftPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<rightPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="Table 11_CH" mode="Opaque" backcolor="#FFBFBF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<leftPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<rightPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<style name="Table 11_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<topPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<leftPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<bottomPen lineWidth="0.5" lineColor="#FFFFFF"/>
+			<rightPen lineWidth="0.5" lineColor="#FFFFFF"/>
+		</box>
+	</style>
+	<subDataset name="curva_s_fis" uuid="9047d1ce-b436-4e66-a9c4-5571234281c8">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="UNIMED - PRD"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="project_hide" class="java.lang.String"/>
+		<parameter name="status_rpt" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT
+MES,
+ID,
+TOTAL_PER,
+RANK() OVER (PARTITION BY 1 ORDER BY MES,ORDEM) ORDEM
+FROM
+(
+	SELECT
+		ODF_PARENT_ID INV_ID,
+		'% planejado' ID,
+		DTT_MES MES,
+		ROUND(DTT_PCT_PLAN_MES*100,0) TOTAL_PER,		
+		1 ORDEM
+	FROM
+		odf_ca_dtt_obj_gst_avc_fis
+	WHERE
+		DTT_ATIVO = 1
+	
+	UNION
+	
+	SELECT
+		ODF_PARENT_ID INV_ID,
+		'% concluído' ID,
+		DTT_MES MES,
+		ROUND(DTT_PCT_CONCL_MES*100,0) TOTAL_PER,		
+		1 ORDEM
+	FROM
+		odf_ca_dtt_obj_gst_avc_fis
+	WHERE
+		DTT_ATIVO = 1
+)T1
+
+JOIN
+
+(
+	SELECT
+		INV.ID INV_ID,
+		RPT.ID RPT_ID,
+		RPT.cop_report_date RPT_DATE
+	FROM
+		INV_INVESTMENTS INV
+		JOIN ODF_CA_COP_PRJ_STATUSRPT RPT ON RPT.ODF_PARENT_ID = INV.ID	
+	WHERE
+		RPT.ID = $P{status_rpt}
+)T2
+
+ON T1.INV_ID = T2.INV_ID
+
+WHERE
+	T1.INV_ID = $P{project_hide}
+	AND TRUNC(T1.MES,'MONTH') <= TRUNC(T2.RPT_DATE,'MONTH')
+	AND T1.MES IS NOT NULL]]>
+		</queryString>
+		<field name="MES" class="java.sql.Timestamp"/>
+		<field name="ID" class="java.lang.String"/>
+		<field name="TOTAL_PER" class="java.math.BigDecimal"/>
+		<field name="ORDEM" class="java.math.BigDecimal"/>
+	</subDataset>
+	<subDataset name="milestones" uuid="5e7d4f73-d35b-49dc-9090-c82737c26357">
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="UNIMED - PRD"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="project_hide" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT
+TASK_NAME,
+TASK_START,
+TASK_FINISH,
+BASELINE_FINISH,
+DIAS_ATRASO,
+DIAS_ATRASO_PCT,
+DIAS_ATRASO_PCT_STATUS,
+STATUS
+FROM
+(
+	SELECT
+	  TSK.PRNAME TASK_NAME,
+	  TSK.PRSTART TASK_START,
+	  TSK.PRFINISH TASK_FINISH,
+	  BASELINE_DETAILS.FINISH_DATE BASELINE_FINISH,
+	  TSK_D.days_late DIAS_ATRASO,
+	  TSK_D.days_late_pct DIAS_ATRASO_PCT,
+	  CASE
+		WHEN TSK_D.days_late_pct < 1 THEN 10
+		WHEN TSK_D.days_late_pct >= 1 AND TSK_D.days_late_pct < 10 THEN 20
+		WHEN TSK_D.days_late_pct >= 10 THEN 30
+		ELSE 40
+		END DIAS_ATRASO_PCT_STATUS,
+	  TSK_STATUS.NAME STATUS
+		
+	FROM 
+	  INV_INVESTMENTS INV
+	  JOIN PRTASK TSK ON INV.ID = TSK.PRPROJECTID
+	  JOIN COP_TSK_DAYS_LATE_V TSK_D ON TSK.PRID = TSK_D.TASK_ID
+	  LEFT JOIN PRJ_BASELINES BASELINE ON BASELINE.PROJECT_ID = INV.ID AND BASELINE.IS_CURRENT = 1
+	  LEFT JOIN PRJ_BASELINE_DETAILS BASELINE_DETAILS ON BASELINE_DETAILS.BASELINE_ID = BASELINE.ID AND BASELINE_DETAILS.OBJECT_ID = TSK.PRID
+	  LEFT JOIN CMN_LOOKUPS_V TSK_STATUS ON TSK_STATUS.LOOKUP_ENUM = TSK.PRSTATUS AND TSK_STATUS.LOOKUP_TYPE = 'prTaskStatus' AND TSK_STATUS.LANGUAGE_CODE = 'pt'
+
+	WHERE
+	  INV.ID = $P{project_hide} 
+	  AND TSK.PRISMILESTONE = 1 
+	  AND TSK.PRSTATUS <> 2
+
+	ORDER BY
+	  TSK.PRSTART ASC
+)T1
+WHERE
+	ROWNUM <= 5]]>
+		</queryString>
+		<field name="TASK_NAME" class="java.lang.String"/>
+		<field name="TASK_START" class="java.sql.Timestamp"/>
+		<field name="TASK_FINISH" class="java.sql.Timestamp"/>
+		<field name="BASELINE_FINISH" class="java.sql.Timestamp"/>
+		<field name="DIAS_ATRASO" class="java.math.BigDecimal"/>
+		<field name="DIAS_ATRASO_PCT" class="java.math.BigDecimal"/>
+		<field name="DIAS_ATRASO_PCT_STATUS" class="java.math.BigDecimal"/>
+		<field name="STATUS" class="java.lang.String"/>
+	</subDataset>
+	<subDataset name="risks" uuid="4c95ba39-818c-4b1b-a48e-7fd45f243b51">
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="UNIMED - PRD"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="project_hide" class="java.lang.String"/>
+		<queryString>
+			<![CDATA[SELECT
+	RISK.NAME RISK_NAME,	
+	RISK.DESCRIPTION RISK_DESC,
+	RISK.IMPACT_DATE RISK_IMPACT_DATE,
+	RISK.PRIORITY_CODE RISK_PRIORITY,
+	RISK.RESOLUTION RISK_RES,
+	RISK.PROBABILITY_ENUM PROBABILITY,
+	RISK.IMPACT_ENUM IMPACT,
+	RES.FIRST_NAME || ' ' || RES.LAST_NAME RISK_OWNER,
+	RISK_STATUS.NAME RISK_STATUS	  
+FROM 
+	INV_INVESTMENTS INV
+	JOIN RIM_RISKS_AND_ISSUES RISK ON RISK.PK_ID = INV.ID AND RISK.TYPE_CODE = 'RISK'
+	LEFT JOIN CMN_LOOKUPS_V RISK_STATUS ON RISK_STATUS.LOOKUP_CODE = RISK.STATUS_CODE AND RISK_STATUS.LOOKUP_TYPE = 'RIM_STATUS' AND RISK_STATUS.LANGUAGE_CODE = 'pt'
+	LEFT JOIN SRM_RESOURCES RES ON RES.USER_ID = RISK.ASSIGNED_TO	
+WHERE
+	INV.ID = $P{project_hide} 
+	AND RISK.STATUS_CODE = 'OPEN'  
+	AND ROWNUM <=5	  
+ORDER BY
+	RISK.IMPACT_DATE ASC]]>
+		</queryString>
+		<field name="RISK_NAME" class="java.lang.String"/>
+		<field name="RISK_DESC" class="java.lang.String"/>
+		<field name="RISK_IMPACT_DATE" class="java.sql.Timestamp"/>
+		<field name="RISK_PRIORITY" class="java.lang.String"/>
+		<field name="RISK_RES" class="java.lang.String"/>
+		<field name="PROBABILITY" class="java.math.BigDecimal"/>
+		<field name="IMPACT" class="java.math.BigDecimal"/>
+		<field name="RISK_OWNER" class="java.lang.String"/>
+		<field name="RISK_STATUS" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="project_hide" class="java.lang.String"/>
+	<parameter name="status_rpt" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+INV_ID,
+INV_CODE,
+INV_NAME,	
+DATA_INICIO,
+DATA_TERMINO,
+DATA_INICIO_LB,
+DATA_TERMINO_LB,
+DIAS_ATRASO_INICIO,
+DIAS_ATRASO_TERMINO,
+RPT_DATE,
+RPT_PRINC_REAL,
+RPT_ATUAL,
+RPT_PROX_ATIV,
+RPT_STATUS_GERAL,
+RPT_STATUS_CRONOGRAMA,
+RPT_STATUS_ESCOPO,
+RPT_STATUS_CUSTO_ESFORCO,
+CASE
+	WHEN RPT_STATUS_GERAL_2 = 0 THEN 10
+	WHEN RPT_STATUS_GERAL < RPT_STATUS_GERAL_2 THEN 20
+	WHEN RPT_STATUS_GERAL > RPT_STATUS_GERAL_2 THEN 30
+	ELSE 10
+	END RPT_STATUS_GERAL_2,
+CASE
+	WHEN RPT_STATUS_CRONOGRAMA_2 = 0 THEN 10
+	WHEN RPT_STATUS_CRONOGRAMA < RPT_STATUS_CRONOGRAMA_2 THEN 20
+	WHEN RPT_STATUS_CRONOGRAMA > RPT_STATUS_CRONOGRAMA_2 THEN 30
+	ELSE 10
+	END RPT_STATUS_CRONOGRAMA_2,
+CASE
+	WHEN RPT_STATUS_ESCOPO_2 = 0 THEN 10
+	WHEN RPT_STATUS_ESCOPO < RPT_STATUS_ESCOPO_2 THEN 20
+	WHEN RPT_STATUS_ESCOPO > RPT_STATUS_ESCOPO_2 THEN 30
+	ELSE 10
+	END RPT_STATUS_ESCOPO_2,
+CASE
+	WHEN RPT_STATUS_CUSTO_ESFORCO_2 = 0 THEN 10
+	WHEN RPT_STATUS_CUSTO_ESFORCO < RPT_STATUS_CUSTO_ESFORCO_2 THEN 20
+	WHEN RPT_STATUS_CUSTO_ESFORCO > RPT_STATUS_CUSTO_ESFORCO_2 THEN 30
+	ELSE 10
+	END RPT_STATUS_CUSTO_ESFORCO_2,
+STATUS,
+ETAPA,
+TIPO_PROJETO,
+CATEGORIA,
+GRAVIDADE,
+GERENTE,  
+DIRETOR_RESPONSAVEL,
+GESTOR_AREA,
+PMO,
+OBJETIVO,
+JUSTIFICATIVA,
+BENEFICIOS,
+AREA_EXECUTORA,
+QTD_RISK,
+QTD_MILES
+FROM
+(
+	SELECT DISTINCT
+	T1.INV_ID,
+	T1.INV_CODE,
+	T1.INV_NAME,	
+	T2.DATA_INICIO,
+	T2.DATA_TERMINO,
+	T2.DATA_INICIO_LB,
+	T2.DATA_TERMINO_LB,
+	T2.DIAS_ATRASO_INICIO,
+	T2.DIAS_ATRASO_TERMINO,
+	T3.RPT_DATE,
+	T3.RPT_PRINC_REAL,
+	T3.RPT_ATUAL,
+	T3.RPT_PROX_ATIV,
+	CASE
+		WHEN T3.RPT_STATUS_GERAL >= 10 AND T3.RPT_STATUS_GERAL <= 40 THEN 10
+		WHEN T3.RPT_STATUS_GERAL > 40 AND T3.RPT_STATUS_GERAL <= 90 THEN 20
+		WHEN T3.RPT_STATUS_GERAL > 90 THEN 30
+		ELSE 0 
+		END RPT_STATUS_GERAL,
+	T3.RPT_STATUS_CRONOGRAMA,
+	T3.RPT_STATUS_ESCOPO,
+	T3.RPT_STATUS_CUSTO_ESFORCO,
+	CASE
+		WHEN T4.RPT_STATUS_GERAL >= 10 AND T4.RPT_STATUS_GERAL <= 40 THEN 10
+		WHEN T4.RPT_STATUS_GERAL > 40 AND T4.RPT_STATUS_GERAL <= 90 THEN 20
+		WHEN T4.RPT_STATUS_GERAL > 90 THEN 30
+		ELSE 0 
+		END RPT_STATUS_GERAL_2,
+	NVL(T4.RPT_STATUS_CRONOGRAMA,0) RPT_STATUS_CRONOGRAMA_2,
+	NVL(T4.RPT_STATUS_ESCOPO,0) RPT_STATUS_ESCOPO_2,
+	NVL(T4.RPT_STATUS_CUSTO_ESFORCO,0) RPT_STATUS_CUSTO_ESFORCO_2,
+	T1.STATUS,
+	T1.ETAPA,
+	T1.TIPO_PROJETO,
+	T1.CATEGORIA,
+	T1.GRAVIDADE,
+	T1.GERENTE,  
+	T1.DIRETOR_RESPONSAVEL,
+	T1.GESTOR_AREA,
+	T1.PMO,
+	T1.OBJETIVO,
+	T1.JUSTIFICATIVA,
+	T1.BENEFICIOS,
+	T1.AREA_EXECUTORA,
+	CASE WHEN T1.QTD_RISK > 0 THEN 'true' ELSE 'false' END QTD_RISK,
+	CASE WHEN T1.QTD_MILES > 0 THEN 'true' ELSE 'false' END QTD_MILES
+	FROM
+	(
+	  SELECT 
+		INV.ID INV_ID,
+		INV.CODE INV_CODE,
+		INV.NAME INV_NAME,	
+		STATUS.NAME STATUS,
+		ETAPA.NAME ETAPA,
+		TP.NAME TIPO_PROJETO,
+		CATEG.NAME CATEGORIA,
+		GRAV.NAME GRAVIDADE,
+		MGR.FIRST_NAME || ' ' || MGR.LAST_NAME GERENTE,  
+		DAS.FIRST_NAME || ' ' || DAS.LAST_NAME DIRETOR_RESPONSAVEL,
+		GAS.FIRST_NAME || ' ' || GAS.LAST_NAME GESTOR_AREA,
+		PMO.FIRST_NAME || ' ' || PMO.LAST_NAME PMO,
+		OPRJ.OBJ_OBJECTIVE OBJETIVO,
+		OINV.UM_JUSTIFICATIVA JUSTIFICATIVA,
+		OINV.UM_BENEFICIOS BENEFICIOS,
+		OBSU.NAME AREA_EXECUTORA,
+		(
+			SELECT COUNT(RISK.ID) 
+			FROM RIM_RISKS_AND_ISSUES RISK
+			WHERE RISK.TYPE_CODE = 'RISK' 
+			AND RISK.PK_ID = INV.ID
+			AND RISK.STATUS_CODE = 'OPEN' 
+		)QTD_RISK,
+		(
+			SELECT COUNT(TSK.PRID) 	
+			FROM PRTASK TSK 
+			LEFT JOIN PRJ_BASELINES BASELINE ON BASELINE.PROJECT_ID = INV.ID AND BASELINE.IS_CURRENT = 1
+			LEFT JOIN PRJ_BASELINE_DETAILS BASELINE_DETAILS ON BASELINE_DETAILS.BASELINE_ID = BASELINE.ID AND BASELINE_DETAILS.OBJECT_ID = TSK.PRID
+			WHERE TSK.PRPROJECTID = INV.ID AND TSK.PRISMILESTONE = 1 AND TSK.PRSTATUS <> 2
+		)QTD_MILES
+	  FROM
+		INV_INVESTMENTS INV
+		LEFT JOIN ODF_CA_PROJECT OPRJ ON OPRJ.ID = INV.ID
+		LEFT JOIN ODF_CA_INV OINV ON OINV.ID = INV.ID
+		LEFT JOIN PRTASK TSK ON TSK.PRPROJECTID = INV.ID
+		LEFT JOIN PRJ_BASELINES BL ON BL.PROJECT_ID = INV.ID AND BL.IS_CURRENT = 1
+		LEFT JOIN PRJ_BASELINE_DETAILS BLD ON BLD.BASELINE_ID = BL.ID AND BL.PROJECT_ID = INV.ID AND BL.IS_CURRENT = 1 AND BLD.OBJECT_TYPE = 'TASK'
+		LEFT JOIN CMN_LOOKUPS_V TP ON TP.LOOKUP_CODE = OPRJ.obj_request_type AND TP.LOOKUP_TYPE = 'OBJ_IDEA_PROJECT_TYPE' AND TP.LANGUAGE_CODE = 'pt'
+		LEFT JOIN CMN_LOOKUPS_V CATEG ON CATEG.LOOKUP_CODE = OPRJ.obj_request_category AND CATEG.LOOKUP_TYPE = 'OBJ_IDEA_PROJECT_CATEGORY' AND CATEG.LANGUAGE_CODE = 'pt'
+		LEFT JOIN CMN_LOOKUPS_V GRAV ON GRAV.LOOKUP_CODE = OINV.um_gravidade AND GRAV.LOOKUP_TYPE = 'LKP_UM_GRAVIDADE' AND GRAV.LANGUAGE_CODE = 'pt'
+		LEFT JOIN CMN_LOOKUPS_V ETAPA ON ETAPA.LOOKUP_CODE = INV.STAGE_CODE AND ETAPA.LOOKUP_TYPE = 'INV_STAGE_TYPE' AND ETAPA.LANGUAGE_CODE = 'pt'
+		LEFT JOIN CMN_LOOKUPS_V STATUS ON STATUS.LOOKUP_ENUM = INV.STATUS AND STATUS.LOOKUP_TYPE = 'INVESTMENT_OBJ_STATUS' AND STATUS.LANGUAGE_CODE = 'pt'
+		LEFT JOIN SRM_RESOURCES MGR ON MGR.USER_ID = INV.MANAGER_ID
+		LEFT JOIN SRM_RESOURCES DAS ON DAS.ID = OPRJ.obj_stakeholder1
+		LEFT JOIN SRM_RESOURCES PMO ON PMO.ID = OPRJ.obj_stakeholder2
+		LEFT JOIN SRM_RESOURCES GAS ON GAS.ID = OPRJ.obj_stakeholder3
+		LEFT JOIN PRJ_OBS_ASSOCIATIONS OBSA ON OBSA.RECORD_ID = INV.ID
+		LEFT JOIN PRJ_OBS_UNITS_FLAT OBSF ON OBSA.UNIT_ID = OBSF.UNIT_ID
+		LEFT JOIN PRJ_OBS_UNITS OBSU ON OBSU.ID = OBSF.BRANCH_UNIT_ID
+		LEFT JOIN PRJ_OBS_OBJECT_TYPES OOT ON OOT.TYPE_ID = OBSU.TYPE_ID AND OOT.TABLE_NAME = 'SRM_PROJECTS'    
+	  WHERE
+		INV.ID = $P{project_hide} 
+	  ORDER BY
+		OBSU.DEPTH DESC
+	)T1
+	 
+	LEFT JOIN 
+
+	(
+		SELECT
+			INV.ID INV_ID,
+			MIN(TSK.PRSTART) DATA_INICIO,
+			MAX(TSK.PRFINISH) DATA_TERMINO,
+			MIN(BLD.START_DATE) DATA_INICIO_LB,
+			MAX(BLD.FINISH_DATE) DATA_TERMINO_LB,
+			(MIN(TSK.PRSTART) - MIN(BLD.START_DATE)) DIAS_ATRASO_INICIO,
+			(MAX(TSK.PRFINISH) - MAX(BLD.FINISH_DATE)) DIAS_ATRASO_TERMINO
+		FROM
+			INV_INVESTMENTS INV
+			LEFT JOIN ODF_CA_PROJECT OPRJ ON OPRJ.ID = INV.ID
+			LEFT JOIN ODF_CA_INV OINV ON OINV.ID = INV.ID
+			LEFT JOIN PRTASK TSK ON TSK.PRPROJECTID = INV.ID
+			LEFT JOIN PRJ_BASELINES BL ON BL.PROJECT_ID = INV.ID AND BL.IS_CURRENT = 1
+			LEFT JOIN PRJ_BASELINE_DETAILS BLD ON BLD.BASELINE_ID = BL.ID AND BL.PROJECT_ID = INV.ID AND BL.IS_CURRENT = 1 AND BLD.OBJECT_TYPE = 'TASK'
+		WHERE
+			INV.ID = $P{project_hide}
+		GROUP BY
+			INV.ID	
+	)T2
+
+	ON T1.INV_ID = T2.INV_ID
+
+	LEFT JOIN
+
+	(
+		SELECT
+			INV.ID INV_ID,
+			RPT.ID RPT_ID,
+			RPT.NAME RPT_NAME,
+			RPT.CODE RPT_CODE,
+			RPT.cop_report_date RPT_DATE,
+			RPT.cop_key_accomplish RPT_PRINC_REAL,
+			RPT.cop_report_update RPT_ATUAL,
+			RPT.cop_upcoming_act RPT_PROX_ATIV,
+			(NVL(RPT.cop_schedule_status,0) + NVL(RPT.cop_scope_status,0) + NVL(RPT.cop_cost_eft_status,0)) RPT_STATUS_GERAL,
+			NVL(RPT.cop_schedule_status,0) RPT_STATUS_CRONOGRAMA,
+			NVL(RPT.cop_scope_status,0) RPT_STATUS_ESCOPO,
+			NVL(RPT.cop_cost_eft_status,0) RPT_STATUS_CUSTO_ESFORCO
+		FROM
+			INV_INVESTMENTS INV
+			LEFT JOIN ODF_CA_COP_PRJ_STATUSRPT RPT ON RPT.ODF_PARENT_ID = INV.ID	
+		WHERE
+			INV.ID = $P{project_hide}
+			AND RPT.ID = $P{status_rpt}
+	)T3
+
+	ON T1.INV_ID = T3.INV_ID
+
+	LEFT JOIN
+
+	(
+		SELECT
+			DENSE_RANK() OVER (PARTITION BY INV.ID ORDER BY RPT.cop_report_date DESC) LINHA,
+			INV.ID INV_ID,
+			RPT.ID RPT_ID,
+			RPT.NAME RPT_NAME,
+			RPT.CODE RPT_CODE,
+			RPT.cop_report_date RPT_DATE,
+			RPT.cop_key_accomplish RPT_PRINC_REAL,
+			RPT.cop_report_update RPT_ATUAL,
+			RPT.cop_upcoming_act RPT_PROX_ATIV,
+			(NVL(RPT.cop_schedule_status,0) + NVL(RPT.cop_scope_status,0) + NVL(RPT.cop_cost_eft_status,0)) RPT_STATUS_GERAL,
+			NVL(RPT.cop_schedule_status,0) RPT_STATUS_CRONOGRAMA,
+			NVL(RPT.cop_scope_status,0) RPT_STATUS_ESCOPO,
+			NVL(RPT.cop_cost_eft_status,0) RPT_STATUS_CUSTO_ESFORCO
+		FROM
+			INV_INVESTMENTS INV
+			JOIN ODF_CA_COP_PRJ_STATUSRPT RPT ON RPT.ODF_PARENT_ID = INV.ID
+		WHERE
+			INV.ID = $P{project_hide}
+	)T4
+
+	ON T1.INV_ID = T4.INV_ID AND T3.RPT_ID < T4.RPT_ID AND T4.LINHA = 1
+
+	WHERE ROWNUM <= 1
+)FINAL]]>
+	</queryString>
+	<field name="INV_ID" class="java.math.BigDecimal"/>
+	<field name="INV_CODE" class="java.lang.String"/>
+	<field name="INV_NAME" class="java.lang.String"/>
+	<field name="DATA_INICIO" class="java.sql.Timestamp"/>
+	<field name="DATA_TERMINO" class="java.sql.Timestamp"/>
+	<field name="DATA_INICIO_LB" class="java.sql.Timestamp"/>
+	<field name="DATA_TERMINO_LB" class="java.sql.Timestamp"/>
+	<field name="DIAS_ATRASO_INICIO" class="java.math.BigDecimal"/>
+	<field name="DIAS_ATRASO_TERMINO" class="java.math.BigDecimal"/>
+	<field name="RPT_DATE" class="java.sql.Timestamp"/>
+	<field name="RPT_PRINC_REAL" class="java.lang.String"/>
+	<field name="RPT_ATUAL" class="java.lang.String"/>
+	<field name="RPT_PROX_ATIV" class="java.lang.String"/>
+	<field name="RPT_STATUS_GERAL" class="java.math.BigDecimal"/>
+	<field name="RPT_STATUS_CRONOGRAMA" class="java.math.BigDecimal"/>
+	<field name="RPT_STATUS_ESCOPO" class="java.math.BigDecimal"/>
+	<field name="RPT_STATUS_CUSTO_ESFORCO" class="java.math.BigDecimal"/>
+	<field name="RPT_STATUS_GERAL_2" class="java.math.BigDecimal"/>
+	<field name="RPT_STATUS_CRONOGRAMA_2" class="java.math.BigDecimal"/>
+	<field name="RPT_STATUS_ESCOPO_2" class="java.math.BigDecimal"/>
+	<field name="RPT_STATUS_CUSTO_ESFORCO_2" class="java.math.BigDecimal"/>
+	<field name="STATUS" class="java.lang.String"/>
+	<field name="ETAPA" class="java.lang.String"/>
+	<field name="TIPO_PROJETO" class="java.lang.String"/>
+	<field name="CATEGORIA" class="java.lang.String"/>
+	<field name="GRAVIDADE" class="java.lang.String"/>
+	<field name="GERENTE" class="java.lang.String"/>
+	<field name="DIRETOR_RESPONSAVEL" class="java.lang.String"/>
+	<field name="GESTOR_AREA" class="java.lang.String"/>
+	<field name="PMO" class="java.lang.String"/>
+	<field name="OBJETIVO" class="java.lang.String"/>
+	<field name="JUSTIFICATIVA" class="java.lang.String"/>
+	<field name="BENEFICIOS" class="java.lang.String"/>
+	<field name="AREA_EXECUTORA" class="java.lang.String"/>
+	<field name="QTD_RISK" class="java.lang.String"/>
+	<field name="QTD_MILES" class="java.lang.String"/>
+	<title>
+		<band height="40">
+			<textField>
+				<reportElement mode="Opaque" x="5" y="5" width="1006" height="26" backcolor="#EDEDED" uuid="eb476283-3e25-4f91-9a57-8bcb836797f9">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textFieldExpression><![CDATA["Text Field"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement mode="Opaque" x="0" y="0" width="1005" height="25" forecolor="#EEEEEE" backcolor="#00401A" uuid="dc0b4d54-1a59-4e35-a312-7c364e29a240">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font fontName="Trebuchet MS" size="14" isBold="true"/>
+					<paragraph leftIndent="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{INV_NAME}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<detail>
+		<band height="190">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="285" height="70" backcolor="#B1D34B" uuid="9c12cda2-c2d9-433e-a10e-fe83cb994c3e">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<staticText>
+					<reportElement mode="Opaque" x="5" y="5" width="100" height="20" uuid="74d51a0d-6a50-402e-87d8-b8d7500ba030">
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Trebuchet MS" isBold="true"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[Gerente da área]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="105" y="5" width="175" height="20" uuid="838d6267-f287-4a07-b26d-738ceabf0f88"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Trebuchet MS"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{GESTOR_AREA}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="5" y="25" width="100" height="20" uuid="71b51ac9-8f8d-47c6-bab0-d8b077e7aeb0"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Trebuchet MS" isBold="true"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[Gerente de projeto]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="105" y="25" width="175" height="20" uuid="f667b797-6f08-4bd8-bd4f-0a749a1a5ade"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Trebuchet MS"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{GERENTE}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="5" y="45" width="100" height="20" uuid="f14f7362-30aa-493a-8791-fcf00fdf81b8"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Trebuchet MS" isBold="true"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[Tipo de projeto]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="105" y="45" width="175" height="20" uuid="624a5e90-0766-48dd-a65e-9e7f54f9f7c7"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Trebuchet MS"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{TIPO_PROJETO}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement mode="Opaque" x="290" y="0" width="264" height="70" backcolor="#B1D34B" uuid="11d3b1f2-66f1-40a9-9ca9-eeadb2e55217"/>
+				<staticText>
+					<reportElement mode="Opaque" x="5" y="25" width="144" height="20" uuid="17aeb0d6-7a34-45a2-ae2e-35f74a3bd6b4"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Trebuchet MS" isBold="true"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[Etapa]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="149" y="25" width="108" height="20" uuid="cade0e02-3291-4d48-b59a-dd262d21aeca"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Trebuchet MS"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{ETAPA}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="5" y="45" width="144" height="20" uuid="4723ee27-36ee-419f-a23c-2cf557dbc332">
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Trebuchet MS" isBold="true"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[Andamento]]></text>
+				</staticText>
+				<textField isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="149" y="45" width="108" height="20" uuid="df062d3b-74e5-493d-baba-1cbad6b602c3"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Trebuchet MS"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{STATUS}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="5" y="5" width="144" height="20" uuid="cc702707-e768-4c2a-860d-4a2e8b5b6bda">
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Trebuchet MS" isBold="true"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[Data do relatório de status]]></text>
+				</staticText>
+				<textField pattern="dd/MM/yy" isBlankWhenNull="true">
+					<reportElement mode="Opaque" x="149" y="5" width="108" height="20" uuid="538a84d1-4f46-43f0-897b-56dc2f7be760">
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Trebuchet MS"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{RPT_DATE}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="75" width="285" height="111" backcolor="#B1D34B" uuid="0d88bae2-3103-4034-a00d-1ceda7848eea">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<frame>
+					<reportElement x="5" y="0" width="275" height="103" uuid="0683c5ad-d39e-4f07-8150-b9027d196529"/>
+					<staticText>
+						<reportElement mode="Opaque" x="193" y="24" width="82" height="20" uuid="e774127f-0fb5-4963-8d88-b384ad7829fc">
+							<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+						</reportElement>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="Trebuchet MS" size="10" isBold="true"/>
+							<paragraph leftIndent="2"/>
+						</textElement>
+						<text><![CDATA[Término]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="111" y="24" width="82" height="20" uuid="4356228f-0f9d-4a5c-87e7-be014154b3e7">
+							<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+						</reportElement>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="Trebuchet MS" size="10" isBold="true"/>
+							<paragraph leftIndent="2"/>
+						</textElement>
+						<text><![CDATA[Início]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="0" y="24" width="111" height="20" uuid="e66b8603-81a3-4824-bf7f-06981afc5617">
+							<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+						</reportElement>
+						<textElement verticalAlignment="Middle">
+							<font fontName="Trebuchet MS" size="10" isBold="true"/>
+							<paragraph leftIndent="2"/>
+						</textElement>
+						<text><![CDATA[]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Transparent" x="0" y="0" width="275" height="24" uuid="65b42b73-c41e-45ce-95d6-c6d07163e092">
+							<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+						</reportElement>
+						<box>
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="Trebuchet MS" isBold="true"/>
+							<paragraph leftIndent="2"/>
+						</textElement>
+						<text><![CDATA[Datas do projeto]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="0" y="83" width="111" height="20" uuid="8fd3b8c0-32de-4730-8413-444561d62a33">
+							<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+						</reportElement>
+						<textElement verticalAlignment="Middle">
+							<font fontName="Trebuchet MS" size="10" isBold="true"/>
+							<paragraph leftIndent="2"/>
+						</textElement>
+						<text><![CDATA[Dias de atraso]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="0" y="64" width="111" height="20" uuid="06da612a-cb94-4d5a-87a5-902a1c6b6328">
+							<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+						</reportElement>
+						<textElement verticalAlignment="Middle">
+							<font fontName="Trebuchet MS" size="10" isBold="true"/>
+							<paragraph leftIndent="2"/>
+						</textElement>
+						<text><![CDATA[Linha de base]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="0" y="44" width="111" height="20" uuid="91aa1b46-7450-4c77-925f-4f313855e66c">
+							<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						</reportElement>
+						<textElement verticalAlignment="Middle">
+							<font fontName="Trebuchet MS" size="10" isBold="true"/>
+							<paragraph leftIndent="2"/>
+						</textElement>
+						<text><![CDATA[Plano]]></text>
+					</staticText>
+					<textField pattern="dd/MM/yy" isBlankWhenNull="true">
+						<reportElement mode="Opaque" x="111" y="44" width="82" height="20" uuid="799c619e-cb47-4b8d-a2f0-7e4e5f53a50f"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="Trebuchet MS" size="10"/>
+							<paragraph leftIndent="5"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{DATA_INICIO}]]></textFieldExpression>
+					</textField>
+					<textField pattern="dd/MM/yy" isBlankWhenNull="true">
+						<reportElement mode="Opaque" x="111" y="64" width="82" height="20" uuid="04f33f62-880b-4686-94fd-2318d10e7912"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="Trebuchet MS" size="10"/>
+							<paragraph leftIndent="5"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{DATA_INICIO_LB}]]></textFieldExpression>
+					</textField>
+					<textField pattern="#,##0" isBlankWhenNull="true">
+						<reportElement mode="Opaque" x="111" y="83" width="82" height="20" uuid="bc3f20a5-b48e-421b-8361-7e210017c825">
+							<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+							<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+						</reportElement>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="Trebuchet MS" size="10"/>
+							<paragraph leftIndent="5"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{DIAS_ATRASO_INICIO}]]></textFieldExpression>
+					</textField>
+					<textField pattern="#,##0" isBlankWhenNull="true">
+						<reportElement mode="Opaque" x="193" y="83" width="82" height="20" uuid="649451bd-1135-4b45-9fb1-2ec0dadc76b6">
+							<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+							<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+						</reportElement>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="Trebuchet MS" size="10"/>
+							<paragraph leftIndent="5"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{DIAS_ATRASO_TERMINO}]]></textFieldExpression>
+					</textField>
+					<textField pattern="dd/MM/yy" isBlankWhenNull="true">
+						<reportElement mode="Opaque" x="193" y="44" width="82" height="20" uuid="cc5137e8-a75d-43fb-8291-3991416b1952">
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						</reportElement>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="Trebuchet MS" size="10"/>
+							<paragraph leftIndent="5"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{DATA_TERMINO}]]></textFieldExpression>
+					</textField>
+					<textField pattern="dd/MM/yy" isBlankWhenNull="true">
+						<reportElement mode="Opaque" x="193" y="64" width="82" height="20" uuid="93b85fe3-1a7a-421f-a31c-cb9bd1364045"/>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="Trebuchet MS" size="10"/>
+							<paragraph leftIndent="5"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{DATA_TERMINO_LB}]]></textFieldExpression>
+					</textField>
+				</frame>
+			</frame>
+			<frame>
+				<reportElement mode="Opaque" x="290" y="75" width="264" height="111" backcolor="#B1D34B" uuid="786feaa0-8c6c-41f0-bfca-359a369e4a1b">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<frame>
+					<reportElement stretchType="RelativeToBandHeight" x="5" y="0" width="252" height="104" uuid="56c1b867-d960-4f74-98e2-9734d443edd2">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					</reportElement>
+					<staticText>
+						<reportElement mode="Transparent" x="0" y="0" width="252" height="24" uuid="16c36d5d-0def-4758-a607-6e5c32af1b33">
+							<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+						</reportElement>
+						<box>
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="Trebuchet MS" isBold="true"/>
+							<paragraph leftIndent="2"/>
+						</textElement>
+						<text><![CDATA[Indicadores do relatório de status]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="0" y="24" width="126" height="20" uuid="c4f749d4-e163-4465-bb69-c212539e5168">
+							<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						</reportElement>
+						<textElement verticalAlignment="Middle">
+							<font fontName="Trebuchet MS" size="10" isBold="true"/>
+							<paragraph leftIndent="2"/>
+						</textElement>
+						<text><![CDATA[Geral]]></text>
+					</staticText>
+					<staticText>
+						<reportElement mode="Opaque" x="0" y="64" width="126" height="20" uuid="c5551d8d-e160-474b-8212-c99c1a04f55c">
+							<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						</reportElement>
+						<textElement verticalAlignment="Middle">
+							<font fontName="Trebuchet MS" size="10" isBold="true"/>
+							<paragraph leftIndent="2"/>
+						</textElement>
+						<text><![CDATA[Escopo]]></text>
+					</staticText>
+					<staticText>
+						<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="44" width="126" height="20" uuid="8ba8f3e0-ecd3-4dd0-9792-0ff1c6046860">
+							<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						</reportElement>
+						<textElement verticalAlignment="Middle">
+							<font fontName="Trebuchet MS" size="10" isBold="true"/>
+							<paragraph leftIndent="2"/>
+						</textElement>
+						<text><![CDATA[Cronograma]]></text>
+					</staticText>
+					<staticText>
+						<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="84" width="126" height="20" uuid="f57df37d-ca0c-4442-838d-7dabe747a0e2">
+							<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						</reportElement>
+						<textElement verticalAlignment="Middle">
+							<font fontName="Trebuchet MS" size="10" isBold="true"/>
+							<paragraph leftIndent="2"/>
+						</textElement>
+						<text><![CDATA[Custo e esforço]]></text>
+					</staticText>
+					<image scaleImage="Clip" hAlign="Center" vAlign="Middle" onErrorType="Icon">
+						<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="126" y="64" width="63" height="20" uuid="0ad0a6b6-3509-48e2-aeb8-9c9ef1c863e2"/>
+						<box topPadding="3" leftPadding="0" bottomPadding="3"/>
+						<imageExpression><![CDATA[$F{RPT_STATUS_ESCOPO}.equals(new BigDecimal(10)) ? "stoplightGreen"
+: $F{RPT_STATUS_ESCOPO}.equals(new BigDecimal(20)) ? "stoplightYellow"
+: $F{RPT_STATUS_ESCOPO}.equals(new BigDecimal(30)) ? "stoplightRed"
+: "stoplightWhite"]]></imageExpression>
+					</image>
+					<image scaleImage="Clip" hAlign="Center" vAlign="Middle" onErrorType="Icon">
+						<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="126" y="84" width="63" height="20" uuid="ff8865e6-1fed-482f-b47b-0738ade3a3b8"/>
+						<box topPadding="3" leftPadding="0" bottomPadding="3"/>
+						<imageExpression><![CDATA[$F{RPT_STATUS_CUSTO_ESFORCO}.equals(new BigDecimal(10)) ? "stoplightGreen"
+: $F{RPT_STATUS_CUSTO_ESFORCO}.equals(new BigDecimal(20)) ? "stoplightYellow"
+: $F{RPT_STATUS_CUSTO_ESFORCO}.equals(new BigDecimal(30)) ? "stoplightRed"
+: "stoplightWhite"]]></imageExpression>
+					</image>
+					<image scaleImage="Clip" hAlign="Center" vAlign="Middle" onErrorType="Icon">
+						<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="126" y="24" width="63" height="20" uuid="75fb8d71-bde4-449c-9c9f-816e48e0472e">
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						</reportElement>
+						<box topPadding="3" leftPadding="0" bottomPadding="3"/>
+						<imageExpression><![CDATA[$F{RPT_STATUS_GERAL}.equals(new BigDecimal(10))  ? "stoplightGreen"
+: $F{RPT_STATUS_GERAL}.equals(new BigDecimal(20)) ? "stoplightYellow"
+: $F{RPT_STATUS_GERAL}.equals(new BigDecimal(30)) ? "stoplightRed"
+: "stoplightWhite"]]></imageExpression>
+					</image>
+					<image scaleImage="Clip" hAlign="Center" vAlign="Middle" onErrorType="Icon">
+						<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="126" y="44" width="63" height="20" uuid="881b4d0d-1da5-48c7-9eeb-a183c7e40be3"/>
+						<box topPadding="3" leftPadding="0" bottomPadding="3"/>
+						<imageExpression><![CDATA[$F{RPT_STATUS_CRONOGRAMA}.equals(new BigDecimal(10))  ? "stoplightGreen"
+: $F{RPT_STATUS_CRONOGRAMA}.equals(new BigDecimal(20)) ? "stoplightYellow"
+: $F{RPT_STATUS_CRONOGRAMA}.equals(new BigDecimal(30)) ? "stoplightRed"
+: "stoplightWhite"]]></imageExpression>
+					</image>
+					<image scaleImage="Clip" hAlign="Center" vAlign="Middle" onErrorType="Icon">
+						<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="189" y="64" width="63" height="20" uuid="ec5a854a-983a-4204-ab90-ab763a2d7d62"/>
+						<box topPadding="3" leftPadding="0" bottomPadding="3"/>
+						<imageExpression><![CDATA[$F{RPT_STATUS_ESCOPO_2}.equals(new BigDecimal(10))  ? "arrowSideGrey"
+: $F{RPT_STATUS_ESCOPO_2}.equals(new BigDecimal(20)) ? "arrowUpGrey"
+: $F{RPT_STATUS_ESCOPO_2}.equals(new BigDecimal(30)) ? "arrowDownGrey"
+: "arrowSideGrey"]]></imageExpression>
+					</image>
+					<image scaleImage="Clip" hAlign="Center" vAlign="Middle" onErrorType="Icon">
+						<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="189" y="84" width="63" height="20" uuid="ed766398-ef0e-43c5-b19b-7f6a7b262e55"/>
+						<box topPadding="3" leftPadding="0" bottomPadding="3"/>
+						<imageExpression><![CDATA[$F{RPT_STATUS_CUSTO_ESFORCO_2}.equals(new BigDecimal(10))  ? "arrowSideGrey"
+: $F{RPT_STATUS_CUSTO_ESFORCO_2}.equals(new BigDecimal(20)) ? "arrowUpGrey"
+: $F{RPT_STATUS_CUSTO_ESFORCO_2}.equals(new BigDecimal(30)) ? "arrowDownGrey"
+: "arrowSideGrey"]]></imageExpression>
+					</image>
+					<image scaleImage="Clip" hAlign="Center" vAlign="Middle" onErrorType="Icon">
+						<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="189" y="24" width="63" height="20" uuid="d873547b-9bd5-400a-8e38-8d61bb1edcd2">
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						</reportElement>
+						<box topPadding="3" leftPadding="0" bottomPadding="3"/>
+						<imageExpression><![CDATA[$F{RPT_STATUS_GERAL_2}.equals(new BigDecimal(10))  ? "arrowSideGrey"
+: $F{RPT_STATUS_GERAL_2}.equals(new BigDecimal(20)) ? "arrowUpGrey"
+: $F{RPT_STATUS_GERAL_2}.equals(new BigDecimal(30)) ? "arrowDownGrey"
+: "arrowSideGrey"]]></imageExpression>
+					</image>
+					<image scaleImage="Clip" hAlign="Center" vAlign="Middle" onErrorType="Icon">
+						<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="189" y="44" width="63" height="20" uuid="9a6f2b43-acef-4eb8-9bcb-2ffb2f21e492"/>
+						<box topPadding="3" leftPadding="0" bottomPadding="3"/>
+						<imageExpression><![CDATA[$F{RPT_STATUS_CRONOGRAMA_2}.equals(new BigDecimal(10))  ? "arrowSideGrey"
+: $F{RPT_STATUS_CRONOGRAMA_2}.equals(new BigDecimal(20)) ? "arrowUpGrey"
+: $F{RPT_STATUS_CRONOGRAMA_2}.equals(new BigDecimal(30)) ? "arrowDownGrey"
+: "arrowSideGrey"]]></imageExpression>
+					</image>
+				</frame>
+			</frame>
+			<frame>
+				<reportElement mode="Opaque" x="560" y="-1" width="451" height="187" backcolor="#B1D34B" uuid="9f3ad42f-e84f-4b3e-84cb-7b4655446a74">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<frame>
+					<reportElement stretchType="RelativeToBandHeight" x="5" y="5" width="438" height="173" uuid="adbe9d81-72d7-4b5b-883c-177fc61a7d4c">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<staticText>
+						<reportElement mode="Transparent" x="0" y="0" width="438" height="20" uuid="87c0a85f-0a97-4768-9fc7-495945c5cebc">
+							<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+						</reportElement>
+						<box>
+							<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						</box>
+						<textElement textAlignment="Center" verticalAlignment="Middle">
+							<font fontName="Trebuchet MS" isBold="true"/>
+							<paragraph leftIndent="2"/>
+						</textElement>
+						<text><![CDATA[Objetivo]]></text>
+					</staticText>
+					<textField isBlankWhenNull="true">
+						<reportElement mode="Opaque" x="0" y="20" width="438" height="155" uuid="d9ee1e7f-5823-4b0a-b3d7-f9c7c73bc2af">
+							<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						</reportElement>
+						<textElement verticalAlignment="Top">
+							<font fontName="Trebuchet MS"/>
+							<paragraph leftIndent="5" rightIndent="5" spacingBefore="5" spacingAfter="2"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{OBJETIVO}]]></textFieldExpression>
+					</textField>
+				</frame>
+			</frame>
+		</band>
+		<band height="75">
+			<frame>
+				<reportElement x="0" y="0" width="1011" height="75" uuid="099f59f6-a950-48f1-8813-7cbaf9c345ee"/>
+				<frame>
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="1011" height="70" backcolor="#B1D34B" uuid="ecdbfb30-eeae-432c-bc6a-7b7cad6f0dd5">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<frame>
+						<reportElement stretchType="RelativeToBandHeight" x="5" y="5" width="998" height="60" uuid="b6537f3f-dafb-4681-b0ad-a12defcd457f">
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+							<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						</reportElement>
+						<staticText>
+							<reportElement mode="Transparent" x="0" y="0" width="998" height="20" uuid="eaad3238-35a9-4c91-a13c-0e04a2ff4946">
+								<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+								<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							</reportElement>
+							<box>
+								<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font fontName="Trebuchet MS" isBold="true"/>
+								<paragraph leftIndent="2"/>
+							</textElement>
+							<text><![CDATA[Atualização do relatório de status]]></text>
+						</staticText>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="20" width="998" height="40" uuid="f8d02280-342f-4deb-b7f3-aeeee842e2c5"/>
+							<textElement verticalAlignment="Top">
+								<font fontName="Trebuchet MS"/>
+								<paragraph leftIndent="5" rightIndent="5" spacingBefore="5" spacingAfter="2"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{RPT_ATUAL}]]></textFieldExpression>
+						</textField>
+					</frame>
+				</frame>
+			</frame>
+		</band>
+		<band height="75">
+			<frame>
+				<reportElement x="0" y="0" width="1011" height="75" uuid="a450a516-a5ab-44d0-8d3c-714f7cc8a5b3"/>
+				<frame>
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="502" height="70" backcolor="#B1D34B" uuid="3cff50b4-4783-4ed0-a145-11ad886a797a">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<frame>
+						<reportElement stretchType="RelativeToBandHeight" x="5" y="5" width="490" height="60" uuid="914ad717-524b-4871-b551-ce165de67711">
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+							<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						</reportElement>
+						<staticText>
+							<reportElement mode="Transparent" x="0" y="0" width="490" height="20" uuid="25f170f2-060a-4a3a-9f0f-92d2de277729">
+								<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+								<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							</reportElement>
+							<box>
+								<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font fontName="Trebuchet MS" isBold="true"/>
+								<paragraph leftIndent="2"/>
+							</textElement>
+							<text><![CDATA[Principais realizações]]></text>
+						</staticText>
+						<textField>
+							<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="20" width="490" height="40" uuid="77d20530-f283-444b-ae16-d6f67a93df03">
+								<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+								<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+								<printWhenExpression><![CDATA[$F{QTD_RISK}.toString().equals("false")]]></printWhenExpression>
+							</reportElement>
+							<textElement>
+								<font fontName="Trebuchet MS" size="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA["Não foram identificados riscos nesse período"]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="20" width="490" height="40" uuid="67c3a37b-72c5-4a1d-aa0d-7bad9d716128"/>
+							<textElement verticalAlignment="Top">
+								<font fontName="Trebuchet MS"/>
+								<paragraph leftIndent="5" rightIndent="5" spacingBefore="5" spacingAfter="2"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{RPT_PRINC_REAL}]]></textFieldExpression>
+						</textField>
+					</frame>
+				</frame>
+				<frame>
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="509" y="0" width="502" height="70" backcolor="#B1D34B" uuid="d307df71-7343-41f9-9c43-0443bc175b13">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<frame>
+						<reportElement stretchType="RelativeToBandHeight" x="5" y="5" width="490" height="60" uuid="2001b52c-4d48-4f41-a9d0-d4f524f19cee">
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+							<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						</reportElement>
+						<staticText>
+							<reportElement mode="Transparent" x="0" y="0" width="490" height="20" uuid="20c1fb44-c74e-4ee7-8bf9-cfa3f9008d9d">
+								<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+								<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							</reportElement>
+							<box>
+								<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font fontName="Trebuchet MS" isBold="true"/>
+								<paragraph leftIndent="2"/>
+							</textElement>
+							<text><![CDATA[Próximas atividades]]></text>
+						</staticText>
+						<textField>
+							<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="20" width="490" height="40" uuid="6b2abc68-ecae-4a65-8f63-581f8c2e27b3">
+								<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+								<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+								<printWhenExpression><![CDATA[$F{QTD_RISK}.toString().equals("false")]]></printWhenExpression>
+							</reportElement>
+							<textElement>
+								<font fontName="Trebuchet MS" size="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA["Não foram identificados riscos nesse período"]]></textFieldExpression>
+						</textField>
+						<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+							<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="20" width="490" height="40" uuid="a4f5f44f-79ee-4a45-9657-ba1d5aeb8ef1"/>
+							<textElement verticalAlignment="Top">
+								<font fontName="Trebuchet MS"/>
+								<paragraph leftIndent="5" rightIndent="5" spacingBefore="5" spacingAfter="2"/>
+							</textElement>
+							<textFieldExpression><![CDATA[$F{RPT_PROX_ATIV}]]></textFieldExpression>
+						</textField>
+					</frame>
+				</frame>
+			</frame>
+		</band>
+		<band height="95">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<frame>
+				<reportElement x="0" y="0" width="1011" height="90" uuid="db3f6eea-74d4-4091-ad16-35752f0c3153"/>
+				<frame>
+					<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="502" height="90" backcolor="#B1D34B" uuid="975d78d8-80a9-43c5-b89d-f557d7587d27"/>
+					<frame>
+						<reportElement stretchType="RelativeToBandHeight" x="5" y="5" width="490" height="75" uuid="8b7990f3-fc87-428c-82c2-0df73d0f933f">
+							<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+							<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						</reportElement>
+						<staticText>
+							<reportElement mode="Transparent" x="0" y="0" width="490" height="20" uuid="a509433b-7275-4018-b140-f6923804a1da">
+								<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+								<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							</reportElement>
+							<box>
+								<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font fontName="Trebuchet MS" isBold="true"/>
+								<paragraph leftIndent="2"/>
+							</textElement>
+							<text><![CDATA[Próximos marcos]]></text>
+						</staticText>
+						<textField>
+							<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="20" width="490" height="55" uuid="3c242e90-054d-424c-903a-a83510e1b6a8">
+								<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+								<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+								<printWhenExpression><![CDATA[$F{QTD_MILES}.toString().equals("false")]]></printWhenExpression>
+							</reportElement>
+							<textElement>
+								<font fontName="Trebuchet MS" size="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA["Não foram identificados marcos nesse período"]]></textFieldExpression>
+						</textField>
+						<componentElement>
+							<reportElement stretchType="RelativeToBandHeight" x="0" y="20" width="490" height="55" uuid="b1f7dc2f-3023-4306-a993-9372e7072a19">
+								<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+								<property name="com.jaspersoft.studio.table.style.table_header" value="Table 9_TH"/>
+								<property name="com.jaspersoft.studio.table.style.column_header" value="Table 9_CH"/>
+								<property name="com.jaspersoft.studio.table.style.detail" value="Table 9_TD"/>
+							</reportElement>
+							<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+								<datasetRun subDataset="milestones" uuid="07697f52-222e-4ca1-b2b7-af8f9aeebedc">
+									<datasetParameter name="project_hide">
+										<datasetParameterExpression><![CDATA[$P{project_hide}]]></datasetParameterExpression>
+									</datasetParameter>
+									<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+								</datasetRun>
+								<jr:column width="245" uuid="541e1684-1e7c-4966-8238-06446b6a759a">
+									<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+									<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+									<jr:tableHeader style="Table 9_TH" height="30">
+										<property name="com.jaspersoft.studio.unit.height" value="px"/>
+										<property name="com.jaspersoft.studio.unit.width" value="px"/>
+										<staticText>
+											<reportElement mode="Opaque" x="0" y="0" width="245" height="30" backcolor="#EDEDED" uuid="33538be5-aed5-41e6-a4e2-a1277cca4f2c"/>
+											<textElement textAlignment="Center" verticalAlignment="Middle">
+												<font fontName="Trebuchet MS"/>
+											</textElement>
+											<text><![CDATA[Nome]]></text>
+										</staticText>
+									</jr:tableHeader>
+									<jr:detailCell style="Table 9_TD" height="25">
+										<property name="com.jaspersoft.studio.unit.height" value="px"/>
+										<textField isBlankWhenNull="true">
+											<reportElement x="0" y="0" width="245" height="25" uuid="f7a4b175-80ba-4dc4-a214-cd2aec721b42"/>
+											<textElement verticalAlignment="Middle">
+												<font fontName="Trebuchet MS"/>
+											</textElement>
+											<textFieldExpression><![CDATA[$F{TASK_NAME}]]></textFieldExpression>
+										</textField>
+									</jr:detailCell>
+								</jr:column>
+								<jr:column width="90" uuid="6fd00940-3308-4b3f-98e1-c56da12fd533">
+									<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+									<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+									<jr:tableHeader style="Table 9_TH" height="30">
+										<property name="com.jaspersoft.studio.unit.width" value="px"/>
+										<staticText>
+											<reportElement mode="Opaque" x="0" y="0" width="90" height="30" backcolor="#EDEDED" uuid="fde2066a-fe1f-4892-a90f-259d6fdc93b8"/>
+											<textElement textAlignment="Center" verticalAlignment="Middle">
+												<font fontName="Trebuchet MS"/>
+											</textElement>
+											<text><![CDATA[Término]]></text>
+										</staticText>
+									</jr:tableHeader>
+									<jr:detailCell style="Table 9_TD" height="25">
+										<textField pattern="dd/MM/yy" isBlankWhenNull="true">
+											<reportElement x="0" y="0" width="90" height="25" uuid="597d567a-6de5-4d69-9591-5c77dd785cae"/>
+											<textElement textAlignment="Center" verticalAlignment="Middle">
+												<font fontName="Trebuchet MS"/>
+											</textElement>
+											<textFieldExpression><![CDATA[$F{TASK_FINISH}]]></textFieldExpression>
+										</textField>
+									</jr:detailCell>
+								</jr:column>
+								<jr:column width="90" uuid="f69abfd9-b991-4a53-8538-9811d2855e32">
+									<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+									<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+									<jr:tableHeader style="Table 9_TH" height="30">
+										<property name="com.jaspersoft.studio.unit.width" value="px"/>
+										<staticText>
+											<reportElement mode="Opaque" x="0" y="0" width="90" height="30" backcolor="#EDEDED" uuid="6eb7bbea-e84a-462e-97bc-f08373d6a5b9"/>
+											<textElement textAlignment="Center" verticalAlignment="Middle">
+												<font fontName="Trebuchet MS"/>
+											</textElement>
+											<text><![CDATA[Dias de atraso]]></text>
+										</staticText>
+									</jr:tableHeader>
+									<jr:detailCell style="Table 9_TD" height="25">
+										<property name="com.jaspersoft.studio.unit.width" value="px"/>
+										<textField pattern="#,##0" isBlankWhenNull="true">
+											<reportElement x="0" y="0" width="90" height="25" uuid="9158d5ca-7563-45e7-ac5f-753d738add8d"/>
+											<textElement textAlignment="Center" verticalAlignment="Middle">
+												<font fontName="Trebuchet MS"/>
+											</textElement>
+											<textFieldExpression><![CDATA[$F{DIAS_ATRASO}]]></textFieldExpression>
+										</textField>
+									</jr:detailCell>
+								</jr:column>
+								<jr:column width="65" uuid="ff9d3924-74a0-4f09-b8cd-9f8ced8c2246">
+									<jr:tableHeader style="Table 9_TH" height="30">
+										<staticText>
+											<reportElement mode="Opaque" x="0" y="0" width="65" height="30" backcolor="#EDEDED" uuid="9dfef080-37f1-4087-b36b-83789699cd94"/>
+											<textElement textAlignment="Center" verticalAlignment="Middle">
+												<font fontName="Trebuchet MS"/>
+											</textElement>
+											<text><![CDATA[% do Cronograma]]></text>
+										</staticText>
+									</jr:tableHeader>
+									<jr:detailCell style="Table 9_TD" height="25">
+										<property name="com.jaspersoft.studio.unit.width" value="px"/>
+										<image scaleImage="Clip" hAlign="Center" vAlign="Middle">
+											<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="65" height="25" uuid="a6ac4d1e-456c-4c8f-9351-d6cfe591b41f"/>
+											<box topPadding="3" leftPadding="0" bottomPadding="3"/>
+											<imageExpression><![CDATA[$F{DIAS_ATRASO_PCT_STATUS}.equals(new BigDecimal(10))  ? "stoplightGreen"
+: $F{DIAS_ATRASO_PCT_STATUS}.equals(new BigDecimal(20)) ? "stoplightYellow"
+: $F{DIAS_ATRASO_PCT_STATUS}.equals(new BigDecimal(30)) ? "stoplightRed"
+: "stoplightWhite"]]></imageExpression>
+										</image>
+									</jr:detailCell>
+								</jr:column>
+							</jr:table>
+						</componentElement>
+					</frame>
+				</frame>
+				<frame>
+					<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="509" y="0" width="502" height="90" backcolor="#B1D34B" uuid="5912ec88-3258-4da0-8955-970eaae1c6cc">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<frame>
+						<reportElement stretchType="RelativeToBandHeight" x="5" y="5" width="490" height="75" uuid="305f8c68-ecbe-4d39-850e-d059999de02a">
+							<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+							<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+						</reportElement>
+						<staticText>
+							<reportElement mode="Transparent" x="0" y="0" width="490" height="20" uuid="7eb37b8b-3a5f-4dea-bfd7-5e2f0dac13fa">
+								<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+								<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							</reportElement>
+							<box>
+								<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+								<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+							</box>
+							<textElement textAlignment="Center" verticalAlignment="Middle">
+								<font fontName="Trebuchet MS" isBold="true"/>
+								<paragraph leftIndent="2"/>
+							</textElement>
+							<text><![CDATA[Riscos]]></text>
+						</staticText>
+						<textField>
+							<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="20" width="490" height="55" uuid="97075d1f-574d-4d12-b4f9-2a5330cc8b1d">
+								<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+								<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+								<printWhenExpression><![CDATA[$F{QTD_RISK}.toString().equals("false")]]></printWhenExpression>
+							</reportElement>
+							<textElement>
+								<font fontName="Trebuchet MS" size="10"/>
+							</textElement>
+							<textFieldExpression><![CDATA["Não foram identificados riscos nesse período"]]></textFieldExpression>
+						</textField>
+						<componentElement>
+							<reportElement stretchType="RelativeToTallestObject" x="0" y="20" width="490" height="55" uuid="a0c693f0-507f-4bf2-8397-ff977272f4e2">
+								<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+								<property name="com.jaspersoft.studio.table.style.table_header" value="Table 11_TH"/>
+								<property name="com.jaspersoft.studio.table.style.column_header" value="Table 11_CH"/>
+								<property name="com.jaspersoft.studio.table.style.detail" value="Table 11_TD"/>
+							</reportElement>
+							<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+								<datasetRun subDataset="risks" uuid="b592bc5e-f9e0-44b9-904d-8e004432be9b">
+									<datasetParameter name="project_hide">
+										<datasetParameterExpression><![CDATA[$P{project_hide}]]></datasetParameterExpression>
+									</datasetParameter>
+									<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+								</datasetRun>
+								<jr:column width="190" uuid="932fd03f-ba08-4822-8c4b-d5414d640499">
+									<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+									<jr:tableHeader style="Table 11_TH" height="30" rowSpan="1">
+										<property name="com.jaspersoft.studio.unit.width" value="px"/>
+										<property name="com.jaspersoft.studio.unit.height" value="px"/>
+										<staticText>
+											<reportElement mode="Opaque" x="0" y="0" width="190" height="30" backcolor="#EDEDED" uuid="9b4e4046-dff4-496f-a159-70f4e43e3a3e"/>
+											<textElement textAlignment="Center" verticalAlignment="Middle">
+												<font fontName="Trebuchet MS"/>
+											</textElement>
+											<text><![CDATA[Nome]]></text>
+										</staticText>
+									</jr:tableHeader>
+									<jr:detailCell style="Table 11_TD" height="25">
+										<property name="com.jaspersoft.studio.unit.height" value="px"/>
+										<textField>
+											<reportElement x="0" y="0" width="190" height="25" uuid="0b334755-8ff7-4a33-bcd9-ad963639930a"/>
+											<textElement verticalAlignment="Middle">
+												<font fontName="Trebuchet MS"/>
+											</textElement>
+											<textFieldExpression><![CDATA[$F{RISK_NAME}]]></textFieldExpression>
+										</textField>
+									</jr:detailCell>
+								</jr:column>
+								<jr:column width="70" uuid="e53e7b8d-d2fb-4786-a7ad-ff15a604328f">
+									<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+									<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+									<jr:tableHeader style="Table 11_TH" height="30" rowSpan="1">
+										<staticText>
+											<reportElement mode="Opaque" x="0" y="0" width="70" height="30" backcolor="#EDEDED" uuid="d9a88b93-5a65-4c8a-89d6-fd52e187a738"/>
+											<textElement textAlignment="Center" verticalAlignment="Middle">
+												<font fontName="Trebuchet MS"/>
+											</textElement>
+											<text><![CDATA[Probabilidade]]></text>
+										</staticText>
+									</jr:tableHeader>
+									<jr:detailCell style="Table 11_TD" height="25">
+										<property name="com.jaspersoft.studio.unit.width" value="px"/>
+										<image scaleImage="Clip" hAlign="Center" vAlign="Middle" onErrorType="Icon">
+											<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="70" height="25" uuid="6cb5dec9-9fc2-4a35-9ffc-dd7ef3e68636"/>
+											<box topPadding="3" leftPadding="0" bottomPadding="3"/>
+											<imageExpression><![CDATA[$F{PROBABILITY}.equals(new BigDecimal(1))  ? "stoplightGreen"
+: $F{PROBABILITY}.equals(new BigDecimal(2)) ? "stoplightYellow"
+: $F{PROBABILITY}.equals(new BigDecimal(3)) ? "stoplightRed"
+: "stoplightWhite"]]></imageExpression>
+										</image>
+									</jr:detailCell>
+								</jr:column>
+								<jr:column width="70" uuid="46e7ce08-4349-4195-8268-5934c9d6ae22">
+									<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+									<jr:tableHeader style="Table 11_TH" height="30" rowSpan="1">
+										<staticText>
+											<reportElement mode="Opaque" x="0" y="0" width="70" height="30" backcolor="#EDEDED" uuid="cf7d9fa9-6046-45ea-9b4b-b6ea1e07a44b"/>
+											<textElement textAlignment="Center" verticalAlignment="Middle">
+												<font fontName="Trebuchet MS"/>
+											</textElement>
+											<text><![CDATA[Impacto]]></text>
+										</staticText>
+									</jr:tableHeader>
+									<jr:detailCell style="Table 11_TD" height="25">
+										<property name="com.jaspersoft.studio.unit.width" value="px"/>
+										<image scaleImage="Clip" hAlign="Center" vAlign="Middle" onErrorType="Icon">
+											<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="70" height="25" uuid="a70168da-fb2b-4fac-804f-d5944f3feb82"/>
+											<box topPadding="3" leftPadding="0" bottomPadding="3"/>
+											<imageExpression><![CDATA[$F{IMPACT}.equals(new BigDecimal(1))  ? "stoplightGreen"
+: $F{IMPACT}.equals(new BigDecimal(2)) ? "stoplightYellow"
+: $F{IMPACT}.equals(new BigDecimal(3)) ? "stoplightRed"
+: "stoplightWhite"]]></imageExpression>
+										</image>
+									</jr:detailCell>
+								</jr:column>
+								<jr:column width="160" uuid="530f9ab3-60ed-4040-bf8c-39fa4331b62b">
+									<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+									<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+									<jr:tableHeader style="Table 11_TH" height="30" rowSpan="1">
+										<property name="com.jaspersoft.studio.unit.width" value="px"/>
+										<staticText>
+											<reportElement mode="Opaque" x="0" y="0" width="160" height="30" backcolor="#EDEDED" uuid="9a4cd2da-34d9-452e-8d2f-2c63df45c2ea"/>
+											<textElement textAlignment="Center" verticalAlignment="Middle">
+												<font fontName="Trebuchet MS"/>
+											</textElement>
+											<text><![CDATA[Responsável]]></text>
+										</staticText>
+									</jr:tableHeader>
+									<jr:detailCell style="Table 11_TD" height="25">
+										<property name="com.jaspersoft.studio.unit.width" value="px"/>
+										<textField>
+											<reportElement x="0" y="0" width="160" height="25" uuid="78056e29-da11-463e-a851-37d86fec477d"/>
+											<textElement verticalAlignment="Middle">
+												<font fontName="Trebuchet MS"/>
+											</textElement>
+											<textFieldExpression><![CDATA[$F{RISK_OWNER}]]></textFieldExpression>
+										</textField>
+									</jr:detailCell>
+								</jr:column>
+							</jr:table>
+						</componentElement>
+					</frame>
+				</frame>
+			</frame>
+		</band>
+		<band height="279">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="1011" height="279" backcolor="#B1D34B" uuid="174e8f97-feca-4a9b-854a-2be9e7d662fb">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<componentElement>
+					<reportElement x="5" y="20" width="1000" height="255" uuid="7287755f-803f-4f6d-be98-f9af2ecd4421">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.jasperreports.highcharts.interactive" value="false"/>
+					</reportElement>
+					<hc:chart xmlns:hc="http://jaspersoft.com/highcharts" xsi:schemaLocation="http://jaspersoft.com/highcharts http://jaspersoft.com/schema/highcharts.xsd" type="Line">
+						<hc:chartSetting name="default">
+							<hc:chartProperty name="title.text" value=""/>
+							<hc:chartProperty name="credits.enabled" value="false"/>
+							<hc:chartProperty name="credits.href" value=""/>
+							<hc:chartProperty name="credits.text" value=""/>
+							<hc:chartProperty name="yAxis.title.text" value=""/>
+							<hc:chartProperty name="chart.zoomType" value="xy"/>
+							<hc:chartProperty name="plotOptions.series.dataLabels.enabled" value="true"/>
+							<hc:chartProperty name="plotOptions.series.dataLabels.format">
+								<hc:propertyExpression><![CDATA["{y} %"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="yAxis.labels.enabled">
+								<hc:propertyExpression><![CDATA[FALSE( )]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="xAxis.gridLineColor" value="White"/>
+							<hc:chartProperty name="yAxis.gridLineColor" value="White"/>
+							<hc:chartProperty name="plotOptions.series.dataLabels.rotation" value="-45"/>
+							<hc:chartProperty name="plotOptions.series.dataLabels.align" value="left"/>
+							<hc:chartProperty name="plotOptions.series.dataLabels.y">
+								<hc:propertyExpression><![CDATA[new Integer(-10)]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="plotOptions.series.dataLabels.style.color" value="black"/>
+							<hc:chartProperty name="legend.verticalAlign" value="top"/>
+							<hc:chartProperty name="plotOptions.series.dataLabels.style.fontSize" value="10px"/>
+						</hc:chartSetting>
+						<multiAxisData>
+							<multiAxisDataset>
+								<dataset>
+									<datasetRun subDataset="curva_s_fis" uuid="965fa0e6-b510-4e53-860b-07986652b58e">
+										<datasetParameter name="project_hide">
+											<datasetParameterExpression><![CDATA[$P{project_hide}]]></datasetParameterExpression>
+										</datasetParameter>
+										<datasetParameter name="status_rpt">
+											<datasetParameterExpression><![CDATA[$P{status_rpt}]]></datasetParameterExpression>
+										</datasetParameter>
+										<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+									</datasetRun>
+								</dataset>
+							</multiAxisDataset>
+							<dataAxis axis="Rows">
+								<axisLevel name="MÊS">
+									<labelExpression><![CDATA["Level Label expression"]]></labelExpression>
+									<axisLevelBucket order="None" class="java.lang.String">
+										<bucketExpression><![CDATA[new SimpleDateFormat("yyyy-MM").format($F{MES})]]></bucketExpression>
+									</axisLevelBucket>
+								</axisLevel>
+							</dataAxis>
+							<dataAxis axis="Columns">
+								<axisLevel name="ID">
+									<labelExpression><![CDATA[]]></labelExpression>
+									<axisLevelBucket order="None" class="java.lang.String">
+										<bucketExpression><![CDATA[$F{ID}]]></bucketExpression>
+										<bucketProperty name="color"><![CDATA[$F{ID}.toString().equals("% planejado") ? "#ED1651"
+: $F{ID}.toString().equals("% concluído") ? "#B1D34B"
+: "#411564"]]></bucketProperty>
+									</axisLevelBucket>
+								</axisLevel>
+							</dataAxis>
+							<multiAxisMeasure name="PORCENTAGEM" class="java.math.BigDecimal" calculation="Nothing">
+								<labelExpression><![CDATA[""]]></labelExpression>
+								<valueExpression><![CDATA[$F{TOTAL_PER}]]></valueExpression>
+							</multiAxisMeasure>
+						</multiAxisData>
+						<hc:series name="PORCENTAGEM">
+							<hc:contributor name="SeriesProperty">
+								<hc:contributorProperty name="color" valueType="Bucket" value="ID.color"/>
+							</hc:contributor>
+						</hc:series>
+					</hc:chart>
+				</componentElement>
+				<staticText>
+					<reportElement mode="Transparent" x="5" y="0" width="1000" height="20" uuid="708a4419-91ae-41f4-aa30-2cccd4de8bac">
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Trebuchet MS" isBold="true"/>
+						<paragraph leftIndent="2"/>
+					</textElement>
+					<text><![CDATA[Curva S Física]]></text>
+				</staticText>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>
