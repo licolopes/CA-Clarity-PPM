@@ -10,11 +10,6 @@
 	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="UNIMED - DEV"/>
-	<property name="ireport.jasperserver.url" value="https://cppmrpt103.ondemand.ca.com/reportservice/"/>
-	<property name="ireport.jasperserver.user" value="reportdev|cppm9187"/>
-	<property name="ireport.jasperserver.report.resource" value="/ca_ppm/unimed/unimed_rpt_aceite_proj_files/Signatures.jrxml"/>
-	<property name="ireport.jasperserver.reportUnit" value="/ca_ppm/unimed/unimed_rpt_aceite_proj"/>
 	<parameter name="param_tap" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT
