@@ -1,13 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.4.2.final using JasperReports Library version 6.4.1  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4_8" pageWidth="1290" pageHeight="800" columnWidth="1290" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="737e5c36-4c89-4e64-8e52-e43a14ebe769">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="RUMO PROD CA JDBC"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
-	<property name="ireport.jasperserver.url" value="https://cppmrpt103.ondemand.ca.com/reportservice/"/>
-	<property name="ireport.jasperserver.user" value="reportdev|cppm9008"/>
-	<property name="ireport.jasperserver.report.resource" value="/ca_ppm/RUMO_ALL/bam_fluxo_proj_files/main_jrxml"/>
-	<property name="ireport.jasperserver.reportUnit" value="/ca_ppm/RUMO_ALL/bam_fluxo_proj"/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
