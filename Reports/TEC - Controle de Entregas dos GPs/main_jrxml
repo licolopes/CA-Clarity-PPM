@@ -1,11 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.4.2.final using JasperReports Library version 6.4.1  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="controle_entregas_gps" pageWidth="3000" pageHeight="1200" columnWidth="2960" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="43e8b697-7228-4517-8cd6-5d27c7bd391c">
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="TECBAN - TESTE"/>
-	<property name="ireport.jasperserver.url" value="https://cppmrpt103s.ondemand.ca.com/reportservice/"/>
-	<property name="ireport.jasperserver.user" value="report_dev|cppm2058_test"/>
-	<property name="ireport.jasperserver.report.resource" value="/ca_ppm/tecban/controle_entrega_gps_files/main_jrxml"/>
-	<property name="ireport.jasperserver.reportUnit" value="/ca_ppm/tecban/controle_entrega_gps"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<property name="net.sf.jasperreports.viewer.zoom" value="0.85"/>
 	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
