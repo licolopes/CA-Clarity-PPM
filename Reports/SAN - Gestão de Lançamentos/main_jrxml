@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.2.final using JasperReports Library version 6.4.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="san_gestao_lanc" pageWidth="1100" pageHeight="842" orientation="Landscape" columnWidth="1060" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="5ac33139-a960-423e-b6b7-e0118062fe5e">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SANOFI - PROD"/>
+	<property name="ireport.jasperserver.url" value="https://cppmrpt103s.ondemand.ca.com/reportservice/"/>
+	<property name="ireport.jasperserver.user" value="reportdev|cppm9188"/>
+	<property name="ireport.jasperserver.report.resource" value="/ca_ppm/sanofi/san_gest_lanc_files/main_jrxml"/>
+	<property name="ireport.jasperserver.reportUnit" value="/ca_ppm/sanofi/san_gest_lanc"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#8FAFCC">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#CFDBE6">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="FAROL">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{FAROL_ID}.equals("10")]]></conditionExpression>
+			<style mode="Opaque" backcolor="#00FF00"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{FAROL_ID}.equals("20")]]></conditionExpression>
+			<style mode="Opaque" backcolor="#FFFF00"/>
+		</conditionalStyle>
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$F{FAROL_ID}.equals("30")]]></conditionExpression>
+			<style mode="Opaque" backcolor="#FF0000"/>
+		</conditionalStyle>
+	</style>
+	<subDataset name="projetos" uuid="5614100b-5ecd-4c28-b9d2-d9acd600938f">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SANOFI - PRD"/>
+		<parameter name="FRANCHISE" class="java.lang.String"/>
+		<parameter name="project" class="java.util.Collection"/>
+		<parameter name="stage_gate" class="java.util.Collection"/>
+		<parameter name="san_manager" class="java.util.Collection"/>
+		<queryString>
+			<![CDATA[SELECT
+LINHA,
+INV_ID,
+INV_CODE,
+INV_NAME,
+STAGE_GATE,
+REG_PLAN,
+REG_REAL,
+LANC_PLAN,
+LANC_REAL,
+NET_SALES,
+FAROL,
+FAROL_ID,
+PMO,
+COMENTARIOS
+FROM
+(
+	SELECT
+	 ROWNUM LINHA
+	 , INVI.ID INV_ID
+	 , INVI.CODE INV_CODE
+	 , INVI.NAME INV_NAME
+	 , GATE.NAME STAGE_GATE
+	 , NVL(BL_REG.FINISH_DATE,REG.PRFINISH) REG_PLAN
+	 , REG.PRFINISH REG_REAL
+	 , NVL(BL_SELLIN.FINISH_DATE,SELLIN.PRFINISH) LANC_PLAN
+	 , SELLIN.PRFINISH LANC_REAL
+	 , OCINV.san_net_sales NET_SALES
+	 , FAROL.NAME FAROL
+	 , FAROL.LOOKUP_CODE FAROL_ID
+	 , MAN.ID PMO_ID
+	 , SUBSTR(MAN.FIRST_NAME, 1, 1) || '. ' || MAN.LAST_NAME PMO
+	 , RPT.cop_report_update COMENTARIOS
+	  
+	FROM
+		INV_INVESTMENTS INVI
+		JOIN ODF_CA_INV OCINV ON INVI.ID = OCINV.ID
+		JOIN CMN_SEC_USERS MAN ON MAN.ID = INVI.MANAGER_ID
+		LEFT JOIN ODF_CA_COP_PRJ_STATUSRPT RPT ON RPT.ODF_PARENT_ID = INVI.ID
+		LEFT JOIN CMN_LOOKUPS_V FAROL ON FAROL.LOOKUP_CODE = RPT.cop_schedule_status AND FAROL.LANGUAGE_CODE = 'en' AND FAROL.LOOKUP_TYPE = 'OBJ_STATUSREPORT_STATUS_ENUM'
+		LEFT JOIN PRJ_BASELINES BL ON BL.PROJECT_ID = INVI.ID AND BL.IS_CURRENT = 1
+		LEFT JOIN PRTASK REG ON INVI.ID = REG.PRPROJECTID AND REG.PRNAME = 'Aprovação Dossiê'
+		LEFT JOIN PRJ_BASELINE_DETAILS BL_REG ON REG.PRID = BL_REG.OBJECT_ID AND BL_REG.BASELINE_ID = BL.ID
+		LEFT JOIN PRTASK SELLIN ON INVI.ID = SELLIN.PRPROJECTID AND SELLIN.PRNAME = 'Sell in'
+		LEFT JOIN PRJ_BASELINE_DETAILS BL_SELLIN ON SELLIN.PRID = BL_SELLIN.OBJECT_ID AND BL_SELLIN.BASELINE_ID = BL.ID
+		JOIN CMN_LOOKUPS_V GATE ON OCINV.SAN_STAGE_GATE = GATE.LOOKUP_CODE AND GATE.LANGUAGE_CODE = 'en' AND GATE.LOOKUP_TYPE = 'SAN_LKP_STAGE_GATE'
+		JOIN CMN_LOOKUPS_V FRANCHISE ON OCINV.SAN_FRANCHISE = FRANCHISE.LOOKUP_CODE AND FRANCHISE.LANGUAGE_CODE = 'en' AND FRANCHISE.LOOKUP_TYPE = 'SAN_LKP_FRANCHISE'
+
+	WHERE 
+		(RPT.ID IS NULL OR  RPT.ID = (SELECT MAX(ID) FROM ODF_CA_COP_PRJ_STATUSRPT RPT2 WHERE RPT2.ODF_PARENT_ID = INVI.ID))
+		AND FRANCHISE.NAME = $P{FRANCHISE} 
+)AMTS
+WHERE
+	$X{IN,INV_ID,project} 
+    AND $X{IN,STAGE_GATE,stage_gate} 
+    AND $X{IN,PMO_ID,san_manager}]]>
+		</queryString>
+		<field name="LINHA" class="java.math.BigDecimal"/>
+		<field name="INV_ID" class="java.math.BigDecimal"/>
+		<field name="INV_CODE" class="java.lang.String"/>
+		<field name="INV_NAME" class="java.lang.String"/>
+		<field name="STAGE_GATE" class="java.lang.String"/>
+		<field name="REG_PLAN" class="java.sql.Timestamp"/>
+		<field name="REG_REAL" class="java.sql.Timestamp"/>
+		<field name="LANC_PLAN" class="java.sql.Timestamp"/>
+		<field name="LANC_REAL" class="java.sql.Timestamp"/>
+		<field name="NET_SALES" class="java.math.BigDecimal"/>
+		<field name="FAROL" class="java.lang.String"/>
+		<field name="FAROL_ID" class="java.lang.Integer"/>
+		<field name="PMO" class="java.lang.String"/>
+		<field name="COMENTARIOS" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="project" class="java.util.Collection"/>
+	<parameter name="stage_gate" class="java.util.Collection"/>
+	<parameter name="san_manager" class="java.util.Collection"/>
+	<queryString>
+		<![CDATA[SELECT DISTINCT 
+    FRANCHISE.LOOKUP_CODE FRANCHISE_ID
+    , FRANCHISE.NAME FRANCHISE
+FROM 
+    CMN_LOOKUPS_V FRANCHISE 
+    JOIN ODF_CA_INV OCINV ON FRANCHISE.LOOKUP_CODE = OCINV.SAN_FRANCHISE AND FRANCHISE.LANGUAGE_CODE = 'pt']]>
+	</queryString>
+	<field name="FRANCHISE_ID" class="java.lang.String"/>
+	<field name="FRANCHISE" class="java.lang.String"/>
+	<sortField name="FRANCHISE"/>
+	<pageHeader>
+		<band height="55" splitType="Stretch">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="0" width="962" height="40" backcolor="#CFDBE6" uuid="74cae0bc-9415-49d2-9e9f-d29f0c10f9f1">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="19"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Gestão de lançamentos"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<detail>
+		<band height="70" splitType="Stretch">
+			<componentElement>
+				<reportElement x="0" y="0" width="1060" height="60" uuid="2f7e5327-a793-4fa5-85c4-eb0662051d2e">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+					<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+					<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+					<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+				</reportElement>
+				<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+					<datasetRun subDataset="projetos" uuid="97efc574-eaed-436c-89d3-e9c9ead5906b">
+						<datasetParameter name="FRANCHISE">
+							<datasetParameterExpression><![CDATA[$F{FRANCHISE}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="project">
+							<datasetParameterExpression><![CDATA[$P{project}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="san_manager">
+							<datasetParameterExpression><![CDATA[$P{san_manager}]]></datasetParameterExpression>
+						</datasetParameter>
+						<datasetParameter name="stage_gate">
+							<datasetParameterExpression><![CDATA[$P{stage_gate}]]></datasetParameterExpression>
+						</datasetParameter>
+						<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+					</datasetRun>
+					<jr:column width="30" uuid="96c7239b-a345-4f92-8a28-f71c15c79a81">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="30" height="30" uuid="3b601a79-9f66-465e-b077-f0a7801a8471"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[#]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="30" height="30" uuid="0dde61d8-38ac-4b32-8bd1-c8204626fe0c"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{LINHA}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="114" uuid="f447eacf-a775-4796-8c53-5f15a6cad1ac">
+						<jr:columnHeader style="Table_CH" height="30">
+							<textField>
+								<reportElement x="0" y="0" width="114" height="30" uuid="5cadf57f-9f18-40a1-b9af-aa1383bcd0d5"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$P{FRANCHISE}]]></textFieldExpression>
+							</textField>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="114" height="30" uuid="28a97b51-95bd-4669-9956-02dedd55b319"/>
+								<box padding="3"/>
+								<textElement verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{INV_NAME}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="66" uuid="8f3678d9-7ddc-4a8d-b328-5fb82b645c80">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="66" height="30" uuid="509e2e00-67f2-4042-be18-06a8873a67a5"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[GATE DE APROVAÇÃO]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="66" height="30" uuid="4c8c2cc8-d3f3-43b3-8fa0-0c365f7c119a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{STAGE_GATE}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="80" uuid="5983247c-375c-4599-8112-301e6c70cf13">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="80" height="30" uuid="8b289009-3d91-44fc-8c3a-dbea6d09d5ea"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[REGISTRO PLANEJADO]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true" pattern="MMMM - yy" isBlankWhenNull="true">
+								<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="80" height="30" uuid="db661a01-0f7d-4c73-859e-6ebdfe27e8f1"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{REG_PLAN}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="80" uuid="30f5b8d4-c0cd-4575-bf35-ad69cd11e75c">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="80" height="30" uuid="83836558-6e08-42d9-8815-d1f2fc3ff365"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[REGISTRO REAL]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true" pattern="MMMM - yy" isBlankWhenNull="true">
+								<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="80" height="30" uuid="484a5274-7480-473e-be38-fad5fb4ca576"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{REG_REAL}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="80" uuid="e8561f1e-bd67-417d-ab0f-c8f55c30443d">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="80" height="30" uuid="547361aa-89e3-46dd-ac0a-926f66c76e35"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[EXP. DE LANÇAMENTO]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true" pattern="MMMM - yy" isBlankWhenNull="true">
+								<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="80" height="30" uuid="57b482a1-6ec6-44c8-bcda-d587efd2785c"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{LANC_PLAN}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="80" uuid="72bce8c3-afef-4608-a8f6-398643cf4c5d">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="80" height="30" uuid="0c0d85cd-96ec-449b-9a88-b19499a4b3ac"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[SELL-IN (Budget/LRP)]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true" pattern="MMMM - yy" isBlankWhenNull="true">
+								<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="80" height="30" uuid="88f08eb3-44da-4733-b288-361974716f02"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{LANC_REAL}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="80" uuid="bd3816ad-e6ac-45ed-9594-a9d9488159c2">
+						<jr:columnHeader style="Table_CH" height="30">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<staticText>
+								<reportElement x="0" y="0" width="80" height="30" uuid="0f134f3a-edae-4c32-8a3b-93f141d8c6ec"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[NET SALES]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<property name="com.jaspersoft.studio.unit.width" value="px"/>
+							<textField isStretchWithOverflow="true" pattern="#,##0" isBlankWhenNull="true">
+								<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="80" height="30" uuid="e9e77683-cece-4c10-b93c-ccb31b31137a"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{NET_SALES}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="50" uuid="a5cea3da-ed5a-434b-b55e-1c221c11c4e7">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="50" height="30" uuid="d8013221-afaf-468b-ae0a-f84f36a67f75"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[FAROL]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<image scaleImage="Clip" hAlign="Center" vAlign="Middle">
+								<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="50" height="30" uuid="9e2c2e29-fddb-44a1-a10b-3f2c0a1600eb"/>
+								<box topPadding="3" leftPadding="0" bottomPadding="3"/>
+								<imageExpression><![CDATA[$F{FAROL_ID} == 10 ? "/ca_ppm/resources/images/stoplightGreen"
+: $F{FAROL_ID} == 20 ? "/ca_ppm/resources/images/stoplightYellow"
+: $F{FAROL_ID} == 30 ? "/ca_ppm/resources/images/stoplightRed"
+: ""]]></imageExpression>
+							</image>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="70" uuid="e0ac37d1-58fd-44ef-9593-7a7742ade6b8">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="70" height="30" uuid="e48eeba7-78ac-4ef9-a7ba-f2df8611f2bf"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[PMO]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="70" height="30" uuid="c57dfc2f-f32e-447f-ad1f-80ab5791528b"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{PMO}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+					<jr:column width="232" uuid="b2443eb5-bb0e-4f53-82ff-2ca693486eff">
+						<jr:columnHeader style="Table_CH" height="30">
+							<staticText>
+								<reportElement x="0" y="0" width="232" height="30" uuid="a7f9a456-affc-4364-a2dd-5fbb04604e12"/>
+								<textElement textAlignment="Center" verticalAlignment="Middle"/>
+								<text><![CDATA[COMENTÁRIOS]]></text>
+							</staticText>
+						</jr:columnHeader>
+						<jr:detailCell style="Table_TD" height="30">
+							<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+								<reportElement positionType="Float" stretchType="RelativeToBandHeight" x="0" y="0" width="232" height="30" uuid="1f1efb44-df50-4818-8258-ab7346d8d40e"/>
+								<box padding="3"/>
+								<textElement verticalAlignment="Middle"/>
+								<textFieldExpression><![CDATA[$F{COMENTARIOS}]]></textFieldExpression>
+							</textField>
+						</jr:detailCell>
+					</jr:column>
+				</jr:table>
+			</componentElement>
+		</band>
+	</detail>
+</jasperReport>
