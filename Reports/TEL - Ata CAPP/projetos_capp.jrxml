@@ -1,0 +1,787 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.2.final using JasperReports Library version 6.4.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="projetos_capp" pageWidth="557" pageHeight="842" columnWidth="557" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="170e6f90-4ca2-4dfb-8ec6-d69746d932da">
+	<property name="ireport.jasperserver.url" value="https://cppmrpt103.ondemand.ca.com/reportservice/"/>
+	<property name="ireport.jasperserver.user" value="report_dev|cppm9296"/>
+	<property name="ireport.jasperserver.report.resource" value="/ca_ppm/vivo/vivo_rpt_ata_capp_files/projetos_capp.jrxml"/>
+	<property name="ireport.jasperserver.reportUnit" value="/ca_ppm/vivo/vivo_rpt_ata_capp"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="VIVO - DEV"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<style name="Table_TH" mode="Opaque" backcolor="#F0F8FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_TD" mode="Opaque" backcolor="#FFFFFF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<style name="Table_CH" mode="Opaque" backcolor="#BFE1FF">
+		<box>
+			<pen lineWidth="0.5" lineColor="#000000"/>
+			<topPen lineWidth="0.5" lineColor="#000000"/>
+			<leftPen lineWidth="0.5" lineColor="#000000"/>
+			<bottomPen lineWidth="0.5" lineColor="#000000"/>
+			<rightPen lineWidth="0.5" lineColor="#000000"/>
+		</box>
+	</style>
+	<subDataset name="pareceres" uuid="2e7557fd-55d1-41f8-bc66-a8e0c8ea0ac8">
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="VIVO - DEV"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<parameter name="INV_ID" class="java.lang.String"/>
+		<parameter name="obj_capp_hide" class="java.lang.String"/>
+		<parameter name="prj_capp" class="java.util.Collection"/>
+		<queryString>
+			<![CDATA[SELECT
+	PCAPP.IDEA_ID INV_ID
+	, PCAPP.TEL_CAPP_OBS_COMITE OBS_COMITE
+	, AREA_AVALIADORA.NAME AREA_AVALIADORA
+	, PCAPP.TEL_CAPP_COMENTARIOS OBS_PARECER
+	, STATUS_PARECER.NAME STATUS_PARECER
+FROM
+	ODF_CA_TEL_PRJ_CAPP PRJ_CAPP
+	JOIN odf_ca_tel_obj_parecer_capp PCAPP ON PCAPP.ODF_PARENT_ID = PRJ_CAPP.ID
+	JOIN ODF_CA_TEL_OBJ_CAPP CAPP ON CAPP.ID = PRJ_CAPP.ODF_PARENT_ID
+	LEFT JOIN CMN_LOOKUPS_V STATUS_PARECER ON STATUS_PARECER.LOOKUP_CODE = PCAPP.TEL_CAPP_STATUS_PAR AND STATUS_PARECER.LOOKUP_TYPE = 'TEL_LKP_STATUS_PAREC_AVAL_CAPP' AND STATUS_PARECER.LANGUAGE_CODE = 'pt'		
+	LEFT JOIN CMN_LOOKUPS_V AREA_AVALIADORA ON AREA_AVALIADORA.LOOKUP_CODE = PCAPP.TEL_CAPP_AREA_AVAL AND AREA_AVALIADORA.LOOKUP_TYPE = 'TEL_PARECER_AREAS' AND AREA_AVALIADORA.LANGUAGE_CODE = 'pt'	
+WHERE
+	PCAPP.IDEA_ID = $P{INV_ID}
+	AND CAPP.ID = $P{obj_capp_hide}
+ORDER BY
+	AREA_AVALIADORA.NAME]]>
+		</queryString>
+		<field name="INV_ID" class="java.math.BigDecimal"/>
+		<field name="OBS_COMITE" class="java.lang.String"/>
+		<field name="AREA_AVALIADORA" class="java.lang.String"/>
+		<field name="OBS_PARECER" class="java.lang.String"/>
+		<field name="STATUS_PARECER" class="java.lang.String"/>
+	</subDataset>
+	<parameter name="obj_capp_hide" class="java.lang.String"/>
+	<parameter name="prj_capp" class="java.util.Collection"/>
+	<parameter name="INV_ID" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+CAPP_ID,
+CODIGO_CAPP_PRJ,
+HORA_INICIO_PRJ,
+HORA_TERMINO_PRJ,
+ESCOPO_PAUTA_PRJ,
+SEQUENCIA_PRJ,
+ID_PROCESSUM_PRJ,
+ID_PS_PRJ,
+GO_NOGO_PRJ,
+RESUMO_ACAO_PRJ,
+LANCAMENTO_COMERCIAL_PRJ,
+VOLUMETRIA_PRJ,
+SEGMENTO_PRJ,
+INV_ID,
+INV_CODE,
+NOME_PROJETO_PRJ,
+RESPONSAVEL_PRJ,
+TIPO_FLUXO_PRJ,
+RECOMENDACOES_MANDATORIAS_PRJ,
+CONTROLE_REAJUSTE_PRJ,
+ACOMP_POS_IMPLANTACAO_PRJ
+FROM
+(
+	SELECT 
+		  CAPP.ID CAPP_ID
+		, PRJ_CAPP.CODE CODIGO_CAPP_PRJ
+		, PRJ_CAPP.TEL_CAPP_HORA_INICIO HORA_INICIO_PRJ
+		, PRJ_CAPP.TEL_CAPP_HORA_TERM HORA_TERMINO_PRJ
+		, PRJ_CAPP.TEL_CAPP_ESCOP_PAUTA ESCOPO_PAUTA_PRJ
+		, PRJ_CAPP.TEL_CAPP_SEQ SEQUENCIA_PRJ
+		, PRJ_CAPP.TEL_CAPP_PROCESSUM ID_PROCESSUM_PRJ
+		, PRJ_CAPP.TEL_CAPP_ID_PS ID_PS_PRJ
+		, GO_NO_GO.NAME GO_NOGO_PRJ
+		, PRJ_CAPP.TEL_CAPP_RES_ACAO RESUMO_ACAO_PRJ
+		, PRJ_CAPP.TEL_CAPP_LANC_COMERC LANCAMENTO_COMERCIAL_PRJ
+		, PRJ_CAPP.TEL_CAPP_VOLUMETRIA VOLUMETRIA_PRJ
+		, PRJ_CAPP.TEL_CAPP_PA_CONV_PS SEGMENTO_PRJ
+		, INV.ID INV_ID
+		, INV.CODE INV_CODE
+		, PRJ_CAPP.TEL_CAPP_PROJETO NOME_PROJETO_PRJ
+		, R.FIRST_NAME || ' ' || R.LAST_NAME RESPONSAVEL_PRJ
+		, TF.NAME TIPO_FLUXO_PRJ
+		, PRJ_CAPP.TEP_CAPP_REC_MAND_CP RECOMENDACOES_MANDATORIAS_PRJ
+		, CR.NAME CONTROLE_REAJUSTE_PRJ
+		, API.NAME ACOMP_POS_IMPLANTACAO_PRJ
+	FROM 
+		ODF_CA_TEL_OBJ_CAPP CAPP
+		INNER JOIN ODF_CA_TEL_PRJ_CAPP PRJ_CAPP ON CAPP.ID = PRJ_CAPP.ODF_PARENT_ID
+		LEFT JOIN CMN_LOOKUPS_V TF ON TF.LOOKUP_CODE = PRJ_CAPP.TEL_CAPP_TP_FLUXO AND TF.LOOKUP_TYPE = 'INV_PROCESS_TYPE' AND TF.LANGUAGE_CODE = 'pt'
+		LEFT JOIN CMN_LOOKUPS_V CR ON CR.LOOKUP_ENUM = PRJ_CAPP.TEL_CAPP_CONT_REAJ AND CR.LOOKUP_TYPE = 'COP_PORTLET_BOOLEAN' AND CR.LANGUAGE_CODE = 'pt'
+		LEFT JOIN CMN_LOOKUPS_V API ON API.LOOKUP_ENUM = PRJ_CAPP.TEL_CAPP_ACP_POS_IMP AND API.LOOKUP_TYPE = 'COP_PORTLET_BOOLEAN' AND API.LANGUAGE_CODE = 'pt'
+		LEFT JOIN CMN_LOOKUPS_V GO_NO_GO ON GO_NO_GO.LOOKUP_CODE = PRJ_CAPP.TEL_CAPP_PRJ_GO_NOGO AND GO_NO_GO.LOOKUP_TYPE = 'TEL_LKP_LISTA_APROV_CAPP' AND GO_NO_GO.LANGUAGE_CODE = 'pt'
+		INNER JOIN INV_INVESTMENTS INV ON INV.ID = PRJ_CAPP.IDEA_ID
+		INNER JOIN SRM_RESOURCES R ON PRJ_CAPP.TEL_CAPP_RESPONSAVEL = R.ID
+	WHERE
+		CAPP.ID = $P{obj_capp_hide}
+	ORDER BY PRJ_CAPP.TEL_CAPP_SEQ
+)T1
+WHERE
+	$X{IN,INV_ID,prj_capp}]]>
+	</queryString>
+	<field name="CAPP_ID" class="java.math.BigDecimal"/>
+	<field name="CODIGO_CAPP_PRJ" class="java.lang.String"/>
+	<field name="HORA_INICIO_PRJ" class="java.lang.String"/>
+	<field name="HORA_TERMINO_PRJ" class="java.lang.String"/>
+	<field name="ESCOPO_PAUTA_PRJ" class="java.lang.String"/>
+	<field name="SEQUENCIA_PRJ" class="java.lang.String"/>
+	<field name="ID_PROCESSUM_PRJ" class="java.lang.String"/>
+	<field name="ID_PS_PRJ" class="java.lang.String"/>
+	<field name="GO_NOGO_PRJ" class="java.lang.String"/>
+	<field name="RESUMO_ACAO_PRJ" class="java.lang.String"/>
+	<field name="LANCAMENTO_COMERCIAL_PRJ" class="java.sql.Timestamp"/>
+	<field name="VOLUMETRIA_PRJ" class="java.lang.String"/>
+	<field name="SEGMENTO_PRJ" class="java.lang.String"/>
+	<field name="INV_ID" class="java.math.BigDecimal"/>
+	<field name="INV_CODE" class="java.lang.String"/>
+	<field name="NOME_PROJETO_PRJ" class="java.lang.String"/>
+	<field name="RESPONSAVEL_PRJ" class="java.lang.String"/>
+	<field name="TIPO_FLUXO_PRJ" class="java.lang.String"/>
+	<field name="RECOMENDACOES_MANDATORIAS_PRJ" class="java.lang.String"/>
+	<field name="CONTROLE_REAJUSTE_PRJ" class="java.lang.String"/>
+	<field name="ACOMP_POS_IMPLANTACAO_PRJ" class="java.lang.String"/>
+	<sortField name="SEQUENCIA_PRJ"/>
+	<detail>
+		<band height="35">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<frame>
+				<reportElement x="0" y="0" width="557" height="35" uuid="31779c9e-548d-47cb-aa2c-54f1519bcf7c"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField pattern="hh:mm" isBlankWhenNull="true">
+					<reportElement key="" mode="Opaque" x="0" y="0" width="53" height="30" forecolor="#FFFFFF" backcolor="#000000" uuid="9aa1984c-166d-4e50-be9d-a264c53bf960"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Calibri" size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{SEQUENCIA_PRJ}]]></textFieldExpression>
+				</textField>
+				<textField pattern="hh:mm" isBlankWhenNull="true">
+					<reportElement key="" x="53" y="0" width="117" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="29e76dca-cd78-4429-a026-578427541dfb"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Calibri" size="11" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{CODIGO_CAPP_PRJ}]]></textFieldExpression>
+				</textField>
+				<textField pattern="hh:mm" isBlankWhenNull="true">
+					<reportElement key="" x="170" y="0" width="210" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="a302c691-dc52-47e1-953c-0c9dda155854"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Calibri" size="11" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NOME_PROJETO_PRJ}]]></textFieldExpression>
+				</textField>
+				<textField pattern="hh:mm" isBlankWhenNull="true">
+					<reportElement key="" stretchType="RelativeToBandHeight" x="360" y="0" width="82" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="96f254b5-e2cd-4ab9-bcbd-45c20f8ca121"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font fontName="Calibri" size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Status CAPP:"]]></textFieldExpression>
+				</textField>
+				<textField pattern="hh:mm" isBlankWhenNull="true">
+					<reportElement key="" stretchType="RelativeToBandHeight" x="442" y="0" width="104" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="871396a9-97d6-49f5-a106-705afee52bdd"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="Calibri" size="11" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{GO_NOGO_PRJ}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+		<band height="20">
+			<frame>
+				<reportElement x="0" y="0" width="557" height="20" uuid="5792d285-2a19-4f05-b686-fef4e5fd01e5"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField pattern="hh:mm" isBlankWhenNull="true">
+					<reportElement key="" stretchType="RelativeToTallestObject" x="9" y="0" width="91" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="e8ae8062-1031-44ae-bd02-4c321f420b01">
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font fontName="Calibri" size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Tipo do Fluxo:"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="hh:mm" isBlankWhenNull="true">
+					<reportElement key="" stretchType="RelativeToTallestObject" x="84" y="0" width="184" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="85f282b2-d072-45ff-befd-215ea57155e8"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font fontName="Calibri" size="11" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{TIPO_FLUXO_PRJ}]]></textFieldExpression>
+				</textField>
+				<textField pattern="hh:mm" isBlankWhenNull="true">
+					<reportElement key="" stretchType="RelativeToTallestObject" x="270" y="0" width="119" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="379cd8dc-34ae-4ddb-a8a1-0a91d948f116"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font fontName="Calibri" size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["ID Processum:"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="hh:mm" isBlankWhenNull="true">
+					<reportElement key="" stretchType="RelativeToTallestObject" x="354" y="0" width="192" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="5a177fb1-9b08-49c9-93c5-d118fa238678"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font fontName="Calibri" size="11" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{ID_PROCESSUM_PRJ}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+		<band height="20">
+			<frame>
+				<reportElement x="0" y="0" width="557" height="20" uuid="eed9c669-ea9b-46f8-9f6e-f562bd75b88a">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField pattern="hh:mm" isBlankWhenNull="true">
+					<reportElement key="" stretchType="RelativeToTallestObject" x="9" y="0" width="84" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="0175ea56-c2e6-47c5-8145-188ada321473">
+						<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font fontName="Calibri" size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Segmento:"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="hh:mm" isBlankWhenNull="true">
+					<reportElement key="" stretchType="RelativeToTallestObject" x="70" y="0" width="270" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="99cacf25-59ec-4cba-b7a4-91c0dbebc7cb">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font fontName="Calibri" size="11" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{SEGMENTO_PRJ}]]></textFieldExpression>
+				</textField>
+				<textField pattern="hh:mm" isBlankWhenNull="true">
+					<reportElement key="" stretchType="RelativeToTallestObject" x="341" y="0" width="140" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="cde1809c-ecff-4a29-b12c-1afaa70c3474"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font fontName="Calibri" size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Lançamento Comercial:"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="dd/MM/YYYY" isBlankWhenNull="true">
+					<reportElement key="" stretchType="RelativeToTallestObject" x="450" y="0" width="96" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="c060a76a-74d8-4bf5-8c2b-028ef63df839"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font fontName="Calibri" size="11" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{LANCAMENTO_COMERCIAL_PRJ}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+		<band height="20">
+			<frame>
+				<reportElement x="0" y="0" width="557" height="20" uuid="9055c16c-4fdc-4d7a-8dd2-9b858477713c"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField>
+					<reportElement stretchType="RelativeToTallestObject" x="9" y="0" width="91" height="20" uuid="fd9c8767-a60d-4aea-bd89-e238934288ea"/>
+					<textElement verticalAlignment="Top">
+						<font fontName="Calibri" size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Resumo:"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="hh:mm" isBlankWhenNull="true">
+					<reportElement key="" stretchType="RelativeToTallestObject" x="60" y="0" width="486" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="a7a76817-0e9c-4003-9a10-b1d87249c122"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font fontName="Calibri" size="11" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{RESUMO_ACAO_PRJ}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+		<band height="20">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<frame>
+				<reportElement x="0" y="0" width="557" height="20" uuid="8087a802-fba1-4dca-9b56-16adfe6812bb">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField>
+					<reportElement stretchType="RelativeToTallestObject" x="10" y="0" width="90" height="20" uuid="d26992f9-cd75-4c22-a726-acb8838f8377"/>
+					<textElement verticalAlignment="Top">
+						<font fontName="Calibri" size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Volumetria:"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="#,##0.00#" isBlankWhenNull="true">
+					<reportElement key="" stretchType="RelativeToTallestObject" x="84" y="0" width="462" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="44b0dc40-8ea4-451b-ba3c-b6185850aee5"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font fontName="Calibri" size="11" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{VOLUMETRIA_PRJ}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+		<band height="20">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<frame>
+				<reportElement x="0" y="0" width="557" height="20" uuid="30dfa586-4ea3-4f59-b59f-dd3919a004ce">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField>
+					<reportElement stretchType="RelativeToTallestObject" x="10" y="0" width="90" height="20" uuid="a923b629-49e4-4e94-b8c6-717812fe38a6"/>
+					<textElement verticalAlignment="Top">
+						<font fontName="Calibri" size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Responsável:"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="hh:mm" isBlankWhenNull="true">
+					<reportElement key="" stretchType="RelativeToTallestObject" x="84" y="0" width="462" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="ce4f978e-ee63-46ae-b87b-44bac019777c"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font fontName="Calibri" size="11" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{RESPONSAVEL_PRJ}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+		<band height="20">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<frame>
+				<reportElement x="0" y="0" width="557" height="20" uuid="613578c1-fc38-4767-85e3-cc3278aa7fc0">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField>
+					<reportElement stretchType="RelativeToTallestObject" x="10" y="0" width="127" height="20" uuid="34fd1437-c64d-4b16-bb8b-57495df7c1cf"/>
+					<textElement verticalAlignment="Top">
+						<font fontName="Calibri" size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Controle de Reajuste:"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="hh:mm" isBlankWhenNull="true">
+					<reportElement key="" stretchType="RelativeToTallestObject" x="122" y="0" width="424" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="bbe5b975-5fb2-4c9c-8b2f-b2bb0a7b7b24"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font fontName="Calibri" size="11" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{CONTROLE_REAJUSTE_PRJ}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+		<band height="20">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<frame>
+				<reportElement x="0" y="0" width="557" height="20" uuid="8391bdd0-509e-4d2e-a7a7-c26d8eb729e3">
+					<property name="com.jaspersoft.studio.unit.x" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField>
+					<reportElement stretchType="RelativeToTallestObject" x="11" y="0" width="229" height="20" uuid="b38691b5-b016-4d8a-9e24-d45524a5632d"/>
+					<textElement verticalAlignment="Top">
+						<font fontName="Calibri" size="11" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Acompanhamento Pós-Implantação:"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="hh:mm" isBlankWhenNull="true">
+					<reportElement key="" stretchType="RelativeToTallestObject" x="198" y="0" width="348" height="19" forecolor="#000000" backcolor="#FFFFFF" uuid="f7aa236f-454c-4bfd-b93b-19d97e5af638"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font fontName="Calibri" size="11" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{ACOMP_POS_IMPLANTACAO_PRJ}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+		<band height="20">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<frame>
+				<reportElement x="0" y="0" width="557" height="20" uuid="0eadf5af-c7fb-44c6-9611-8c90d4d7cdec"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField>
+					<reportElement x="11" y="2" width="110" height="20" uuid="98aa929b-875e-4169-aff3-c981cf319383"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font fontName="Calibri" size="14" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["CAPP"]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+		<band height="20">
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<frame>
+				<reportElement x="0" y="0" width="557" height="20" uuid="a7ad5dfc-ff0b-47b1-aa3a-26cdf87958df">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="11" y="0" width="161" height="20" uuid="486ec215-068f-4a89-b22b-f2bb24b9b5fc"/>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font fontName="Calibri" size="11" isBold="true" isUnderline="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Escopo Pauta CAPP:"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="hh:mm" isBlankWhenNull="true">
+					<reportElement key="" positionType="Float" stretchType="RelativeToTallestObject" x="125" y="0" width="420" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="7bdc0fd2-28df-4bd8-8b87-fcce62f5f003"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font fontName="Calibri" size="11" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{ESCOPO_PAUTA_PRJ}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+		<band height="20">
+			<frame>
+				<reportElement x="0" y="0" width="557" height="20" uuid="91c6e3bf-7d34-4bdf-bea9-3f792ebbfa87"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textField>
+					<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="11" y="0" width="220" height="20" uuid="24eab377-a50e-41eb-805e-e2eaa6cdd12a">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font fontName="Calibri" size="11" isBold="true" isUnderline="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Recomendações Mandatórias do CAPP:"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="hh:mm" isBlankWhenNull="true">
+					<reportElement key="" positionType="Float" stretchType="RelativeToTallestObject" x="210" y="0" width="336" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="93205703-5524-414b-8050-e141a59433f5">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Top">
+						<font fontName="Calibri" size="11" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{RECOMENDACOES_MANDATORIAS_PRJ}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+		<band height="55">
+			<frame>
+				<reportElement x="0" y="0" width="557" height="55" uuid="04f921cd-d768-426f-af35-7a1e6c00f72b"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<componentElement>
+					<reportElement stretchType="RelativeToBandHeight" x="11" y="0" width="537" height="49" uuid="b8567ac1-b5e4-4b82-b22d-27c701ba6194">
+						<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+						<property name="com.jaspersoft.studio.table.style.table_header" value="Table_TH"/>
+						<property name="com.jaspersoft.studio.table.style.column_header" value="Table_CH"/>
+						<property name="com.jaspersoft.studio.table.style.detail" value="Table_TD"/>
+					</reportElement>
+					<jr:table xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd">
+						<datasetRun subDataset="pareceres" uuid="cf9dc052-d58f-402f-b053-bdec3425eed1">
+							<datasetParameter name="INV_ID">
+								<datasetParameterExpression><![CDATA[$F{INV_ID}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="obj_capp_hide">
+								<datasetParameterExpression><![CDATA[$P{obj_capp_hide}]]></datasetParameterExpression>
+							</datasetParameter>
+							<datasetParameter name="prj_capp">
+								<datasetParameterExpression><![CDATA[$P{prj_capp}]]></datasetParameterExpression>
+							</datasetParameter>
+							<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+						</datasetRun>
+						<jr:column width="110" uuid="df98bb3a-880a-4fac-aaf6-d77b9b82c8e2">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column1"/>
+							<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+							<jr:tableHeader style="Table_TH" height="20" rowSpan="1">
+								<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField>
+									<reportElement mode="Opaque" x="0" y="0" width="110" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="430f78fb-22f6-4d0e-bcbf-74acd67c0bfd"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font fontName="Calibri" size="11" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA["Área Avaliadora"]]></textFieldExpression>
+								</textField>
+							</jr:tableHeader>
+							<jr:detailCell style="Table_TD" height="30">
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="110" height="30" backcolor="#FFFFFF" uuid="09704323-dc85-41f0-aad1-a1bb88486c43"/>
+									<textElement textAlignment="Left" verticalAlignment="Middle">
+										<font fontName="Calibri" size="11"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{AREA_AVALIADORA}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="110" uuid="9c194e30-ac60-4c78-972a-af8a000392db">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column2"/>
+							<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+							<jr:tableHeader style="Table_TH" height="20" rowSpan="1">
+								<textField>
+									<reportElement mode="Opaque" x="0" y="0" width="110" height="20" backcolor="#FFFFFF" uuid="6dccc951-c7b0-45fe-8244-f13b851e9ca1"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font fontName="Calibri" size="11" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA["Parecer"]]></textFieldExpression>
+								</textField>
+							</jr:tableHeader>
+							<jr:detailCell style="Table_TD" height="30">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="110" height="30" backcolor="#FFFFFF" uuid="5f52fb6d-63fc-4430-aa7f-2d412f2e05d1"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font fontName="Calibri" size="11"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{STATUS_PARECER}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="155" uuid="b9d8c40d-f903-4ac0-902e-59e859db39c1">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column3"/>
+							<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+							<jr:tableHeader style="Table_TH" height="20" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<textField>
+									<reportElement mode="Opaque" x="0" y="0" width="155" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="0ed4d2be-6122-4732-ab13-57deedf73193"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font fontName="Calibri" size="11" isBold="true"/>
+									</textElement>
+									<textFieldExpression><![CDATA["Observações Parecer"]]></textFieldExpression>
+								</textField>
+							</jr:tableHeader>
+							<jr:detailCell style="Table_TD" height="30">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="155" height="30" backcolor="#FFFFFF" uuid="5edcb56d-b5ec-41fb-8dce-f7fa6817c7f9"/>
+									<textElement verticalAlignment="Middle">
+										<font fontName="Calibri" size="11"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{OBS_PARECER}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+						<jr:column width="161" uuid="90f3c078-87e4-4643-8220-3b0fe55ae5f3">
+							<property name="com.jaspersoft.studio.components.table.model.column.name" value="Column4"/>
+							<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+							<jr:tableHeader style="Table_TH" height="20" rowSpan="1">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<property name="com.jaspersoft.studio.unit.height" value="px"/>
+								<textField>
+									<reportElement mode="Opaque" x="0" y="0" width="161" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="d24a70ac-0e7b-4612-b848-2853f84c9401"/>
+									<textElement textAlignment="Center" verticalAlignment="Middle">
+										<font fontName="Calibri" size="11" isBold="true"/>
+										<paragraph lineSpacing="Double"/>
+									</textElement>
+									<textFieldExpression><![CDATA["Observações em Comitê"]]></textFieldExpression>
+								</textField>
+							</jr:tableHeader>
+							<jr:detailCell style="Table_TD" height="30">
+								<property name="com.jaspersoft.studio.unit.width" value="px"/>
+								<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+									<reportElement stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="161" height="30" backcolor="#FFFFFF" uuid="ebe3efd0-bc00-4d23-9fb6-ffc8b81303d3">
+										<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+									</reportElement>
+									<textElement verticalAlignment="Middle">
+										<font fontName="Calibri" size="11"/>
+									</textElement>
+									<textFieldExpression><![CDATA[$F{OBS_COMITE}]]></textFieldExpression>
+								</textField>
+							</jr:detailCell>
+						</jr:column>
+					</jr:table>
+				</componentElement>
+			</frame>
+		</band>
+		<band height="25">
+			<frame>
+				<reportElement x="0" y="0" width="557" height="20" uuid="8744a918-aaff-4842-8b5d-3bad8b1866c5">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textField>
+					<reportElement positionType="FixRelativeToBottom" mode="Opaque" x="10" y="0" width="536" height="20" forecolor="#000000" uuid="0af8fb11-7e99-4a89-bb6b-0ecb7f056562">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<box>
+						<pen lineWidth="0.0"/>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Calibri" size="11" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Aprovações por decurso de prazo: n/a"]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.2.final using JasperReports Library version 6.4.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="projetos_capp" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="170e6f90-4ca2-4dfb-8ec6-d69746d932da">
+	<property name="ireport.jasperserver.url" value="https://cppmrpt103.ondemand.ca.com/reportservice/"/>
+	<property name="ireport.jasperserver.user" value="report_dev|cppm9296"/>
+	<property name="ireport.jasperserver.report.resource" value="/ca_ppm/vivo/vivo_rpt_pauta_capp_files/projetos_capp.jrxml"/>
+	<property name="ireport.jasperserver.reportUnit" value="/ca_ppm/vivo/vivo_rpt_pauta_capp"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="VIVO - DEV"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="obj_capp_hide" class="java.lang.String"/>
+	<parameter name="prj_capp" class="java.util.Collection"/>
+	<parameter name="inv_hide" class="java.lang.String"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+CAPP_ID,
+CODIGO_CAPP_PRJ,
+HORA_INICIO_PRJ,
+HORA_TERMINO_PRJ,
+ESCOPO_PAUTA_PRJ,
+SEQUENCIA_PRJ,
+ID_PROCESSUM_JUR,
+ID_PROCESSUM_REG,
+VERSAO_DOSSIE,
+ID_PS_PRJ,
+GO_NOGO_PRJ,
+RESUMO_ACAO_PRJ,
+LANCAMENTO_IMP_PRJ,
+LANCAMENTO_COMERCIAL_PRJ,
+VOLUMETRIA_PRJ,
+SEGMENTO_PRJ,
+INV_ID,
+INV_CODE,
+NOME_PROJETO_PRJ,
+RESPONSAVEL_PRJ,
+TIPO_FLUXO_PRJ,
+RECOMENDACOES_MANDATORIAS_PRJ,
+CONTROLE_REAJUSTE_PRJ,
+MOTIVO_NOGO,
+DESC_NOGO,
+FASES
+FROM
+(
+	SELECT 
+		  CAPP.ID CAPP_ID
+		, INV.ID INV_ID
+		, INV.CODE INV_CODE
+		, PRJ_CAPP.CODE CODIGO_CAPP_PRJ
+		, NVL(PRJ_CAPP.TEL_CAPP_HORA_INICIO,'00:00') HORA_INICIO_PRJ
+		, NVL(PRJ_CAPP.TEL_CAPP_HORA_TERM,'00:00') HORA_TERMINO_PRJ
+		, PRJ_CAPP.TEL_CAPP_ESCOP_PAUTA ESCOPO_PAUTA_PRJ
+		, PRJ_CAPP.TEL_CAPP_SEQ SEQUENCIA_PRJ
+		, PRJ_CAPP.TEL_CAPP_PROCESSUM ID_PROCESSUM_JUR
+		, PRJ_CAPP.id_proc_reg ID_PROCESSUM_REG
+		, PRJ_CAPP.ver_dossie VERSAO_DOSSIE
+		, PRJ_CAPP.TEL_CAPP_ID_PS ID_PS_PRJ
+		, PRJ_CAPP.TEL_CAPP_PRJ_GO_NOGO GO_NOGO_PRJ
+		, PRJ_CAPP.TEL_CAPP_RES_ACAO RESUMO_ACAO_PRJ
+		, PRJ_CAPP.dt_lanc_imp_prj LANCAMENTO_IMP_PRJ
+		, PRJ_CAPP.TEL_CAPP_LANC_COMERC LANCAMENTO_COMERCIAL_PRJ
+		, PRJ_CAPP.TEL_CAPP_VOLUMETRIA VOLUMETRIA_PRJ
+		, PRJ_CAPP.TEL_CAPP_PA_CONV_PS SEGMENTO_PRJ
+		, PRJ_CAPP.TEL_CAPP_PROJETO NOME_PROJETO_PRJ
+		, R.FIRST_NAME || ' ' || R.LAST_NAME || ' ' || OCR.tel_telefone || ' ' || OCR.tel_celular RESPONSAVEL_PRJ
+		, TF.NAME TIPO_FLUXO_PRJ
+		, PRJ_CAPP.TEP_CAPP_REC_MAND_CP RECOMENDACOES_MANDATORIAS_PRJ
+		, CR.NAME CONTROLE_REAJUSTE_PRJ
+		, MNG.NAME MOTIVO_NOGO
+		, PRJ_CAPP.tel_desc_no_go DESC_NOGO
+		, (SELECT LISTAGG(FASE.NAME, ', ') WITHIN GROUP (ORDER BY FASE.NAME ASC) FROM ODF_CA_TEL_PRJ_CAPP PCAPP2   
+		JOIN ODF_MULTI_VALUED_LOOKUPS MLKP ON MLKP.PK_ID = PCAPP2.ID AND MLKP.ATTRIBUTE = 'tel_capp_fases_prj'                      
+		JOIN CMN_LOOKUPS_V FASE ON MLKP.VALUE = FASE.LOOKUP_CODE AND FASE.LOOKUP_TYPE = 'TEL_FASE_PRJ' AND FASE.LANGUAGE_CODE = 'pt'                 
+		WHERE PCAPP2.ID = PRJ_CAPP.ID) FASES
+	FROM 
+		ODF_CA_TEL_OBJ_CAPP CAPP
+		INNER JOIN ODF_CA_TEL_PRJ_CAPP PRJ_CAPP ON CAPP.ID = PRJ_CAPP.ODF_PARENT_ID
+		LEFT JOIN CMN_LOOKUPS_V TF ON TF.LOOKUP_CODE = PRJ_CAPP.TEL_CAPP_TP_FLUXO AND TF.LOOKUP_TYPE = 'INV_PROCESS_TYPE' AND TF.LANGUAGE_CODE = 'pt'
+		LEFT JOIN CMN_LOOKUPS_V CR ON CR.ID = PRJ_CAPP.TEL_CAPP_CONT_REAJ AND CR.LOOKUP_TYPE = 'PAC_RPT_YESNO' AND CR.LANGUAGE_CODE = 'pt'
+		LEFT JOIN CMN_LOOKUPS_V MNG ON MNG.LOOKUP_CODE = PRJ_CAPP.tel_motivo_nogo AND MNG.LOOKUP_TYPE = 'TEL_MOTIVO_NOGO' AND MNG.LANGUAGE_CODE = 'pt'
+		INNER JOIN INV_INVESTMENTS INV ON INV.ID = PRJ_CAPP.IDEA_ID
+		INNER JOIN SRM_RESOURCES R ON PRJ_CAPP.TEL_CAPP_RESPONSAVEL = R.ID
+		INNER JOIN ODF_CA_RESOURCE OCR ON R.ID = OCR.ID
+	WHERE
+		CAPP.ID = $P{obj_capp_hide}
+	ORDER BY 
+		PRJ_CAPP.TEL_CAPP_SEQ ASC
+)T1
+WHERE
+	 $X{IN,INV_ID,prj_capp}]]>
+	</queryString>
+	<field name="CAPP_ID" class="java.math.BigDecimal"/>
+	<field name="CODIGO_CAPP_PRJ" class="java.lang.String"/>
+	<field name="HORA_INICIO_PRJ" class="java.lang.String"/>
+	<field name="HORA_TERMINO_PRJ" class="java.lang.String"/>
+	<field name="ESCOPO_PAUTA_PRJ" class="oracle.jdbc.OracleClob"/>
+	<field name="SEQUENCIA_PRJ" class="java.lang.String"/>
+	<field name="ID_PROCESSUM_JUR" class="java.lang.String"/>
+	<field name="ID_PROCESSUM_REG" class="java.lang.String"/>
+	<field name="VERSAO_DOSSIE" class="java.lang.String"/>
+	<field name="ID_PS_PRJ" class="java.lang.String"/>
+	<field name="GO_NOGO_PRJ" class="java.lang.String"/>
+	<field name="RESUMO_ACAO_PRJ" class="java.lang.String"/>
+	<field name="LANCAMENTO_IMP_PRJ" class="java.sql.Timestamp"/>
+	<field name="LANCAMENTO_COMERCIAL_PRJ" class="java.sql.Timestamp"/>
+	<field name="VOLUMETRIA_PRJ" class="java.lang.String"/>
+	<field name="SEGMENTO_PRJ" class="java.lang.String"/>
+	<field name="INV_ID" class="java.math.BigDecimal"/>
+	<field name="INV_CODE" class="java.lang.String"/>
+	<field name="NOME_PROJETO_PRJ" class="java.lang.String"/>
+	<field name="RESPONSAVEL_PRJ" class="java.lang.String"/>
+	<field name="TIPO_FLUXO_PRJ" class="java.lang.String"/>
+	<field name="RECOMENDACOES_MANDATORIAS_PRJ" class="oracle.jdbc.OracleClob"/>
+	<field name="CONTROLE_REAJUSTE_PRJ" class="java.lang.String"/>
+	<field name="MOTIVO_NOGO" class="java.lang.String"/>
+	<field name="DESC_NOGO" class="java.lang.String"/>
+	<field name="FASES" class="java.lang.String"/>
+	<sortField name="SEQUENCIA_PRJ"/>
+	<detail>
+		<band height="265">
+			<rectangle>
+				<reportElement x="0" y="1" width="51" height="20" backcolor="#000000" uuid="ffb4d5f0-7c91-49ae-9a2c-49244f4bf9a1">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+			</rectangle>
+			<textField pattern="hh:mm" isBlankWhenNull="true">
+				<reportElement key="" x="0" y="1" width="51" height="20" forecolor="#FFFFFF" backcolor="#FFFFFF" uuid="2918cb95-b1ed-40ef-ac01-1e0514247ec3">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SEQUENCIA_PRJ}]]></textFieldExpression>
+			</textField>
+			<textField pattern="hh:mm" isBlankWhenNull="true">
+				<reportElement x="52" y="1" width="94" height="20" uuid="08801664-3d11-42b5-84df-5e9c522467fe">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Calibri" size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{HORA_INICIO_PRJ} + " às " + $F{HORA_TERMINO_PRJ}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="0" y="1" width="550" height="1" uuid="786327c1-5e93-434e-bf57-e849d3581645"/>
+			</line>
+			<frame>
+				<reportElement positionType="Float" mode="Opaque" x="146" y="1" width="404" height="20" backcolor="#D9D4D4" uuid="c3ed9073-7cfb-4dd3-9c10-534660e3a4ce"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="180" height="20" backcolor="#D9D9D9" uuid="6769d8b4-e84f-4e3c-a189-bfce49c76fcd">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Calibri" size="11" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Ação:"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true" hyperlinkType="Reference" hyperlinkTarget="Blank">
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="140" y="0" width="264" height="20" backcolor="#D9D9D9" uuid="f5d4e0ad-739b-4521-8f6d-0175195da06c"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Calibri" size="11"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{NOME_PROJETO_PRJ}]]></textFieldExpression>
+					<hyperlinkReferenceExpression><![CDATA["https://cppm9296.ondemand.ca.com/niku/nu#action:pma.ideaProperties&odf_code=idea&odf_view=ideaProperties&id=" + $F{INV_ID}]]></hyperlinkReferenceExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" mode="Opaque" x="146" y="21" width="404" height="20" backcolor="#D9D9D9" uuid="4084b9e6-69d4-42b5-85c7-4bcd0fed4569">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="180" height="20" backcolor="#D9D9D9" uuid="b9fd297f-876e-4cd2-9a92-3f3147133ec6">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Calibri" size="11" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Resumo:"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="140" y="0" width="264" height="20" backcolor="#D9D9D9" uuid="d26ee07d-d9b9-4a82-870f-4644d56cdb5c">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Calibri" size="11"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{RESUMO_ACAO_PRJ}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" mode="Opaque" x="146" y="41" width="404" height="20" backcolor="#D9D9D9" uuid="56a2cbc8-f38c-4719-b268-17851ac7e9ee">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="180" height="20" backcolor="#D9D9D9" uuid="47a847a9-eb7e-43fe-ad3d-3a68b2df7f27">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Calibri" size="11" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Escopo Pauta:"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="140" y="0" width="264" height="20" backcolor="#D9D9D9" uuid="c454e362-3009-41c6-894b-27eb99c4680d">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Calibri" size="11"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{ESCOPO_PAUTA_PRJ}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" mode="Opaque" x="146" y="61" width="404" height="20" backcolor="#D9D9D9" uuid="72260169-3d18-4cb0-b01d-3f8f2db1e88e">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+				</reportElement>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="180" height="20" backcolor="#D9D9D9" uuid="9a1628ad-cf5b-4791-99eb-6f87d300b6d7"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Calibri" size="11" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Elaborador:"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="140" y="0" width="264" height="20" backcolor="#D9D9D9" uuid="ba2d1c7a-6ac7-4d27-b9b7-b3ac862340a7"/>
+					<box>
+						<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Calibri" size="11" isBold="false"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{RESPONSAVEL_PRJ}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" mode="Opaque" x="146" y="81" width="404" height="20" backcolor="#D9D9D9" uuid="f753a98e-0a18-452a-bc9b-a668ed2defe8"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="180" height="20" backcolor="#D9D9D9" uuid="8e8a9fea-4835-4789-961a-f8bbd1cb17b1"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Calibri" size="11" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Fases:"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="dd/MM/YYYY" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="140" y="0" width="264" height="20" backcolor="#D9D9D9" uuid="c5d17452-6c79-45b4-b893-ec20361cd83d"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Calibri" size="11"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{FASES}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" mode="Opaque" x="146" y="120" width="404" height="20" backcolor="#D9D9D9" uuid="90915fb2-e604-4114-95e0-a24a253e6db4"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="180" height="20" backcolor="#D9D9D9" uuid="e0f08cff-5733-40ba-b764-b24f18f7aba6"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Calibri" size="11" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Segmento:"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="dd/MM/YYYY" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="140" y="0" width="264" height="20" backcolor="#D9D9D9" uuid="d986edaa-633a-44a4-86cf-7e885ee73dd7"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Calibri" size="11"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{SEGMENTO_PRJ}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" mode="Opaque" x="146" y="139" width="404" height="20" backcolor="#D9D9D9" uuid="8b0454ae-71a2-4cdb-9e09-176830ff70b7"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="180" height="20" backcolor="#D9D9D9" uuid="7e9314a7-5345-4f60-8091-4033ce9d2d0a"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Calibri" size="11" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["ID Processum Jurídico:"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="dd/MM/YYYY" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="140" y="0" width="264" height="20" backcolor="#D9D9D9" uuid="acf06615-fedb-4a03-91ab-f507f85202b4"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Calibri" size="11"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{ID_PROCESSUM_JUR}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" mode="Opaque" x="146" y="219" width="404" height="20" backcolor="#D9D9D9" uuid="ab084186-4c9c-49fb-8dcc-8679b7ba7d63"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="180" height="20" backcolor="#D9D9D9" uuid="101322c0-4097-4cb1-951b-356887039602"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Calibri" size="11" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["ID CAPP:"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="dd/MM/YYYY" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="140" y="0" width="264" height="20" backcolor="#D9D9D9" uuid="114c9456-12f0-4fdb-803e-60a87ddd647d"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Calibri" size="11"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{CODIGO_CAPP_PRJ}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" mode="Opaque" x="146" y="239" width="404" height="20" backcolor="#D9D9D9" uuid="5cdebe6f-9489-4fcf-8283-e4522197efc0"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="180" height="20" backcolor="#D9D9D9" uuid="34cc2824-7b1b-4de1-94b0-988ef8cc5f7a"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Calibri" size="11" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Tipo Fluxo:"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="dd/MM/YYYY" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="140" y="0" width="264" height="20" backcolor="#D9D9D9" uuid="0c862574-a110-496c-a22c-1bcbf9cc2b96"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Calibri" size="11"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{TIPO_FLUXO_PRJ}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" mode="Opaque" x="146" y="159" width="404" height="20" backcolor="#D9D9D9" uuid="135c4306-0de0-4723-b82a-e8b8546c99e6"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="180" height="20" backcolor="#D9D9D9" uuid="c88018be-0674-43c4-8e81-fd07bd41fb5a"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Calibri" size="11" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["ID Processum Regulatório:"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="dd/MM/YYYY" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="140" y="0" width="264" height="20" backcolor="#D9D9D9" uuid="d1e24963-ed6e-48f5-8603-6cfcb7ed3f1a"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Calibri" size="11"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{ID_PROCESSUM_REG}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" mode="Opaque" x="146" y="179" width="404" height="20" backcolor="#D9D9D9" uuid="e694bbb4-295f-4275-95a7-f568a24bfd38"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="180" height="20" backcolor="#D9D9D9" uuid="33b8e30d-f164-4b43-b6b6-d83e99b7ce36"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Calibri" size="11" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Volumetria Cliente:"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="dd/MM/YYYY" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="140" y="0" width="264" height="20" backcolor="#D9D9D9" uuid="6e04d8c1-3227-49c6-80f2-ebe9e67e3f6a"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Calibri" size="11"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{VOLUMETRIA_PRJ}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" mode="Opaque" x="146" y="199" width="404" height="20" backcolor="#D9D9D9" uuid="d60d1187-df9b-4a05-9760-33d2d11f90f6"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="180" height="20" backcolor="#D9D9D9" uuid="22c0169f-c8f6-4671-bc83-58fb46bd4106"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Calibri" size="11" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Versão do Dossiê:"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="dd/MM/YYYY" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="140" y="0" width="264" height="20" backcolor="#D9D9D9" uuid="32b0ff3b-0dcc-4580-aa77-7f3ed38cdc85"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Calibri" size="11"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{VERSAO_DOSSIE}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement positionType="Float" mode="Opaque" x="146" y="101" width="404" height="20" backcolor="#D9D9D9" uuid="17daa321-1c6d-4eee-b597-71930333b81c"/>
+				<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="0" y="0" width="180" height="20" backcolor="#D9D9D9" uuid="516816e2-482f-4fd7-b008-070ea255e475"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Calibri" size="11" isBold="true"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Lançamento Comercial:"]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="dd/MM/YYYY" isBlankWhenNull="true">
+					<reportElement positionType="Float" stretchType="RelativeToBandHeight" mode="Opaque" x="140" y="0" width="264" height="20" backcolor="#D9D9D9" uuid="35c48e85-5f8d-4ea7-b45b-ff240475f72a"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font fontName="Calibri" size="11"/>
+						<paragraph leftIndent="5"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{LANCAMENTO_COMERCIAL_PRJ}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

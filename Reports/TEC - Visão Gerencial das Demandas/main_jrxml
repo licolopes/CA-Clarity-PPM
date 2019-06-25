@@ -1,0 +1,1552 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.2.final using JasperReports Library version 6.4.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Visão Gerencial" pageWidth="1000" pageHeight="1200" orientation="Landscape" columnWidth="960" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6cdb58a5-e4a2-413f-8547-619eb77a1e11">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="TECBAN - TEST"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="ireport.jasperserver.url" value="https://cppmrpt103s.ondemand.ca.com/reportservice/"/>
+	<property name="ireport.jasperserver.user" value="report_dev|cppm2058_test"/>
+	<property name="ireport.jasperserver.report.resource" value="/ca_ppm/tecban/tb_visao_gerencial_files/main_jrxml"/>
+	<property name="ireport.jasperserver.reportUnit" value="/ca_ppm/tecban/tb_visao_gerencial"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<subDataset name="Categoria da Demanda" uuid="d65b37df-99ec-4cac-85f0-7393f839b08c">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="TECBAN - TEST"/>
+		<parameter name="raia" class="java.util.Collection"/>
+		<parameter name="clientes" class="java.util.Collection"/>
+		<parameter name="categ_demanda" class="java.util.Collection"/>
+		<parameter name="dir_solicitante" class="java.util.Collection"/>
+		<parameter name="status_demanda" class="java.util.Collection"/>
+		<queryString>
+			<![CDATA[SELECT
+  CATEGORIA
+  , COUNT(INV_ID) QTD
+
+FROM
+(
+
+	SELECT DISTINCT
+		INV.ID INV_ID
+		, INV.CODE INV_CODE
+		, INV.NAME INV_NAME
+		, CATEGORIA.NAME CATEGORIA
+		, CASE
+			WHEN RAIA.NAME = 'ERP' THEN 'ERP'
+			WHEN RAIA.NAME = 'Projetos de Curta Duração (Fast Track)' THEN 'Fast Track'
+			WHEN RAIA.NAME = 'Projetos de Desenvolvimento de Novas Soluções de Negócios' THEN 'DNSN'
+			WHEN RAIA.NAME = 'Projetos de Manutenção e Sustentação do Negócio' THEN 'MSN'
+			WHEN RAIA.NAME = 'Segurança' THEN 'Segurança'
+			WHEN RAIA.NAME = 'Sem CAPEX Compartilhado' THEN 'Sem CAPEX Compartilhado'
+			WHEN RAIA.NAME = 'Soluções e Serviços BackOffice' THEN 'BKO'
+			WHEN RAIA.NAME = 'Ferramentas Administrativas' THEN 'BKO'      
+			END RAIA
+		, CASE
+			WHEN DIR_SOLICITANTE.NAME = 'Diretoria AF&Pessoas' THEN 'Dir. AF&Pessoas'
+			WHEN DIR_SOLICITANTE.NAME = 'Diretoria de Negócios e Soluções' THEN 'Dir. de Neg. e Soluções'
+			WHEN DIR_SOLICITANTE.NAME = 'Diretoria de Operações' THEN 'Dir. de Operações'
+			WHEN DIR_SOLICITANTE.NAME = 'Diretoria de Relacionamento' THEN 'Dir. de Relacionamento'
+			WHEN DIR_SOLICITANTE.NAME = 'Diretoria de Tec. da Informação' THEN 'Dir. de Tec. da Informação'
+			WHEN DIR_SOLICITANTE.NAME = 'Diretoria Geral' THEN 'Dir. Geral'        
+			END DIR_SOLICITANTE
+		, CLIENTE.NAME CLIENTE
+		, AREA_GEST.NAME AREA_GEST
+		, STATUS_DEM.NAME STATUS_DEM
+
+	FROM
+		INV_INVESTMENTS INV
+		LEFT JOIN ODF_CA_IDEA OIDEA ON OIDEA.ID = INV.ID
+		LEFT JOIN ODF_CA_INV OINV ON OINV.ID = INV.ID
+		LEFT JOIN CMN_LOOKUPS_V CATEGORIA ON CATEGORIA.LOOKUP_CODE = OIDEA.OBJ_REQUEST_TYPE AND CATEGORIA.LOOKUP_TYPE = 'OBJ_IDEA_PROJECT_TYPE' AND CATEGORIA.LANGUAGE_CODE = 'pt'
+		LEFT JOIN CMN_LOOKUPS_V RAIA ON RAIA.LOOKUP_CODE = OIDEA.TB_TP_PJT_PRIOZ_CORP AND RAIA.LOOKUP_TYPE = 'TB_PC_TP_PROJETO' AND RAIA.LANGUAGE_CODE = 'pt'
+		LEFT JOIN CMN_LOOKUPS_V DIR_SOLICITANTE ON DIR_SOLICITANTE.LOOKUP_CODE = OINV.TB_INV_DIR_SOLIC AND DIR_SOLICITANTE.LOOKUP_TYPE = 'TB_LISTA_DIRETORIAS' AND DIR_SOLICITANTE.LANGUAGE_CODE = 'pt'
+		LEFT JOIN CMN_LOOKUPS_V CLIENTE ON CLIENTE.LOOKUP_CODE = OINV.TB_CLIENTE_EXTERNO AND CLIENTE.LOOKUP_TYPE = 'TB_LISTA_CLIENTES' AND CLIENTE.LANGUAGE_CODE = 'pt'
+		LEFT JOIN CMN_LOOKUPS_V AREA_GEST ON AREA_GEST.LOOKUP_CODE = OIDEA.TB_AREA_APROVADORA AND AREA_GEST.LOOKUP_TYPE = 'TB_AREA_APROVADORA' AND AREA_GEST.LANGUAGE_CODE = 'pt'
+		LEFT JOIN CMN_LOOKUPS_V STATUS_DEM ON STATUS_DEM.LOOKUP_CODE = OIDEA.TB_STAT_DEMANDA AND STATUS_DEM.LOOKUP_TYPE = 'TB_STATUS_DEMANDA' AND STATUS_DEM.LANGUAGE_CODE = 'pt'
+
+	WHERE
+		INV.ODF_OBJECT_CODE = 'idea'
+		AND INV.IS_ACTIVE = 1
+	
+) AMTS
+
+WHERE
+	CATEGORIA IS NOT NULL
+	AND $X{IN,RAIA,raia} 
+	AND $X{IN,CLIENTE,clientes}
+	AND $X{IN,CATEGORIA,categ_demanda}
+	AND $X{IN,DIR_SOLICITANTE,dir_solicitante}
+	AND $X{IN,STATUS_DEM,status_demanda} 
+
+GROUP BY
+	CATEGORIA
+
+ORDER BY
+	CATEGORIA ASC]]>
+		</queryString>
+		<field name="CATEGORIA" class="java.lang.String"/>
+		<field name="QTD" class="java.math.BigDecimal"/>
+	</subDataset>
+	<subDataset name="Raia de Priorização" uuid="3fe210c0-1fb9-42d9-b05b-517945ae3c85">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="TECBAN - TEST"/>
+		<parameter name="raia" class="java.util.Collection"/>
+		<parameter name="clientes" class="java.util.Collection"/>
+		<parameter name="categ_demanda" class="java.util.Collection"/>
+		<parameter name="dir_solicitante" class="java.util.Collection"/>
+		<parameter name="status_demanda" class="java.util.Collection"/>
+		<queryString>
+			<![CDATA[SELECT
+  RAIA
+  , COUNT(INV_ID) QTD
+
+FROM
+(
+
+	SELECT DISTINCT
+		INV.ID INV_ID
+		, INV.CODE INV_CODE
+		, INV.NAME INV_NAME
+		, CATEGORIA.NAME CATEGORIA
+		, CASE
+			WHEN RAIA.NAME = 'ERP' THEN 'ERP'
+			WHEN RAIA.NAME = 'Projetos de Curta Duração (Fast Track)' THEN 'Fast Track'
+			WHEN RAIA.NAME = 'Projetos de Desenvolvimento de Novas Soluções de Negócios' THEN 'DNSN'
+			WHEN RAIA.NAME = 'Projetos de Manutenção e Sustentação do Negócio' THEN 'MSN'
+			WHEN RAIA.NAME = 'Segurança' THEN 'Segurança'
+			WHEN RAIA.NAME = 'Sem CAPEX Compartilhado' THEN 'Sem CAPEX Compartilhado'
+			WHEN RAIA.NAME = 'Soluções e Serviços BackOffice' THEN 'BKO'
+			WHEN RAIA.NAME = 'Ferramentas Administrativas' THEN 'BKO'      
+			END RAIA
+		, CASE
+			WHEN DIR_SOLICITANTE.NAME = 'Diretoria AF&Pessoas' THEN 'Dir. AF&Pessoas'
+			WHEN DIR_SOLICITANTE.NAME = 'Diretoria de Negócios e Soluções' THEN 'Dir. de Neg. e Soluções'
+			WHEN DIR_SOLICITANTE.NAME = 'Diretoria de Operações' THEN 'Dir. de Operações'
+			WHEN DIR_SOLICITANTE.NAME = 'Diretoria de Relacionamento' THEN 'Dir. de Relacionamento'
+			WHEN DIR_SOLICITANTE.NAME = 'Diretoria de Tec. da Informação' THEN 'Dir. de Tec. da Informação'
+			WHEN DIR_SOLICITANTE.NAME = 'Diretoria Geral' THEN 'Dir. Geral'        
+			END DIR_SOLICITANTE
+		, CLIENTE.NAME CLIENTE
+		, AREA_GEST.NAME AREA_GEST
+		, STATUS_DEM.NAME STATUS_DEM
+
+	FROM
+		INV_INVESTMENTS INV
+		LEFT JOIN ODF_CA_IDEA OIDEA ON OIDEA.ID = INV.ID
+		LEFT JOIN ODF_CA_INV OINV ON OINV.ID = INV.ID
+		LEFT JOIN CMN_LOOKUPS_V CATEGORIA ON CATEGORIA.LOOKUP_CODE = OIDEA.OBJ_REQUEST_TYPE AND CATEGORIA.LOOKUP_TYPE = 'OBJ_IDEA_PROJECT_TYPE' AND CATEGORIA.LANGUAGE_CODE = 'pt'
+		LEFT JOIN CMN_LOOKUPS_V RAIA ON RAIA.LOOKUP_CODE = OIDEA.TB_TP_PJT_PRIOZ_CORP AND RAIA.LOOKUP_TYPE = 'TB_PC_TP_PROJETO' AND RAIA.LANGUAGE_CODE = 'pt'
+		LEFT JOIN CMN_LOOKUPS_V DIR_SOLICITANTE ON DIR_SOLICITANTE.LOOKUP_CODE = OINV.TB_INV_DIR_SOLIC AND DIR_SOLICITANTE.LOOKUP_TYPE = 'TB_LISTA_DIRETORIAS' AND DIR_SOLICITANTE.LANGUAGE_CODE = 'pt'
+		LEFT JOIN CMN_LOOKUPS_V CLIENTE ON CLIENTE.LOOKUP_CODE = OINV.TB_CLIENTE_EXTERNO AND CLIENTE.LOOKUP_TYPE = 'TB_LISTA_CLIENTES' AND CLIENTE.LANGUAGE_CODE = 'pt'
+		LEFT JOIN CMN_LOOKUPS_V AREA_GEST ON AREA_GEST.LOOKUP_CODE = OIDEA.TB_AREA_APROVADORA AND AREA_GEST.LOOKUP_TYPE = 'TB_AREA_APROVADORA' AND AREA_GEST.LANGUAGE_CODE = 'pt'
+		LEFT JOIN CMN_LOOKUPS_V STATUS_DEM ON STATUS_DEM.LOOKUP_CODE = OIDEA.TB_STAT_DEMANDA AND STATUS_DEM.LOOKUP_TYPE = 'TB_STATUS_DEMANDA' AND STATUS_DEM.LANGUAGE_CODE = 'pt'
+
+	WHERE
+		INV.ODF_OBJECT_CODE = 'idea'
+		AND INV.IS_ACTIVE = 1
+	
+) AMTS
+
+WHERE
+	RAIA IS NOT NULL
+	AND $X{IN,RAIA,raia} 
+	AND $X{IN,CLIENTE,clientes}
+	AND $X{IN,CATEGORIA,categ_demanda}
+	AND $X{IN,DIR_SOLICITANTE,dir_solicitante}
+	AND $X{IN,STATUS_DEM,status_demanda} 
+
+GROUP BY
+	RAIA
+
+ORDER BY
+	RAIA ASC]]>
+		</queryString>
+		<field name="RAIA" class="java.lang.String"/>
+		<field name="QTD" class="java.math.BigDecimal"/>
+	</subDataset>
+	<subDataset name="Demandas por Cliente" uuid="53aa3e1f-6da0-4933-8713-4ca62ac9bdca">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="TECBAN - TEST"/>
+		<parameter name="raia" class="java.util.Collection"/>
+		<parameter name="clientes" class="java.util.Collection">
+			<defaultValueExpression><![CDATA[java.util.Arrays.asList("Banco do Brasil","Bradesco")]]></defaultValueExpression>
+		</parameter>
+		<parameter name="categ_demanda" class="java.util.Collection"/>
+		<parameter name="dir_solicitante" class="java.util.Collection"/>
+		<parameter name="status_demanda" class="java.util.Collection"/>
+		<queryString>
+			<![CDATA[SELECT
+  CLIENTE
+  , COUNT(INV_ID) QTD
+
+FROM
+(
+
+	SELECT DISTINCT
+		INV.ID INV_ID
+		, INV.CODE INV_CODE
+		, INV.NAME INV_NAME
+		, CATEGORIA.NAME CATEGORIA
+		, CASE
+			WHEN RAIA.NAME = 'ERP' THEN 'ERP'
+			WHEN RAIA.NAME = 'Projetos de Curta Duração (Fast Track)' THEN 'Fast Track'
+			WHEN RAIA.NAME = 'Projetos de Desenvolvimento de Novas Soluções de Negócios' THEN 'DNSN'
+			WHEN RAIA.NAME = 'Projetos de Manutenção e Sustentação do Negócio' THEN 'MSN'
+			WHEN RAIA.NAME = 'Segurança' THEN 'Segurança'
+			WHEN RAIA.NAME = 'Sem CAPEX Compartilhado' THEN 'Sem CAPEX Compartilhado'
+			WHEN RAIA.NAME = 'Soluções e Serviços BackOffice' THEN 'BKO'
+			WHEN RAIA.NAME = 'Ferramentas Administrativas' THEN 'BKO'      
+			END RAIA
+		, CASE
+			WHEN DIR_SOLICITANTE.NAME = 'Diretoria AF&Pessoas' THEN 'Dir. AF&Pessoas'
+			WHEN DIR_SOLICITANTE.NAME = 'Diretoria de Negócios e Soluções' THEN 'Dir. de Neg. e Soluções'
+			WHEN DIR_SOLICITANTE.NAME = 'Diretoria de Operações' THEN 'Dir. de Operações'
+			WHEN DIR_SOLICITANTE.NAME = 'Diretoria de Relacionamento' THEN 'Dir. de Relacionamento'
+			WHEN DIR_SOLICITANTE.NAME = 'Diretoria de Tec. da Informação' THEN 'Dir. de Tec. da Informação'
+			WHEN DIR_SOLICITANTE.NAME = 'Diretoria Geral' THEN 'Dir. Geral'        
+			END DIR_SOLICITANTE
+		, CLIENTE.NAME CLIENTE
+		, AREA_GEST.NAME AREA_GEST
+		, STATUS_DEM.NAME STATUS_DEM
+
+	FROM
+		INV_INVESTMENTS INV
+		LEFT JOIN ODF_CA_IDEA OIDEA ON OIDEA.ID = INV.ID
+		LEFT JOIN ODF_CA_INV OINV ON OINV.ID = INV.ID
+		LEFT JOIN CMN_LOOKUPS_V CATEGORIA ON CATEGORIA.LOOKUP_CODE = OIDEA.OBJ_REQUEST_TYPE AND CATEGORIA.LOOKUP_TYPE = 'OBJ_IDEA_PROJECT_TYPE' AND CATEGORIA.LANGUAGE_CODE = 'pt'
+		LEFT JOIN CMN_LOOKUPS_V RAIA ON RAIA.LOOKUP_CODE = OIDEA.TB_TP_PJT_PRIOZ_CORP AND RAIA.LOOKUP_TYPE = 'TB_PC_TP_PROJETO' AND RAIA.LANGUAGE_CODE = 'pt'
+		LEFT JOIN CMN_LOOKUPS_V DIR_SOLICITANTE ON DIR_SOLICITANTE.LOOKUP_CODE = OINV.TB_INV_DIR_SOLIC AND DIR_SOLICITANTE.LOOKUP_TYPE = 'TB_LISTA_DIRETORIAS' AND DIR_SOLICITANTE.LANGUAGE_CODE = 'pt'
+		LEFT JOIN CMN_LOOKUPS_V CLIENTE ON CLIENTE.LOOKUP_CODE = OINV.TB_CLIENTE_EXTERNO AND CLIENTE.LOOKUP_TYPE = 'TB_LISTA_CLIENTES' AND CLIENTE.LANGUAGE_CODE = 'pt'
+		LEFT JOIN CMN_LOOKUPS_V AREA_GEST ON AREA_GEST.LOOKUP_CODE = OIDEA.TB_AREA_APROVADORA AND AREA_GEST.LOOKUP_TYPE = 'TB_AREA_APROVADORA' AND AREA_GEST.LANGUAGE_CODE = 'pt'
+		LEFT JOIN CMN_LOOKUPS_V STATUS_DEM ON STATUS_DEM.LOOKUP_CODE = OIDEA.TB_STAT_DEMANDA AND STATUS_DEM.LOOKUP_TYPE = 'TB_STATUS_DEMANDA' AND STATUS_DEM.LANGUAGE_CODE = 'pt'
+
+	WHERE
+		INV.ODF_OBJECT_CODE = 'idea'
+		AND INV.IS_ACTIVE = 1
+	
+) AMTS
+
+WHERE
+	CLIENTE IS NOT NULL
+	AND $X{IN,RAIA,raia} 
+	AND $X{IN,CLIENTE,clientes}
+	AND $X{IN,CATEGORIA,categ_demanda}
+	AND $X{IN,DIR_SOLICITANTE,dir_solicitante} 
+	AND $X{IN,STATUS_DEM,status_demanda} 
+
+GROUP BY
+	CLIENTE
+
+ORDER BY
+	CLIENTE ASC]]>
+		</queryString>
+		<field name="CLIENTE" class="java.lang.String"/>
+		<field name="QTD" class="java.math.BigDecimal"/>
+	</subDataset>
+	<subDataset name="Diretoria Solicitante" uuid="35292da8-30ef-4a4d-8b21-ee01e778c828">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="TECBAN - TEST"/>
+		<parameter name="categ_demanda" class="java.util.Collection"/>
+		<parameter name="raia" class="java.util.Collection"/>
+		<parameter name="clientes" class="java.util.Collection">
+			<parameterDescription><![CDATA[]]></parameterDescription>
+			<defaultValueExpression><![CDATA[java.util.Arrays.asList("Banco do Brasil","Bradesco","Caixa Econômica","Citibank","HSBC","Itaú","Banco Santander Brasil")]]></defaultValueExpression>
+		</parameter>
+		<parameter name="dir_solicitante" class="java.util.Collection"/>
+		<parameter name="status_demanda" class="java.util.Collection"/>
+		<queryString>
+			<![CDATA[SELECT
+  DIR_SOLICITANTE
+  , COUNT(INV_ID) QTD
+
+FROM
+(
+
+	SELECT DISTINCT
+		INV.ID INV_ID
+		, INV.CODE INV_CODE
+		, INV.NAME INV_NAME
+		, CATEGORIA.NAME CATEGORIA
+		, CASE
+			WHEN RAIA.NAME = 'ERP' THEN 'ERP'
+			WHEN RAIA.NAME = 'Projetos de Curta Duração (Fast Track)' THEN 'Fast Track'
+			WHEN RAIA.NAME = 'Projetos de Desenvolvimento de Novas Soluções de Negócios' THEN 'DNSN'
+			WHEN RAIA.NAME = 'Projetos de Manutenção e Sustentação do Negócio' THEN 'MSN'
+			WHEN RAIA.NAME = 'Segurança' THEN 'Segurança'
+			WHEN RAIA.NAME = 'Sem CAPEX Compartilhado' THEN 'Sem CAPEX Compartilhado'
+			WHEN RAIA.NAME = 'Soluções e Serviços BackOffice' THEN 'BKO'
+			WHEN RAIA.NAME = 'Ferramentas Administrativas' THEN 'BKO'      
+			END RAIA
+		, CASE
+			WHEN DIR_SOLICITANTE.NAME = 'Diretoria AF&Pessoas' THEN 'Dir. AF&Pessoas'
+			WHEN DIR_SOLICITANTE.NAME = 'Diretoria de Negócios e Soluções' THEN 'Dir. de Neg. e Soluções'
+			WHEN DIR_SOLICITANTE.NAME = 'Diretoria de Operações' THEN 'Dir. de Operações'
+			WHEN DIR_SOLICITANTE.NAME = 'Diretoria de Relacionamento' THEN 'Dir. de Relacionamento'
+			WHEN DIR_SOLICITANTE.NAME = 'Diretoria de Tec. da Informação' THEN 'Dir. de Tec. da Informação'
+			WHEN DIR_SOLICITANTE.NAME = 'Diretoria Geral' THEN 'Dir. Geral'        
+			END DIR_SOLICITANTE
+		, CLIENTE.NAME CLIENTE
+		, AREA_GEST.NAME AREA_GEST
+		, STATUS_DEM.NAME STATUS_DEM
+
+	FROM
+		INV_INVESTMENTS INV
+		LEFT JOIN ODF_CA_IDEA OIDEA ON OIDEA.ID = INV.ID
+		LEFT JOIN ODF_CA_INV OINV ON OINV.ID = INV.ID
+		LEFT JOIN CMN_LOOKUPS_V CATEGORIA ON CATEGORIA.LOOKUP_CODE = OIDEA.OBJ_REQUEST_TYPE AND CATEGORIA.LOOKUP_TYPE = 'OBJ_IDEA_PROJECT_TYPE' AND CATEGORIA.LANGUAGE_CODE = 'pt'
+		LEFT JOIN CMN_LOOKUPS_V RAIA ON RAIA.LOOKUP_CODE = OIDEA.TB_TP_PJT_PRIOZ_CORP AND RAIA.LOOKUP_TYPE = 'TB_PC_TP_PROJETO' AND RAIA.LANGUAGE_CODE = 'pt'
+		LEFT JOIN CMN_LOOKUPS_V DIR_SOLICITANTE ON DIR_SOLICITANTE.LOOKUP_CODE = OINV.TB_INV_DIR_SOLIC AND DIR_SOLICITANTE.LOOKUP_TYPE = 'TB_LISTA_DIRETORIAS' AND DIR_SOLICITANTE.LANGUAGE_CODE = 'pt'
+		LEFT JOIN CMN_LOOKUPS_V CLIENTE ON CLIENTE.LOOKUP_CODE = OINV.TB_CLIENTE_EXTERNO AND CLIENTE.LOOKUP_TYPE = 'TB_LISTA_CLIENTES' AND CLIENTE.LANGUAGE_CODE = 'pt'
+		LEFT JOIN CMN_LOOKUPS_V AREA_GEST ON AREA_GEST.LOOKUP_CODE = OIDEA.TB_AREA_APROVADORA AND AREA_GEST.LOOKUP_TYPE = 'TB_AREA_APROVADORA' AND AREA_GEST.LANGUAGE_CODE = 'pt'
+		LEFT JOIN CMN_LOOKUPS_V STATUS_DEM ON STATUS_DEM.LOOKUP_CODE = OIDEA.TB_STAT_DEMANDA AND STATUS_DEM.LOOKUP_TYPE = 'TB_STATUS_DEMANDA' AND STATUS_DEM.LANGUAGE_CODE = 'pt'
+
+	WHERE
+		INV.ODF_OBJECT_CODE = 'idea'
+		AND INV.IS_ACTIVE = 1
+	
+) AMTS
+
+WHERE
+	DIR_SOLICITANTE IS NOT NULL
+	AND $X{IN,RAIA,raia} 
+	AND $X{IN,CLIENTE,clientes}
+	AND $X{IN,CATEGORIA,categ_demanda}
+	AND $X{IN,DIR_SOLICITANTE,dir_solicitante} 
+	AND $X{IN,STATUS_DEM,status_demanda} 
+
+GROUP BY
+	DIR_SOLICITANTE
+
+ORDER BY
+	DIR_SOLICITANTE ASC]]>
+		</queryString>
+		<field name="DIR_SOLICITANTE" class="java.lang.String"/>
+		<field name="QTD" class="java.math.BigDecimal"/>
+	</subDataset>
+	<subDataset name="Status da Demanda" uuid="5a06bbde-936e-4fab-ad02-21297c9e4044">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="TECBAN - TEST"/>
+		<parameter name="categ_demanda" class="java.util.Collection"/>
+		<parameter name="raia" class="java.util.Collection"/>
+		<parameter name="clientes" class="java.util.Collection">
+			<parameterDescription><![CDATA[]]></parameterDescription>
+			<defaultValueExpression><![CDATA[java.util.Arrays.asList("Banco do Brasil","Bradesco","Caixa Econômica","Citibank","HSBC","Itaú","Banco Santander Brasil")]]></defaultValueExpression>
+		</parameter>
+		<parameter name="dir_solicitante" class="java.util.Collection"/>
+		<parameter name="status_demanda" class="java.util.Collection"/>
+		<queryString>
+			<![CDATA[SELECT
+  STATUS_DEM
+  , COUNT(INV_ID) QTD
+
+FROM
+(
+
+	SELECT DISTINCT
+		INV.ID INV_ID
+		, INV.CODE INV_CODE
+		, INV.NAME INV_NAME
+		, CATEGORIA.NAME CATEGORIA
+		, CASE
+			WHEN RAIA.NAME = 'ERP' THEN 'ERP'
+			WHEN RAIA.NAME = 'Projetos de Curta Duração (Fast Track)' THEN 'Fast Track'
+			WHEN RAIA.NAME = 'Projetos de Desenvolvimento de Novas Soluções de Negócios' THEN 'DNSN'
+			WHEN RAIA.NAME = 'Projetos de Manutenção e Sustentação do Negócio' THEN 'MSN'
+			WHEN RAIA.NAME = 'Segurança' THEN 'Segurança'
+			WHEN RAIA.NAME = 'Sem CAPEX Compartilhado' THEN 'Sem CAPEX Compartilhado'
+			WHEN RAIA.NAME = 'Soluções e Serviços BackOffice' THEN 'BKO'
+			WHEN RAIA.NAME = 'Ferramentas Administrativas' THEN 'BKO'      
+			END RAIA
+		, CASE
+			WHEN DIR_SOLICITANTE.NAME = 'Diretoria AF&Pessoas' THEN 'Dir. AF&Pessoas'
+			WHEN DIR_SOLICITANTE.NAME = 'Diretoria de Negócios e Soluções' THEN 'Dir. de Neg. e Soluções'
+			WHEN DIR_SOLICITANTE.NAME = 'Diretoria de Operações' THEN 'Dir. de Operações'
+			WHEN DIR_SOLICITANTE.NAME = 'Diretoria de Relacionamento' THEN 'Dir. de Relacionamento'
+			WHEN DIR_SOLICITANTE.NAME = 'Diretoria de Tec. da Informação' THEN 'Dir. de Tec. da Informação'
+			WHEN DIR_SOLICITANTE.NAME = 'Diretoria Geral' THEN 'Dir. Geral'        
+			END DIR_SOLICITANTE
+		, CLIENTE.NAME CLIENTE
+		, AREA_GEST.NAME AREA_GEST
+		, STATUS_DEM.NAME STATUS_DEM
+
+	FROM
+		INV_INVESTMENTS INV
+		LEFT JOIN ODF_CA_IDEA OIDEA ON OIDEA.ID = INV.ID
+		LEFT JOIN ODF_CA_INV OINV ON OINV.ID = INV.ID
+		LEFT JOIN CMN_LOOKUPS_V CATEGORIA ON CATEGORIA.LOOKUP_CODE = OIDEA.OBJ_REQUEST_TYPE AND CATEGORIA.LOOKUP_TYPE = 'OBJ_IDEA_PROJECT_TYPE' AND CATEGORIA.LANGUAGE_CODE = 'pt'
+		LEFT JOIN CMN_LOOKUPS_V RAIA ON RAIA.LOOKUP_CODE = OIDEA.TB_TP_PJT_PRIOZ_CORP AND RAIA.LOOKUP_TYPE = 'TB_PC_TP_PROJETO' AND RAIA.LANGUAGE_CODE = 'pt'
+		LEFT JOIN CMN_LOOKUPS_V DIR_SOLICITANTE ON DIR_SOLICITANTE.LOOKUP_CODE = OINV.TB_INV_DIR_SOLIC AND DIR_SOLICITANTE.LOOKUP_TYPE = 'TB_LISTA_DIRETORIAS' AND DIR_SOLICITANTE.LANGUAGE_CODE = 'pt'
+		LEFT JOIN CMN_LOOKUPS_V CLIENTE ON CLIENTE.LOOKUP_CODE = OINV.TB_CLIENTE_EXTERNO AND CLIENTE.LOOKUP_TYPE = 'TB_LISTA_CLIENTES' AND CLIENTE.LANGUAGE_CODE = 'pt'
+		LEFT JOIN CMN_LOOKUPS_V AREA_GEST ON AREA_GEST.LOOKUP_CODE = OIDEA.TB_AREA_APROVADORA AND AREA_GEST.LOOKUP_TYPE = 'TB_AREA_APROVADORA' AND AREA_GEST.LANGUAGE_CODE = 'pt'
+		LEFT JOIN CMN_LOOKUPS_V STATUS_DEM ON STATUS_DEM.LOOKUP_CODE = OIDEA.TB_STAT_DEMANDA AND STATUS_DEM.LOOKUP_TYPE = 'TB_STATUS_DEMANDA' AND STATUS_DEM.LANGUAGE_CODE = 'pt'
+
+	WHERE
+		INV.ODF_OBJECT_CODE = 'idea'
+		AND INV.IS_ACTIVE = 1
+	
+) AMTS
+
+WHERE
+	STATUS_DEM IS NOT NULL
+	AND $X{IN,RAIA,raia} 
+	AND $X{IN,CLIENTE,clientes}
+	AND $X{IN,CATEGORIA,categ_demanda}
+	AND $X{IN,DIR_SOLICITANTE,dir_solicitante} 
+	AND $X{IN,STATUS_DEM,status_demanda} 
+
+GROUP BY
+	STATUS_DEM
+
+ORDER BY
+	STATUS_DEM ASC]]>
+		</queryString>
+		<field name="STATUS_DEM" class="java.lang.String"/>
+		<field name="QTD" class="java.math.BigDecimal"/>
+	</subDataset>
+	<subDataset name="Horas por mês Demandas" uuid="bdebd993-48c2-45ab-8e3d-e85a43d1d43a">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="TECBAN - TEST"/>
+		<parameter name="data_inicio" class="java.util.Date">
+			<defaultValueExpression><![CDATA[new SimpleDateFormat("yyyy-MM-dd").parse("2016-01-01")]]></defaultValueExpression>
+		</parameter>
+		<parameter name="data_termino" class="java.util.Date">
+			<defaultValueExpression><![CDATA[new SimpleDateFormat("yyyy-MM-dd").parse("2016-12-31")]]></defaultValueExpression>
+		</parameter>
+		<parameter name="raia" class="java.util.Collection"/>
+		<parameter name="clientes" class="java.util.Collection">
+			<parameterDescription><![CDATA[]]></parameterDescription>
+			<defaultValueExpression><![CDATA[java.util.Arrays.asList("Banco do Brasil","Bradesco","Caixa Econômica","Citibank","HSBC","Itaú","Banco Santander Brasil")]]></defaultValueExpression>
+		</parameter>
+		<parameter name="categ_demanda" class="java.util.Collection"/>
+		<parameter name="dir_solicitante" class="java.util.Collection"/>
+		<parameter name="status_demanda" class="java.util.Collection"/>
+		<queryString>
+			<![CDATA[SELECT
+MES
+, ROUND(SUM(ALC),2) ALC
+, ROUND(SUM(ACT),2) ACT
+
+FROM
+(
+
+	SELECT
+	MES
+	, 0 ALC
+	, SUM(ACT) ACT
+
+
+	FROM
+	(
+
+		SELECT 
+			INV.ID INV_ID
+			, INV.CODE INV_CODE
+			, INV.NAME INV_NAME
+			, CATEGORIA.NAME CATEGORIA
+			, CASE
+				WHEN RAIA.NAME = 'ERP' THEN 'ERP'
+				WHEN RAIA.NAME = 'Projetos de Curta Duração (Fast Track)' THEN 'Fast Track'
+				WHEN RAIA.NAME = 'Projetos de Desenvolvimento de Novas Soluções de Negócios' THEN 'DNSN'
+				WHEN RAIA.NAME = 'Projetos de Manutenção e Sustentação do Negócio' THEN 'MSN'
+				WHEN RAIA.NAME = 'Segurança' THEN 'Segurança'
+				WHEN RAIA.NAME = 'Sem CAPEX Compartilhado' THEN 'Sem CAPEX Compartilhado'
+				WHEN RAIA.NAME = 'Soluções e Serviços BackOffice' THEN 'BKO'
+				WHEN RAIA.NAME = 'Ferramentas Administrativas' THEN 'BKO'      
+				END RAIA
+			, CASE
+				WHEN DIR_SOLICITANTE.NAME = 'Diretoria AF&Pessoas' THEN 'Dir. AF&Pessoas'
+				WHEN DIR_SOLICITANTE.NAME = 'Diretoria de Negócios e Soluções' THEN 'Dir. de Neg. e Soluções'
+				WHEN DIR_SOLICITANTE.NAME = 'Diretoria de Operações' THEN 'Dir. de Operações'
+				WHEN DIR_SOLICITANTE.NAME = 'Diretoria de Relacionamento' THEN 'Dir. de Relacionamento'
+				WHEN DIR_SOLICITANTE.NAME = 'Diretoria de Tec. da Informação' THEN 'Dir. de Tec. da Informação'
+				WHEN DIR_SOLICITANTE.NAME = 'Diretoria Geral' THEN 'Dir. Geral'        
+				END DIR_SOLICITANTE
+			, CLIENTE.NAME CLIENTE
+			, AREA_GEST.NAME AREA_GEST
+			, STATUS_DEM.NAME STATUS_DEM
+			, R.UNIQUE_NAME RES_ID
+			, R.FIRST_NAME || ' ' || R.LAST_NAME RES_NAME
+			, RES_TYPE.NAME RES_TYPE
+			, TRUNC(S.SLICE_DATE, 'mm') MES
+			, NVL(S.SLICE,0) ACT
+
+		FROM   
+			PRASSIGNMENT A          
+			INNER  JOIN PRTASK TSK ON  TSK.PRID = A.PRTASKID
+			INNER  JOIN SRM_RESOURCES R ON  A.PRRESOURCEID = R.ID AND R.RESOURCE_TYPE = 0				 
+			INNER  JOIN PRJ_BLB_SLICES S ON  A.PRID = S.PRJ_OBJECT_ID
+			INNER  JOIN PRJ_BLB_SLICEREQUESTS SR ON S.SLICE_REQUEST_ID = SR.ID AND SR.REQUEST_NAME IN ('MONTHLYRESOURCEACTCURVE')
+			INNER  JOIN NBI_DIM_CALENDAR_TIME CAL ON S.SLICE_DATE = CAL.DAY
+			INNER  JOIN NBI_DIM_CALENDAR_TIME LD ON LD.MONTH_KEY = CAL.MONTH_KEY AND LD.HIERARCHY_LEVEL = 'MONTH'
+			LEFT JOIN PRTEAM TM ON TM.PRID = S.PRJ_OBJECT_ID
+			INNER JOIN INV_INVESTMENTS INV ON INV.ID = TSK.PRPROJECTID
+			INNER JOIN CMN_LOOKUPS_V RES_TYPE ON RES_TYPE.LOOKUP_ENUM = R.RESOURCE_TYPE AND RES_TYPE.LOOKUP_TYPE = 'RESOURCE_TYPE' AND RES_TYPE.LANGUAGE_CODE = 'pt'
+			LEFT JOIN ODF_CA_IDEA OIDEA ON OIDEA.ID = INV.ID
+			LEFT JOIN ODF_CA_INV OINV ON OINV.ID = INV.ID
+			LEFT JOIN CMN_LOOKUPS_V CATEGORIA ON CATEGORIA.LOOKUP_CODE = OIDEA.OBJ_REQUEST_TYPE AND CATEGORIA.LOOKUP_TYPE = 'OBJ_IDEA_PROJECT_TYPE' AND CATEGORIA.LANGUAGE_CODE = 'pt'
+			LEFT JOIN CMN_LOOKUPS_V RAIA ON RAIA.LOOKUP_CODE = OIDEA.TB_TP_PJT_PRIOZ_CORP AND RAIA.LOOKUP_TYPE = 'TB_PC_TP_PROJETO' AND RAIA.LANGUAGE_CODE = 'pt'
+			LEFT JOIN CMN_LOOKUPS_V DIR_SOLICITANTE ON DIR_SOLICITANTE.LOOKUP_CODE = OINV.TB_INV_DIR_SOLIC AND DIR_SOLICITANTE.LOOKUP_TYPE = 'TB_LISTA_DIRETORIAS' AND DIR_SOLICITANTE.LANGUAGE_CODE = 'pt'
+			LEFT JOIN CMN_LOOKUPS_V CLIENTE ON CLIENTE.LOOKUP_CODE = OINV.TB_CLIENTE_EXTERNO AND CLIENTE.LOOKUP_TYPE = 'TB_LISTA_CLIENTES' AND CLIENTE.LANGUAGE_CODE = 'pt'
+			LEFT JOIN CMN_LOOKUPS_V AREA_GEST ON AREA_GEST.LOOKUP_CODE = OIDEA.TB_AREA_APROVADORA AND AREA_GEST.LOOKUP_TYPE = 'TB_AREA_APROVADORA' AND AREA_GEST.LANGUAGE_CODE = 'pt'
+			LEFT JOIN CMN_LOOKUPS_V STATUS_DEM ON STATUS_DEM.LOOKUP_CODE = OIDEA.TB_STAT_DEMANDA AND STATUS_DEM.LOOKUP_TYPE = 'TB_STATUS_DEMANDA' AND STATUS_DEM.LANGUAGE_CODE = 'pt'
+
+		WHERE  
+			S.SLICE > 0
+			AND RES_TYPE.NAME = 'Mão-de-obra'
+			AND INV.ODF_OBJECT_CODE = 'idea'
+
+	)ACTUAL
+	
+	WHERE
+		$X{IN,RAIA,raia} 
+		AND $X{IN,CLIENTE,clientes}
+		AND $X{IN,CATEGORIA,categ_demanda}
+		AND $X{IN,DIR_SOLICITANTE,dir_solicitante} 
+		AND $X{IN,STATUS_DEM,status_demanda} 
+		
+	GROUP BY
+	  MES
+	  
+	UNION ALL
+
+	SELECT
+	MES
+	, SUM(ALC) ALC
+	, 0 ACT
+
+	FROM
+	(
+
+		SELECT		
+			 INV.ID INV_ID
+			, INV.CODE INV_CODE
+			, INV.NAME INV_NAME
+			, CATEGORIA.NAME CATEGORIA
+			, CASE
+				WHEN RAIA.NAME = 'ERP' THEN 'ERP'
+				WHEN RAIA.NAME = 'Projetos de Curta Duração (Fast Track)' THEN 'Fast Track'
+				WHEN RAIA.NAME = 'Projetos de Desenvolvimento de Novas Soluções de Negócios' THEN 'DNSN'
+				WHEN RAIA.NAME = 'Projetos de Manutenção e Sustentação do Negócio' THEN 'MSN'
+				WHEN RAIA.NAME = 'Segurança' THEN 'Segurança'
+				WHEN RAIA.NAME = 'Sem CAPEX Compartilhado' THEN 'Sem CAPEX Compartilhado'
+				WHEN RAIA.NAME = 'Soluções e Serviços BackOffice' THEN 'BKO'
+				WHEN RAIA.NAME = 'Ferramentas Administrativas' THEN 'BKO'      
+				END RAIA
+			, CASE
+				WHEN DIR_SOLICITANTE.NAME = 'Diretoria AF&Pessoas' THEN 'Dir. AF&Pessoas'
+				WHEN DIR_SOLICITANTE.NAME = 'Diretoria de Negócios e Soluções' THEN 'Dir. de Neg. e Soluções'
+				WHEN DIR_SOLICITANTE.NAME = 'Diretoria de Operações' THEN 'Dir. de Operações'
+				WHEN DIR_SOLICITANTE.NAME = 'Diretoria de Relacionamento' THEN 'Dir. de Relacionamento'
+				WHEN DIR_SOLICITANTE.NAME = 'Diretoria de Tec. da Informação' THEN 'Dir. de Tec. da Informação'
+				WHEN DIR_SOLICITANTE.NAME = 'Diretoria Geral' THEN 'Dir. Geral'        
+				END DIR_SOLICITANTE
+			, CLIENTE.NAME CLIENTE
+			, AREA_GEST.NAME AREA_GEST
+			, STATUS_DEM.NAME STATUS_DEM
+			, RES.UNIQUE_NAME RES_ID
+			, RES.FIRST_NAME || ' ' || RES.LAST_NAME RES_NAME
+			, RES_TYPE.NAME RES_TYPE	
+			, TRUNC(S.SLICE_DATE, 'mm') MES
+			, NVL(S.SLICE,0) ALC
+
+
+		FROM 
+			PRJ_BLB_SLICES S 
+			INNER JOIN PRTEAM TM ON TM.PRID = S.PRJ_OBJECT_ID
+			INNER JOIN SRM_RESOURCES RES ON RES.ID = TM.PRRESOURCEID
+			INNER JOIN CMN_LOOKUPS_V RES_TYPE ON RES_TYPE.LOOKUP_ENUM = RES.RESOURCE_TYPE AND RES_TYPE.LOOKUP_TYPE = 'RESOURCE_TYPE' AND RES_TYPE.LANGUAGE_CODE = 'pt'
+			INNER JOIN INV_INVESTMENTS INV ON INV.ID = TM.PRPROJECTID
+			INNER JOIN PRJ_BLB_SLICEREQUESTS SR ON SR.ID = s.slice_request_id AND sr.request_name IN ('MONTHLYRESOURCEALLOCCURVE')
+			LEFT JOIN ODF_CA_IDEA OIDEA ON OIDEA.ID = INV.ID
+			LEFT JOIN ODF_CA_INV OINV ON OINV.ID = INV.ID
+			LEFT JOIN CMN_LOOKUPS_V CATEGORIA ON CATEGORIA.LOOKUP_CODE = OIDEA.OBJ_REQUEST_TYPE AND CATEGORIA.LOOKUP_TYPE = 'OBJ_IDEA_PROJECT_TYPE' AND CATEGORIA.LANGUAGE_CODE = 'pt'
+			LEFT JOIN CMN_LOOKUPS_V RAIA ON RAIA.LOOKUP_CODE = OIDEA.TB_TP_PJT_PRIOZ_CORP AND RAIA.LOOKUP_TYPE = 'TB_PC_TP_PROJETO' AND RAIA.LANGUAGE_CODE = 'pt'
+			LEFT JOIN CMN_LOOKUPS_V DIR_SOLICITANTE ON DIR_SOLICITANTE.LOOKUP_CODE = OINV.TB_INV_DIR_SOLIC AND DIR_SOLICITANTE.LOOKUP_TYPE = 'TB_LISTA_DIRETORIAS' AND DIR_SOLICITANTE.LANGUAGE_CODE = 'pt'
+			LEFT JOIN CMN_LOOKUPS_V CLIENTE ON CLIENTE.LOOKUP_CODE = OINV.TB_CLIENTE_EXTERNO AND CLIENTE.LOOKUP_TYPE = 'TB_LISTA_CLIENTES' AND CLIENTE.LANGUAGE_CODE = 'pt'
+			LEFT JOIN CMN_LOOKUPS_V AREA_GEST ON AREA_GEST.LOOKUP_CODE = OIDEA.TB_AREA_APROVADORA AND AREA_GEST.LOOKUP_TYPE = 'TB_AREA_APROVADORA' AND AREA_GEST.LANGUAGE_CODE = 'pt'
+			LEFT JOIN CMN_LOOKUPS_V STATUS_DEM ON STATUS_DEM.LOOKUP_CODE = OIDEA.TB_STAT_DEMANDA AND STATUS_DEM.LOOKUP_TYPE = 'TB_STATUS_DEMANDA' AND STATUS_DEM.LANGUAGE_CODE = 'pt'
+
+		WHERE
+			S.SLICE > 0			
+			AND RES_TYPE.NAME = 'Mão-de-obra'
+			AND INV.ODF_OBJECT_CODE = 'idea'
+
+	)ALLOCATION
+	
+	WHERE
+		$X{IN,RAIA,raia} 
+		AND $X{IN,CLIENTE,clientes}
+		AND $X{IN,CATEGORIA,categ_demanda}
+		AND $X{IN,DIR_SOLICITANTE,dir_solicitante} 
+		AND $X{IN,STATUS_DEM,status_demanda} 
+
+	GROUP BY
+		MES
+)AMTS
+
+WHERE
+	MES  BETWEEN TO_DATE($P{data_inicio},'dd/MM/yy') AND TO_DATE($P{data_termino},'dd/MM/yy')
+	
+
+GROUP BY
+  MES
+
+ORDER BY
+  MES ASC]]>
+		</queryString>
+		<field name="MES" class="java.sql.Timestamp"/>
+		<field name="ALC" class="java.math.BigDecimal"/>
+		<field name="ACT" class="java.math.BigDecimal"/>
+	</subDataset>
+	<parameter name="raia" class="java.util.Collection"/>
+	<parameter name="clientes" class="java.util.Collection">
+		<parameterDescription><![CDATA[]]></parameterDescription>
+	</parameter>
+	<parameter name="categ_demanda" class="java.util.Collection"/>
+	<parameter name="data_inicio" class="java.util.Date">
+		<defaultValueExpression><![CDATA[new SimpleDateFormat("yyyy-MM-dd").parse("2016-01-01")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="data_termino" class="java.util.Date">
+		<defaultValueExpression><![CDATA[new SimpleDateFormat("yyyy-MM-dd").parse("2016-12-31")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="dir_solicitante" class="java.util.Collection"/>
+	<parameter name="status_demanda" class="java.util.Collection"/>
+	<queryString>
+		<![CDATA[SELECT
+1 TESTE
+FROM DUAL]]>
+	</queryString>
+	<field name="TESTE" class="java.math.BigDecimal"/>
+	<title>
+		<band height="70">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="0" width="960" height="50" forecolor="#7F7F7F" backcolor="#FFFFFF" uuid="c0b33d03-5b1e-4b23-9aa5-434ca1740baf"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="26" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Visão Gerencial de Demandas"]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement mode="Transparent" x="830" y="0" width="130" height="50" uuid="1c33b843-6f04-4356-b020-3c7a536dd5fb"/>
+				<imageExpression><![CDATA["repo:tb_logo"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<detail>
+		<band height="1050">
+			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
+			<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+			<frame>
+				<reportElement x="0" y="0" width="470" height="330" uuid="900edaf9-3f2f-48b4-ad35-688240b2eb70"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<componentElement>
+					<reportElement x="0" y="30" width="470" height="300" uuid="5c8055d4-efdc-4459-9574-502b8ac9bd6e">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.jasperreports.highcharts.interactive" value="FALSE"/>
+					</reportElement>
+					<hc:chart xmlns:hc="http://jaspersoft.com/highcharts" xsi:schemaLocation="http://jaspersoft.com/highcharts http://jaspersoft.com/schema/highcharts.xsd" type="Pie">
+						<hc:hyperlink hyperlinkType="ReportExecution" hyperlinkTarget="Blank">
+							<hyperlinkParameter name="raia">
+								<hyperlinkParameterExpression><![CDATA[$P{raia}]]></hyperlinkParameterExpression>
+							</hyperlinkParameter>
+							<hyperlinkParameter name="clientes">
+								<hyperlinkParameterExpression><![CDATA[$P{clientes}]]></hyperlinkParameterExpression>
+							</hyperlinkParameter>
+							<hyperlinkParameter name="categ_demanda">
+								<hyperlinkParameterExpression><![CDATA[$P{categ_demanda}]]></hyperlinkParameterExpression>
+							</hyperlinkParameter>
+							<hyperlinkParameter name="dir_solicitante">
+								<hyperlinkParameterExpression><![CDATA[$P{dir_solicitante}]]></hyperlinkParameterExpression>
+							</hyperlinkParameter>
+							<hyperlinkParameter name="status_demanda">
+								<hyperlinkParameterExpression><![CDATA[$P{status_demanda}]]></hyperlinkParameterExpression>
+							</hyperlinkParameter>
+						</hc:hyperlink>
+						<hc:chartSetting name="default">
+							<hc:chartProperty name="chart.zoomType">
+								<hc:propertyExpression><![CDATA["xy"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="colors">
+								<hc:propertyExpression><![CDATA[java.util.Arrays.asList("#A10E1B","#7F7F7F","#BFBFBF","#6F000D","#404040","#ED1C24","#3EADE6","#FF7F0A","#488FC7","#004A99")]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="credits.enabled">
+								<hc:propertyExpression><![CDATA[false]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="credits.href">
+								<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="credits.text">
+								<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="legend.align">
+								<hc:propertyExpression><![CDATA["right"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="legend.enabled">
+								<hc:propertyExpression><![CDATA[Boolean.TRUE]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="legend.layout">
+								<hc:propertyExpression><![CDATA["vertical"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="legend.verticalAlign">
+								<hc:propertyExpression><![CDATA["middle"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="plotOptions.pie.dataLabels.enabled">
+								<hc:propertyExpression><![CDATA[TRUE( )]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="plotOptions.pie.dataLabels.format">
+								<hc:propertyExpression><![CDATA["{point.y}"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="plotOptions.pie.dataLabels.style.fontSize">
+								<hc:propertyExpression><![CDATA["12px"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="plotOptions.pie.showInLegend" value="true"/>
+							<hc:chartProperty name="title.text">
+								<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="yAxis.title.text">
+								<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+							</hc:chartProperty>
+						</hc:chartSetting>
+						<multiAxisData>
+							<multiAxisDataset>
+								<dataset>
+									<datasetRun subDataset="Raia de Priorização" uuid="f5ca954c-64bc-4e8a-9c3c-3c6aace5f351">
+										<datasetParameter name="raia">
+											<datasetParameterExpression><![CDATA[$P{raia}]]></datasetParameterExpression>
+										</datasetParameter>
+										<datasetParameter name="clientes">
+											<datasetParameterExpression><![CDATA[$P{clientes}]]></datasetParameterExpression>
+										</datasetParameter>
+										<datasetParameter name="categ_demanda">
+											<datasetParameterExpression><![CDATA[$P{categ_demanda}]]></datasetParameterExpression>
+										</datasetParameter>
+										<datasetParameter name="dir_solicitante">
+											<datasetParameterExpression><![CDATA[$P{dir_solicitante}]]></datasetParameterExpression>
+										</datasetParameter>
+										<datasetParameter name="status_demanda">
+											<datasetParameterExpression><![CDATA[$P{status_demanda}]]></datasetParameterExpression>
+										</datasetParameter>
+										<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+									</datasetRun>
+								</dataset>
+							</multiAxisDataset>
+							<dataAxis axis="Rows">
+								<axisLevel name="Raia">
+									<labelExpression><![CDATA["Level Label expression"]]></labelExpression>
+									<axisLevelBucket order="None" class="java.lang.String">
+										<bucketExpression><![CDATA[$F{RAIA}]]></bucketExpression>
+										<comparatorExpression><![CDATA[]]></comparatorExpression>
+										<bucketProperty name="categ_demanda"><![CDATA[$P{categ_demanda}]]></bucketProperty>
+										<bucketProperty name="clientes"><![CDATA[$P{clientes}]]></bucketProperty>
+										<bucketProperty name="dir_solicitante"><![CDATA[$P{dir_solicitante}]]></bucketProperty>
+										<bucketProperty name="raia"><![CDATA[$F{RAIA}]]></bucketProperty>
+										<bucketProperty name="status_demanda"><![CDATA[$P{status_demanda}]]></bucketProperty>
+									</axisLevelBucket>
+								</axisLevel>
+							</dataAxis>
+							<multiAxisMeasure name="Measure1" class="java.lang.Integer" calculation="Nothing">
+								<labelExpression><![CDATA["Quantidade"]]></labelExpression>
+								<valueExpression><![CDATA[$F{QTD}]]></valueExpression>
+							</multiAxisMeasure>
+						</multiAxisData>
+						<hc:series name="Measure1">
+							<hc:contributor name="SeriesItemHyperlink">
+								<hc:contributorProperty name="hyperlinkTarget" valueType="Constant" value="Blank"/>
+								<hc:contributorProperty name="hyperlinkType" valueType="Constant" value="ReportExecution"/>
+								<hc:contributorProperty name="_report" valueType="Constant" value="/ca_ppm/tecban/tb_dd_visao_gerencial_dem"/>
+								<hc:contributorProperty name="raia" valueType="Bucket" value="Raia.raia"/>
+								<hc:contributorProperty name="status_demanda" valueType="Bucket" value="Raia.status_demanda"/>
+								<hc:contributorProperty name="dir_solicitante" valueType="Bucket" value="Raia.dir_solicitante"/>
+								<hc:contributorProperty name="clientes" valueType="Bucket" value="Raia.clientes"/>
+								<hc:contributorProperty name="categ_demanda" valueType="Bucket" value="Raia.categ_demanda"/>
+							</hc:contributor>
+						</hc:series>
+					</hc:chart>
+				</componentElement>
+				<textField>
+					<reportElement x="0" y="0" width="470" height="30" uuid="eead2f21-6db8-4e05-bf84-b201bf9ca06c"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="19"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Raia de Priorização"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement x="490" y="0" width="470" height="330" uuid="f5ff71ef-1b72-40b1-812f-b35cc77d3cbb"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<componentElement>
+					<reportElement x="0" y="30" width="470" height="300" uuid="a8bbfa6b-8423-48d1-b60f-9b2d41d5c5ef">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.jasperreports.highcharts.interactive" value="FALSE"/>
+					</reportElement>
+					<hc:chart xmlns:hc="http://jaspersoft.com/highcharts" xsi:schemaLocation="http://jaspersoft.com/highcharts http://jaspersoft.com/schema/highcharts.xsd" type="Pie">
+						<hc:hyperlink hyperlinkType="ReportExecution" hyperlinkTarget="Blank">
+							<hyperlinkParameter name="raia">
+								<hyperlinkParameterExpression><![CDATA[$P{raia}]]></hyperlinkParameterExpression>
+							</hyperlinkParameter>
+							<hyperlinkParameter name="clientes">
+								<hyperlinkParameterExpression><![CDATA[$P{clientes}]]></hyperlinkParameterExpression>
+							</hyperlinkParameter>
+							<hyperlinkParameter name="categ_demanda">
+								<hyperlinkParameterExpression><![CDATA[$P{categ_demanda}]]></hyperlinkParameterExpression>
+							</hyperlinkParameter>
+							<hyperlinkParameter name="dir_solicitante">
+								<hyperlinkParameterExpression><![CDATA[$P{dir_solicitante}]]></hyperlinkParameterExpression>
+							</hyperlinkParameter>
+							<hyperlinkParameter name="status_demanda">
+								<hyperlinkParameterExpression><![CDATA[$P{status_demanda}]]></hyperlinkParameterExpression>
+							</hyperlinkParameter>
+						</hc:hyperlink>
+						<hc:chartSetting name="default">
+							<hc:chartProperty name="chart.zoomType">
+								<hc:propertyExpression><![CDATA["xy"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="colors">
+								<hc:propertyExpression><![CDATA[java.util.Arrays.asList("#A10E1B","#7F7F7F","#BFBFBF","#6F000D","#404040","#ED1C24","#3EADE6","#FF7F0A","#488FC7","#004A99")]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="credits.enabled">
+								<hc:propertyExpression><![CDATA[false]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="credits.href">
+								<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="credits.text">
+								<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="legend.align">
+								<hc:propertyExpression><![CDATA["right"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="legend.enabled">
+								<hc:propertyExpression><![CDATA[Boolean.TRUE]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="legend.layout">
+								<hc:propertyExpression><![CDATA["vertical"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="legend.verticalAlign">
+								<hc:propertyExpression><![CDATA["middle"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="plotOptions.pie.dataLabels.enabled">
+								<hc:propertyExpression><![CDATA[TRUE( )]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="plotOptions.pie.dataLabels.format">
+								<hc:propertyExpression><![CDATA["{point.y}"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="plotOptions.pie.dataLabels.style.fontSize">
+								<hc:propertyExpression><![CDATA["12px"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="plotOptions.pie.showInLegend" value="true"/>
+							<hc:chartProperty name="title.text">
+								<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="yAxis.title.text">
+								<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+							</hc:chartProperty>
+						</hc:chartSetting>
+						<multiAxisData>
+							<multiAxisDataset>
+								<dataset>
+									<datasetRun subDataset="Categoria da Demanda" uuid="ffa59491-3322-4286-905d-ef74386827df">
+										<datasetParameter name="raia">
+											<datasetParameterExpression><![CDATA[$P{raia}]]></datasetParameterExpression>
+										</datasetParameter>
+										<datasetParameter name="clientes">
+											<datasetParameterExpression><![CDATA[$P{clientes}]]></datasetParameterExpression>
+										</datasetParameter>
+										<datasetParameter name="categ_demanda">
+											<datasetParameterExpression><![CDATA[$P{categ_demanda}]]></datasetParameterExpression>
+										</datasetParameter>
+										<datasetParameter name="dir_solicitante">
+											<datasetParameterExpression><![CDATA[$P{dir_solicitante}]]></datasetParameterExpression>
+										</datasetParameter>
+										<datasetParameter name="status_demanda">
+											<datasetParameterExpression><![CDATA[$P{status_demanda}]]></datasetParameterExpression>
+										</datasetParameter>
+										<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+									</datasetRun>
+								</dataset>
+							</multiAxisDataset>
+							<dataAxis axis="Rows">
+								<axisLevel name="Categoria">
+									<labelExpression><![CDATA["Level Label expression"]]></labelExpression>
+									<axisLevelBucket order="None" class="java.lang.String">
+										<bucketExpression><![CDATA[$F{CATEGORIA}]]></bucketExpression>
+										<bucketProperty name="categ_demanda"><![CDATA[$F{CATEGORIA}]]></bucketProperty>
+										<bucketProperty name="clientes"><![CDATA[$P{clientes}]]></bucketProperty>
+										<bucketProperty name="dir_solicitante"><![CDATA[$P{dir_solicitante}]]></bucketProperty>
+										<bucketProperty name="raia"><![CDATA[$P{raia}]]></bucketProperty>
+										<bucketProperty name="status_demanda"><![CDATA[$P{status_demanda}]]></bucketProperty>
+									</axisLevelBucket>
+								</axisLevel>
+							</dataAxis>
+							<multiAxisMeasure name="Measure1" class="java.lang.Integer" calculation="Nothing">
+								<labelExpression><![CDATA["Quantidade"]]></labelExpression>
+								<valueExpression><![CDATA[$F{QTD}]]></valueExpression>
+							</multiAxisMeasure>
+						</multiAxisData>
+						<hc:series name="Measure1">
+							<hc:contributor name="SeriesItemHyperlink">
+								<hc:contributorProperty name="hyperlinkTarget" valueType="Constant" value="Blank"/>
+								<hc:contributorProperty name="hyperlinkType" valueType="Constant" value="ReportExecution"/>
+								<hc:contributorProperty name="_report" valueType="Constant" value="/ca_ppm/tecban/tb_dd_visao_gerencial_dem"/>
+								<hc:contributorProperty name="categ_demanda" valueType="Bucket" value="Categoria.categ_demanda"/>
+								<hc:contributorProperty name="clientes" valueType="Bucket" value="Categoria.clientes"/>
+								<hc:contributorProperty name="dir_solicitante" valueType="Bucket" value="Categoria.dir_solicitante"/>
+								<hc:contributorProperty name="raia" valueType="Bucket" value="Categoria.raia"/>
+								<hc:contributorProperty name="status_demanda" valueType="Bucket" value="Categoria.status_demanda"/>
+							</hc:contributor>
+						</hc:series>
+					</hc:chart>
+				</componentElement>
+				<textField>
+					<reportElement x="0" y="0" width="470" height="30" uuid="ad3d70bb-bf94-44fb-bf5f-9b85f9538788"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="19"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Categoria da Demanda"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement x="0" y="360" width="470" height="330" uuid="4dff252d-7733-44f7-8584-405d8e752c55"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<componentElement>
+					<reportElement x="0" y="30" width="470" height="300" uuid="469dbfbb-9875-4fbc-b6fe-ef96ac9839fb">
+						<property name="com.jaspersoft.jasperreports.highcharts.interactive" value="FALSE"/>
+					</reportElement>
+					<hc:chart xmlns:hc="http://jaspersoft.com/highcharts" xsi:schemaLocation="http://jaspersoft.com/highcharts http://jaspersoft.com/schema/highcharts.xsd" type="Column">
+						<hc:hyperlink hyperlinkType="ReportExecution" hyperlinkTarget="Blank">
+							<hyperlinkParameter name="raia">
+								<hyperlinkParameterExpression><![CDATA[$P{raia}]]></hyperlinkParameterExpression>
+							</hyperlinkParameter>
+							<hyperlinkParameter name="clientes">
+								<hyperlinkParameterExpression><![CDATA[$P{clientes}]]></hyperlinkParameterExpression>
+							</hyperlinkParameter>
+							<hyperlinkParameter name="categ_demanda">
+								<hyperlinkParameterExpression><![CDATA[$P{categ_demanda}]]></hyperlinkParameterExpression>
+							</hyperlinkParameter>
+							<hyperlinkParameter name="dir_solicitante">
+								<hyperlinkParameterExpression><![CDATA[$P{dir_solicitante}]]></hyperlinkParameterExpression>
+							</hyperlinkParameter>
+							<hyperlinkParameter name="status_demanda">
+								<hyperlinkParameterExpression><![CDATA[$P{status_demanda}]]></hyperlinkParameterExpression>
+							</hyperlinkParameter>
+						</hc:hyperlink>
+						<hc:chartSetting name="default">
+							<hc:chartProperty name="chart.zoomType">
+								<hc:propertyExpression><![CDATA["xy"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="colors">
+								<hc:propertyExpression><![CDATA[java.util.Arrays.asList("#A10E1B","#7F7F7F","#BFBFBF","#6F000D","#404040","#ED1C24","#3EADE6","#FF7F0A","#488FC7","#004A99")]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="credits.enabled">
+								<hc:propertyExpression><![CDATA[false]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="credits.href">
+								<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="credits.text">
+								<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="legend.align">
+								<hc:propertyExpression><![CDATA["right"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="legend.enabled">
+								<hc:propertyExpression><![CDATA[Boolean.FALSE]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="legend.layout">
+								<hc:propertyExpression><![CDATA["vertical"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="legend.verticalAlign">
+								<hc:propertyExpression><![CDATA["middle"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="legend.x">
+								<hc:propertyExpression><![CDATA[new Integer(0)]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="legend.y">
+								<hc:propertyExpression><![CDATA[new Integer(0)]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="plotOptions.series.dataLabels.enabled" value="TRUE"/>
+							<hc:chartProperty name="plotOptions.series.dataLabels.style.fontSize">
+								<hc:propertyExpression><![CDATA["12px"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="title.text">
+								<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="xAxis.gridLineColor" value="White"/>
+							<hc:chartProperty name="xAxis.labels.rotation">
+								<hc:propertyExpression><![CDATA[new Integer(-45)]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="yAxis.gridLineColor" value="White"/>
+							<hc:chartProperty name="yAxis.labels.enabled">
+								<hc:propertyExpression><![CDATA[FALSE( )]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="yAxis.labels.rotation">
+								<hc:propertyExpression><![CDATA[new Integer(0)]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="yAxis.title.text">
+								<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+							</hc:chartProperty>
+						</hc:chartSetting>
+						<multiAxisData>
+							<multiAxisDataset>
+								<dataset>
+									<datasetRun subDataset="Demandas por Cliente" uuid="a4bc61a0-6acf-4b7e-a370-e132629a3ffe">
+										<datasetParameter name="raia">
+											<datasetParameterExpression><![CDATA[$P{raia}]]></datasetParameterExpression>
+										</datasetParameter>
+										<datasetParameter name="clientes">
+											<datasetParameterExpression><![CDATA[$P{clientes}]]></datasetParameterExpression>
+										</datasetParameter>
+										<datasetParameter name="categ_demanda">
+											<datasetParameterExpression><![CDATA[$P{categ_demanda}]]></datasetParameterExpression>
+										</datasetParameter>
+										<datasetParameter name="dir_solicitante">
+											<datasetParameterExpression><![CDATA[$P{dir_solicitante}]]></datasetParameterExpression>
+										</datasetParameter>
+										<datasetParameter name="status_demanda">
+											<datasetParameterExpression><![CDATA[$P{status_demanda}]]></datasetParameterExpression>
+										</datasetParameter>
+										<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+									</datasetRun>
+								</dataset>
+							</multiAxisDataset>
+							<dataAxis axis="Rows">
+								<axisLevel name="Cliente">
+									<labelExpression><![CDATA[]]></labelExpression>
+									<axisLevelBucket order="None" class="java.lang.String">
+										<bucketExpression><![CDATA[$F{CLIENTE}]]></bucketExpression>
+										<bucketProperty name="categ_demanda"><![CDATA[$P{categ_demanda}]]></bucketProperty>
+										<bucketProperty name="clientes"><![CDATA[$F{CLIENTE}]]></bucketProperty>
+										<bucketProperty name="dir_solicitante"><![CDATA[$P{dir_solicitante}]]></bucketProperty>
+										<bucketProperty name="raia"><![CDATA[$P{raia}]]></bucketProperty>
+										<bucketProperty name="status_demanda"><![CDATA[$P{status_demanda}]]></bucketProperty>
+									</axisLevelBucket>
+								</axisLevel>
+							</dataAxis>
+							<dataAxis axis="Columns">
+								<axisLevel name="Cliente">
+									<labelExpression><![CDATA[]]></labelExpression>
+									<axisLevelBucket order="None" class="java.lang.String">
+										<bucketExpression><![CDATA["Quantidade"]]></bucketExpression>
+									</axisLevelBucket>
+								</axisLevel>
+							</dataAxis>
+							<multiAxisMeasure name="Quantidade" class="java.lang.Integer" calculation="Nothing">
+								<labelExpression><![CDATA[""]]></labelExpression>
+								<valueExpression><![CDATA[$F{QTD}]]></valueExpression>
+							</multiAxisMeasure>
+						</multiAxisData>
+						<hc:series name="Quantidade">
+							<hc:contributor name="SeriesItemHyperlink">
+								<hc:contributorProperty name="hyperlinkTarget" valueType="Constant" value="Blank"/>
+								<hc:contributorProperty name="hyperlinkType" valueType="Constant" value="ReportExecution"/>
+								<hc:contributorProperty name="_report" valueType="Constant" value="/ca_ppm/tecban/tb_dd_visao_gerencial_dem"/>
+								<hc:contributorProperty name="clientes" valueType="Bucket" value="Cliente.clientes"/>
+								<hc:contributorProperty name="raia" valueType="Bucket" value="Cliente.raia"/>
+								<hc:contributorProperty name="categ_demanda" valueType="Bucket" value="Cliente.categ_demanda"/>
+								<hc:contributorProperty name="dir_solicitante" valueType="Bucket" value="Cliente.dir_solicitante"/>
+								<hc:contributorProperty name="status_demanda" valueType="Bucket" value="Cliente.status_demanda"/>
+							</hc:contributor>
+						</hc:series>
+					</hc:chart>
+				</componentElement>
+				<textField>
+					<reportElement x="0" y="0" width="470" height="30" uuid="6d6db4f9-9224-43a5-92b9-a08c4868cbed"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="19"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Demandas por Cliente"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement x="490" y="360" width="470" height="330" uuid="d2030d35-2169-40a9-9249-15b0698107fe"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<componentElement>
+					<reportElement x="0" y="30" width="470" height="300" uuid="e3577ecd-eea2-4a66-a063-60b4046a9f74">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.jasperreports.highcharts.interactive" value="FALSE"/>
+					</reportElement>
+					<hc:chart xmlns:hc="http://jaspersoft.com/highcharts" xsi:schemaLocation="http://jaspersoft.com/highcharts http://jaspersoft.com/schema/highcharts.xsd" type="Pie">
+						<hc:hyperlink hyperlinkType="ReportExecution" hyperlinkTarget="Blank">
+							<hyperlinkParameter name="raia">
+								<hyperlinkParameterExpression><![CDATA[$P{raia}]]></hyperlinkParameterExpression>
+							</hyperlinkParameter>
+							<hyperlinkParameter name="clientes">
+								<hyperlinkParameterExpression><![CDATA[$P{clientes}]]></hyperlinkParameterExpression>
+							</hyperlinkParameter>
+							<hyperlinkParameter name="categ_demanda">
+								<hyperlinkParameterExpression><![CDATA[$P{categ_demanda}]]></hyperlinkParameterExpression>
+							</hyperlinkParameter>
+							<hyperlinkParameter name="dir_solicitante">
+								<hyperlinkParameterExpression><![CDATA[$P{dir_solicitante}]]></hyperlinkParameterExpression>
+							</hyperlinkParameter>
+							<hyperlinkParameter name="status_demanda">
+								<hyperlinkParameterExpression><![CDATA[$P{status_demanda}]]></hyperlinkParameterExpression>
+							</hyperlinkParameter>
+						</hc:hyperlink>
+						<hc:chartSetting name="default">
+							<hc:chartProperty name="chart.zoomType">
+								<hc:propertyExpression><![CDATA["xy"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="colors">
+								<hc:propertyExpression><![CDATA[java.util.Arrays.asList("#A10E1B","#7F7F7F","#BFBFBF","#6F000D","#404040","#ED1C24","#3EADE6","#FF7F0A","#488FC7","#004A99")]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="credits.enabled">
+								<hc:propertyExpression><![CDATA[false]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="credits.href">
+								<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="credits.text">
+								<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="legend.align">
+								<hc:propertyExpression><![CDATA["right"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="legend.enabled">
+								<hc:propertyExpression><![CDATA[Boolean.TRUE]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="legend.layout">
+								<hc:propertyExpression><![CDATA["vertical"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="legend.verticalAlign">
+								<hc:propertyExpression><![CDATA["middle"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="plotOptions.pie.dataLabels.enabled">
+								<hc:propertyExpression><![CDATA[TRUE( )]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="plotOptions.pie.dataLabels.format">
+								<hc:propertyExpression><![CDATA["{point.y}"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="plotOptions.pie.dataLabels.style.fontSize">
+								<hc:propertyExpression><![CDATA["12px"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="plotOptions.pie.showInLegend" value="true"/>
+							<hc:chartProperty name="title.text">
+								<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="yAxis.title.text">
+								<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+							</hc:chartProperty>
+						</hc:chartSetting>
+						<multiAxisData>
+							<multiAxisDataset>
+								<dataset>
+									<datasetRun subDataset="Diretoria Solicitante" uuid="13106194-6f76-4dcc-81ad-f80b24c9a020">
+										<datasetParameter name="categ_demanda">
+											<datasetParameterExpression><![CDATA[$P{categ_demanda}]]></datasetParameterExpression>
+										</datasetParameter>
+										<datasetParameter name="raia">
+											<datasetParameterExpression><![CDATA[$P{raia}]]></datasetParameterExpression>
+										</datasetParameter>
+										<datasetParameter name="clientes">
+											<datasetParameterExpression><![CDATA[$P{clientes}]]></datasetParameterExpression>
+										</datasetParameter>
+										<datasetParameter name="dir_solicitante">
+											<datasetParameterExpression><![CDATA[$P{dir_solicitante}]]></datasetParameterExpression>
+										</datasetParameter>
+										<datasetParameter name="status_demanda">
+											<datasetParameterExpression><![CDATA[$P{status_demanda}]]></datasetParameterExpression>
+										</datasetParameter>
+										<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+									</datasetRun>
+								</dataset>
+							</multiAxisDataset>
+							<dataAxis axis="Rows">
+								<axisLevel name="Diretoria">
+									<labelExpression><![CDATA["Level Label expression"]]></labelExpression>
+									<axisLevelBucket order="None" class="java.lang.String">
+										<bucketExpression><![CDATA[$F{DIR_SOLICITANTE}]]></bucketExpression>
+										<bucketProperty name="categ_demanda"><![CDATA[$P{categ_demanda}]]></bucketProperty>
+										<bucketProperty name="clientes"><![CDATA[$P{clientes}]]></bucketProperty>
+										<bucketProperty name="dir_solicitante"><![CDATA[$F{DIR_SOLICITANTE}]]></bucketProperty>
+										<bucketProperty name="raia"><![CDATA[$P{raia}]]></bucketProperty>
+										<bucketProperty name="status_demanda"><![CDATA[$P{status_demanda}]]></bucketProperty>
+									</axisLevelBucket>
+								</axisLevel>
+							</dataAxis>
+							<multiAxisMeasure name="Measure1" class="java.lang.Integer" calculation="Nothing">
+								<labelExpression><![CDATA["Quantidade"]]></labelExpression>
+								<valueExpression><![CDATA[$F{QTD}]]></valueExpression>
+							</multiAxisMeasure>
+						</multiAxisData>
+						<hc:series name="Measure1">
+							<hc:contributor name="SeriesItemHyperlink">
+								<hc:contributorProperty name="hyperlinkTarget" valueType="Constant" value="Blank"/>
+								<hc:contributorProperty name="hyperlinkType" valueType="Constant" value="ReportExecution"/>
+								<hc:contributorProperty name="_report" valueType="Constant" value="/ca_ppm/tecban/tb_dd_visao_gerencial_dem"/>
+								<hc:contributorProperty name="dir_solicitante" valueType="Bucket" value="Diretoria.dir_solicitante"/>
+								<hc:contributorProperty name="categ_demanda" valueType="Bucket" value="Diretoria.categ_demanda"/>
+								<hc:contributorProperty name="clientes" valueType="Bucket" value="Diretoria.clientes"/>
+								<hc:contributorProperty name="raia" valueType="Bucket" value="Diretoria.raia"/>
+								<hc:contributorProperty name="status_demanda" valueType="Bucket" value="Diretoria.status_demanda"/>
+							</hc:contributor>
+						</hc:series>
+					</hc:chart>
+				</componentElement>
+				<textField>
+					<reportElement x="0" y="0" width="470" height="30" uuid="c4867ae9-5467-4e87-a833-29dd24edddb2"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="19"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Diretoria Solicitante"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement x="0" y="720" width="470" height="330" uuid="6cd6304f-a328-4d66-8394-a583740b8d78"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<componentElement>
+					<reportElement x="0" y="30" width="470" height="300" uuid="7c71c154-d8c1-4cec-a84f-2fd6dde85c2a">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.jasperreports.highcharts.interactive" value="FALSE"/>
+					</reportElement>
+					<hc:chart xmlns:hc="http://jaspersoft.com/highcharts" xsi:schemaLocation="http://jaspersoft.com/highcharts http://jaspersoft.com/schema/highcharts.xsd" type="Bar">
+						<hc:hyperlink hyperlinkType="ReportExecution" hyperlinkTarget="Blank">
+							<hyperlinkParameter name="raia">
+								<hyperlinkParameterExpression><![CDATA[$P{raia}]]></hyperlinkParameterExpression>
+							</hyperlinkParameter>
+							<hyperlinkParameter name="clientes">
+								<hyperlinkParameterExpression><![CDATA[$P{clientes}]]></hyperlinkParameterExpression>
+							</hyperlinkParameter>
+							<hyperlinkParameter name="categ_demanda">
+								<hyperlinkParameterExpression><![CDATA[$P{categ_demanda}]]></hyperlinkParameterExpression>
+							</hyperlinkParameter>
+							<hyperlinkParameter name="dir_solicitante">
+								<hyperlinkParameterExpression><![CDATA[$P{dir_solicitante}]]></hyperlinkParameterExpression>
+							</hyperlinkParameter>
+							<hyperlinkParameter name="status_demanda">
+								<hyperlinkParameterExpression><![CDATA[$P{status_demanda}]]></hyperlinkParameterExpression>
+							</hyperlinkParameter>
+						</hc:hyperlink>
+						<hc:chartSetting name="default">
+							<hc:chartProperty name="chart.zoomType">
+								<hc:propertyExpression><![CDATA["xy"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="colors">
+								<hc:propertyExpression><![CDATA[java.util.Arrays.asList("#A10E1B","#7F7F7F","#BFBFBF","#6F000D","#404040","#ED1C24","#3EADE6","#FF7F0A","#488FC7","#004A99")]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="credits.enabled">
+								<hc:propertyExpression><![CDATA[false]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="credits.href">
+								<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="credits.text">
+								<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="legend.align">
+								<hc:propertyExpression><![CDATA["right"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="legend.enabled">
+								<hc:propertyExpression><![CDATA[Boolean.FALSE]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="legend.layout">
+								<hc:propertyExpression><![CDATA["vertical"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="legend.verticalAlign">
+								<hc:propertyExpression><![CDATA["middle"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="legend.x">
+								<hc:propertyExpression><![CDATA[new Integer(0)]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="legend.y">
+								<hc:propertyExpression><![CDATA[new Integer(0)]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="plotOptions.pie.showInLegend" value="true"/>
+							<hc:chartProperty name="plotOptions.series.dataLabels.enabled" value="TRUE"/>
+							<hc:chartProperty name="plotOptions.series.dataLabels.style.fontSize">
+								<hc:propertyExpression><![CDATA["10px"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="title.text">
+								<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="xAxis.labels.rotation">
+								<hc:propertyExpression><![CDATA[new Integer(-45)]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="yAxis.gridLineColor" value="White"/>
+							<hc:chartProperty name="yAxis.labels.rotation">
+								<hc:propertyExpression><![CDATA[new Integer(0)]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="yAxis.title.text">
+								<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+							</hc:chartProperty>
+						</hc:chartSetting>
+						<multiAxisData>
+							<multiAxisDataset>
+								<dataset>
+									<datasetRun subDataset="Status da Demanda" uuid="7c544f4f-2b8f-4eb4-99f4-2973758c7e46">
+										<datasetParameter name="categ_demanda">
+											<datasetParameterExpression><![CDATA[$P{categ_demanda}]]></datasetParameterExpression>
+										</datasetParameter>
+										<datasetParameter name="raia">
+											<datasetParameterExpression><![CDATA[$P{raia}]]></datasetParameterExpression>
+										</datasetParameter>
+										<datasetParameter name="clientes">
+											<datasetParameterExpression><![CDATA[$P{clientes}]]></datasetParameterExpression>
+										</datasetParameter>
+										<datasetParameter name="dir_solicitante">
+											<datasetParameterExpression><![CDATA[$P{dir_solicitante}]]></datasetParameterExpression>
+										</datasetParameter>
+										<datasetParameter name="status_demanda">
+											<datasetParameterExpression><![CDATA[$P{status_demanda}]]></datasetParameterExpression>
+										</datasetParameter>
+										<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+									</datasetRun>
+								</dataset>
+							</multiAxisDataset>
+							<dataAxis axis="Rows">
+								<axisLevel name="Status">
+									<labelExpression><![CDATA[]]></labelExpression>
+									<axisLevelBucket order="None" class="java.lang.String">
+										<bucketExpression><![CDATA[$F{STATUS_DEM}]]></bucketExpression>
+										<bucketProperty name="categ_demanda"><![CDATA[$P{categ_demanda}]]></bucketProperty>
+										<bucketProperty name="clientes"><![CDATA[$P{clientes}]]></bucketProperty>
+										<bucketProperty name="dir_solicitante"><![CDATA[$P{dir_solicitante}]]></bucketProperty>
+										<bucketProperty name="raia"><![CDATA[$P{raia}]]></bucketProperty>
+										<bucketProperty name="status_demanda"><![CDATA[$F{STATUS_DEM}]]></bucketProperty>
+									</axisLevelBucket>
+								</axisLevel>
+							</dataAxis>
+							<dataAxis axis="Columns">
+								<axisLevel name="Status">
+									<labelExpression><![CDATA[]]></labelExpression>
+									<axisLevelBucket order="None" class="java.lang.String">
+										<bucketExpression><![CDATA["Quantidade"]]></bucketExpression>
+									</axisLevelBucket>
+								</axisLevel>
+							</dataAxis>
+							<multiAxisMeasure name="Quantidade" class="java.lang.Integer" calculation="Nothing">
+								<labelExpression><![CDATA[""]]></labelExpression>
+								<valueExpression><![CDATA[$F{QTD}]]></valueExpression>
+							</multiAxisMeasure>
+						</multiAxisData>
+						<hc:series name="Quantidade">
+							<hc:contributor name="SeriesItemHyperlink">
+								<hc:contributorProperty name="hyperlinkTarget" valueType="Constant" value="Blank"/>
+								<hc:contributorProperty name="hyperlinkType" valueType="Constant" value="ReportExecution"/>
+								<hc:contributorProperty name="_report" valueType="Constant" value="/ca_ppm/tecban/tb_dd_visao_gerencial_dem"/>
+								<hc:contributorProperty name="status_demanda" valueType="Bucket" value="Status.status_demanda"/>
+								<hc:contributorProperty name="categ_demanda" valueType="Bucket" value="Status.categ_demanda"/>
+								<hc:contributorProperty name="clientes" valueType="Bucket" value="Status.clientes"/>
+								<hc:contributorProperty name="dir_solicitante" valueType="Bucket" value="Status.dir_solicitante"/>
+								<hc:contributorProperty name="raia" valueType="Bucket" value="Status.raia"/>
+							</hc:contributor>
+						</hc:series>
+					</hc:chart>
+				</componentElement>
+				<textField>
+					<reportElement x="0" y="0" width="470" height="30" uuid="b1c00e05-371c-4f79-8504-43a2bb0e739f"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="19"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Status da Demanda"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement x="490" y="720" width="470" height="330" uuid="3d074d69-f6ab-40fd-a632-7c24fbb4b0b9"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<componentElement>
+					<reportElement x="0" y="30" width="470" height="300" uuid="04574d41-ea29-4f00-8169-b7ee46f8c150">
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+						<property name="com.jaspersoft.jasperreports.highcharts.interactive" value="FALSE"/>
+					</reportElement>
+					<hc:chart xmlns:hc="http://jaspersoft.com/highcharts" xsi:schemaLocation="http://jaspersoft.com/highcharts http://jaspersoft.com/schema/highcharts.xsd" type="Line">
+						<hc:hyperlink hyperlinkType="ReportExecution" hyperlinkTarget="Blank">
+							<hyperlinkParameter name="raia">
+								<hyperlinkParameterExpression><![CDATA[$P{raia}]]></hyperlinkParameterExpression>
+							</hyperlinkParameter>
+							<hyperlinkParameter name="clientes">
+								<hyperlinkParameterExpression><![CDATA[$P{clientes}]]></hyperlinkParameterExpression>
+							</hyperlinkParameter>
+							<hyperlinkParameter name="categ_demanda">
+								<hyperlinkParameterExpression><![CDATA[$P{categ_demanda}]]></hyperlinkParameterExpression>
+							</hyperlinkParameter>
+							<hyperlinkParameter name="data_inicio">
+								<hyperlinkParameterExpression><![CDATA[$P{data_inicio}]]></hyperlinkParameterExpression>
+							</hyperlinkParameter>
+							<hyperlinkParameter name="dir_solicitante">
+								<hyperlinkParameterExpression><![CDATA[$P{dir_solicitante}]]></hyperlinkParameterExpression>
+							</hyperlinkParameter>
+							<hyperlinkParameter name="status_demanda">
+								<hyperlinkParameterExpression><![CDATA[$P{status_demanda}]]></hyperlinkParameterExpression>
+							</hyperlinkParameter>
+						</hc:hyperlink>
+						<hc:chartSetting name="default">
+							<hc:chartProperty name="chart.zoomType">
+								<hc:propertyExpression><![CDATA["xy"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="colors">
+								<hc:propertyExpression><![CDATA[java.util.Arrays.asList("#A10E1B","#7F7F7F","#BFBFBF","#6F000D","#404040","#ED1C24","#3EADE6","#FF7F0A","#488FC7","#004A99")]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="credits.enabled">
+								<hc:propertyExpression><![CDATA[false]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="credits.href">
+								<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="credits.text">
+								<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="legend.align">
+								<hc:propertyExpression><![CDATA["center"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="legend.enabled">
+								<hc:propertyExpression><![CDATA[Boolean.TRUE]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="legend.layout">
+								<hc:propertyExpression><![CDATA["horizontal"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="legend.verticalAlign">
+								<hc:propertyExpression><![CDATA["top"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="legend.x">
+								<hc:propertyExpression><![CDATA[new Integer(0)]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="legend.y">
+								<hc:propertyExpression><![CDATA[new Integer(0)]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="plotOptions.pie.dataLabels.enabled">
+								<hc:propertyExpression><![CDATA[FALSE( )]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="plotOptions.pie.showInLegend" value="true"/>
+							<hc:chartProperty name="plotOptions.series.dataLabels.enabled" value="TRUE"/>
+							<hc:chartProperty name="title.text">
+								<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="xAxis.labels.rotation">
+								<hc:propertyExpression><![CDATA[new Integer(-45)]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="yAxis.gridLineColor" value="White"/>
+							<hc:chartProperty name="yAxis.labels.enabled">
+								<hc:propertyExpression><![CDATA[FALSE( )]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="yAxis.labels.rotation">
+								<hc:propertyExpression><![CDATA[new Integer(0)]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="yAxis.title.text">
+								<hc:propertyExpression><![CDATA[""]]></hc:propertyExpression>
+							</hc:chartProperty>
+						</hc:chartSetting>
+						<multiAxisData>
+							<multiAxisDataset>
+								<dataset>
+									<datasetRun subDataset="Horas por mês Demandas" uuid="25f656a7-cbca-487f-97fb-7e5aa278573e">
+										<datasetParameter name="data_inicio">
+											<datasetParameterExpression><![CDATA[$P{data_inicio}]]></datasetParameterExpression>
+										</datasetParameter>
+										<datasetParameter name="raia">
+											<datasetParameterExpression><![CDATA[$P{raia}]]></datasetParameterExpression>
+										</datasetParameter>
+										<datasetParameter name="clientes">
+											<datasetParameterExpression><![CDATA[$P{clientes}]]></datasetParameterExpression>
+										</datasetParameter>
+										<datasetParameter name="categ_demanda">
+											<datasetParameterExpression><![CDATA[$P{categ_demanda}]]></datasetParameterExpression>
+										</datasetParameter>
+										<datasetParameter name="dir_solicitante">
+											<datasetParameterExpression><![CDATA[$P{dir_solicitante}]]></datasetParameterExpression>
+										</datasetParameter>
+										<datasetParameter name="status_demanda">
+											<datasetParameterExpression><![CDATA[$P{status_demanda}]]></datasetParameterExpression>
+										</datasetParameter>
+										<datasetParameter name="data_termino">
+											<datasetParameterExpression><![CDATA[$P{data_termino}]]></datasetParameterExpression>
+										</datasetParameter>
+										<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+									</datasetRun>
+								</dataset>
+							</multiAxisDataset>
+							<dataAxis axis="Rows">
+								<axisLevel name="Mês">
+									<labelExpression><![CDATA[]]></labelExpression>
+									<axisLevelBucket order="None" class="java.lang.String">
+										<bucketExpression><![CDATA[new SimpleDateFormat("yyyy-MM").format($F{MES})]]></bucketExpression>
+										<bucketProperty name="categ_demanda"><![CDATA[$P{categ_demanda}]]></bucketProperty>
+										<bucketProperty name="clientes"><![CDATA[$P{clientes}]]></bucketProperty>
+										<bucketProperty name="data_inicio"><![CDATA[new SimpleDateFormat("dd/MM/yy").format($F{MES})]]></bucketProperty>
+										<bucketProperty name="data_termino"><![CDATA[new SimpleDateFormat("dd/MM/yy").format($F{MES})]]></bucketProperty>
+										<bucketProperty name="dir_solicitante"><![CDATA[$P{dir_solicitante}]]></bucketProperty>
+										<bucketProperty name="raia"><![CDATA[$P{raia}]]></bucketProperty>
+										<bucketProperty name="status_demanda"><![CDATA[$P{status_demanda}]]></bucketProperty>
+									</axisLevelBucket>
+								</axisLevel>
+							</dataAxis>
+							<dataAxis axis="Columns"/>
+							<multiAxisMeasure name="Alocação" class="java.lang.Integer" calculation="Nothing">
+								<labelExpression><![CDATA["Alocação"]]></labelExpression>
+								<valueExpression><![CDATA[$F{ALC}]]></valueExpression>
+							</multiAxisMeasure>
+							<multiAxisMeasure name="Horas Trabalhadas" class="java.lang.Integer" calculation="Nothing">
+								<labelExpression><![CDATA["Horas Trabalhadas"]]></labelExpression>
+								<valueExpression><![CDATA[$F{ACT}]]></valueExpression>
+							</multiAxisMeasure>
+						</multiAxisData>
+						<hc:series name="Alocação">
+							<hc:contributor name="SeriesItemHyperlink">
+								<hc:contributorProperty name="hyperlinkTarget" valueType="Constant" value="Blank"/>
+								<hc:contributorProperty name="hyperlinkType" valueType="Constant" value="ReportExecution"/>
+								<hc:contributorProperty name="_report" valueType="Constant" value="/ca_ppm/tecban/tb_dd_visao_gerencial_dem_act_alc"/>
+								<hc:contributorProperty name="data_inicio" valueType="Bucket" value="Mês.data_inicio"/>
+								<hc:contributorProperty name="data_termino" valueType="Bucket" value="Mês.data_termino"/>
+								<hc:contributorProperty name="categ_demanda" valueType="Bucket" value="Mês.categ_demanda"/>
+								<hc:contributorProperty name="clientes" valueType="Bucket" value="Mês.clientes"/>
+								<hc:contributorProperty name="dir_solicitante" valueType="Bucket" value="Mês.dir_solicitante"/>
+								<hc:contributorProperty name="raia" valueType="Bucket" value="Mês.raia"/>
+								<hc:contributorProperty name="status_demanda" valueType="Bucket" value="Mês.status_demanda"/>
+							</hc:contributor>
+						</hc:series>
+						<hc:series name="Horas Trabalhadas">
+							<hc:contributor name="SeriesItemHyperlink">
+								<hc:contributorProperty name="hyperlinkTarget" valueType="Constant" value="Blank"/>
+								<hc:contributorProperty name="hyperlinkType" valueType="Constant" value="ReportExecution"/>
+								<hc:contributorProperty name="_report" valueType="Constant" value="/ca_ppm/tecban/tb_dd_visao_gerencial_dem_act_alc"/>
+								<hc:contributorProperty name="data_inicio" valueType="Bucket" value="Mês.data_inicio"/>
+								<hc:contributorProperty name="categ_demanda" valueType="Bucket" value="Mês.categ_demanda"/>
+								<hc:contributorProperty name="data_termino" valueType="Bucket" value="Mês.data_termino"/>
+								<hc:contributorProperty name="clientes" valueType="Bucket" value="Mês.clientes"/>
+								<hc:contributorProperty name="dir_solicitante" valueType="Bucket" value="Mês.dir_solicitante"/>
+								<hc:contributorProperty name="raia" valueType="Bucket" value="Mês.raia"/>
+								<hc:contributorProperty name="status_demanda" valueType="Bucket" value="Mês.status_demanda"/>
+							</hc:contributor>
+						</hc:series>
+					</hc:chart>
+				</componentElement>
+				<textField>
+					<reportElement x="0" y="0" width="470" height="30" uuid="c694a6c7-d6d0-4692-aea8-326cd41804b5"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="19"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Horas por mês em Demandas"]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+</jasperReport>

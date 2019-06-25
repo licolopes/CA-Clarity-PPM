@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.2.final using JasperReports Library version 6.4.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="par_concep" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="aaa8aec2-bf0a-46ec-95e7-725bf877d306">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="VIVO - DEV"/>
+	<property name="ireport.jasperserver.url" value="https://cppmrpt103.ondemand.ca.com/reportservice/"/>
+	<property name="ireport.jasperserver.user" value="report_dev|cppm9296"/>
+	<property name="ireport.jasperserver.report.resource" value="/ca_ppm/vivo/vivo_rpt_dossie_ps_v3_files/par_concep.jrxml"/>
+	<property name="ireport.jasperserver.reportUnit" value="/ca_ppm/vivo/vivo_rpt_dossie_ps_v3"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<parameter name="inv_hide" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT
+	INV.ID INV_ID,
+	INV.CODE INV_CODE,
+	INV.NAME INV_NAME,
+	AREA.NAME AREA,
+	CASE
+		WHEN AREA.NAME = 'Jurídico' THEN '10.1 Jurídico'
+		WHEN AREA.NAME = 'Regulatório' THEN '10.2 Regulatório'
+		WHEN AREA.NAME = 'Tributário' THEN '10.3 Tributário'
+		WHEN AREA.NAME = 'Qualidade' THEN '10.4 Qualidade'
+		END AREA_NOVO,
+	ETAPA.NAME ETAPA,
+	PARECER.TEL_DESC_REQ DESCRICAO,
+	RM.NAME REQUISITO_MANDATORIO,
+	NME.NAME NECESSARIO_MUDAR_ESC,
+	RSA.NAME REQUISITO_SERA_ATEND,
+	PARECER.tel_dt_retorno DATA_RETORNO,
+	PARECER.tel_justificativa JUSTIFICATIVA,
+	STATUS.NAME STATUS,
+	ALT_ESC.NAME ALTERACAO_ESCOPO,
+	CP.FIRST_NAME || ' ' || CP.LAST_NAME CRIADO_POR,
+	PARECER.CREATED_DATE DT_CRIACAO,
+	AP.FIRST_NAME || ' ' || AP.LAST_NAME ATUALIZADO_POR,
+	PARECER.LAST_UPDATED_DATE DT_ULT_ATUALIZACAO,
+	(SELECT LISTAGG(F.NAME,chr(10)) WITHIN GROUP (ORDER BY F.NAME ASC) 
+	FROM ODF_CA_TEL_PARECER_DAS_AREA PAR
+	JOIN CLB_DMS_FILES F ON F.PARENT_FOLDER_ID = PAR.TEL_ANEXOS
+	WHERE PAR.ID = PARECER.ID) ANEXOS
+FROM
+	INV_INVESTMENTS INV
+	INNER JOIN ODF_CA_TEL_PARECER_DAS_AREA PARECER ON PARECER.ODF_PARENT_ID = INV.ID
+	LEFT JOIN SRM_RESOURCES CP ON CP.USER_ID = PARECER.CREATED_BY
+	LEFT JOIN SRM_RESOURCES AP ON AP.USER_ID = PARECER.LAST_UPDATED_BY
+	LEFT JOIN CMN_LOOKUPS_V AREA ON AREA.LOOKUP_CODE = PARECER.TEL_AREA AND AREA.LOOKUP_TYPE = 'TEL_PARECER_AREAS' AND AREA.LANGUAGE_CODE = 'pt'
+	LEFT JOIN CMN_LOOKUPS_V ETAPA ON ETAPA.LOOKUP_CODE = PARECER.TEL_ETAPA_PARECER AND ETAPA.LOOKUP_TYPE = 'INV_STAGE_TYPE' AND ETAPA.LANGUAGE_CODE = 'pt'
+	LEFT JOIN CMN_LOOKUPS_V RM ON RM.ID = PARECER.tel_req_mand AND RM.LOOKUP_TYPE = 'PAC_RPT_YESNO' AND RM.LANGUAGE_CODE = 'pt'
+	LEFT JOIN CMN_LOOKUPS_V NME ON NME.LOOKUP_CODE = PARECER.tel_nec_mudar_escopo AND NME.LOOKUP_TYPE = 'TEL_LKP_SN' AND NME.LANGUAGE_CODE = 'pt'
+	LEFT JOIN CMN_LOOKUPS_V RSA ON RSA.ID = PARECER.tel_req_atend AND RSA.LOOKUP_TYPE = 'PAC_RPT_YESNO' AND RSA.LANGUAGE_CODE = 'pt'
+	LEFT JOIN CMN_LOOKUPS_V STATUS ON STATUS.LOOKUP_CODE = PARECER.tel_status AND STATUS.LOOKUP_TYPE = 'TEL_LKP_STATUS_PAR_AREAS' AND STATUS.LANGUAGE_CODE = 'pt'
+	LEFT JOIN CMN_LOOKUPS_V ALT_ESC ON ALT_ESC.LOOKUP_CODE = PARECER.tel_nec_mudar_escopo AND ALT_ESC.LOOKUP_TYPE = 'TEL_LKP_SN' AND ALT_ESC.LANGUAGE_CODE = 'pt'
+WHERE
+	INV.ID = $P{inv_hide} 
+	AND ETAPA.LOOKUP_CODE = 'conv_concepcao'
+	AND PARECER.TEL_AREA IN ('juridico','qualid','regulatorio','tributario')]]>
+	</queryString>
+	<field name="INV_ID" class="java.math.BigDecimal"/>
+	<field name="INV_CODE" class="java.lang.String"/>
+	<field name="INV_NAME" class="java.lang.String"/>
+	<field name="AREA" class="java.lang.String"/>
+	<field name="AREA_NOVO" class="java.lang.String"/>
+	<field name="ETAPA" class="java.lang.String"/>
+	<field name="DESCRICAO" class="java.lang.String"/>
+	<field name="REQUISITO_MANDATORIO" class="java.lang.String"/>
+	<field name="NECESSARIO_MUDAR_ESC" class="java.lang.String"/>
+	<field name="REQUISITO_SERA_ATEND" class="java.lang.String"/>
+	<field name="DATA_RETORNO" class="java.sql.Timestamp"/>
+	<field name="JUSTIFICATIVA" class="java.lang.String"/>
+	<field name="STATUS" class="java.lang.String"/>
+	<field name="ALTERACAO_ESCOPO" class="java.lang.String"/>
+	<field name="CRIADO_POR" class="java.lang.String"/>
+	<field name="DT_CRIACAO" class="java.sql.Timestamp"/>
+	<field name="ATUALIZADO_POR" class="java.lang.String"/>
+	<field name="DT_ULT_ATUALIZACAO" class="java.sql.Timestamp"/>
+	<field name="ANEXOS" class="java.lang.String"/>
+	<sortField name="AREA_NOVO"/>
+	<sortField name="DT_CRIACAO"/>
+	<detail>
+		<band height="140">
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="0" y="0" width="380" height="22" uuid="d8c506db-881d-429c-bf1d-d0e9985d4a27"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{AREA_NOVO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Opaque" x="20" y="22" width="525" height="15" backcolor="#EBEBEB" uuid="d1f675a7-ab2e-45b2-9fd0-e3462ae48978">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Avaliador]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="40" width="120" height="15" uuid="625760ec-c888-462b-b3d3-786801c6a3ff"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Requisito Mandatório:]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="132" y="40" width="68" height="15" uuid="44f7d453-c50a-4d54-b09d-06dd53ed6a9b"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{REQUISITO_MANDATORIO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="200" y="40" width="140" height="15" uuid="5aa84c09-3802-46b0-af19-35bceb614df6"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Tem alteração de escopo?]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="323" y="40" width="96" height="15" uuid="028ab166-e44c-4cf5-8344-ef0ea8b36611"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ALTERACAO_ESCOPO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="448" y="40" width="60" height="15" uuid="1ed6d5ef-6118-45fb-8026-25c15c982958"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Status:]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="485" y="40" width="60" height="15" uuid="00f65e6a-b3bf-473f-ae06-512060e531c1"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{STATUS}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="29" y="55" width="516" height="15" uuid="0fd251dc-17a0-4f6b-9275-a6495a72b853">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Descrição:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement x="29" y="70" width="516" height="15" uuid="221d8176-5a78-4fb8-9355-adc0e1c5b011"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="5" spacingBefore="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{DESCRICAO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="29" y="90" width="516" height="15" uuid="ac05412a-d4ff-48e2-97d4-df513a7e750a"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Anexos]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="29" y="105" width="516" height="15" uuid="ce5fcbcd-33f7-446b-9729-38352ad5f23a"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="5" spacingBefore="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{ANEXOS}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="29" y="125" width="100" height="15" uuid="f66b5aee-12ec-4641-90ea-4b8a068901e2"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Última atualização:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="117" y="125" width="100" height="15" uuid="69b61d13-a292-49c7-8409-8a891b4e74a4"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{DT_ULT_ATUALIZACAO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="229" y="125" width="81" height="15" uuid="5bfaf6fe-23a8-4013-818a-afe5a6e52da7"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Atualizado por:]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="301" y="125" width="244" height="15" uuid="da08ca0f-72f9-4e05-a831-31a3da61a7ba"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{ATUALIZADO_POR}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="75">
+			<staticText>
+				<reportElement mode="Opaque" x="20" y="5" width="525" height="15" backcolor="#EBEBEB" uuid="ca7f7cc7-bae6-4759-b6c7-d457acf99f84">
+					<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Demandante]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="29" y="25" width="130" height="15" uuid="2dfb8436-20a9-41d3-8d82-4d18157c21e3">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Requisito será atendido?]]></text>
+			</staticText>
+			<textField pattern="" isBlankWhenNull="true">
+				<reportElement x="143" y="25" width="68" height="15" uuid="9c717f91-4185-4662-985f-6e57cccb03ab"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{REQUISITO_SERA_ATEND}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="237" y="25" width="90" height="15" uuid="0da47815-66f5-4020-b479-a0e6c9d44432"/>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Data de Retorno:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
+				<reportElement x="315" y="25" width="96" height="15" uuid="14a0f885-764d-4c8d-9dd8-74da0d439e73"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{DATA_RETORNO}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="29" y="40" width="516" height="15" uuid="c172c0f2-44ae-4774-8b73-0608283caf48">
+					<property name="com.jaspersoft.studio.unit.y" value="pixel"/>
+				</reportElement>
+				<textElement verticalAlignment="Middle"/>
+				<text><![CDATA[Justificativa:]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true">
+				<reportElement x="29" y="55" width="516" height="15" uuid="77c039ce-1966-4fd3-a678-52943d433d5f"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement verticalAlignment="Middle">
+					<paragraph leftIndent="5" spacingBefore="5"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{JUSTIFICATIVA}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

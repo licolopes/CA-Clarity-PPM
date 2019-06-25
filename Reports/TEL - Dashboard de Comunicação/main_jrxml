@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.4.2.final using JasperReports Library version 6.4.1  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="dash_comunicacao" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="842" leftMargin="0" rightMargin="0" topMargin="10" bottomMargin="0" uuid="82d84933-db3d-4f04-99b8-5cce3f92e9f3">
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="VIVO - DEV"/>
+	<property name="ireport.jasperserver.url" value="https://cppmrpt103.ondemand.ca.com/reportservice/"/>
+	<property name="ireport.jasperserver.user" value="jasperadmin|cppm9296"/>
+	<property name="ireport.jasperserver.reportUnit" value="/ca_ppm/vivo/vivo_dash_comunicacao"/>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="ireport.jasperserver.report.resource" value="/ca_ppm/vivo/vivo_dash_comunicacao_files/main_jrxml"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<subDataset name="evolucao" uuid="85b783ff-2511-4a1a-9400-eed7e4e7c1ba">
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="VIVO - DEV"/>
+		<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+		<queryString>
+			<![CDATA[SELECT
+  DATA_CRIACAO,
+  COUNT(INV_ID) QTD
+FROM
+(
+  SELECT
+    INV.ID INV_ID,
+    INV.CODE INV_CODE,
+    INV.NAME INV_NAME,
+    TRUNC(INV.CREATED_DATE,'MONTH') DATA_CRIACAO
+  FROM
+    INV_INVESTMENTS INV
+    INNER JOIN ODF_CA_IDEA OIDEA ON OIDEA.ID = INV.ID
+  WHERE
+    OIDEA.PARTITION_CODE = 'tel_comunicacao'
+)T1
+GROUP BY
+  DATA_CRIACAO]]>
+		</queryString>
+		<field name="DATA_CRIACAO" class="java.sql.Timestamp"/>
+		<field name="QTD" class="java.math.BigDecimal"/>
+		<sortField name="DATA_CRIACAO"/>
+	</subDataset>
+	<subDataset name="distribuicao" uuid="d361bccc-9b72-459c-b454-92cd4ff63f6f">
+		<property name="com.jaspersoft.studio.data.defaultdataadapter" value="VIVO - DEV"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="0"/>
+		<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="1000"/>
+		<queryString>
+			<![CDATA[SELECT
+SEGMENTO,
+COUNT(INV_ID) QTD
+FROM
+(
+  SELECT DISTINCT
+    INV.ID INV_ID,
+    INV.CODE INV_CODE,
+    INV.NAME INV_NAME,
+    SEGMENTO.NAME SEGMENTO
+  FROM
+    INV_INVESTMENTS INV
+    INNER JOIN ODF_CA_IDEA OIDEA ON OIDEA.ID = INV.ID
+    LEFT JOIN CMN_LOOKUPS_V SEGMENTO ON SEGMENTO.LOOKUP_CODE = OIDEA.tel_segmento AND SEGMENTO.LOOKUP_TYPE = 'TEL_SEGMENTO' AND SEGMENTO.LANGUAGE_CODE = 'pt'
+  WHERE
+    OIDEA.PARTITION_CODE = 'tel_comunicacao'
+    AND TRUNC(INV.CREATED_DATE,'YEAR') = TRUNC(SYSDATE,'YEAR')
+)T1
+GROUP BY
+  SEGMENTO]]>
+		</queryString>
+		<field name="SEGMENTO" class="java.lang.String"/>
+		<field name="QTD" class="java.math.BigDecimal"/>
+	</subDataset>
+	<queryString>
+		<![CDATA[SELECT
+  COUNT(CASE WHEN QUARTER = '1' THEN INV_ID END) Q1,
+  COUNT(CASE WHEN QUARTER = '2' THEN INV_ID END) Q2,
+  COUNT(CASE WHEN QUARTER = '3' THEN INV_ID END) Q3,
+  COUNT(CASE WHEN QUARTER = '4' THEN INV_ID END) Q4,
+  COUNT(INV_ID) TOTAL
+FROM
+(
+  SELECT
+    INV.ID INV_ID,
+    INV.CODE INV_CODE,
+    INV.NAME INV_NAME,
+    TO_CHAR(INV.CREATED_DATE,'Q') QUARTER
+  FROM
+    INV_INVESTMENTS INV
+    INNER JOIN ODF_CA_IDEA OIDEA ON OIDEA.ID = INV.ID
+  WHERE
+    OIDEA.PARTITION_CODE = 'tel_comunicacao'
+    AND TRUNC(INV.CREATED_DATE,'YEAR') = TRUNC(SYSDATE,'YEAR')
+)T1]]>
+	</queryString>
+	<field name="Q1" class="java.math.BigDecimal"/>
+	<field name="Q2" class="java.math.BigDecimal"/>
+	<field name="Q3" class="java.math.BigDecimal"/>
+	<field name="Q4" class="java.math.BigDecimal"/>
+	<field name="TOTAL" class="java.math.BigDecimal"/>
+	<title>
+		<band height="540">
+			<frame>
+				<reportElement x="0" y="20" width="440" height="50" uuid="5f03822d-60db-42a1-a8b6-31bed65ea90d"/>
+				<textField>
+					<reportElement x="0" y="0" width="90" height="20" forecolor="#919191" uuid="7dccd8fc-cad0-4985-af3b-eaab44aa1a3c"/>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["#1° Trimestre"]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0">
+					<reportElement x="0" y="20" width="90" height="30" uuid="2b912ff7-8ee9-44da-a0b4-648cbc749de0"/>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font size="16" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{Q1}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="90" y="0" width="90" height="20" forecolor="#919191" uuid="f829e8ef-d3cd-4d76-81df-e1a8eb998caa"/>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["#2° Trimestre"]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0">
+					<reportElement x="90" y="20" width="90" height="30" uuid="95fe74c8-772d-4911-9b41-f7652a7c51cf"/>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font size="16" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{Q2}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="180" y="0" width="90" height="20" forecolor="#919191" uuid="8140d6da-c84f-4d25-8128-019ea5016453"/>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["#3° Trimestre"]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0">
+					<reportElement x="180" y="20" width="90" height="30" uuid="6383fe00-bf4a-4107-a0c4-23b5633cb33d"/>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font size="16" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{Q3}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="270" y="0" width="90" height="20" forecolor="#919191" uuid="885403be-bf96-4493-840d-85694abaf498"/>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["#4° Trimestre"]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0">
+					<reportElement x="270" y="20" width="90" height="30" uuid="6c3d7c48-e98b-4df5-83f3-b178a4a01c7f"/>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font size="16" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{Q4}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="360" y="0" width="80" height="20" forecolor="#919191" uuid="31ddf7cc-8df5-4e01-ad8c-ac108d990f30"/>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font size="12" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Total"]]></textFieldExpression>
+				</textField>
+				<textField pattern="#,##0">
+					<reportElement x="360" y="20" width="80" height="30" uuid="d3f17ef1-1bb0-4db6-81dd-bdaa4e092755"/>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font size="16" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{TOTAL}]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement x="0" y="80" width="440" height="230" uuid="1e7261c6-c37c-4db5-94ca-2dcf642aff21">
+					<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+				</reportElement>
+				<componentElement>
+					<reportElement x="0" y="10" width="440" height="220" uuid="2deeaa25-9ff6-4c7c-8aca-2fed005c4865"/>
+					<hc:chart xmlns:hc="http://jaspersoft.com/highcharts" xsi:schemaLocation="http://jaspersoft.com/highcharts http://jaspersoft.com/schema/highcharts.xsd" type="Line">
+						<hc:chartSetting name="default">
+							<hc:chartProperty name="title.text" value=""/>
+							<hc:chartProperty name="credits.enabled" value="false"/>
+							<hc:chartProperty name="credits.href" value=""/>
+							<hc:chartProperty name="credits.text" value=""/>
+							<hc:chartProperty name="yAxis.title.text" value=""/>
+							<hc:chartProperty name="chart.zoomType" value="xy"/>
+							<hc:chartProperty name="com.jaspersoft.studio.highcharts.dataconfiguration.simple" value="true"/>
+							<hc:chartProperty name="plotOptions.series.dataLabels.enabled" value="true"/>
+							<hc:chartProperty name="xAxis.gridLineColor" value="white"/>
+							<hc:chartProperty name="yAxis.gridLineColor" value="white"/>
+							<hc:chartProperty name="yAxis.labels.enabled">
+								<hc:propertyExpression><![CDATA[FALSE( )]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="plotOptions.series.showInLegend_customSimpleMode" value="true"/>
+							<hc:chartProperty name="plotOptions.series.showInLegend">
+								<hc:propertyExpression><![CDATA[false]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="plotOptions.series.dataLabels.style.fontSize">
+								<hc:propertyExpression><![CDATA["10px"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="chart.spacingTop_customSimpleMode" value="true"/>
+							<hc:chartProperty name="chart.spacingTop">
+								<hc:propertyExpression><![CDATA[0]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="chart.spacingBottom_customSimpleMode" value="true"/>
+							<hc:chartProperty name="chart.spacingBottom">
+								<hc:propertyExpression><![CDATA[0]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="chart.spacingLeft_customSimpleMode" value="true"/>
+							<hc:chartProperty name="chart.spacingLeft">
+								<hc:propertyExpression><![CDATA[0]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="chart.spacingRight_customSimpleMode" value="true"/>
+							<hc:chartProperty name="chart.spacingRight">
+								<hc:propertyExpression><![CDATA[0]]></hc:propertyExpression>
+							</hc:chartProperty>
+						</hc:chartSetting>
+						<multiAxisData>
+							<multiAxisDataset>
+								<dataset>
+									<datasetRun subDataset="evolucao" uuid="acf86544-e019-45aa-a827-e3efe758a735">
+										<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+									</datasetRun>
+								</dataset>
+							</multiAxisDataset>
+							<dataAxis axis="Rows">
+								<axisLevel name="Level1">
+									<labelExpression><![CDATA["Level Label expression"]]></labelExpression>
+									<axisLevelBucket order="None" class="java.lang.Comparable">
+										<bucketExpression><![CDATA[new SimpleDateFormat("MMMM/yy").format($F{DATA_CRIACAO})]]></bucketExpression>
+									</axisLevelBucket>
+								</axisLevel>
+							</dataAxis>
+							<dataAxis axis="Columns"/>
+							<multiAxisMeasure name="Measure1" class="java.lang.Number" calculation="Nothing">
+								<labelExpression><![CDATA["Quantidade"]]></labelExpression>
+								<valueExpression><![CDATA[$F{QTD}]]></valueExpression>
+							</multiAxisMeasure>
+						</multiAxisData>
+					</hc:chart>
+				</componentElement>
+				<textField>
+					<reportElement x="0" y="0" width="120" height="20" forecolor="#919191" uuid="e1b6fc77-f776-4ad9-b808-67d72a066b2a"/>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font size="14" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Evolução"]]></textFieldExpression>
+				</textField>
+			</frame>
+			<frame>
+				<reportElement x="0" y="310" width="440" height="230" uuid="6a097e7e-2486-4fb3-b6ec-0e2b4cba5a5c"/>
+				<componentElement>
+					<reportElement x="0" y="10" width="440" height="219" uuid="56b9f810-dde9-4c6d-b6f1-61ce984f3590">
+						<property name="com.jaspersoft.studio.unit.width" value="pixel"/>
+						<property name="com.jaspersoft.studio.unit.height" value="pixel"/>
+					</reportElement>
+					<hc:chart xmlns:hc="http://jaspersoft.com/highcharts" xsi:schemaLocation="http://jaspersoft.com/highcharts http://jaspersoft.com/schema/highcharts.xsd" type="Pie" evaluationTime="Report">
+						<hc:chartSetting name="default">
+							<hc:chartProperty name="title.text" value=""/>
+							<hc:chartProperty name="credits.enabled" value="false"/>
+							<hc:chartProperty name="credits.href" value=""/>
+							<hc:chartProperty name="credits.text" value=""/>
+							<hc:chartProperty name="yAxis.title.text" value=""/>
+							<hc:chartProperty name="chart.zoomType" value="xy"/>
+							<hc:chartProperty name="com.jaspersoft.studio.highcharts.dataconfiguration.simple" value="true"/>
+							<hc:chartProperty name="plotOptions.pie.showInLegend" value="false"/>
+							<hc:chartProperty name="plotOptions.pie.dataLabels.enabled" value="true"/>
+							<hc:chartProperty name="plotOptions.pie.innerSize" value="50%"/>
+							<hc:chartProperty name="legend.enabled_customSimpleMode" value="true"/>
+							<hc:chartProperty name="legend.enabled">
+								<hc:propertyExpression><![CDATA[false]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="legend.verticalAlign" value="middle"/>
+							<hc:chartProperty name="legend.align" value="right"/>
+							<hc:chartProperty name="plotOptions.pie.dataLabels.format">
+								<hc:propertyExpression><![CDATA["{point.name} - {point.percentage:.0f}%"]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="chart.spacingTop_customSimpleMode" value="true"/>
+							<hc:chartProperty name="chart.spacingTop">
+								<hc:propertyExpression><![CDATA[0]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="chart.spacingBottom_customSimpleMode" value="true"/>
+							<hc:chartProperty name="chart.spacingBottom">
+								<hc:propertyExpression><![CDATA[0]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="chart.spacingLeft_customSimpleMode" value="true"/>
+							<hc:chartProperty name="chart.spacingLeft">
+								<hc:propertyExpression><![CDATA[0]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="chart.spacingRight_customSimpleMode" value="true"/>
+							<hc:chartProperty name="chart.spacingRight">
+								<hc:propertyExpression><![CDATA[0]]></hc:propertyExpression>
+							</hc:chartProperty>
+							<hc:chartProperty name="plotOptions.pie.dataLabels.style.fontSize">
+								<hc:propertyExpression><![CDATA["10px"]]></hc:propertyExpression>
+							</hc:chartProperty>
+						</hc:chartSetting>
+						<multiAxisData>
+							<multiAxisDataset>
+								<dataset>
+									<datasetRun subDataset="distribuicao" uuid="e3b2ff5b-ede0-412f-9c68-f43df6c7e94a">
+										<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+									</datasetRun>
+								</dataset>
+							</multiAxisDataset>
+							<dataAxis axis="Rows">
+								<axisLevel name="Level1">
+									<labelExpression><![CDATA["Level Label expression"]]></labelExpression>
+									<axisLevelBucket order="None" class="java.lang.Comparable">
+										<bucketExpression><![CDATA[$F{SEGMENTO}]]></bucketExpression>
+									</axisLevelBucket>
+								</axisLevel>
+							</dataAxis>
+							<multiAxisMeasure name="Measure1" class="java.lang.Number" calculation="Nothing">
+								<labelExpression><![CDATA["Quantidade"]]></labelExpression>
+								<valueExpression><![CDATA[$F{QTD}]]></valueExpression>
+							</multiAxisMeasure>
+						</multiAxisData>
+					</hc:chart>
+				</componentElement>
+				<textField>
+					<reportElement x="0" y="0" width="120" height="20" forecolor="#919191" uuid="a400ff06-d2dc-435f-bb98-ee2be47fc3d6"/>
+					<textElement textAlignment="Center" verticalAlignment="Top">
+						<font size="14" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["Distribuição"]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+</jasperReport>
