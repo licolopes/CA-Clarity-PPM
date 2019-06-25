@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.4.2.final using JasperReports Library version 6.4.1  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="projects" pageWidth="1190" pageHeight="1750" columnWidth="1190" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="68270571-4384-42fd-bbbb-42a48abfe3bb">
-	<property name="ireport.jasperserver.url" value="https://cppmrpt103.ondemand.ca.com/reportservice/"/>
-	<property name="ireport.jasperserver.user" value="reportdev|cppm9008"/>
-	<property name="ireport.jasperserver.report.resource" value="/ca_ppm/RUMO_ALL/RUMO_Status_Report_files/main_jrxml"/>
-	<property name="ireport.jasperserver.reportUnit" value="/ca_ppm/RUMO_ALL/RUMO_Status_Report"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="RUMO PROD CA JDBC"/>
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
